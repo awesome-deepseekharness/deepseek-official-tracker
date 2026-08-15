@@ -1,0 +1,61 @@
+{
+  "changelog": [
+    "2026-08-13|DeepSeek-V4-Pro Update ",
+    "2026-07-31|DeepSeek-V4-Flash Update ",
+    "2026-04-24|DeepSeek-V4 ",
+    "2025-12-01|DeepSeek-V3.2 ",
+    "2025-12-01|DeepSeek-V3.2-Speciale ",
+    "2025-09-29|DeepSeek-V3.2-Exp ",
+    "2025-09-22|DeepSeek-V3.1-Terminus ",
+    "2025-08-21|DeepSeek-V3.1 ",
+    "2025-05-28|deepseek-reasoner ",
+    "2025-03-24|deepseek-chat ",
+    "2025-01-20|deepseek-reasoner ",
+    "2024-12-26|deepseek-chat ",
+    "2024-12-10|deepseek-chat ",
+    "2024-09-05|deepseek-coder & deepseek-chat Upgraded to DeepSeek V2.5 Model ",
+    "2024-08-02|API Launches Context Caching on Disk Technology ",
+    "2024-07-25|New API Features ",
+    "2024-07-24|deepseek-coder ",
+    "2024-06-28|deepseek-chat ",
+    "2024-06-14|deepseek-coder ",
+    "2024-05-17|deepseek-chat "
+  ],
+  "news": [
+    "news260813",
+    "news260424",
+    "news251201",
+    "news250929",
+    "news250120",
+    "news1226",
+    "news0802",
+    "news0725"
+  ],
+  "releases": [
+    "deepseek-ai/DeepSeek-V3|v1.0.0",
+    "deepseek-ai/DeepSeek-V3|v1.0.0",
+    "deepseek-ai/DeepSeek-R1|v1.0.0",
+    "deepseek-ai/DeepSeek-R1|v1.0.0",
+    "deepseek-ai/DeepEP|v1.2.1",
+    "deepseek-ai/DeepEP|v1.2.1",
+    "deepseek-ai/DeepGEMM|nv_dev_f8e8fb5",
+    "deepseek-ai/DeepGEMM|nv_dev_950d31a",
+    "deepseek-ai/DeepGEMM|nv_dev_67fc648",
+    "deepseek-ai/DeepGEMM|nv_dev_c491439",
+    "deepseek-ai/DeepGEMM|nv_dev_4ff3f54",
+    "deepseek-ai/DeepGEMM|v2.1.1",
+    "deepseek-ai/DeepGEMM|v2.1.1.post3",
+    "deepseek-ai/DeepGEMM|v2.1.1.post2",
+    "deepseek-ai/DeepGEMM|v2.1.1.post1",
+    "deepseek-ai/DeepGEMM|v2.1.0",
+    "deepseek-ai/smallpond|v0.15.0"
+  ],
+  "npm": [
+    "0.0.1-rc.1",
+    "0.0.1-rc.2",
+    "0.0.1-rc.5",
+    "0.1.0-rc.2",
+    "0.1.0-rc.3",
+    "0.1.0-rc.6"
+  ]
+}
