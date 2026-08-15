@@ -2,63 +2,51 @@
 
 # DeepSeek Official Tracker
 
-自动抓取 DeepSeek 官方新闻、发布与任何变更 — 由 GitHub Actions 每 6 小时自动更新。
-
 Auto-tracked feed of DeepSeek official news, releases, and any changes — updated by GitHub Actions every 6 hours.
+自动抓取 DeepSeek 官方新闻、发布与变更,每 6 小时自动更新。
 
-[English](README.md) | 中文 · [English](README.md) | [中文](README.zh.md)
+[English](README.md) | [中文](README.zh.md)
 
-**友链 / Sister Project:** [Awesome DeepSeek Harness](https://github.com/awesome-deepseekharness/awesome-deepseek-harness) — 精选 dsh 插件与生态项目合集
+**Sister Project:** [Awesome DeepSeek Harness](https://github.com/awesome-deepseekharness/awesome-deepseek-harness) — curated plugins & ecosystem for dsh
 
 </div>
 
-## 跟踪源 / Tracked Sources
+## Latest / 最新动态
 
-| 源 / Source | 说明 / Description | 输出 / Output |
+### [2026-08-13] DeepSeek-V4-Pro GA Release · V4-Pro 正式发布
+
+The GA release of **DeepSeek-V4-Pro** has been rolled out on the APP, Web, and API. Set the model name to `deepseek-v4-pro` to use the latest version.
+
+- **Significantly enhanced agent capabilities** — Terminal Bench 2.1: 87.9, DeepSWE: 62.7, Toolathlon-Verified: 74.1, HLE (wo/w tools): 42.7/60.0
+- **Native support for the Responses API** — specially adapted for Codex, with a one-click configuration script
+- **Flexible thinking effort control** — V4-Pro / V4-Flash now support `low` / `high` / `max` effort levels
+- **API pricing adjustment** — peak/off-peak pricing takes effect 2026-08-16 16:00 UTC, off-peak at half price
+
+[Official announcement](https://api-docs.deepseek.com/news/news260813) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-08-13)
+
+---
+
+## Tracked Sources / 跟踪源
+
+| Source | Description | Output |
 | --- | --- | --- |
-| [DeepSeek API Change Log](https://api-docs.deepseek.com/updates) | 官方 API 变更日志(模型发布、定价、功能) | [api-changelog.md](api-changelog.md) |
-| [DeepSeek Official News](https://api-docs.deepseek.com/news) | 官方新闻页(从变更日志中发现新闻链接) | [NEWS.md](NEWS.md) |
-| [GitHub Releases & Tags](https://github.com/deepseek-ai) | deepseek-ai 组织全部活跃仓库的 release 与 tag | [releases.md](releases.md) |
-| [npm: @deepseek-ai/dsh](https://www.npmjs.com/package/@deepseek-ai/dsh) | 官方 dsh 包版本发布 | [npm.md](npm.md) |
-| — | 综合时间线(新条目置顶) | [FEED.md](FEED.md) |
+| [DeepSeek API Change Log](https://api-docs.deepseek.com/updates) | Official API changelog (model releases, pricing, features) | [api-changelog.md](api-changelog.md) |
+| [DeepSeek Official News](https://api-docs.deepseek.com/news) | Official news pages | [NEWS.md](NEWS.md) |
+| [GitHub Releases & Tags](https://github.com/deepseek-ai) | All active `deepseek-ai` repositories | [releases.md](releases.md) |
+| [npm: @deepseek-ai/dsh](https://www.npmjs.com/package/@deepseek-ai/dsh) | Official dsh package versions | [npm.md](npm.md) |
+| Combined timeline (newest first) | — | [FEED.md](FEED.md) |
 
-## 自动化 / Automation
+## Automation / 自动化
 
-- [.github/workflows/track.yml](.github/workflows/track.yml) — 每 6 小时定时运行(`cron: 0 */6 * * *`),也支持手动触发(`workflow_dispatch`)
-- [scripts/track.mjs](scripts/track.mjs) — 抓取脚本(Node.js,零依赖,仅用内置 fetch)
-- 去重状态保存在 [data/state.json](data/state.json),只追加新条目,已见条目不重复提交
-- 有更新时由 `github-actions[bot]` 自动提交推送
+Fetched and committed automatically by GitHub Actions every 6 hours (`cron: 0 */6 * * *`), also triggerable manually. New items are appended; seen items are never repeated.
+由 GitHub Actions 每 6 小时自动抓取并提交,可手动触发;只追加新条目,已见条目不重复。
 
-## 自动化 / Automation Flow
-
-```mermaid
-graph LR
-  A[GitHub Actions<br/>每 6 小时] --> B[track.mjs]
-  B --> C[api-docs.deepseek.com<br/>Change Log + News]
-  B --> D[api.github.com<br/>deepseek-ai releases/tags]
-  B --> E[registry.npmjs.org<br/>@deepseek-ai/dsh]
-  C --> F[state.json 去重]
-  D --> F
-  E --> F
-  F --> G[更新 markdown 输出]
-  G --> H[有变更?]
-  H -->|是| I[bot 自动提交推送]
-  H -->|否| J[跳过]
-```
-
-## 手动触发 / Manual Run
+## Manual Run / 手动运行
 
 ```bash
-# 本地运行(无需安装依赖)
 node scripts/track.mjs
-
-# 或仓库页面: Actions → Track DeepSeek Official Updates → Run workflow
 ```
-
-## 贡献 / Contributing
-
-发现新的官方源?欢迎提 Issue 或 PR。
 
 ## License
 
-[CC0-1.0](LICENSE) — 数据归各自来源所有;本仓库仅做自动镜像整理。
+[CC0-1.0](LICENSE) — Data belongs to their respective sources; this repo only mirrors and organizes them automatically.
