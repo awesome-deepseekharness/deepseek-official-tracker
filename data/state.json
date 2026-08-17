@@ -48,7 +48,9 @@
     "deepseek-ai/DeepGEMM|v2.1.1.post2",
     "deepseek-ai/DeepGEMM|v2.1.1.post1",
     "deepseek-ai/DeepGEMM|v2.1.0",
-    "deepseek-ai/smallpond|v0.15.0"
+    "deepseek-ai/smallpond|v0.15.0",
+    "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.7",
+    "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.7"
   ],
   "npm": [
     "0.0.1-rc.1",
@@ -56,6 +58,7 @@
     "0.0.1-rc.5",
     "0.1.0-rc.2",
     "0.1.0-rc.3",
-    "0.1.0-rc.6"
+    "0.1.0-rc.6",
+    "0.1.0-rc.7"
   ]
 }
