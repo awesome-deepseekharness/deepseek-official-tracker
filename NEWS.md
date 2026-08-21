@@ -1,5 +1,13 @@
 # DeepSeek Official News
 
+## [2026-08-21] DeepSeek-V4-Flash-Vision-Exp Release: Multimodal API Now Live
+
+[Source](https://api-docs.deepseek.com/news/news260821)
+
+---
+
+---
+
 ## [2026-08-13] DeepSeek-V4-Pro GA Release
 
 [Source](https://api-docs.deepseek.com/news/news260813)

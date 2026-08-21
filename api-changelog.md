@@ -1,5 +1,15 @@
 # DeepSeek API Change Log (mirror)
 
+## [2026-08-21] DeepSeek-V4-Flash-Vision-Exp Release 
+
+Today, the new multimodal vision understanding model DeepSeek-V4-Flash-Vision-Exp is now available on the DeepSeek API platform. This is an experimental model that can be accessed by setting model='deepseek-v4-flash-vision-exp' . Terminal Bench 2.1: 83.9 NL2Repo: 57.7 DeepSWE: 59.3 DSBench-Hard: 63.6 AutomationBench (Public): 25.7 ApexBench (Pass@1): 36.5 Agents' Last Exam: 27.3 Chartography: 64.3 ZeroBench (Pass@5): 35.0 * For the Code Agent text tasks in the public benchmark sets, the DeepSeek family models were tested using the DeepSeek Harness minimal mode as the framework, with the max ef
+
+[Source](https://api-docs.deepseek.com/updates#date-2026-08-21)
+
+---
+
+---
+
 ## [2026-08-13] DeepSeek-V4-Pro Update 
 
 The GA release of DeepSeek-V4-Pro has been rolled out on the APP, Web, and API. The API calling method remains unchanged — simply set the model name to deepseek-v4-pro to use the latest version. Significantly enhanced Agent capabilities The GA version of DeepSeek V4 Pro greatly enhances agent capabilities, with particularly significant performance improvements in production environments. HLE (wo / w tools): 42.7/60.0 Terminal Bench 2.1: 87.9 NL2Repo: 61.5 Cybergym: 83.3 DeepSWE: 62.7 Toolathlon-Verified: 74.1 Agents' Last Exam: 25.7 AutomationBench (Public): 31.8 DSBench-FullStack: 71.1 DSBenc
