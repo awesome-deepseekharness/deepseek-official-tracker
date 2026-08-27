@@ -111,11 +111,12 @@ function runOpencode(modelId, prompt) {
     const args = ['run', '--model', model, prompt];
     // Use --format json if available for structured output, but plain is fine
     console.log(`\n[discover] Trying model: ${model} ...`);
+    const isWin = process.platform === 'win32';
     const child = spawn('opencode', args, {
       cwd: ROOT,
       env: process.env,
       stdio: ['ignore', 'pipe', 'pipe'],
-      shell: false,
+      shell: isWin, // win32 needs shell for opencode.ps1
     });
     let out = '', err = '';
     const timeout = setTimeout(() => {
@@ -143,9 +144,10 @@ async function generateWithTraversal(prompt) {
   let lastErr = null;
   for (const modelId of combined) {
     try {
-      // Check if opencode binary exists
+      // Check if opencode binary exists (win32 needs shell for .ps1)
+      const isWin = process.platform === 'win32';
       const hasOpencode = await new Promise(res => {
-        const c = spawn('opencode', ['--version'], { stdio: 'ignore' });
+        const c = spawn('opencode', ['--version'], { stdio: 'ignore', shell: isWin });
         c.on('error', () => res(false));
         c.on('close', code => res(code === 0));
       });
