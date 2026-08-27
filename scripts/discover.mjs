@@ -299,16 +299,18 @@ async function main() {
   console.log(`[discover] Prompt written to .discover-prompt.md (${prompt.length} chars)`);
 
   // Guard against PR spam: if no new slugs and insights already AI-generated and recent (<24h), skip
-  // But always allow agentic run when OPENCODE_API_KEY present (for community signals)
-  const hasKeyForAgentic = !!process.env.OPENCODE_API_KEY;
-  if (newSlugs.length === 0 && fs.existsSync(INSIGHTS_FILE) && !hasKeyForAgentic) {
+  // But always allow agentic run when any LLM key present (for community signals + thinking)
+  const hasAnyKeyForGuard = !!(process.env.OPENCODE_API_KEY || process.env.ANTHROPIC_API_KEY || process.env.OPENAI_API_KEY);
+  // Debug: show env presence (without leaking value)
+  console.log(`[discover] Env check — OPENCODE_API_KEY:${process.env.OPENCODE_API_KEY ? 'yes('+process.env.OPENCODE_API_KEY.length+' chars)' : 'no'} ANTHROPIC:${process.env.ANTHROPIC_API_KEY ? 'yes' : 'no'} OPENAI:${process.env.OPENAI_API_KEY ? 'yes' : 'no'}`);
+  if (newSlugs.length === 0 && fs.existsSync(INSIGHTS_FILE) && !hasAnyKeyForGuard) {
     try {
       const existing = fs.readFileSync(INSIGHTS_FILE, 'utf8');
       const knownTail = (state.websiteNews || []).slice(-7).join(', ');
       const stat = fs.statSync(INSIGHTS_FILE);
       const ageHours = (Date.now() - stat.mtimeMs) / 3600000;
       if (existing.includes('No new') && existing.includes(knownTail.slice(0, 20)) && ageHours < 24) {
-        console.log(`[discover] No new diff and insights up-to-date (${ageHours.toFixed(1)}h old) and no OPENCODE_API_KEY — skipping to avoid PR spam`);
+        console.log(`[discover] No new diff and insights up-to-date (${ageHours.toFixed(1)}h old) and no LLM key — skipping to avoid PR spam`);
         console.log(`[discover] Done. insights unchanged.`);
         return;
       }
