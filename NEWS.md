@@ -38,19 +38,19 @@
 
 ---
 
-## [2012-26-] 🚀 Introducing DeepSeek-V3
+## [2024-12-26] 🚀 Introducing DeepSeek-V3
 
 [Source](https://api-docs.deepseek.com/news/news1226)
 
 ---
 
-## [2008-02-] DeepSeek API introduces Context Caching on Disk, cutting prices by an order of magnitude
+## [2024-08-02] DeepSeek API introduces Context Caching on Disk, cutting prices by an order of magnitude
 
 [Source](https://api-docs.deepseek.com/news/news0802)
 
 ---
 
-## [2007-25-] DeepSeek API Upgrade
+## [2024-07-25] DeepSeek API Upgrade
 
 [Source](https://api-docs.deepseek.com/news/news0725)
 
