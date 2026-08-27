@@ -108,9 +108,9 @@ async function fetchLiveFreeModels() {
 function runOpencode(modelId, prompt) {
   return new Promise((resolve, reject) => {
     const model = `opencode/${modelId}`;
-    const args = ['run', '--model', model, prompt];
+    const args = ['run', '--model', model, '--agent', 'discover', prompt];
     // Use --format json if available for structured output, but plain is fine
-    console.log(`\n[discover] Trying model: ${model} ...`);
+    console.log(`\n[discover] Trying model: ${model} (agent:discover) ...`);
     const isWin = process.platform === 'win32';
     const child = spawn('opencode', args, {
       cwd: ROOT,
@@ -182,38 +182,60 @@ async function generateWithTraversal(prompt) {
 function buildPrompt({ newSlugs, state, feedPreview }) {
   const now = new Date().toISOString();
   return [
-    `You are the AI discover agent for deepseek-official-tracker. Task: discover news from deepseek.com diff and verify with official sources.`,
+    `You are the autonomous DeepSeek Official Discovery Agent (see .opencode/agent/discover.md). Be *agentic*, not mechanical. Decide intelligently which tools to use.`,
     ``,
     `## Context (as of ${now} UTC)`,
     `- Repo: https://github.com/awesome-deepseekharness/deepseek-official-tracker`,
     `- Known state (data/state.json) websiteNews: ${JSON.stringify(state.websiteNews || []).slice(0, 500)}`,
     `- Known changelog/news/HF slugs: ${JSON.stringify({ changelog: (state.changelog||[]).slice(-3), news: (state.news||[]).slice(-3), huggingface: (state.huggingface||[]).slice(-3) }).slice(0, 600)}`,
-    `- Newly detected diff on https://www.deepseek.com/en/news/ vs state: ${newSlugs.length ? newSlugs.join(', ') : '(none - check if any new blog post appeared since last run)'}`,
-    `- Recent FEED preview (newest 8):`,
-    ...feedPreview.split('\n').slice(0, 15).map(l => `  ${l}`),
+    `- Precomputed diff on https://www.deepseek.com/en/news/ vs state: ${newSlugs.length ? newSlugs.join(', ') : '(none - but do NOT trust this alone, you must autonomously re-verify with tools)'}`,
+    `- Recent FEED preview (newest 15):`,
+    ...feedPreview.split('\n').slice(0, 18).map(l => `  ${l}`),
     ``,
-    `## Your tools`,
-    `- You have read, webfetch, bash, grep, glob. Use webfetch to verify each new slug at https://www.deepseek.com/en/news/<slug>/ and https://api-docs.deepseek.com/news/<slug> and https://api-docs.deepseek.com/updates if relevant.`,
-    `- Also check https://huggingface.co/api/models?author=deepseek-ai for new weights if relevant.`,
+    `## Your toolbox — use intelligently`,
+    `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, etc.)`,
+    `- webfetch : fetch a URL (good for static HTML)`,
+    `- websearch : search the web (e.g., "deepseek x.com deepseek_ai", "deepseek reddit", "deepseek hacker news")`,
+    `- bash : run shell. Prefer these free, no-key helpers:`,
+    `  • Jina AI reader (free, JS-proof): \`curl -s https://s.jina.ai/http://www.deepseek.com/en/news/\` or \`curl -s https://r.jina.ai/http://x.com/deepseek_ai\` or \`curl -s "https://cc.bingj.com/cache.cgi?d=3&m=https://x.com/deepseek_ai"\` — use when webfetch returns Next.js shell`,
+    `  • HackerNews Algolia: \`curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=8" | jq\``,
+    `  • Reddit JSON: \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/LocalLLaMA/search.json?q=deepseek&sort=new&t=week" | jq\` and \`r/deepseek\`, via jina \`https://s.jina.ai/https://www.reddit.com/r/deepseek/\``,
+    `  • X/Twitter: \`websearch "deepseek_ai site:x.com"\` then \`bash curl -s https://s.jina.ai/http://x.com/deepseek_ai\``,
+    `  • HF: \`curl -s https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified | jq\``,
+    `  • npm: \`curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq\``,
+    `- edit : write insights.md`,
+    `- todowrite / task : plan`,
     ``,
-    `## Output requirements`,
-    `- Write to insights.md at repo root (overwrite). Language: English primary, Chinese summary optional.`,
+    `## Discovery methodology (autonomous)`,
+    `1. Verify official primaries yourself (don't trust precomputed diff): webfetch or jina fetch https://www.deepseek.com/en/news/ and each slug page, https://api-docs.deepseek.com/updates, https://api-docs.deepseek.com/news/<slug>.`,
+    `2. Probe community signals to catch early hints (then cross-verify with official):`,
+    `   - X: websearch + jina fetch x.com/deepseek_ai timeline`,
+    `   - Reddit: r/LocalLLaMA + r/deepseek search JSON`,
+    `   - HN: Algolia search`,
+    `   Treat these as *signals only* — a finding is only "verified" if official Source exists. Otherwise mark "unverified community signal".`,
+    `3. Decide next tool based on what you find. Be exploratory, not scripted.`,
+    ``,
+    `## Output — overwrite insights.md at repo root`,
+    `- Language: English primary, Chinese summary optional`,
     `- Structure:`,
     `  1. # Insights — DeepSeek Official Discovery — <date>`,
-    `  2. > Auto-generated by opencode (model: <model-id>) + Date + Disclaimer: AI draft, needs human review via PR`,
-    `  3. ## Summary — 2-3 sentences, what changed`,
-    `  4. ## New findings (for each new slug): title, date, 1-sentence summary, [Source](url) — MUST include verifiable Source link, never hallucinate`,
-    `  5. ## Cross-check — compare with api-changelog.md / NEWS.md / huggingface.md, note if already covered`,
-    `  6. ## Risk / Confidence — low/medium/high, note if diff is empty`,
-    `  7. ## Next steps — suggest whether to run node scripts/track.mjs or wait`,
-    `- If no new diff, write insights.md with "No new official updates detected" + timestamp + still include FEED preview.`,
-    `- NEVER invent a slug or date. If uncertain, write "unverified" and ask for manual review.`,
+    `  2. > Auto-generated by opencode (model: <model-id>) — <ISO> UTC. AI draft, needs human review via PR.`,
+    `  3. ## Summary — 2-3 sentences`,
+    `  4. ## New findings — for each *verified* official item: title, date, 1-sentence summary, [Source](url) (official only)`,
+    `  5. ## Community signals (optional) — X/Reddit/HN hits with [Source], labeled unverified`,
+    `  6. ## Cross-check — vs website-news.md / api-changelog.md / NEWS.md / huggingface.md / state.json`,
+    `  7. ## Risk / Confidence — low/medium/high`,
+    `  8. ## Next steps — suggest node scripts/track.mjs or wait`,
+    `  9. ## FEED preview — first 20 lines of FEED.md`,
+    `- If truly no new official updates after your own verification, write "No new official updates detected" + timestamp, but still include Community signals if any.`,
+    `- NEVER invent slug/date. If uncertain, write "unverified" and ask for manual review.`,
     ``,
     `## Guardrails`,
-    `- Default to PR: your output is a draft for human review, not auto-commit to main.`,
-    `- Use latest free model fallback: you are already running on the best available free model.`,
+    `- PR-safe: draft for human review, never push to main.`,
+    `- Prefer jina.ai (s.jina.ai / r.jina.ai / cc.bingj.com) when webfetch returns shell.`,
+    `- You are on the latest free model via public opencode provider — do your best.`,
     ``,
-    `Proceed. After writing insights.md, echo "DONE" and list the Sources you used.`,
+    `Proceed autonomously. After writing insights.md, echo "DONE" and list all [Source] URLs you actually fetched.`,
   ].join('\n');
 }
 

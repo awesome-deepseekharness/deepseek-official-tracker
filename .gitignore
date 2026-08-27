@@ -1,7 +1,10 @@
 node_modules/
 .discover-prompt.md
-.opencode/
+.opencode/*
+!.opencode/agent/
+!.opencode/agent/discover.md
 *.tmp
 .DS_Store
 site/
+AGENTS.md
 
