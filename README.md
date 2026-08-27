@@ -56,8 +56,6 @@
 - [How it Works vs Others](#-how-it-works--how-were-different)
 - [Subscribe / Use](#-subscribe--use)
 - [Automation & Reliability](#️-automation--reliability)
-- [Experimental AI Discover](#-experimental-ai-discover--opencode-headless)
-- [GitHub Pages](#-github-pages)
 - [Manual Run](#-manual-run)
 - [FAQ](#-faq)
 - [Keywords / SEO](#-keywords--seo)
@@ -120,29 +118,10 @@ curl -s https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-offic
 
 ## ⚙️ Automation & Reliability
 
-- **Track Schedule:** `cron: 0 */6 * * *` (every 6h) + `workflow_dispatch` + push on `scripts/**` (so a fix instantly re-crawls).
-- **Discover Schedule:** `cron: 30 3 * * *` daily 03:30 UTC (experimental, PR-only) + `workflow_dispatch`.
+- **Schedule:** `cron: 0 */6 * * *` (every 6h) + `workflow_dispatch` + push on `scripts/**` (so a fix instantly re-crawls).
 - **Past failures:** 2 early `rejected` pushes on `2026-08-15 09:1x UTC` due to concurrent `git push` race. **Fixed:** `fetch-depth:0`, `pull --rebase --autostash` with 3-retry loop (`scripts/track.mjs:fetchText` also retries 3× with backoff, 15s timeout). Since fix: **40+ consecutive successes** (checked 2026-08-16 → 2026-08-27).
 - **State:** `data/state.json` dedupes IDs (`changelog: 21, news: 9, websiteNews: 7, huggingface: 20` as of 2026-08-27). Corrupted entries auto-heal (date validation `YYYY-MM-DD`, tag vs release dedup).
 - **No timestamp churn:** `FEED.md` header is stable except `last update:` ISO timestamp; no empty commits.
-
-## 🤖 Experimental: AI Discover — Opencode Headless
-
-> `scripts/discover.mjs` + `.github/workflows/discover.yml` — headless `opencode run --model opencode/<free-id> "discover news from deepseek.com diff"` with latest free-model traversal + PR guard.
-
-- **What it does:** diffs `https://www.deepseek.com/en/news/` vs `data/state.json:websiteNews`, fetches live free models from `https://opencode.ai/zen/v1/models` (filters `-free`, prioritizes `deepseek-v4-flash-free`), tries each via `opencode run --model opencode/<id>` (2min timeout, 1.2s backoff) → writes `insights.md` with `Summary / New findings [Source] / Cross-check / Risk / Next steps`. If all models fail or no `OPENCODE_API_KEY`, falls back to deterministic template (no hallucination).
-- **Free-model traversal:** always fetches latest list (currently `deepseek-v4-flash-free, muse-spark-1.2-contributor-free, mimo-v2.5-free, hy3-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, laguna-s-2.1-free` + static `big-pickle` etc) and iterates until one creates `insights.md` with `[Source]`. Prevents single-model sunset breakage.
-- **PR by default:** workflow uses `peter-evans/create-pull-request@v6` → branch `discover/insights-<run_id>` → PR titled `chore(discover): AI draft` labelled `ai-draft, needs-review`. Never auto-merges to `main`; reviewer must verify each `[Source]` link/date.
-- **Enable AI:** set `OPENCODE_API_KEY` (from https://opencode.ai/auth) + optionally `ANTHROPIC_API_KEY` in repo **Settings → Secrets → Actions**. Without it, fallback template still runs (so workflow stays green).
-- **Manual:** `node scripts/discover.mjs` locally (needs `npm i -g opencode-ai` if you want AI, otherwise fallback).
-
-## 🌐 GitHub Pages
-
-> `scripts/build-pages.mjs` + `.github/workflows/pages.yml` — static SEO site from markdown.
-
-- **URL:** `https://awesome-deepseekharness.github.io/deepseek-official-tracker/` (after enabling Pages → Source: GitHub Actions)
-- **Content:** `site/index.html` generated from `FEED.md` (79 items) + `insights.md` preview + sources grid, with meta `description/keywords/og:*` for SEO, plus `site/feed.json` for API consumers.
-- **Deploy:** on push to `main` (FEED/README changes) or `workflow_dispatch`; uses `actions/upload-pages-artifact@v3` + `actions/deploy-pages@v4`.
 
 ## 🛠️ Manual Run
 
@@ -175,8 +154,6 @@ Files are append-only; re-running without new upstream items is a no-op.
 
 `deepseek` `deepseek api` `deepseek oficial tracker` `deepseek news` `deepseek changelog` `deepseek v4` `deepseek v4 pro` `deepseek v4 flash` `deepseek v3.2` `deepseek v3.2 exp` `deepseek r1` `deepseek r1 0528` `deepseek v3` `deepseek harness` `dsh deepseek` `deepseek github releases` `deepseek huggingface` `deepseek npm` `deepseek pricing` `deepseek context caching` `deepseek 1m context` `deepseek api docs`
 
-> This repo is optimized for search: `deepseek official news`, `deepseek api changelog`, `deepseek releases`, `deepseek huggingface models`, `deepseek npm dsh`. Add `site:github.com deepseek tracker` to find it.
-
 ## 🤝 Contributing & Related
 
 - **PRs welcome:** fixing a slug, adding a repo, improving `fetchText` resiliency. The script is vanilla Node.js (no deps) for easy review.
@@ -184,7 +161,6 @@ Files are append-only; re-running without new upstream items is a no-op.
 - **Related:**
   - [awesome-deepseek-harness](https://github.com/awesome-deepseekharness/awesome-deepseek-harness) — curated `dsh` plugins & agents
   - [deepseek-ai/awesome-deepseek-integration](https://github.com/deepseek-ai/awesome-deepseek-integration) — official integrations directory
-  - Trackers we studied: `LearnPrompt/ai-news-radar`, `chrbailey/deeptrend`, `reformdai/daily-hot-tracker`, `giftedunicorn/ai-news-bot`
 
 ## 📄 License
 
