@@ -1,0 +1,7 @@
+node_modules/
+.discover-prompt.md
+.opencode/
+*.tmp
+.DS_Store
+site/
+

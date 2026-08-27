@@ -5,14 +5,16 @@
 **最全、自动、可验证的 DeepSeek 官方更新追踪 — 无谣言、无幻觉，每条可溯源。**
 
 [![Track](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml)
+[![Discover](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml)
+[![Pages](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/pages.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/pages.yml)
 [![Last Update](https://img.shields.io/github/last-commit/awesome-deepseekharness/deepseek-official-tracker?label=%E6%9C%80%E5%90%8E%E6%9B%B4%E6%96%B0&color=0abf5b)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/commits/main)
 [![FEED](https://img.shields.io/badge/FEED-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0-blue?logo=rss)](FEED.md)
 [![License: CC0](https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg)](LICENSE)
 [![DeepSeek](https://img.shields.io/badge/DeepSeek-V4%20%7C%20V3.2%20%7C%20R1-4B82E6)](https://www.deepseek.com)
 
-*GitHub Actions 每 6 小时自动抓取。6 大官方源 · 0 幻觉 · 100% 可验证链接。*
+*GitHub Actions 每 6 小时自动抓取。6 大官方源 · 0 幻觉 · 100% 可验证链接。实验性 AI insights 走 PR。*
 
-[中文](README.zh.md) | [English](README.md) · [📡 FEED.md](FEED.md) · [📰 官网新闻](website-news.md) · [🤗 HuggingFace](huggingface.md)
+[中文](README.zh.md) | [English](README.md) · [📡 FEED.md](FEED.md) · [📰 官网新闻](website-news.md) · [🤗 HuggingFace](huggingface.md) · [🤖 Insights](insights.md) · [🌐 Pages](https://awesome-deepseekharness.github.io/deepseek-official-tracker/)
 
 **友链：** [Awesome DeepSeek Harness](https://github.com/awesome-deepseekharness/awesome-deepseek-harness) — 精选 `dsh` 插件与生态合集 · **官方：** [platform.deepseek.com](https://platform.deepseek.com) | [api-docs.deepseek.com](https://api-docs.deepseek.com) | [deepseek.com](https://www.deepseek.com)
 
@@ -54,6 +56,8 @@
 - [原理与差异](#-原理与差异)
 - [订阅与使用](#-订阅与使用)
 - [自动化与可靠性](#️-自动化与可靠性)
+- [实验性 AI 发现](#-实验性-ai-发现opencode-无头模式)
+- [GitHub Pages](#-github-pages)
 - [手动运行](#-手动运行)
 - [FAQ](#-faq)
 - [关键词 / SEO](#-关键词--seo)
@@ -116,10 +120,29 @@ curl -s https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-offic
 
 ## ⚙️ 自动化与可靠性
 
-- **调度：** `cron: 0 */6 * * *`（每 6h）+ `workflow_dispatch` + `scripts/**` 变更时 push 触发（修复后立即重抓）。
+- **Track 调度：** `cron: 0 */6 * * *`（每 6h）+ `workflow_dispatch` + `scripts/**` 变更时 push 触发（修复后立即重抓）。
+- **Discover 调度：** `cron: 30 3 * * *` 每日 03:30 UTC（实验性，走 PR）+ `workflow_dispatch`。
 - **历史失败：** 早期 `2026-08-15 09:1x UTC` 有 2 次 `rejected`（并发 `git push` 竞态）。**已修复：** `fetch-depth:0`、`pull --rebase --autostash` 3 次重试（`scripts/track.mjs:fetchText` 亦 3 次重试、15s 超时）。修复后 **连续 40+ 次成功**（2026-08-16 → 2026-08-27）。
 - **状态：** `data/state.json` 记录已见 ID（截至 2026-08-27：`changelog:21, news:9, websiteNews:7, huggingface:20`）。异常条目自动自愈（日期校验 `YYYY-MM-DD`、tag/release 去重）。
 - **无时间戳抖动：** `FEED.md` 头部仅 `last update:` 的 ISO 时间会变，不会产生无意义空提交。
+
+## 🤖 实验性 AI 发现（Opencode 无头模式）
+
+> `scripts/discover.mjs` + `.github/workflows/discover.yml` — 无头 `opencode run --model opencode/<free-id> "discover news from deepseek.com diff"`，最新免费模型遍历 + PR 兜底。
+
+- **做什么：** 对比 `https://www.deepseek.com/en/news/` 与 `data/state.json:websiteNews` 的 diff，拉取 `https://opencode.ai/zen/v1/models` 的最新免费列表（过滤 `-free`，优先 `deepseek-v4-flash-free`），逐个 `opencode run --model opencode/<id>`（2min 超时、1.2s 退避）→ 生成 `insights.md`（含 `Summary / New findings [Source] / Cross-check / Risk / Next steps`）。若均失败或无 `OPENCODE_API_KEY`，回退到确定性模板（零幻觉）。
+- **免费模型遍历：** 始终请求最新 `Zen` 列表（当前 `deepseek-v4-flash-free, muse-spark-1.2-contributor-free, mimo-v2.5-free, hy3-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, laguna-s-2.1-free` + 静态 `big-pickle` 等），逐个尝试直到某个产出带 `[Source]` 的 `insights.md`，防止单模型下线。
+- **默认 PR：** 使用 `peter-evans/create-pull-request@v6` → 分支 `discover/insights-<run_id>` → PR 标题 `chore(discover): AI draft` 带标签 `ai-draft, needs-review`。绝不直推 `main`，需人工核验每个 `[Source]` 链接/日期。
+- **启用 AI：** 在仓库 **Settings → Secrets → Actions** 添加 `OPENCODE_API_KEY`（https://opencode.ai/auth）+ 可选 `ANTHROPIC_API_KEY`，无 key 也能跑（回退模板，workflow 保持绿色）。
+- **本地：** `node scripts/discover.mjs`（需 `npm i -g opencode-ai` 才走 AI，否则回退）。
+
+## 🌐 GitHub Pages
+
+> `scripts/build-pages.mjs` + `.github/workflows/pages.yml` — 由 markdown 生成静态 SEO 站。
+
+- **地址：** `https://awesome-deepseekharness.github.io/deepseek-official-tracker/`（启用 Pages → Source: GitHub Actions 后生效）
+- **内容：** `site/index.html` 由 `FEED.md`（79条）+ `insights.md` 预览 + 来源矩阵生成，含 `description/keywords/og:*`，另产 `site/feed.json` 供 API 消费。
+- **发布：** 推送 `main`（FEED/README 变更）或 `workflow_dispatch` 触发，使用 `actions/upload-pages-artifact@v3` + `actions/deploy-pages@v4`。
 
 ## 🛠️ 手动运行
 
