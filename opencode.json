@@ -13,6 +13,51 @@
       },
       "compat": {
         "supportsLongCacheRetention": true
+      },
+      "models": {
+        "muse-spark-1.2-contributor-free": {
+          "options": {
+            "reasoningEffort": "xhigh",
+            "reasoningSummary": "detailed",
+            "textVerbosity": "medium"
+          }
+        },
+        "deepseek-v4-flash-free": {
+          "options": {
+            "reasoningEffort": "xhigh",
+            "reasoningSummary": "detailed"
+          }
+        },
+        "mimo-v2.5-free": {
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        },
+        "hy3-free": {
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        },
+        "nemotron-3-ultra-free": {
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        },
+        "nemotron-3.5-lightning-free": {
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        },
+        "laguna-s-2.1-free": {
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        },
+        "big-pickle": {
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        }
       }
     }
   },
