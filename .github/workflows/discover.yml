@@ -64,6 +64,8 @@ jobs:
           head -n 30 .discover-prompt.md 2>/dev/null || true
 
       - name: Create PR if insights changed (safe default)
+        id: cpr
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -86,6 +88,16 @@ jobs:
           labels: |
             ai-draft
             needs-review
+
+      - name: Handle PR permission fallback
+        if: steps.cpr.outcome == 'failure'
+        run: |
+          echo "::warning::PR creation blocked — org setting 'Allow GitHub Actions to create and approve pull requests' is OFF."
+          echo "Enable at: https://github.com/organizations/awesome-deepseekharness/settings/actions"
+          echo "Branch discover/insights-${{ github.run_id }} was pushed but PR not created. You can manually create PR via gh:"
+          echo "  gh pr create --head discover/insights-${{ github.run_id }} --base main --title 'chore(discover): AI draft'"
+          # Keep branch for manual PR, don't delete
+          git ls-remote --heads origin discover/insights-${{ github.run_id }} | head -n 5
 
       - name: Summary
         if: always()
