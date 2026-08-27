@@ -33,12 +33,18 @@
     "news0725",
     "news260821"
   ],
+  "websiteNews": [
+    "v4-preview",
+    "deepseek-v3-2",
+    "v3-2-exp",
+    "v3-1-terminus",
+    "deepseek-v3-1",
+    "r1-0528",
+    "deepseek-v3"
+  ],
   "releases": [
     "deepseek-ai/DeepSeek-V3|v1.0.0",
-    "deepseek-ai/DeepSeek-V3|v1.0.0",
     "deepseek-ai/DeepSeek-R1|v1.0.0",
-    "deepseek-ai/DeepSeek-R1|v1.0.0",
-    "deepseek-ai/DeepEP|v1.2.1",
     "deepseek-ai/DeepEP|v1.2.1",
     "deepseek-ai/DeepGEMM|nv_dev_f8e8fb5",
     "deepseek-ai/DeepGEMM|nv_dev_950d31a",
@@ -52,11 +58,7 @@
     "deepseek-ai/DeepGEMM|v2.1.0",
     "deepseek-ai/smallpond|v0.15.0",
     "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.7",
-    "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.7",
     "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.8",
-    "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.8",
-    "deepseek-ai/deepseek-harness|dsh-v0.1.1-rc.2",
-    "deepseek-ai/deepseek-harness|dsh-v0.1.1-rc.1",
     "deepseek-ai/deepseek-harness|dsh-v0.1.1-rc.2",
     "deepseek-ai/deepseek-harness|dsh-v0.1.1-rc.1"
   ],
@@ -71,5 +73,27 @@
     "0.1.0-rc.8",
     "0.1.1-rc.1",
     "0.1.1-rc.2"
+  ],
+  "huggingface": [
+    "deepseek-ai/DeepSeek-V4-Pro-0813",
+    "deepseek-ai/DeepSeek-V4-Flash-0731",
+    "deepseek-ai/DeepSeek-V4-Flash-DSpark",
+    "deepseek-ai/DeepSeek-V4-Pro-DSpark",
+    "deepseek-ai/eagle3_gemma4_12b_ttt7",
+    "deepseek-ai/eagle3_qwen3_14b_ttt7",
+    "deepseek-ai/eagle3_qwen3_8b_ttt7",
+    "deepseek-ai/eagle3_qwen3_4b_ttt7",
+    "deepseek-ai/dflash_gemma4_12b_block7",
+    "deepseek-ai/dflash_qwen3_14b_block7",
+    "deepseek-ai/dflash_qwen3_8b_block7",
+    "deepseek-ai/dflash_qwen3_4b_block7",
+    "deepseek-ai/dspark_gemma4_12b_block7",
+    "deepseek-ai/dspark_qwen3_14b_block7",
+    "deepseek-ai/dspark_qwen3_8b_block7",
+    "deepseek-ai/dspark_qwen3_4b_block7",
+    "deepseek-ai/DeepSeek-V4-Pro",
+    "deepseek-ai/DeepSeek-V4-Flash",
+    "deepseek-ai/DeepSeek-V4-Flash-Base",
+    "deepseek-ai/DeepSeek-V4-Pro-Base"
   ]
 }
