@@ -5,14 +5,16 @@
 **The most complete, automated & verifiable feed for every DeepSeek official update — no rumors, no hallucinations.**
 
 [![Track](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml)
+[![Discover](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml)
+[![Pages](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/pages.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/pages.yml)
 [![Last Update](https://img.shields.io/github/last-commit/awesome-deepseekharness/deepseek-official-tracker?label=last%20update&color=0abf5b)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/commits/main)
 [![FEED](https://img.shields.io/badge/FEED-auto--updated-blue?logo=rss)](FEED.md)
 [![License: CC0](https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg)](LICENSE)
 [![DeepSeek](https://img.shields.io/badge/DeepSeek-V4%20%7C%20V3.2%20%7C%20R1-4B82E6?logo=openai)](https://www.deepseek.com)
 
-*Auto-tracked by GitHub Actions every 6 hours. 6 sources · 0 LLM hallucinations · 100% verifiable links.*
+*Auto-tracked by GitHub Actions every 6 hours. 6 sources · 0 LLM hallucinations · 100% verifiable links. Experimental AI insights via PR.*
 
-[English](README.md) | [中文](README.zh.md) · [📡 FEED.md](FEED.md) · [📰 Website News](website-news.md) · [🤗 HuggingFace](huggingface.md)
+[English](README.md) | [中文](README.zh.md) · [📡 FEED.md](FEED.md) · [📰 Website News](website-news.md) · [🤗 HuggingFace](huggingface.md) · [🤖 Insights](insights.md) · [🌐 Pages](https://awesome-deepseekharness.github.io/deepseek-official-tracker/)
 
 **Sister Project:** [Awesome DeepSeek Harness](https://github.com/awesome-deepseekharness/awesome-deepseek-harness) — curated plugins & ecosystem for `dsh` (DeepSeek Harness) · **Official:** [platform.deepseek.com](https://platform.deepseek.com) | [api-docs.deepseek.com](https://api-docs.deepseek.com) | [deepseek.com](https://www.deepseek.com)
 
@@ -54,6 +56,8 @@
 - [How it Works vs Others](#-how-it-works--how-were-different)
 - [Subscribe / Use](#-subscribe--use)
 - [Automation & Reliability](#️-automation--reliability)
+- [Experimental AI Discover](#-experimental-ai-discover--opencode-headless)
+- [GitHub Pages](#-github-pages)
 - [Manual Run](#-manual-run)
 - [FAQ](#-faq)
 - [Keywords / SEO](#-keywords--seo)
@@ -116,10 +120,29 @@ curl -s https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-offic
 
 ## ⚙️ Automation & Reliability
 
-- **Schedule:** `cron: 0 */6 * * *` (every 6h) + `workflow_dispatch` + push on `scripts/**` (so a fix instantly re-crawls).
+- **Track Schedule:** `cron: 0 */6 * * *` (every 6h) + `workflow_dispatch` + push on `scripts/**` (so a fix instantly re-crawls).
+- **Discover Schedule:** `cron: 30 3 * * *` daily 03:30 UTC (experimental, PR-only) + `workflow_dispatch`.
 - **Past failures:** 2 early `rejected` pushes on `2026-08-15 09:1x UTC` due to concurrent `git push` race. **Fixed:** `fetch-depth:0`, `pull --rebase --autostash` with 3-retry loop (`scripts/track.mjs:fetchText` also retries 3× with backoff, 15s timeout). Since fix: **40+ consecutive successes** (checked 2026-08-16 → 2026-08-27).
 - **State:** `data/state.json` dedupes IDs (`changelog: 21, news: 9, websiteNews: 7, huggingface: 20` as of 2026-08-27). Corrupted entries auto-heal (date validation `YYYY-MM-DD`, tag vs release dedup).
 - **No timestamp churn:** `FEED.md` header is stable except `last update:` ISO timestamp; no empty commits.
+
+## 🤖 Experimental: AI Discover — Opencode Headless
+
+> `scripts/discover.mjs` + `.github/workflows/discover.yml` — headless `opencode run --model opencode/<free-id> "discover news from deepseek.com diff"` with latest free-model traversal + PR guard.
+
+- **What it does:** diffs `https://www.deepseek.com/en/news/` vs `data/state.json:websiteNews`, fetches live free models from `https://opencode.ai/zen/v1/models` (filters `-free`, prioritizes `deepseek-v4-flash-free`), tries each via `opencode run --model opencode/<id>` (2min timeout, 1.2s backoff) → writes `insights.md` with `Summary / New findings [Source] / Cross-check / Risk / Next steps`. If all models fail or no `OPENCODE_API_KEY`, falls back to deterministic template (no hallucination).
+- **Free-model traversal:** always fetches latest list (currently `deepseek-v4-flash-free, muse-spark-1.2-contributor-free, mimo-v2.5-free, hy3-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, laguna-s-2.1-free` + static `big-pickle` etc) and iterates until one creates `insights.md` with `[Source]`. Prevents single-model sunset breakage.
+- **PR by default:** workflow uses `peter-evans/create-pull-request@v6` → branch `discover/insights-<run_id>` → PR titled `chore(discover): AI draft` labelled `ai-draft, needs-review`. Never auto-merges to `main`; reviewer must verify each `[Source]` link/date.
+- **Enable AI:** set `OPENCODE_API_KEY` (from https://opencode.ai/auth) + optionally `ANTHROPIC_API_KEY` in repo **Settings → Secrets → Actions**. Without it, fallback template still runs (so workflow stays green).
+- **Manual:** `node scripts/discover.mjs` locally (needs `npm i -g opencode-ai` if you want AI, otherwise fallback).
+
+## 🌐 GitHub Pages
+
+> `scripts/build-pages.mjs` + `.github/workflows/pages.yml` — static SEO site from markdown.
+
+- **URL:** `https://awesome-deepseekharness.github.io/deepseek-official-tracker/` (after enabling Pages → Source: GitHub Actions)
+- **Content:** `site/index.html` generated from `FEED.md` (79 items) + `insights.md` preview + sources grid, with meta `description/keywords/og:*` for SEO, plus `site/feed.json` for API consumers.
+- **Deploy:** on push to `main` (FEED/README changes) or `workflow_dispatch`; uses `actions/upload-pages-artifact@v3` + `actions/deploy-pages@v4`.
 
 ## 🛠️ Manual Run
 
