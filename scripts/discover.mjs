@@ -268,6 +268,19 @@ async function main() {
     console.warn(`[discover] Website fetch failed: ${e.message}, treating as no diff`);
   }
 
+  // Guard against PR spam: if no new slugs and insights already says "No new diff" with same known slugs, skip rewrite
+  if (newSlugs.length === 0 && fs.existsSync(INSIGHTS_FILE)) {
+    try {
+      const existing = fs.readFileSync(INSIGHTS_FILE, 'utf8');
+      const knownTail = (state.websiteNews || []).slice(-7).join(', ');
+      if (existing.includes('No new') && existing.includes(knownTail.slice(0, 20))) {
+        console.log('[discover] No new diff and insights already up-to-date — skipping rewrite to avoid PR spam');
+        console.log(`[discover] Done. insights unchanged.`);
+        return;
+      }
+    } catch {}
+  }
+
   const prompt = buildPrompt({ newSlugs, state, feedPreview });
 
   // Write prompt to temp file for debugging (optional)
