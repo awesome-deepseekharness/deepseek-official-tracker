@@ -298,24 +298,9 @@ async function main() {
   fs.writeFileSync(path.join(ROOT, '.discover-prompt.md'), prompt, 'utf8');
   console.log(`[discover] Prompt written to .discover-prompt.md (${prompt.length} chars)`);
 
-  // Guard against PR spam: if no new slugs and insights already AI-generated and recent (<24h), skip
-  // But always allow agentic run when any LLM key present (for community signals + thinking)
-  const hasAnyKeyForGuard = !!(process.env.OPENCODE_API_KEY || process.env.ANTHROPIC_API_KEY || process.env.OPENAI_API_KEY);
-  // Debug: show env presence (without leaking value)
-  console.log(`[discover] Env check — OPENCODE_API_KEY:${process.env.OPENCODE_API_KEY ? 'yes('+process.env.OPENCODE_API_KEY.length+' chars)' : 'no'} ANTHROPIC:${process.env.ANTHROPIC_API_KEY ? 'yes' : 'no'} OPENAI:${process.env.OPENAI_API_KEY ? 'yes' : 'no'}`);
-  if (newSlugs.length === 0 && fs.existsSync(INSIGHTS_FILE) && !hasAnyKeyForGuard) {
-    try {
-      const existing = fs.readFileSync(INSIGHTS_FILE, 'utf8');
-      const knownTail = (state.websiteNews || []).slice(-7).join(', ');
-      const stat = fs.statSync(INSIGHTS_FILE);
-      const ageHours = (Date.now() - stat.mtimeMs) / 3600000;
-      if (existing.includes('No new') && existing.includes(knownTail.slice(0, 20)) && ageHours < 24) {
-        console.log(`[discover] No new diff and insights up-to-date (${ageHours.toFixed(1)}h old) and no LLM key — skipping to avoid PR spam`);
-        console.log(`[discover] Done. insights unchanged.`);
-        return;
-      }
-    } catch {}
-  }
+  // Always proceed to agentic run — even with no diff, agent will check community signals (X/Reddit/HN) via tools
+  console.log(`[discover] Env check — OPENCODE_API_KEY:${process.env.OPENCODE_API_KEY ? 'yes('+process.env.OPENCODE_API_KEY.length+' chars)' : 'no'} ANTHROPIC:${process.env.ANTHROPIC_API_KEY ? 'yes' : 'no'} OPENAI:${process.env.OPENAI_API_KEY ? 'yes' : 'no'} — proceeding to agentic run regardless of diff`);
+  // Note: PR spam is now handled by peter-evans/create-pull-request (branch not ahead → no PR), not by early return
 
   // Try opencode traversal if binary and key present (or even without key, try — free models may still work with dummy)
   const hasKey = !!process.env.OPENCODE_API_KEY || !!process.env.OPENCODE_API_KEY?.length || !!process.env.ANTHROPIC_API_KEY || !!process.env.OPENAI_API_KEY;
