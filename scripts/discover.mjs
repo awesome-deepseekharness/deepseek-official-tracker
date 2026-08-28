@@ -45,7 +45,7 @@ const STATIC_FREE_FALLBACK = [
 async function fetchText(url, opts = {}) {
   const headers = { 'User-Agent': 'deepseek-official-tracker-discover/1.0', ...(opts.headers || {}) };
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), opts.timeoutMs || 12000);
+  const t = setTimeout(() => ctrl.abort(), opts.timeoutMs || 15000);
   try {
     const res = await fetch(url, { headers, signal: ctrl.signal });
     if (!res.ok) throw new Error(`GET ${url} -> ${res.status}`);
@@ -121,7 +121,7 @@ function runOpencode(modelId, prompt) {
     const timeout = setTimeout(() => {
       child.kill('SIGTERM');
       reject(new Error(`opencode timeout for ${model}`));
-    }, 120000); // 2min per model
+    }, 300000); // 5min per model — deep research needs longer reasoning
     child.stdout.on('data', d => { out += d.toString(); process.stdout.write(d); });
     child.stderr.on('data', d => { err += d.toString(); process.stderr.write(d); });
     child.on('error', e => {
@@ -181,62 +181,93 @@ async function generateWithTraversal(prompt) {
 function buildPrompt({ newSlugs, state, feedPreview }) {
   const now = new Date().toISOString();
   return [
-    `You are the autonomous DeepSeek Official Discovery Agent (see .opencode/agent/discover.md). Be *agentic*, not mechanical. Decide intelligently which tools to use.`,
+    `You are the DeepSeek Deep Discovery Agent (see .opencode/agent/discover.md). You are *autonomous, thorough, multi-source, max reasoning (xhigh thinking)*. This is a 25-minute deep dive — NOT a 2-minute quick check. Use your time fully. Exhaust tools before writing.`,
     ``,
     `## Context (as of ${now} UTC)`,
     `- Repo: https://github.com/awesome-deepseekharness/deepseek-official-tracker`,
-    `- Known state (data/state.json) websiteNews: ${JSON.stringify(state.websiteNews || []).slice(0, 500)}`,
-    `- Known changelog/news/HF slugs: ${JSON.stringify({ changelog: (state.changelog||[]).slice(-3), news: (state.news||[]).slice(-3), huggingface: (state.huggingface||[]).slice(-3) }).slice(0, 600)}`,
-    `- Precomputed diff on https://www.deepseek.com/en/news/ vs state: ${newSlugs.length ? newSlugs.join(', ') : '(none - but do NOT trust this alone, you must autonomously re-verify with tools)'}`,
-    `- Recent FEED preview (newest 15):`,
-    ...feedPreview.split('\n').slice(0, 18).map(l => `  ${l}`),
+    `- Known state (data/state.json) websiteNews: ${JSON.stringify(state.websiteNews || []).slice(0, 600)}`,
+    `- changelog/news/huggingface (last 5): ${JSON.stringify({ changelog: (state.changelog||[]).slice(-5), news: (state.news||[]).slice(-5), huggingface: (state.huggingface||[]).slice(-5) }).slice(0, 800)}`,
+    `- releases (last 5): ${JSON.stringify((state.releases||[]).slice(-5)).slice(0, 600)}`,
+    `- Precomputed diff on https://www.deepseek.com/en/news/ vs state: ${newSlugs.length ? newSlugs.join(', ') : '(none — but do NOT trust this alone, you must re-verify live with tools)'}`,
+    `- FEED preview (newest 22):`,
+    ...feedPreview.split('
+').slice(0, 22).map(l => `  ${l}`),
     ``,
-    `## Your toolbox — use intelligently`,
-    `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, etc.)`,
-    `- webfetch : fetch a URL (good for static HTML)`,
-    `- websearch : search the web (e.g., "deepseek x.com deepseek_ai", "deepseek reddit", "deepseek hacker news")`,
-    `- bash : run shell. Prefer these free, no-key helpers:`,
-    `  • Jina AI reader (free, JS-proof): \`curl -s https://s.jina.ai/http://www.deepseek.com/en/news/\` or \`curl -s https://r.jina.ai/http://x.com/deepseek_ai\` or \`curl -s "https://cc.bingj.com/cache.cgi?d=3&m=https://x.com/deepseek_ai"\` — use when webfetch returns Next.js shell`,
-    `  • HackerNews Algolia: \`curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=8" | jq\``,
-    `  • Reddit JSON: \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/LocalLLaMA/search.json?q=deepseek&sort=new&t=week" | jq\` and \`r/deepseek\`, via jina \`https://s.jina.ai/https://www.reddit.com/r/deepseek/\``,
-    `  • X/Twitter: \`websearch "deepseek_ai site:x.com"\` then \`bash curl -s https://s.jina.ai/http://x.com/deepseek_ai\``,
-    `  • HF: \`curl -s https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified | jq\``,
-    `  • npm: \`curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq\``,
-    `- edit : write insights.md`,
-    `- todowrite / task : plan`,
+    `## Your toolbox — use intelligently, prefer search-then-fetch`,
+    `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, api-changelog.md, etc.) — start here to avoid duplicate work`,
+    `- webfetch : static HTML fetch`,
+    `- websearch : discover URLs before fetching (use extensively: 4-6 searches minimum)`,
+    `- bash : run shell. Free helpers (no key needed) — use at least 4-6 of these, with fallbacks:`,
+    `  • Jina reader (JS-proof): \`curl -s https://s.jina.ai/http://www.deepseek.com/en/news/\`  |  \`curl -s https://s.jina.ai/https://www.deepseek.com/en/news/<slug>/\`  |  \`curl -s https://r.jina.ai/http://x.com/deepseek_ai\`  |  \`curl -s "https://cc.bingj.com/cache.cgi?d=3&m=https://x.com/deepseek_ai"\``,
+    `  • GitHub: \`curl -s "https://api.github.com/orgs/deepseek-ai/repos?per_page=10&sort=updated" | jq -r ".[].full_name"\`  |  \`curl -s "https://api.github.com/repos/deepseek-ai/DeepSeek-V3/releases?per_page=3" | jq\`  |  \`curl -s "https://api.github.com/repos/deepseek-ai/deepseek-harness/releases?per_page=3" | jq\``,
+    `  • HuggingFace: \`curl -s "https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified&limit=10" | jq -r ".[].modelId"\`  |  \`curl -s "https://huggingface.co/api/models?search=deepseek&sort=likes&limit=5" | jq\``,
+    `  • arXiv: \`curl -s "https://export.arxiv.org/api/query?search_query=all:deepseek&sortBy=submittedDate&max_results=5"\`  +  \`websearch "deepseek arxiv"\``,
+    `  • npm: \`curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq '.["dist-tags"]'\`  +  \`curl -s "https://registry.npmjs.org/-/v1/search?text=@deepseek-ai&size=5" | jq\``,
+    `  • X/Twitter: \`websearch "deepseek_ai site:x.com"\`  →  \`bash curl s.jina.ai/http://x.com/deepseek_ai\` (look for pinned announcement, then verify via official URL)`,
+    `  • Reddit: \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/LocalLLaMA/search.json?q=deepseek&sort=new&t=week&limit=10" | jq\`  +  \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/deepseek/search.json?q=&sort=new&t=week&limit=10" | jq\``,
+    `  • HN: \`curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=10" | jq '.hits[] | {title, url}'\``,
+    `  • Tech media: \`websearch "DeepSeek V4 OR V3.2 release news"\` → fetch top 2-3 hits via jina`,
+    `- edit : write insights.md  |  todowrite / task : plan your 4 phases`,
     ``,
-    `## Discovery methodology (autonomous)`,
-    `1. Verify official primaries yourself (don't trust precomputed diff): webfetch or jina fetch https://www.deepseek.com/en/news/ and each slug page, https://api-docs.deepseek.com/updates, https://api-docs.deepseek.com/news/<slug>.`,
-    `2. Probe community signals to catch early hints (then cross-verify with official):`,
-    `   - X: websearch + jina fetch x.com/deepseek_ai timeline`,
-    `   - Reddit: r/LocalLLaMA + r/deepseek search JSON`,
-    `   - HN: Algolia search`,
-    `   Treat these as *signals only* — a finding is only "verified" if official Source exists. Otherwise mark "unverified community signal".`,
-    `3. Decide next tool based on what you find. Be exploratory, not scripted.`,
+    `## Deep discovery methodology — 4 phases (MANDATORY, use todowrite to track)`,
+    `### Phase 1 — Ground truth (30% time, must do first)`,
+    `- Read data/state.json + FEED.md to avoid reporting old news.`,
+    `- Verify official primaries LIVE yourself — do NOT trust precomputed diff:`,
+    `  1) webfetch OR jina \`https://www.deepseek.com/en/news/\` → extract all slugs, fetch 2-3 newest slug pages for title/date.`,
+    `  2) webfetch \`https://api-docs.deepseek.com/updates\` (date headers) + 1-2 news slugs.`,
+    `  3) GitHub: fetch org repos + DeepSeek-V3/R1/harness releases.`,
+    `  4) HF + npm as above.`,
+    `- Record which official items are *new vs already tracked*.`,
     ``,
-    `## Output — overwrite insights.md at repo root (thinking enabled, variant max)`,
-    `- Language: English primary, Chinese summary optional`,
-    `- Structure:`,
-    `  1. # Insights — DeepSeek Official Discovery — <date>`,
-    `  2. > Auto-generated by opencode (model: <model-id>, variant:max, thinking) — <ISO> UTC. AI draft, needs human review via PR.`,
-    `  3. ## Thinking — 3-5 sentences of your reasoning: what you fetched, what diff you found, which community signals you checked, why you concluded (this will also appear in Action logs via --thinking)`,
-    `  4. ## Summary — 2-3 sentences`,
-    `  5. ## New findings — for each *verified* official item: title, date, 1-sentence summary, [Source](url) (official only)`,
-    `  6. ## Community signals (optional) — X/Reddit/HN hits with [Source], labeled unverified`,
-    `  7. ## Cross-check — vs website-news.md / api-changelog.md / NEWS.md / huggingface.md / state.json`,
-    `  8. ## Risk / Confidence — low/medium/high`,
-    `  9. ## Next steps — suggest node scripts/track.mjs or wait`,
-    `  10. ## FEED preview — first 20 lines of FEED.md`,
-    `- If truly no new official updates after your own verification, write "No new official updates detected" + timestamp, but still include Community signals if any.`,
-    `- NEVER invent slug/date. If uncertain, write "unverified" and ask for manual review.`,
+    `### Phase 2 — Secondary authoritative (30% time, this is NEW — go beyond blog)`,
+    `- arXiv recent DeepSeek papers (export.arxiv API) — any new V4/V3/R1 paper in last 14 days?`,
+    `- HuggingFace trending: are new deepseek-ai models trending vs state.json?`,
+    `- GitHub trending / search: any new deepseek-ai repo or major release not in state?`,
+    `- npm: any new @deepseek-ai package version?`,
+    `- Tech media websearch: fetch 2-3 articles about DeepSeek from past 14 days, cross-check if they reference an official release you missed.`,
+    `- Label these as "secondary" — authoritative but not official blog. Cross-verify: if media says "DeepSeek released X", find the official [Source] (deepseek.com / github / huggingface) before calling verified.`,
+    ``,
+    `### Phase 3 — Community & market early signals (30% time, detect before official posts)`,
+    `- X: websearch + jina timeline of @deepseek_ai — look for teasers, retweets, AMA.`,
+    `- Reddit: both r/LocalLLaMA and r/deepseek JSON — rising threads about DeepSeek in past 7 days?`,
+    `- HN Algolia: top DeepSeek stories past 30 days — any front-page that hints at unannounced drop?`,
+    `- WeChat/Discord via websearch: "deepseek 微信" / "deepseek discord" — capture signals.`,
+    `- Treat ALL of this as *unverified signals* — a finding is only "verified" if official primary Source exists. Otherwise mark "unverified community signal — pending official confirmation" with signal [Source] + note "need official [Source]".`,
+    ``,
+    `### Phase 4 — Synthesis & cross-check (10% time)`,
+    `- Grep FEED.md / website-news.md / api-changelog.md / NEWS.md / huggingface.md / releases.md for each candidate title/slug — deduplicate.`,
+    `- Decide: is there truly a new official update? Or only community buzz? Be conservative — hallucination is worse than omission.`,
+    `- Then write insights.md.`,
+    ``,
+    `## Output — overwrite insights.md (thinking:max, variant:max, 900-1300 words)`,
+    `- Language: English primary, Chinese summary 1 sentence optional at end of Summary`,
+    `- Structure (follow exactly, keep headers):`,
+    `  1. # Insights — DeepSeek Deep Discovery — <YYYY-MM-DD>`,
+    `  2. > Auto-generated by opencode (model: <model-id>, reasoning:xhigh, thinking) — <ISO> UTC. Deep research (4-phase, multi-source). AI draft, needs human review via PR.`,
+    `  3. ## Thinking — 5-7 sentences: which phases you ran, which tiers fetched, what diff vs state, which secondary/community signals checked, why you concluded (this also streams to Action logs via --thinking, so be explicit)`,
+    `  4. ## Summary — 3-4 sentences, high level + trend`,
+    `  5. ## New findings (verified) — for each *verified official* item: **title** — date — 1-2 sentence why it matters — [Source](official url). Group by type (Blog / API / GitHub / HF / npm). If none, write "No new verified official updates after full 4-phase check — <timestamp> UTC" but still show you did the work.`,
+    `  6. ## Secondary signals — arXiv / HF papers / GitHub trending / tech media hits with [Source], labeled "secondary — authoritative, not official blog".`,
+    `  7. ## Community signals — X / Reddit / HN hits with [Source], clearly labeled "unverified — pending official confirmation". Even if no official update, always try to fill this from Phase 3.`,
+    `  8. ## Trends & Context — connect to prior FEED: cadence, e.g., "V4-Flash-Vision-Exp (08-21) follows V4-Pro 0813 by 8 days — multimodal push continues".`,
+    `  9. ## Cross-check — table/bullets vs website-news.md / api-changelog.md / NEWS.md / huggingface.md / releases.md / data/state.json — note "already tracked" vs "new".`,
+    `  10. ## Risk / Confidence — low/medium/high + justification + what to manually verify.`,
+    `  11. ## Next steps — suggest \`node scripts/track.mjs\` if new, else "wait for next 6h cron".`,
+    `  12. ## FEED preview — first 20 lines of FEED.md (code fence)`,
+    `  13. ## Appendix — Sources fetched — bullet list of every URL you actually fetched (for audit, 10+ bullets expected).`,
+    `- If you did 10+ tool calls, your Appendix will prove it. A thin Appendix = incomplete job.`,
+    `- NEVER invent slug/date/title. If uncertain, write "unverified" and ask for manual webfetch.`,
+    `- Prefer jina.ai when webfetch returns Next.js shell or 403.`,
     ``,
     `## Guardrails`,
-    `- PR-safe: draft for human review, never push to main.`,
-    `- Prefer jina.ai (s.jina.ai / r.jina.ai / cc.bingj.com) when webfetch returns shell.`,
-    `- You are on the latest free model via public opencode provider — do your best.`,
+    `- PR-safe: draft only, never push to main — your file goes via PR.`,
+    `- Exhaust before writing: workflow gave you 30 min, use at least 8-12 min research. Do not write after 2 fetches.`,
+    `- Evidence > speed: 3 well-sourced findings beat 10 unsourced.`,
+    `- You run on free model via public opencode Zen — do your best, but be honest about limits.`,
     ``,
-    `Proceed autonomously. After writing insights.md, echo "DONE" and list all [Source] URLs you actually fetched.`,
-  ].join('\n');
+    `Proceed: todowrite Phase 1→4, then execute. After writing insights.md, echo "DONE" and list all [Source] URLs you fetched.`,
+  ].join('
+');
 }
 
 function buildDeterministicInsights({ newSlugs, state }) {
@@ -275,17 +306,17 @@ ${feed}
 }
 
 async function main() {
-  console.log(`[discover] Starting at ${new Date().toISOString()}`);
+  console.log(`[discover] Deep discovery starting at ${new Date().toISOString()}`);
   const state = loadState();
   let newSlugs = [];
   let feedPreview = '';
-  try { feedPreview = fs.readFileSync(FEED_FILE, 'utf8').slice(0, 2000); } catch {}
+  try { feedPreview = fs.readFileSync(FEED_FILE, 'utf8').slice(0, 2500); } catch {}
   try {
-    const html = await fetchText(WEBSITE_NEWS_URL, { timeoutMs: 10000 });
+    const html = await fetchText(WEBSITE_NEWS_URL, { timeoutMs: 15000 });
     const liveSlugs = extractWebsiteSlugs(html);
     const known = new Set(state.websiteNews || []);
     newSlugs = liveSlugs.filter(s => !known.has(s));
-    console.log(`[discover] Live slugs: ${liveSlugs.slice(0, 10).join(', ')}`);
+    console.log(`[discover] Live slugs: ${liveSlugs.slice(0, 12).join(', ')}`);
     console.log(`[discover] Known: ${(state.websiteNews||[]).slice(-8).join(', ')}`);
     console.log(`[discover] New diff: ${newSlugs.length ? newSlugs.join(', ') : '(none)'}`);
   } catch (e) {
