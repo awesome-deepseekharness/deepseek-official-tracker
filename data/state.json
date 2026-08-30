@@ -61,7 +61,8 @@
     "deepseek-ai/deepseek-harness|dsh-v0.1.0-rc.8",
     "deepseek-ai/deepseek-harness|dsh-v0.1.1-rc.2",
     "deepseek-ai/deepseek-harness|dsh-v0.1.1-rc.1",
-    "deepseek-ai/deepseek-harness|dsh-v0.1.2-alpha.1"
+    "deepseek-ai/deepseek-harness|dsh-v0.1.2-alpha.1",
+    "deepseek-ai/deepseek-harness|dsh-v0.1.2-alpha.2"
   ],
   "npm": [
     "0.0.1-rc.1",
@@ -73,7 +74,8 @@
     "0.1.0-rc.7",
     "0.1.0-rc.8",
     "0.1.1-rc.1",
-    "0.1.1-rc.2"
+    "0.1.1-rc.2",
+    "0.1.2-alpha.2"
   ],
   "huggingface": [
     "deepseek-ai/DeepSeek-V4-Pro-0813",
