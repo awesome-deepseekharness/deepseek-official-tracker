@@ -1,5 +1,15 @@
 # HuggingFace: deepseek-ai Models
 
+## [2026-08-31] deepseek-ai/DeepSeek-V4-Flash-Vision-Exp
+
+❤️ 185 · 📥 0 · image-text-to-text · transformers, safetensors, deepseek_v4, text-generation, image-text-to-text
+
+[Source](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp)
+
+---
+
+---
+
 ## [2026-08-13] deepseek-ai/DeepSeek-V4-Pro-0813
 
 ❤️ 765 · 📥 90,822 · text-generation · transformers, safetensors, deepseek_v4, text-generation, conversational
