@@ -1,6 +1,9 @@
 name: Auto Review discover PRs (AI)
 
 on:
+  workflow_run:
+    workflows: ["Discover with Opencode (experimental)"]
+    types: [completed]
   pull_request_target:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
@@ -18,11 +21,13 @@ concurrency:
 
 jobs:
   triage:
-    # Only for bot discover PRs; allow manual dispatch for testing
+    # Only for bot discover PRs; allow manual dispatch/schedule/workflow_run for testing
+    # Note: PRs created via GITHUB_TOKEN don't trigger pull_request_target, so we also listen to workflow_run
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'schedule' ||
-      (github.actor == 'github-actions[bot]' && startsWith(github.head_ref, 'discover/insights-'))
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      (github.actor == 'github-actions[bot]' && startsWith(github.event.pull_request.head.ref || '', 'discover/insights-'))
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
