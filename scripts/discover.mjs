@@ -190,27 +190,26 @@ function buildPrompt({ newSlugs, state, feedPreview }) {
     `- releases (last 5): ${JSON.stringify((state.releases||[]).slice(-5)).slice(0, 600)}`,
     `- Precomputed diff on https://www.deepseek.com/en/news/ vs state: ${newSlugs.length ? newSlugs.join(', ') : '(none — but do NOT trust this alone, you must re-verify live with tools)'}`,
     `- FEED preview (newest 22):`,
-    ...feedPreview.split('
-').slice(0, 22).map(l => `  ${l}`),
+    ...feedPreview.split('\n').slice(0, 22).map(l => `  ${l}`),
     ``,
-    `## Your toolbox — use BOTH jina + remote browser intelligently, prefer search-then-fetch
-- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, api-changelog.md, etc.) — start here to avoid duplicate work
-- webfetch : static HTML fetch
-- websearch : discover URLs before fetching (use extensively: 4-6 searches minimum)
-- bash : run shell. Free helpers (no key needed) — use at least 4-6 of these, mix jina + browser:
-  • Jina reader (fast, JS-proof): `curl -s https://s.jina.ai/http://www.deepseek.com/en/news/`  |  `curl -s https://s.jina.ai/https://www.deepseek.com/en/news/<slug>/`  |  `curl -s https://r.jina.ai/http://x.com/deepseek_ai`  |  `curl -s "https://cc.bingj.com/cache.cgi?d=3&m=https://x.com/deepseek_ai"`
-  • Remote browser kitesurf (rendered, via wss://kitesurf.cloudflare.app — works on ubuntu-latest, no local Chrome): use MCP chrome-devtools to navigate to `https://www.deepseek.com/en/news/` Next.js shell, `https://x.com/deepseek_ai` timeline, any JS-heavy page where jina returns shell — **for high-value targets (top 2 slugs, X timeline) use BOTH jina and browser and compare**
-  • GitHub: `curl -s "https://api.github.com/orgs/deepseek-ai/repos?per_page=10&sort=updated" | jq -r ".[].full_name"`  |  `curl -s "https://api.github.com/repos/deepseek-ai/DeepSeek-V3/releases?per_page=3" | jq`  |  `curl -s "https://api.github.com/repos/deepseek-ai/deepseek-harness/releases?per_page=3" | jq`
-  • HuggingFace: `curl -s "https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified&limit=10" | jq -r ".[].modelId"`  |  `curl -s "https://huggingface.co/api/models?search=deepseek&sort=likes&limit=5" | jq` — browser to huggingface.co/deepseek-ai for visual trending if needed
-  • arXiv: `curl -s "https://export.arxiv.org/api/query?search_query=all:deepseek&sortBy=submittedDate&max_results=5"`  +  `websearch "deepseek arxiv"`
-  • npm: `curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq '.["dist-tags"]'`  +  `curl -s "https://registry.npmjs.org/-/v1/search?text=@deepseek-ai&size=5" | jq`
-  • X/Twitter: `websearch "deepseek_ai site:x.com"`  →  **BOTH** `bash curl s.jina.ai/http://x.com/deepseek_ai` (fast) **and** `kitesurf browser` navigate to `https://x.com/deepseek_ai` (rendered, scroll)
-  • Reddit: `curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/LocalLLaMA/search.json?q=deepseek&sort=new&t=week&limit=10" | jq`  +  `curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/deepseek/search.json?q=&sort=new&t=week&limit=10" | jq`  +  fallback `https://s.jina.ai/https://www.reddit.com/r/deepseek/` or browser
-  • HN: `curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=10" | jq '.hits[] | {title, url}'`
-  • Tech media: `websearch "DeepSeek V4 OR V3.2 release news"` → fetch top 2-3 hits via **jina + browser double-check** for paywalled/dynamic sites
-- edit : write insights.md  |  todowrite / task : plan your 4 phases
-
-## Deep discovery methodology — 4 phases (MANDATORY, use todowrite to track)`,
+    `## Your toolbox — use BOTH jina + remote browser intelligently, prefer search-then-fetch`,
+    `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, api-changelog.md, etc.) — start here to avoid duplicate work`,
+    `- webfetch : static HTML fetch`,
+    `- websearch : discover URLs before fetching (use extensively: 4-6 searches minimum)`,
+    `- bash : run shell. Free helpers (no key needed) — use at least 4-6 of these, mix jina + browser:`,
+    `  • Jina reader (fast, JS-proof): \`curl -s https://s.jina.ai/http://www.deepseek.com/en/news/\`  |  \`curl -s https://s.jina.ai/https://www.deepseek.com/en/news/<slug>/\`  |  \`curl -s https://r.jina.ai/http://x.com/deepseek_ai\`  |  \`curl -s "https://cc.bingj.com/cache.cgi?d=3&m=https://x.com/deepseek_ai"\``,
+    `  • Remote browser kitesurf (rendered, via wss://kitesurf.cloudflare.app — works on ubuntu-latest, no local Chrome): use MCP chrome-devtools to navigate to \`https://www.deepseek.com/en/news/\` Next.js shell, \`https://x.com/deepseek_ai\` timeline, any JS-heavy page where jina returns shell — **for high-value targets (top 2 slugs, X timeline) use BOTH jina and browser and compare**`,
+    `  • GitHub: \`curl -s "https://api.github.com/orgs/deepseek-ai/repos?per_page=10&sort=updated" | jq -r ".[].full_name"\`  |  \`curl -s "https://api.github.com/repos/deepseek-ai/DeepSeek-V3/releases?per_page=3" | jq\`  |  \`curl -s "https://api.github.com/repos/deepseek-ai/deepseek-harness/releases?per_page=3" | jq\``,
+    `  • HuggingFace: \`curl -s "https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified&limit=10" | jq -r ".[].modelId"\`  |  \`curl -s "https://huggingface.co/api/models?search=deepseek&sort=likes&limit=5" | jq\` — browser to huggingface.co/deepseek-ai for visual trending if needed`,
+    `  • arXiv: \`curl -s "https://export.arxiv.org/api/query?search_query=all:deepseek&sortBy=submittedDate&max_results=5"\`  +  \`websearch "deepseek arxiv"\``,
+    `  • npm: \`curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq '.["dist-tags"]'\`  +  \`curl -s "https://registry.npmjs.org/-/v1/search?text=@deepseek-ai&size=5" | jq\``,
+    `  • X/Twitter: \`websearch "deepseek_ai site:x.com"\`  →  **BOTH** \`bash curl s.jina.ai/http://x.com/deepseek_ai\` (fast) **and** \`kitesurf browser\` navigate to \`https://x.com/deepseek_ai\` (rendered, scroll)`,
+    `  • Reddit: \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/LocalLLaMA/search.json?q=deepseek&sort=new&t=week&limit=10" | jq\`  +  \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/deepseek/search.json?q=&sort=new&t=week&limit=10" | jq\`  +  fallback \`https://s.jina.ai/https://www.reddit.com/r/deepseek/\` or browser`,
+    `  • HN: \`curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=10" | jq '.hits[] | {title, url}'\``,
+    `  • Tech media: \`websearch "DeepSeek V4 OR V3.2 release news"\` → fetch top 2-3 hits via **jina + browser double-check** for paywalled/dynamic sites`,
+    `- edit : write insights.md  |  todowrite / task : plan your 4 phases`,
+    ``,
+    `## Deep discovery methodology — 4 phases (MANDATORY, use todowrite to track)`,
     `### Phase 1 — Ground truth (30% time, must do first)`,
     `- Read data/state.json + FEED.md to avoid reporting old news.`,
     `- Verify official primaries LIVE yourself with BOTH tools — do NOT trust precomputed diff:`,
@@ -267,8 +266,7 @@ function buildPrompt({ newSlugs, state, feedPreview }) {
     `- You run on free model via public opencode Zen — do your best, but be honest about limits.`,
     ``,
     `Proceed: todowrite Phase 1→4, then execute. After writing insights.md, echo "DONE" and list all [Source] URLs you fetched.`,
-  ].join('
-');
+  ].join('\n');
 }
 
 function buildDeterministicInsights({ newSlugs, state }) {
