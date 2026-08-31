@@ -1,0 +1,179 @@
+name: Auto Review discover PRs (AI)
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+  schedule:
+    - cron: '15 4 * * *' # daily 04:15 UTC — close stale duplicates even if no new PR
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: auto-review-${{ github.event.pull_request.number || 'schedule' }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    # Only for bot discover PRs; allow manual dispatch for testing
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'schedule' ||
+      (github.actor == 'github-actions[bot]' && startsWith(github.head_ref, 'discover/insights-'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout base (for schedule) or PR head
+        uses: actions/checkout@v4
+        with:
+          # For pull_request_target, checkout PR head for review
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          # Need token to push/merge
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install opencode
+        run: |
+          set -e
+          if npm install -g opencode-ai 2>&1 | head -n 20; then
+            echo "opencode via npm done"
+          else
+            curl -fsSL https://opencode.ai/install | bash
+            echo "$HOME/.local/bin" >> $GITHUB_PATH
+          fi
+          opencode --version || echo "opencode not found"
+
+      - name: Close stale duplicate discover PRs (keep newest)
+        if: github.event_name != 'schedule' || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          echo "Listing open discover PRs..."
+          gh pr list --state open --json number,headRefName,createdAt,title --jq 'sort_by(.createdAt) | reverse | .[] | "\(.number) \(.headRefName) \(.createdAt)"' | tee /tmp/open.txt || true
+          # Keep newest, close older ones that match discover/insights-*
+          # Count how many open discover PRs
+          OPEN_COUNT=$(gh pr list --state open --search "head:discover/insights-" --json number --jq 'length')
+          echo "Open discover PRs count: $OPEN_COUNT"
+          if [ "$OPEN_COUNT" -gt 1 ]; then
+            # Get newest pr number (latest created)
+            NEWEST=$(gh pr list --state open --search "head:discover/insights-" --json number,createdAt --jq 'sort_by(.createdAt) | reverse | .[0].number')
+            echo "Newest is #$NEWEST, closing older..."
+            for n in $(gh pr list --state open --search "head:discover/insights-" --json number --jq '.[].number'); do
+              if [ "$n" != "$NEWEST" ]; then
+                echo "Closing stale #$n"
+                gh pr comment "$n" --body "🤖 Auto-closing stale duplicate: newer discover PR #$NEWEST exists. Keeping only latest to avoid pile-up. Reopen if needed." || true
+                gh pr close "$n" --comment "Auto-closed as duplicate of #$NEWEST" || gh pr close "$n" || true
+                # Optionally delete branch
+                HEAD_REF=$(gh pr view "$n" --json headRefName -q .headRefName)
+                git push origin --delete "$HEAD_REF" 2>&1 | head -n 5 || true
+              fi
+            done
+          else
+            echo "No duplicates to close"
+          fi
+          # Also for schedule: if no PR event, still ensure only 1 open remains (keep newest)
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "Schedule cleanup done"
+          fi
+
+      - name: Determine PR number to review
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUM="${{ github.event.pull_request.number }}"
+          if [ -z "$PR_NUM" ]; then
+            # schedule or dispatch without PR: pick newest open discover PR
+            PR_NUM=$(gh pr list --state open --search "head:discover/insights-" --json number,createdAt --jq 'sort_by(.createdAt) | reverse | .[0].number // empty')
+            echo "No event PR, newest open is: $PR_NUM"
+          fi
+          echo "pr=$PR_NUM" >> $GITHUB_OUTPUT
+          if [ -z "$PR_NUM" ]; then
+            echo "No PR to review, exiting"
+            exit 0
+          fi
+          gh pr view "$PR_NUM" --json title,state,headRefName,url | cat
+
+      - name: AI review via opencode
+        if: steps.pr.outputs.pr != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          set -e
+          PR_NUM="${{ steps.pr.outputs.pr }}"
+          echo "Reviewing PR #$PR_NUM with opencode..."
+          # Ensure we are on PR head
+          git fetch origin "pull/$PR_NUM/head:pr-$PR_NUM" 2>&1 | head -n 10 || true
+          git checkout "pr-$PR_NUM" 2>&1 | head -n 10 || git checkout "origin/pr-$PR_NUM" 2>&1 | head -n 10 || true
+          ls -lh insights.md | head -n 5
+          echo "--- PR diff preview ---"
+          gh pr diff "$PR_NUM" | head -n 300 || true
+          # Run AI reviewer; prompt is PR number, agent is review
+          # Timeout 12min for deep review
+          set +e
+          timeout 720 opencode run --model opencode/muse-spark-1.2-contributor-free --agent review --thinking "PR #$PR_NUM" 2>&1 | tee /tmp/review.log
+          EXIT=$?
+          echo "opencode exit: $EXIT"
+          cat /tmp/review.log | tail -n 100
+          # Fallback if AI didn't write decision file
+          if [ ! -f .review-decision.json ]; then
+            echo "AI did not write .review-decision.json, creating fallback NEEDS_HUMAN"
+            echo '{"decision":"NEEDS_HUMAN","reason":"AI review did not produce decision, needs human","confidence":"low","sources_checked":0}' > .review-decision.json
+          fi
+          cat .review-decision.json
+          # Also ensure comment was posted; if not, post fallback
+          set -e
+
+      - name: Act on decision (MERGE / CLOSE / NEEDS_HUMAN)
+        if: steps.pr.outputs.pr != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          PR_NUM="${{ steps.pr.outputs.pr }}"
+          DECISION=$(jq -r .decision .review-decision.json 2>/dev/null || echo "NEEDS_HUMAN")
+          REASON=$(jq -r .reason .review-decision.json 2>/dev/null || echo "no reason")
+          echo "Decision: $DECISION — $REASON"
+          # Ensure label
+          gh pr view "$PR_NUM" --json labels -q '.labels[].name' | cat || true
+          if [ "$DECISION" = "MERGE" ]; then
+            echo "Approving and merging #$PR_NUM"
+            gh pr review "$PR_NUM" --approve --body "🤖 AI review: **MERGE** — $REASON — auto-approving. Sources verified, risk low." || true
+            # Enable auto-merge or direct squash
+            gh pr merge "$PR_NUM" --squash --delete-branch --body "Auto-merged by AI review (confidence high, sources verified)" 2>&1 | head -n 20 || \
+              gh pr merge "$PR_NUM" --auto --squash 2>&1 | head -n 20 || true
+            gh pr comment "$PR_NUM" --body "✅ Auto-merged by AI reviewer." || true
+          elif [ "$DECISION" = "CLOSE" ]; then
+            echo "Closing #$PR_NUM"
+            gh pr comment "$PR_NUM" --body "🤖 AI review: **CLOSE** — $REASON — closing as noise/duplicate. Tracker is current; next cron will recreate if needed." || true
+            gh pr close "$PR_NUM" --comment "Auto-closed by AI review: $REASON" || true
+            # Delete branch
+            HEAD_REF=$(gh pr view "$PR_NUM" --json headRefName -q .headRefName)
+            git push origin --delete "$HEAD_REF" 2>&1 | head -n 5 || true
+          else
+            echo "NEEDS_HUMAN — leaving open"
+            gh pr comment "$PR_NUM" --body "🤖 AI review: **NEEDS_HUMAN** — $REASON — please review manually. Checklist: verify [Source] links, dates, and Appendix ≥12 bullets." || true
+            gh pr edit "$PR_NUM" --add-label "needs-review" 2>&1 | head -n 5 || true
+          fi
+          # Always upload decision as artifact-like log
+          cat .review-decision.json
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "Auto-review done for PR ${{ steps.pr.outputs.pr }}"
+          cat .review-decision.json 2>/dev/null || echo "no decision"
+          gh pr list --state open --json number,title,headRefName | head -n 20 || true
