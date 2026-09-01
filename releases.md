@@ -1,5 +1,15 @@
 # DeepSeek Official GitHub Releases & Tags
 
+## [2026-09-01] deepseek-ai/deepseek-harness release dsh-v0.1.2-alpha.4
+
+v0.1.2-alpha.4
+
+[Source](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.4)
+
+---
+
+---
+
 ## [2026-08-31] deepseek-ai/deepseek-harness release dsh-v0.1.2-alpha.3
 
 v0.1.2-alpha.3
