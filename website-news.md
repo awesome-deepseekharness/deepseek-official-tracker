@@ -1,5 +1,15 @@
 # DeepSeek Official Website News (deepseek.com)
 
+## [2026-09-10] Introducing DeepSeek-V4.1-Flash: smarter, faster, more efficient.
+
+Introducing the smallest model in our new architecture family, with native visual understanding. Designed for greater capability, faster inference, and higher throughput.
+
+[Source](https://www.deepseek.com/en/news/deepseek-v4-1-flash/)
+
+---
+
+---
+
 ## [2026-04-24] DeepSeek-V4 Preview: Entering the Era of Affordable Million-Token Context
 
 DeepSeek-V4 Preview is officially live & open-sourced. Welcome to the era of cost-effective 1M context length.

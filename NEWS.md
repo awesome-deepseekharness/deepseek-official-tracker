@@ -1,5 +1,13 @@
 # DeepSeek Official News
 
+## [2026-09-10] DeepSeek-V4.1-Flash: Smarter, Faster, More Efficient
+
+[Source](https://api-docs.deepseek.com/news/news260910)
+
+---
+
+---
+
 ## [2026-08-21] DeepSeek-V4-Flash-Vision-Exp Release: Multimodal API Now Live
 
 [Source](https://api-docs.deepseek.com/news/news260821)

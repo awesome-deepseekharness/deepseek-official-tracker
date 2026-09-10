@@ -20,7 +20,8 @@
     "2024-06-28|deepseek-chat ",
     "2024-06-14|deepseek-coder ",
     "2024-05-17|deepseek-chat ",
-    "2026-08-21|DeepSeek-V4-Flash-Vision-Exp Release "
+    "2026-08-21|DeepSeek-V4-Flash-Vision-Exp Release ",
+    "2026-09-10|DeepSeek-V4.1-Flash Release "
   ],
   "news": [
     "news260813",
@@ -31,7 +32,8 @@
     "news1226",
     "news0802",
     "news0725",
-    "news260821"
+    "news260821",
+    "news260910"
   ],
   "websiteNews": [
     "v4-preview",
@@ -40,7 +42,8 @@
     "v3-1-terminus",
     "deepseek-v3-1",
     "r1-0528",
-    "deepseek-v3"
+    "deepseek-v3",
+    "deepseek-v4-1-flash"
   ],
   "releases": [
     "deepseek-ai/DeepSeek-V3|v1.0.0",
@@ -115,6 +118,7 @@
     "deepseek-ai/DeepSeek-V4-Flash",
     "deepseek-ai/DeepSeek-V4-Flash-Base",
     "deepseek-ai/DeepSeek-V4-Pro-Base",
-    "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp"
+    "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+    "deepseek-ai/DeepSeek-V4.1-Flash"
   ]
 }
