@@ -322,6 +322,17 @@ async function main() {
     console.warn(`[discover] Website fetch failed: ${e.message}, treating as no diff`);
   }
 
+  // Noise gate: with no new slugs the run would only reproduce the
+  // "no updates" template (timestamps differ → empty PR pile-up that
+  // auto-review has to close). Skip early; --force / DISCOVER_FORCE=1
+  // (used by workflow_dispatch) still runs the full 4-phase dive.
+  const force = process.argv.includes('--force') || process.env.DISCOVER_FORCE === 'true';
+  if (newSlugs.length === 0 && !force) {
+    console.log('[discover] No new slugs vs data/state.json — skipping run (no PR noise).');
+    console.log(`[discover] Known websiteNews: ${(state.websiteNews || []).slice(-5).join(', ')}`);
+    return;
+  }
+
   const prompt = buildPrompt({ newSlugs, state, feedPreview });
 
   // Write prompt to temp file for debugging (optional)
