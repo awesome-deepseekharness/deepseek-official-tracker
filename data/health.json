@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-09-14T15:13:04.689Z",
+  "ok": true,
+  "issueCount": 0,
+  "issues": [],
+  "stats": {
+    "NEWS.md": 10,
+    "api-changelog.md": 22,
+    "website-news.md": 8,
+    "releases.md": 37,
+    "npm.md": 20,
+    "huggingface.md": 22,
+    "state": {
+      "changelog": 22,
+      "news": 10,
+      "websiteNews": 8,
+      "releases": 30,
+      "npm": 20,
+      "huggingface": 22
+    },
+    "feedItems": 79,
+    "readmeLatest": {
+      "en": "2026-09-10",
+      "zh": "2026-09-10"
+    },
+    "linksChecked": 15
+  }
+}

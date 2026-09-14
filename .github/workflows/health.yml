@@ -1,0 +1,85 @@
+name: Health Check (janitor)
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # daily 05:00 UTC (after track runs)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: tracker # same push lane as track.yml (rebase+retry below)
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Run janitor checks
+        id: check
+        run: |
+          set +e
+          node scripts/health.mjs 2>&1 | tee /tmp/health.log
+          N=$(grep -oE 'HEALTH_ISSUES=[0-9]+' /tmp/health.log | tail -n 1 | cut -d= -f2)
+          echo "issues=${N:-?}" >> $GITHUB_OUTPUT
+          cat /tmp/health.log >> $GITHUB_STEP_SUMMARY
+          exit 0
+
+      - name: Commit health.json if changed
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/health.json
+          if git diff --cached --quiet; then
+            echo "No health change"
+            exit 0
+          fi
+          git commit -m "chore(health): janitor report ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3; do
+            git pull --rebase --autostash || true
+            if git push; then exit 0; fi
+            sleep $((i*5))
+          done
+          exit 1
+
+      - name: Report / resolve rolling issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          N="${{ steps.check.outputs.issues }}"
+          gh label create health --color "0E8A16" --description "Automated janitor findings" 2>/dev/null || true
+          NUM=$(gh issue list --state open --search "in:title Tracker health report" --json number --jq '.[0].number // empty')
+          {
+            echo "Automated janitor report — $(date -u +%FT%TZ)"
+            echo ""
+            echo '```'
+            cat /tmp/health.log
+            echo '```'
+          } > /tmp/health-body.md
+          if [ "$N" != "0" ]; then
+            if [ -n "$NUM" ]; then
+              gh issue comment "$NUM" --body-file /tmp/health-body.md
+            else
+              gh issue create --title "🩺 Tracker health report" --label health --body-file /tmp/health-body.md
+            fi
+          else
+            if [ -n "$NUM" ]; then
+              gh issue comment "$NUM" --body "✅ All checks green again — auto-closing." || true
+              gh issue close "$NUM" || true
+            fi
+          fi
