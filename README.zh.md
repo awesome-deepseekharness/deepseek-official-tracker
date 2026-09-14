@@ -70,7 +70,7 @@
 | 1 | [DeepSeek API 变更日志](https://api-docs.deepseek.com/updates) | 模型 GA/beta、计费、弃用、API 特性开关 | [api-changelog.md](api-changelog.md) | 6h |
 | 2 | [DeepSeek API 官方新闻](https://api-docs.deepseek.com/news) | 长篇官方新闻（`news260813` 等） | [NEWS.md](NEWS.md) | 6h |
 | 3 | [DeepSeek 官网博客](https://www.deepseek.com/en/news/) | 研究博客与开源发布（V4-Preview、V3.2、Terminus…）——**常比 API 文档早 1-2 天** | [website-news.md](website-news.md) | 6h |
-| 4 | [GitHub `deepseek-ai/*` Releases & Tags](https://github.com/deepseek-ai) | 25 个仓库：`DeepSeek-V3`/`R1`/`OCR`/`VL2`/`Coder-V2`/`Math-V2`/`Prover-V2`、`FlashMLA`/`DeepEP`/`DeepGEMM`/`3FS`/`smallpond`、`deepseek-harness`… | [releases.md](releases.md) | 6h |
+| 4 | [GitHub `deepseek-ai/*` Releases & Tags](https://github.com/deepseek-ai) | 28 个仓库：`DeepSeek-V3`/`R1`/`OCR`/`VL2`/`Coder-V2`/`Math-V2`/`Prover-V2`、`FlashMLA`/`DeepEP`/`DeepGEMM`/`3FS`/`smallpond`、`deepseek-harness`… | [releases.md](releases.md) | 6h |
 | 5 | [Hugging Face `deepseek-ai`](https://huggingface.co/deepseek-ai) | 新权重与 checkpoint（`V4-Pro-0813`、`V4-Flash-0731`…）、likes/downloads | [huggingface.md](huggingface.md) | 6h |
 | 6 | [npm `@deepseek-ai/dsh`](https://www.npmjs.com/package/@deepseek-ai/dsh) | `dsh` CLI 版本（`0.1.1-rc.2` 等） | [npm.md](npm.md) | 6h |
 | — | **综合时间线（最新在前，已去重）** | — | **[FEED.md](FEED.md)** | 6h |
@@ -146,7 +146,7 @@ node scripts/track.mjs          # 需 Node 22+，零依赖
 
 **Q: 如何即时通知？** 用 GitHub `Watch` → `Custom` → 全选。或订阅 atom：`https://github.com/awesome-deepseekharness/deepseek-official-tracker/commits/main.atom`。
 
-**Q: 能否新增 deepseek-ai 仓库？** 可以，改 `scripts/track.mjs:OFFICIAL_REPOS`（目前 25 个）后提 PR，我们只追活跃仓，归档 fork 不计。
+**Q: 能否新增 deepseek-ai 仓库？** 可以，改 `scripts/track.mjs:OFFICIAL_REPOS`（目前 28 个）后提 PR，我们只追活跃仓，归档 fork 不计。
 
 **Q: HuggingFace 的 `likes`/`downloads` 是实时的吗？** 是，取自 `huggingface.co/api/models?author=deepseek-ai`，按 `lastModified` 排序。
 

@@ -1,0 +1,64 @@
+name: Scope Watch (new official repos)
+
+on:
+  schedule:
+    - cron: '20 4 * * 0' # weekly Sunday 04:20 UTC (after Saturday track runs)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: scope
+  cancel-in-progress: false
+
+jobs:
+  scope:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Unit tests (scope-watch)
+        run: node --test scripts/scope-watch.test.mjs
+
+      - name: Check for untracked official repos
+        id: check
+        run: |
+          set -e
+          node scripts/scope-watch.mjs --apply 2>&1 | tee /tmp/scope.log
+          COUNT=$(grep -oE 'SCOPE_CANDIDATES=[0-9]+' /tmp/scope.log | cut -d= -f2)
+          echo "candidates=$COUNT" >> $GITHUB_OUTPUT
+          cat /tmp/scope.log >> $GITHUB_STEP_SUMMARY
+
+      - name: Open PR if scope changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(scope): track new official repos"
+          branch: scope/new-repos-${{ github.run_id }}
+          delete-branch: true
+          title: "chore(scope): sync tracked repo scope"
+          body: |
+            **Scope watcher diff** (untracked official repos: `${{ steps.check.outputs.candidates }}` — not fork, not archived, pushed within 180d).
+
+            - Diff: `scripts/track.mjs:OFFICIAL_REPOS` (+ inserts, sorted) + README repo counts synced.
+            - Next `track` run will backfill their releases automatically.
+            - Verify each repo is genuinely official before merging; close this PR to keep ignoring it.
+
+            Log: see Action Summary.
+          add-paths: |
+            scripts/track.mjs
+            README.md
+            README.zh.md
+          labels: |
+            automation

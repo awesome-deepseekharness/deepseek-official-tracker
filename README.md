@@ -70,7 +70,7 @@
 | 1 | [DeepSeek API Change Log](https://api-docs.deepseek.com/updates) | Model GA/beta, pricing, deprecation, API feature flags | [api-changelog.md](api-changelog.md) | 6h |
 | 2 | [DeepSeek API News](https://api-docs.deepseek.com/news) | Long-form official news (`news260813` etc) | [NEWS.md](NEWS.md) | 6h |
 | 3 | [DeepSeek Official Website Blog](https://www.deepseek.com/en/news/) | Research blog, open-source announcements (V4-Preview, V3.2, Terminus…) — **often 1-2 days earlier than API docs** | [website-news.md](website-news.md) | 6h |
-| 4 | [GitHub `deepseek-ai/*` Releases & Tags](https://github.com/deepseek-ai) | 25 repos: `DeepSeek-V3`/`R1`/`OCR`/`VL2`/`Coder-V2`/`Math-V2`/`Prover-V2`, `FlashMLA`/`DeepEP`/`DeepGEMM`/`3FS`/`smallpond`, `deepseek-harness`… | [releases.md](releases.md) | 6h |
+| 4 | [GitHub `deepseek-ai/*` Releases & Tags](https://github.com/deepseek-ai) | 28 repos: `DeepSeek-V3`/`R1`/`OCR`/`VL2`/`Coder-V2`/`Math-V2`/`Prover-V2`, `FlashMLA`/`DeepEP`/`DeepGEMM`/`3FS`/`smallpond`, `deepseek-harness`… | [releases.md](releases.md) | 6h |
 | 5 | [Hugging Face `deepseek-ai`](https://huggingface.co/deepseek-ai) | New weights & checkpoints (`V4-Pro-0813`, `V4-Flash-0731`…), likes/downloads | [huggingface.md](huggingface.md) | 6h |
 | 6 | [npm `@deepseek-ai/dsh`](https://www.npmjs.com/package/@deepseek-ai/dsh) | `dsh` CLI version bumps (`0.1.1-rc.2` etc) | [npm.md](npm.md) | 6h |
 | — | **Combined timeline (newest first, deduplicated)** | — | **[FEED.md](FEED.md)** | 6h |
@@ -146,7 +146,7 @@ Files are append-only; re-running without new upstream items is a no-op (README 
 
 **Q: How do I get notified instantly?** Use GitHub `Watch` → `Custom` → `Pull requests` and `Releases` still not instant? Better: enable `Watch` on Discussions or use an RSS bridge: `https://github.com/awesome-deepseekharness/deepseek-official-tracker/commits/main.atom`.
 
-**Q: Can I add more deepseek-ai repos?** Yes, edit `scripts/track.mjs:OFFICIAL_REPOS` (25 today) and PR. We track active repos; archived forks are excluded.
+**Q: Can I add more deepseek-ai repos?** Yes, edit `scripts/track.mjs:OFFICIAL_REPOS` (28 today) and PR. We track active repos; archived forks are excluded.
 
 **Q: HuggingFace shows `likes` and `downloads` — is it live?** Yes, pulled from `huggingface.co/api/models?author=deepseek-ai`. Sorted by `lastModified`.
 
