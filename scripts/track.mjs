@@ -359,6 +359,100 @@ function renderMarkdownEntry(e) {
   return lines.join('\n\n');
 }
 
+// --- README Latest auto-sync (deterministic, zero-LLM, idempotent) ---
+// Why: README 🔥 Latest was hand-curated while track.mjs only wrote data
+// files + FEED.md, so it went stale (e.g. stuck on 2026-08-13 while
+// 2026-09-10 V4.1-Flash was already in NEWS/changelog/website-news).
+// This mirrors verbatim titles + excerpts + Source links, never rewrites.
+function parseSections(md) {
+  const headers = [...md.matchAll(/^## \[([^\]]+)\] (.*)$/gm)];
+  const out = [];
+  for (let i = 0; i < headers.length; i++) {
+    const m = headers[i];
+    const end = i + 1 < headers.length ? headers[i + 1].index : md.length;
+    const chunk = md.slice(m.index, end);
+    const urlM = chunk.match(/\[Source\]\(([^)]+)\)/);
+    const body = chunk
+      .replace(/^## \[[^\]]+\] .*$/m, '')
+      .replace(/\[Source\]\([^)]+\)/, '')
+      .replace(/^---\s*$/gm, '')
+      .trim()
+      .replace(/\n{3,}/g, '\n\n');
+    out.push({ date: (m[1] || '').trim(), title: (m[2] || '').trim(), summary: body.slice(0, 600), url: urlM ? urlM[1] : '' });
+  }
+  return out;
+}
+
+function syncOneReadme(file, headerPattern, latestBlock, detailsBlock) {
+  if (!fs.existsSync(file)) return;
+  const prev = fs.readFileSync(file, 'utf8');
+  const sectionRe = new RegExp(headerPattern + '[\\s\\S]*?(?=<details>)', 'm');
+  if (!sectionRe.test(prev)) {
+    console.warn(`readme sync: Latest section not found in ${path.basename(file)}`);
+    return;
+  }
+  let md = prev.replace(sectionRe, latestBlock);
+  md = md.replace(/<details>[\s\S]*?<\/details>/m, detailsBlock);
+  if (md !== prev) {
+    fs.writeFileSync(file, md);
+    console.log(`readme sync: ${path.basename(file)} → ${latestBlock.split('\n')[0]}`);
+  }
+}
+
+function syncReadmes() {
+  try {
+    const read = (f) => (fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '');
+    const changelog = parseSections(read(FILES.changelog)).filter((e) => isValidDate(e.date));
+    const news = parseSections(read(FILES.news)).filter((e) => isValidDate(e.date));
+    const website = parseSections(read(FILES.websiteNews)).filter((e) => isValidDate(e.date));
+    const hf = parseSections(read(FILES.huggingface)).filter((e) => isValidDate(e.date));
+    const primary = [
+      ...changelog.map((e) => ({ ...e, src: 'changelog' })),
+      ...news.map((e) => ({ ...e, src: 'news' })),
+      ...website.map((e) => ({ ...e, src: 'website' })),
+    ];
+    if (!primary.length) return;
+    primary.sort((a, b) => (a.date < b.date ? 1 : -1));
+    const latestDate = primary[0].date;
+    const bySrc = (src) => primary.find((e) => e.src === src && e.date === latestDate);
+    const c = bySrc('changelog'), n = bySrc('news'), w = bySrc('website');
+    const headline = (c?.title || n?.title || w?.title || '').replace(/\s+/g, ' ').trim();
+    if (!headline) return;
+    const hfSame = hf.filter((e) => e.date === latestDate).slice(0, 3);
+    const lead = (w?.summary || n?.summary || c?.summary || '').replace(/\s+/g, ' ').trim().slice(0, 300);
+    const bench = (c?.summary || '').replace(/\s+/g, ' ').trim().slice(0, 320);
+    const links = [
+      n?.url ? `[Official announcement](${n.url})` : '',
+      c?.url ? `[Change Log](${c.url})` : '',
+      w?.url ? `[Website](${w.url})` : '',
+      ...hfSame.filter((h) => h.url).map((h) => `[HuggingFace ${h.title.split('/').pop()}](${h.url})`),
+    ].filter(Boolean).join(' · ');
+    const dates = [...new Set(primary.map((e) => e.date))].filter((d) => d !== latestDate).sort().reverse().slice(0, 5);
+    const prevLines = dates.map((d) => {
+      const e = primary.find((x) => x.src === 'changelog' && x.date === d) || primary.find((x) => x.date === d);
+      return `- **${d}** ${e.title}`;
+    });
+    const enLatest =
+      `## 🔥 Latest — ${headline} (${latestDate})\n\n` +
+      `**${(w?.title || n?.title || headline)}**${lead ? ` — ${lead}` : ''}\n\n` +
+      (bench ? `- **Official excerpt:** ${bench}${bench.length >= 320 ? '…' : ''}\n` : '') +
+      (hfSame.length ? `- **Weights same-day:** ${hfSame.map((h) => `\`${h.title}\``).join(', ')}\n` : '') +
+      `\n${links}\n\n`;
+    const enDetails = `<details>\n<summary>Previous highlights</summary>\n\n${prevLines.join('\n')}\n</details>`;
+    syncOneReadme(path.join(ROOT, 'README.md'), '^## 🔥 Latest —.*$', enLatest, enDetails);
+    const zhLatest =
+      `## 🔥 最新 — ${headline} (${latestDate})\n\n` +
+      `**${(w?.title || n?.title || headline)}**${lead ? ` — ${lead}` : ''}\n\n` +
+      (bench ? `- **官方摘录：** ${bench}${bench.length >= 320 ? '…' : ''}\n` : '') +
+      (hfSame.length ? `- **同日权重：** ${hfSame.map((h) => `\`${h.title}\``).join(', ')}\n` : '') +
+      `\n${links}\n\n`;
+    const zhDetails = `<details>\n<summary>往期重点</summary>\n\n${prevLines.join('\n')}\n</details>`;
+    syncOneReadme(path.join(ROOT, 'README.zh.md'), '^## 🔥 最新 —.*$', zhLatest, zhDetails);
+  } catch (e) {
+    console.warn(`readme sync: ${e.message}`);
+  }
+}
+
 // --- main ---
 async function main() {
   const token = process.env.GITHUB_TOKEN || '';
@@ -499,6 +593,9 @@ async function main() {
   const feedHeader = `# DeepSeek Official Tracker Feed\n\n> Auto-generated by GitHub Actions — last update: ${now} (UTC). Sources: API changelog · API News · deepseek.com Blog · GitHub Releases · npm · HuggingFace.\n`;
   const feed = feedHeader + '\n' + dedupedFeed.map((e) => `- **${e.date}** ${e.title}`).join('\n') + '\n';
   fs.writeFileSync(path.join(ROOT, 'FEED.md'), feed);
+
+  // Auto-sync README Latest so the showcase never goes stale again (idempotent)
+  syncReadmes();
 
   console.log(JSON.stringify({ now, ...summary }));
 }

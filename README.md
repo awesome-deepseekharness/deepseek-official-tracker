@@ -10,7 +10,7 @@
 [![Last Update](https://img.shields.io/github/last-commit/awesome-deepseekharness/deepseek-official-tracker?label=last%20update&color=0abf5b)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/commits/main)
 [![FEED](https://img.shields.io/badge/FEED-auto--updated-blue?logo=rss)](FEED.md)
 [![License: CC0](https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg)](LICENSE)
-[![DeepSeek](https://img.shields.io/badge/DeepSeek-V4%20%7C%20V3.2%20%7C%20R1-4B82E6?logo=openai)](https://www.deepseek.com)
+[![DeepSeek](https://img.shields.io/badge/DeepSeek-V4.1%20%7C%20V4%20%7C%20V3.2-4B82E6?logo=openai)](https://www.deepseek.com)
 
 *Auto-tracked by GitHub Actions every 6 hours. 6 sources · 0 LLM hallucinations · 100% verifiable links. Experimental AI insights via PR.*
 
@@ -24,28 +24,27 @@
 
 ## TL;DR
 
-> Tired of checking 5 different DeepSeek channels every morning? This repo does it for you. Single `FEED.md` aggregates **API changelog, API news, deepseek.com blog, GitHub releases/tags, npm, and Hugging Face models** — committed automatically with citation links. Watch this repo → get notified within 6 hours of any official release.
+> Tired of checking 6 different DeepSeek channels every morning? This repo does it for you. Single `FEED.md` aggregates **API changelog, API news, deepseek.com blog, GitHub releases/tags, npm, and Hugging Face models** — committed automatically with citation links. Watch this repo → get notified within 6 hours of any official release.
 
-**Perfect for:** API users tracking model `deepseek-v4-pro`/`deepseek-v4-flash` pricing & deprecations · researchers watching DeepSeek-V3/R1/V3.2/V4 open-source weights · `dsh`/`DeepSeek-Harness` developers tracking CLI releases.
+**Perfect for:** API users tracking model `deepseek-v4.1-flash`/`deepseek-v4-pro`/`deepseek-v4-flash` pricing & deprecations · researchers watching DeepSeek-V3/R1/V3.2/V4/V4.1 open-source weights · `dsh`/`DeepSeek-Harness` developers tracking CLI releases.
 
-## 🔥 Latest — DeepSeek-V4-Pro GA (2026-08-13)
+## 🔥 Latest — DeepSeek-V4.1-Flash Release (2026-09-10)
 
-**DeepSeek-V4-Pro is now GA** on App, Web and API. Set `model="deepseek-v4-pro"` to use the latest `DeepSeek-V4-Pro-0813`.
+**Introducing DeepSeek-V4.1-Flash: smarter, faster, more efficient.** — Introducing the smallest model in our new architecture family, with native visual understanding. Designed for greater capability, faster inference, and higher throughput.
 
-- **Agent SOTA:** Terminal Bench 2.1 **87.9**, DeepSWE **62.7**, Toolathlon-Verified **74.1**, HLE **42.7/60.0** (w/wo tools)
-- **Responses API native** — one-click script for Codex integration
-- **Thinking effort:** `low` / `high` / `max` for V4-Pro & V4-Flash
-- **Pricing:** peak/off-peak from **2026-08-16 16:00 UTC**, off-peak **½ price**
+- **Official excerpt:** Today, we officially release the DeepSeek-V4.1-Flash model. It is the smallest model in our new architecture family, with native multimodal visual understanding. The new architecture is designed for a higher capability ceiling, faster inference, higher throughput, and scaling to larger models. GPQA Diamond: 90.9 HLE: 3…
+- **Weights same-day:** `deepseek-ai/DeepSeek-V4.1-Flash`
 
-[Official announcement](https://api-docs.deepseek.com/news/news260813) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-08-13) · [HuggingFace Pro-0813](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813)
+[Official announcement](https://api-docs.deepseek.com/news/news260910) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-09-10) · [Website](https://www.deepseek.com/en/news/deepseek-v4-1-flash/) · [HuggingFace DeepSeek-V4.1-Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash)
 
 <details>
 <summary>Previous highlights</summary>
 
-- **2026-08-21** Flash-Vision-Exp multimodal `deepseek-v4-flash-vision-exp` live
-- **2026-07-31** V4-Flash public beta `deepseek-v4-flash`
-- **2026-04-24** V4 Preview — 1M context era (`deepseek-v4-pro` / `deepseek-v4-flash`, legacy `deepseek-chat`/`deepseek-reasoner` sunsets 2026-07-24)
-- **2025-12-01** V3.2 & V3.2-Speciale (thinking-in-tool-use)
+- **2026-08-21** DeepSeek-V4-Flash-Vision-Exp Release
+- **2026-08-13** DeepSeek-V4-Pro Update
+- **2026-07-31** DeepSeek-V4-Flash Update
+- **2026-04-24** DeepSeek-V4
+- **2025-12-01** DeepSeek-V3.2-Speciale
 </details>
 
 ---
@@ -83,7 +82,7 @@
 ```
 api-docs.deepseek.com/updates ─┐
 api-docs.deepseek.com/news    ─┤
-www.deepseek.com/en/news      ─┼─► scripts/track.mjs ─► append-only *.md ─► FEED.md (sorted, deduped)
+www.deepseek.com/en/news      ─┼─► scripts/track.mjs ─► append-only *.md ─► FEED.md + README Latest (auto)
 github.com/deepseek-ai/*      ─┤         ▲                         │
 huggingface.co/deepseek-ai    ─┤         │ state.json (seen IDs)   └─► git commit & push (retry+rebase)
 registry.npmjs.org/@deepseek… ─┘         └─ retry+timeout fetch, date validation, n/a handling
@@ -119,8 +118,9 @@ curl -s https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-offic
 ## ⚙️ Automation & Reliability
 
 - **Schedule:** `cron: 0 */6 * * *` (every 6h) + `workflow_dispatch` + push on `scripts/**` (so a fix instantly re-crawls).
-- **Past failures:** 2 early `rejected` pushes on `2026-08-15 09:1x UTC` due to concurrent `git push` race. **Fixed:** `fetch-depth:0`, `pull --rebase --autostash` with 3-retry loop (`scripts/track.mjs:fetchText` also retries 3× with backoff, 15s timeout). Since fix: **40+ consecutive successes** (checked 2026-08-16 → 2026-08-27).
-- **State:** `data/state.json` dedupes IDs (`changelog: 21, news: 9, websiteNews: 7, huggingface: 20` as of 2026-08-27). Corrupted entries auto-heal (date validation `YYYY-MM-DD`, tag vs release dedup).
+- **Past failures:** 2 early `rejected` pushes on `2026-08-15 09:1x UTC` due to concurrent `git push` race. **Fixed:** `fetch-depth:0`, `pull --rebase --autostash` with 3-retry loop (`scripts/track.mjs:fetchText` also retries 3× with backoff, 15s timeout). Since fix: consecutive successes (see Actions tab).
+- **State:** `data/state.json` dedupes IDs (live counts — see file). Corrupted entries auto-heal (date validation `YYYY-MM-DD`, tag vs release dedup).
+- **README showcase:** `🔥 Latest` + Previous highlights are auto-synced by `scripts/track.mjs:syncReadmes` from changelog/news/website-news (verbatim titles + excerpts, no LLM) — no manual bump needed.
 - **No timestamp churn:** `FEED.md` header is stable except `last update:` ISO timestamp; no empty commits.
 
 ## 🛠️ Manual Run
@@ -132,7 +132,7 @@ node scripts/track.mjs          # needs Node 22+; no deps
 # optional: GITHUB_TOKEN=ghp_xxx node scripts/track.mjs  # lifts GitHub 60 req/h limit
 ```
 
-Files are append-only; re-running without new upstream items is a no-op.
+Files are append-only; re-running without new upstream items is a no-op (README Latest sync is idempotent).
 
 ## ❓ FAQ
 
@@ -152,7 +152,7 @@ Files are append-only; re-running without new upstream items is a no-op.
 
 ## 🔍 Keywords / SEO
 
-`deepseek` `deepseek api` `deepseek oficial tracker` `deepseek news` `deepseek changelog` `deepseek v4` `deepseek v4 pro` `deepseek v4 flash` `deepseek v3.2` `deepseek v3.2 exp` `deepseek r1` `deepseek r1 0528` `deepseek v3` `deepseek harness` `dsh deepseek` `deepseek github releases` `deepseek huggingface` `deepseek npm` `deepseek pricing` `deepseek context caching` `deepseek 1m context` `deepseek api docs`
+`deepseek` `deepseek api` `deepseek oficial tracker` `deepseek news` `deepseek changelog` `deepseek v4` `deepseek v4.1` `deepseek v4.1 flash` `deepseek v4 pro` `deepseek v4 flash` `deepseek v3.2` `deepseek v3.2 exp` `deepseek r1` `deepseek r1 0528` `deepseek v3` `deepseek harness` `dsh deepseek` `deepseek github releases` `deepseek huggingface` `deepseek npm` `deepseek pricing` `deepseek context caching` `deepseek 1m context` `deepseek api docs`
 
 ## 🤝 Contributing & Related
 

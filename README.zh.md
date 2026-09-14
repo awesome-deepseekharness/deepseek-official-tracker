@@ -10,7 +10,7 @@
 [![Last Update](https://img.shields.io/github/last-commit/awesome-deepseekharness/deepseek-official-tracker?label=%E6%9C%80%E5%90%8E%E6%9B%B4%E6%96%B0&color=0abf5b)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/commits/main)
 [![FEED](https://img.shields.io/badge/FEED-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0-blue?logo=rss)](FEED.md)
 [![License: CC0](https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg)](LICENSE)
-[![DeepSeek](https://img.shields.io/badge/DeepSeek-V4%20%7C%20V3.2%20%7C%20R1-4B82E6)](https://www.deepseek.com)
+[![DeepSeek](https://img.shields.io/badge/DeepSeek-V4.1%20%7C%20V4%20%7C%20V3.2-4B82E6)](https://www.deepseek.com)
 
 *GitHub Actions 每 6 小时自动抓取。6 大官方源 · 0 幻觉 · 100% 可验证链接。实验性 AI insights 走 PR。*
 
@@ -24,28 +24,27 @@
 
 ## TL;DR
 
-> 每天要刷 5 个 DeepSeek 官方渠道太累？这个仓库帮你一站聚合。单个 `FEED.md` 聚合 **API 变更日志、API 新闻、官网博客、GitHub Releases/Tags、npm、HuggingFace 模型**——自动提交、带溯源链接。Watch 本仓库 → 官方发布后 6 小时内邮件通知。
+> 每天要刷 6 个 DeepSeek 官方渠道太累？这个仓库帮你一站聚合。单个 `FEED.md` 聚合 **API 变更日志、API 新闻、官网博客、GitHub Releases/Tags、npm、HuggingFace 模型**——自动提交、带溯源链接。Watch 本仓库 → 官方发布后 6 小时内邮件通知。
 
-**适合：** 关注 `deepseek-v4-pro`/`deepseek-v4-flash` 计费与弃用通知的 API 用户 · 追踪 DeepSeek-V3/R1/V3.2/V4 开源权重的开发者 · `dsh`/`DeepSeek-Harness` CLI 用户。
+**适合：** 关注 `deepseek-v4.1-flash`/`deepseek-v4-pro`/`deepseek-v4-flash` 计费与弃用通知的 API 用户 · 追踪 DeepSeek-V3/R1/V3.2/V4/V4.1 开源权重的开发者 · `dsh`/`DeepSeek-Harness` CLI 用户。
 
-## 🔥 最新 — DeepSeek-V4-Pro 正式版 (2026-08-13)
+## 🔥 最新 — DeepSeek-V4.1-Flash Release (2026-09-10)
 
-**DeepSeek-V4-Pro 已 GA**，在 App、Web、API 全量上线，`model="deepseek-v4-pro"` 即用最新 `DeepSeek-V4-Pro-0813`。
+**Introducing DeepSeek-V4.1-Flash: smarter, faster, more efficient.** — Introducing the smallest model in our new architecture family, with native visual understanding. Designed for greater capability, faster inference, and higher throughput.
 
-- **Agent 能力 SOTA：** Terminal Bench 2.1 **87.9**、DeepSWE **62.7**、Toolathlon-Verified **74.1**、HLE **42.7/60.0**
-- **原生 Responses API** — 为 Codex 适配，一键配置脚本
-- **思考强度：** `low` / `high` / `max` 三档（V4-Pro / V4-Flash）
-- **计费：** **2026-08-16 16:00 UTC** 起峰谷定价，低谷 **半价**
+- **官方摘录：** Today, we officially release the DeepSeek-V4.1-Flash model. It is the smallest model in our new architecture family, with native multimodal visual understanding. The new architecture is designed for a higher capability ceiling, faster inference, higher throughput, and scaling to larger models. GPQA Diamond: 90.9 HLE: 3…
+- **同日权重：** `deepseek-ai/DeepSeek-V4.1-Flash`
 
-[官方公告](https://api-docs.deepseek.com/news/news260813) · [变更日志](https://api-docs.deepseek.com/updates#date-2026-08-13) · [HuggingFace Pro-0813](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813)
+[Official announcement](https://api-docs.deepseek.com/news/news260910) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-09-10) · [Website](https://www.deepseek.com/en/news/deepseek-v4-1-flash/) · [HuggingFace DeepSeek-V4.1-Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash)
 
 <details>
 <summary>往期重点</summary>
 
-- **2026-08-21** Flash-Vision-Exp 多模态 `deepseek-v4-flash-vision-exp` 上线
-- **2026-07-31** V4-Flash 公测 `deepseek-v4-flash`
-- **2026-04-24** V4 Preview — 1M 上下文时代（`deepseek-v4-pro`/`deepseek-v4-flash`，旧 `deepseek-chat`/`deepseek-reasoner` 于 2026-07-24 退役）
-- **2025-12-01** V3.2 & V3.2-Speciale（thinking-in-tool-use）
+- **2026-08-21** DeepSeek-V4-Flash-Vision-Exp Release
+- **2026-08-13** DeepSeek-V4-Pro Update
+- **2026-07-31** DeepSeek-V4-Flash Update
+- **2026-04-24** DeepSeek-V4
+- **2025-12-01** DeepSeek-V3.2-Speciale
 </details>
 
 ---
@@ -83,7 +82,7 @@
 ```
 api-docs.deepseek.com/updates ─┐
 api-docs.deepseek.com/news    ─┤
-www.deepseek.com/en/news      ─┼─► scripts/track.mjs ─► 追加写入 *.md ─► FEED.md（排序、去重）
+www.deepseek.com/en/news      ─┼─► scripts/track.mjs ─► 追加写入 *.md ─► FEED.md + README 最新区（自动）
 github.com/deepseek-ai/*      ─┤         ▲                         │
 huggingface.co/deepseek-ai    ─┤         │ state.json（已见ID）    └─► git commit & push（重试+rebase）
 registry.npmjs.org/@deepseek… ─┘         └─ 带重试/超时的 fetch、日期校验、n/a 兜底
@@ -119,8 +118,9 @@ curl -s https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-offic
 ## ⚙️ 自动化与可靠性
 
 - **调度：** `cron: 0 */6 * * *`（每 6h）+ `workflow_dispatch` + `scripts/**` 变更时 push 触发（修复后立即重抓）。
-- **历史失败：** 早期 `2026-08-15 09:1x UTC` 有 2 次 `rejected`（并发 `git push` 竞态）。**已修复：** `fetch-depth:0`、`pull --rebase --autostash` 3 次重试（`scripts/track.mjs:fetchText` 亦 3 次重试、15s 超时）。修复后 **连续 40+ 次成功**（2026-08-16 → 2026-08-27）。
-- **状态：** `data/state.json` 记录已见 ID（截至 2026-08-27：`changelog:21, news:9, websiteNews:7, huggingface:20`）。异常条目自动自愈（日期校验 `YYYY-MM-DD`、tag/release 去重）。
+- **历史失败：** 早期 `2026-08-15 09:1x UTC` 有 2 次 `rejected`（并发 `git push` 竞态）。**已修复：** `fetch-depth:0`、`pull --rebase --autostash` 3 次重试（`scripts/track.mjs:fetchText` 亦 3 次重试、15s 超时）。修复后持续成功（见 Actions 页）。
+- **状态：** `data/state.json` 记录已见 ID（实时数量见文件）。异常条目自动自愈（日期校验 `YYYY-MM-DD`、tag/release 去重）。
+- **README 展示区：** `🔥 最新` + 往期重点由 `scripts/track.mjs:syncReadmes` 从 changelog/news/website-news 自动同步（原文标题+摘录，零 LLM）——无需手动更新。
 - **无时间戳抖动：** `FEED.md` 头部仅 `last update:` 的 ISO 时间会变，不会产生无意义空提交。
 
 ## 🛠️ 手动运行
@@ -132,7 +132,7 @@ node scripts/track.mjs          # 需 Node 22+，零依赖
 # 可选：GITHUB_TOKEN=ghp_xxx node scripts/track.mjs  # 解除 GitHub 60 次/小时限制
 ```
 
-文件为追加模式；无新上游时重复运行为 no-op。
+文件为追加模式；无新上游时重复运行为 no-op（README 最新区同步幂等）。
 
 ## ❓ FAQ
 
@@ -152,7 +152,7 @@ node scripts/track.mjs          # 需 Node 22+，零依赖
 
 ## 🔍 关键词 / SEO
 
-`deepseek` `deepseek api` `deepseek 官方` `deepseek 追踪` `deepseek 新闻` `deepseek 变更日志` `deepseek v4` `deepseek v4 pro` `deepseek v4 flash` `deepseek v3.2` `deepseek v3.2 exp` `deepseek r1` `deepseek r1 0528` `deepseek v3` `deepseek harness` `dsh deepseek` `deepseek github` `deepseek huggingface` `deepseek npm` `deepseek 计费` `deepseek context caching` `deepseek 1m 上下文` `deepseek api docs`
+`deepseek` `deepseek api` `deepseek 官方` `deepseek 追踪` `deepseek 新闻` `deepseek 变更日志` `deepseek v4` `deepseek v4.1` `deepseek v4.1 flash` `deepseek v4 pro` `deepseek v4 flash` `deepseek v3.2` `deepseek v3.2 exp` `deepseek r1` `deepseek r1 0528` `deepseek v3` `deepseek harness` `dsh deepseek` `deepseek github` `deepseek huggingface` `deepseek npm` `deepseek 计费` `deepseek context caching` `deepseek 1m 上下文` `deepseek api docs`
 
 ## 🤝 贡献与相关
 
