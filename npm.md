@@ -1,5 +1,13 @@
 # npm: @deepseek-ai/dsh
 
+## [2026-09-29] v0.2.0-rc.2
+
+[Source](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.0-rc.2)
+
+---
+
+---
+
 ## [2026-09-28] v0.2.0-rc.1
 
 [Source](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.0-rc.1)
