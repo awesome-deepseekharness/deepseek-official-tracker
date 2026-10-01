@@ -33,6 +33,7 @@
 **Introducing DeepSeek-V4.1-Flash: smarter, faster, more efficient.** — Introducing the smallest model in our new architecture family, with native visual understanding. Designed for greater capability, faster inference, and higher throughput.
 
 - **官方摘录：** Today, we officially release the DeepSeek-V4.1-Flash model. It is the smallest model in our new architecture family, with native multimodal visual understanding. The new architecture is designed for a higher capability ceiling, faster inference, higher throughput, and scaling to larger models. GPQA Diamond: 90.9 HLE: 3…
+- **同期还有更新（2026-09-29，比上方模型更新）：** deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2 · [Release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.2)
 - **同日权重：** `deepseek-ai/DeepSeek-V4.1-Flash`
 
 [Official announcement](https://api-docs.deepseek.com/news/news260910) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-09-10) · [Website](https://www.deepseek.com/en/news/deepseek-v4-1-flash/) · [HuggingFace DeepSeek-V4.1-Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash)

@@ -13,6 +13,7 @@ on:
       - 'npm.md'
       - 'huggingface.md'
       - 'insights.md'
+      - 'SIGNALS.md'
       - 'scripts/build-pages.mjs'
       - 'site/**'
       - 'package-lock.json'
@@ -31,6 +32,7 @@ on:
       - 'npm.md'
       - 'huggingface.md'
       - 'insights.md'
+      - 'SIGNALS.md'
       - 'scripts/build-pages.mjs'
       - 'scripts/contrast.mjs'
       - 'site/**'
@@ -77,6 +79,7 @@ jobs:
         run: |
           node site/src/lib/transit.test.mjs
           node scripts/corners.x.test.mjs
+          node scripts/signals.test.mjs
 
       - name: Build site
         run: node scripts/build-pages.mjs

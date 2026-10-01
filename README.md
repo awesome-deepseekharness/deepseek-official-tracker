@@ -14,7 +14,7 @@
 
 *Auto-tracked by GitHub Actions every 6 hours. 6 sources · 0 LLM hallucinations · 100% verifiable links. Experimental AI insights via PR.*
 
-[English](README.md) | [中文](README.zh.md) · [📡 FEED.md](FEED.md) · [📰 Website News](website-news.md) · [🤗 HuggingFace](huggingface.md) · [🤖 Insights](insights.md) · [🌐 Pages](https://awesome-deepseekharness.github.io/deepseek-official-tracker/)
+[English](README.md) | [中文](README.zh.md) · [📡 FEED.md](FEED.md) · [📰 Website News](website-news.md) · [🤗 HuggingFace](huggingface.md) · [🔎 Signals](SIGNALS.md) · [🤖 Insights](insights.md) · [🌐 Pages](https://awesome-deepseekharness.github.io/deepseek-official-tracker/)
 
 **Sister Project:** [Awesome DeepSeek Harness](https://github.com/awesome-deepseekharness/awesome-deepseek-harness) — curated plugins & ecosystem for `dsh` (DeepSeek Harness) · **Official:** [platform.deepseek.com](https://platform.deepseek.com) | [api-docs.deepseek.com](https://api-docs.deepseek.com) | [deepseek.com](https://www.deepseek.com)
 
@@ -34,6 +34,7 @@
 
 - **Official excerpt:** Today, we officially release the DeepSeek-V4.1-Flash model. It is the smallest model in our new architecture family, with native multimodal visual understanding. The new architecture is designed for a higher capability ceiling, faster inference, higher throughput, and scaling to larger models. GPQA Diamond: 90.9 HLE: 3…
 - **Weights same-day:** `deepseek-ai/DeepSeek-V4.1-Flash`
+- **Also shipped 2026-09-29 (newer than the model above):** deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2 · [Release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.2)
 
 [Official announcement](https://api-docs.deepseek.com/news/news260910) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-09-10) · [Website](https://www.deepseek.com/en/news/deepseek-v4-1-flash/) · [HuggingFace DeepSeek-V4.1-Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash)
 
@@ -63,7 +64,7 @@
 
 ## 📡 Tracked Sources — 6 official channels
 
-> **Design principle:** Official only. No secondary news, no Twitter rumors, no LLM rewriting. Every line ends with a `[Source]` you can verify in 1 click. Inspired by best-practice trackers like `ai-news-radar` (10+ sources), `deeptrend` (14+ sources), `daily-hot-tracker` — but we optimize for **precision over volume**.
+> **Design principle:** Two layers with different guarantees. The **official feed** (`FEED.md`) is official-only — no secondary news, no rumours, no LLM rewriting, every line a `[Source]` you can verify in 1 click. The **signals layer** (`SIGNALS.md`) collects community, media and rumour material separately, with each tier stating how far it can be trusted. Nothing crosses between them.
 
 | # | Source | What it catches | Output | Frequency |
 |---|--------|-----------------|--------|-----------|
@@ -74,6 +75,21 @@
 | 5 | [Hugging Face `deepseek-ai`](https://huggingface.co/deepseek-ai) | New weights & checkpoints (`V4-Pro-0813`, `V4-Flash-0731`…), likes/downloads | [huggingface.md](huggingface.md) | 6h |
 | 6 | [npm `@deepseek-ai/dsh`](https://www.npmjs.com/package/@deepseek-ai/dsh) | `dsh` CLI version bumps (`0.1.1-rc.2` etc) | [npm.md](npm.md) | 6h |
 | — | **Combined timeline (newest first, deduplicated)** | — | **[FEED.md](FEED.md)** | 6h |
+| 7 | **Community, media & rumour layer** | Reddit/HN/X/V2EX, Chinese tech media (量子位/InfoQ/Solidot), Google News EN+中文, third-party ports, **rumour wires** — every row tiered by how far it can be trusted | [SIGNALS.md](SIGNALS.md) | 6h |
+
+## 🔎 Signals — community, media & rumours
+
+> An official-only tracker tells you what already happened. This layer tells you what people *think* is coming — with the confidence stated up front, so speculation is never mistaken for a release.
+
+[`SIGNALS.md`](SIGNALS.md) is regenerated every 6 hours by `scripts/signals.mjs` over **19 key-free corners with no LLM in that path**, so it cannot hallucinate and does not wait on a review to land. Rows are grouped by trust tier:
+
+| Tier | Sources | Can you assert it? |
+|---|---|---|
+| `rumor` | leak wires, 传闻/泄露 aggregates, "next model" speculation | **No.** Stamped `疑似 / unverified`, dated, with what would confirm it |
+| `community` | HackerNews, Reddit, X, V2EX, third-party GitHub ports | No — leads, does not prove |
+| `secondary` | Established tech media, arXiv, OpenRouter | Authoritative, but not first-party |
+
+A rumour is recorded **with its date** rather than dropped or quietly promoted. When DeepSeek actually ships, it lands in `FEED.md` as an official release and supersedes the rumour — the separate tiers make sure the two are never confused. The AI narrative in [`insights.md`](insights.md) layers verified findings on top, reviewed via PR.
 
 **Why 6 and not 1?** Previously only API docs were watched. Now we cover the full official surface — our audit found `deepseek.com` blog publishes ahead of API docs (e.g., V3.2), and Hugging Face weights often land hours before a blog post. Single-source = you miss it.
 

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-14T15:13:04.689Z",
+  "checkedAt": "2026-10-01T13:32:00.837Z",
   "ok": true,
   "issueCount": 0,
   "issues": [],
@@ -7,22 +7,24 @@
     "NEWS.md": 10,
     "api-changelog.md": 22,
     "website-news.md": 8,
-    "releases.md": 37,
-    "npm.md": 20,
+    "releases.md": 46,
+    "npm.md": 29,
     "huggingface.md": 22,
     "state": {
       "changelog": 22,
       "news": 10,
       "websiteNews": 8,
-      "releases": 30,
-      "npm": 20,
+      "releases": 39,
+      "npm": 29,
       "huggingface": 22
     },
-    "feedItems": 79,
+    "feedItems": 80,
     "readmeLatest": {
       "en": "2026-09-10",
       "zh": "2026-09-10"
     },
-    "linksChecked": 15
+    "linksChecked": 15,
+    "signalsAgeDays": 0,
+    "rumourRows": 0
   }
 }

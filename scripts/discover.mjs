@@ -2,7 +2,7 @@
 /**
  * discover.mjs — experimental AI agent discovery for DeepSeek official updates
  *
- * - Collects live signals from 12 independent corners via scripts/corners.mjs
+ * - Collects live signals from 19 independent corners via scripts/corners.mjs
  *   (blog, changelog, GitHub releases/tags/repos, HF, npm, arXiv, HN, Reddit,
  *   Google News, PyPI, OpenRouter) — all key-free
  * - Diffs them against data/discover-seen.json (written only by this script, so
@@ -205,7 +205,12 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
       ``,
       `### COMMUNITY unverified (${(byTier.community || []).length}) — early signals only, label unverified`,
       fmtList(byTier.community || []),
-    ] : [`- (none fresh this run — that is why you were triggered; go find what the precomputed corners missed, use websearch/browser aggressively)`]),
+      ...((byTier.rumor || []).length ? [
+        ``,
+        `### RUMOURS (${byTier.rumor.length}) — speculation about work DeepSeek has NOT announced. Report these in a dedicated \`## Rumours — 疑似 / unverified\` section with the claim date, the source, and what would confirm it. NEVER put a rumour in New findings, the README, or FEED — speculation is not a release.`,
+        fmtList(byTier.rumor, 12),
+      ] : []),
+    ] : [`- (none fresh this run — that is why you were triggered; go find what the precomputed corners missed, use exa/firecrawl/browser aggressively)`]),
     ...(cornerErrors.length ? [
       ``,
       `### CORNERS THAT FAILED THIS RUN — probe these yourself with tools and say so`,
@@ -215,8 +220,10 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
     `- FEED preview (newest 22):`,
     ...feedPreview.split('\n').slice(0, 22).map(l => `  ${l}`),
     ``,
-    `## Your toolbox — prioritise the key-free endpoints that actually work, then escalate to browser/websearch`,
-    `NOTE: s.jina.ai now returns 401 (key-gated) and Reddit JSON often 403/429. Do not burn your budget retrying them — go straight to the alternatives below, and only fall back to jina/websearch if listed ones fail.`,
+    `## Your toolbox — prioritise the key-free channels that actually work, then escalate to browser/search`,
+    `NOTE: s.jina.ai returns 401 (key-gated), Exa's REST api.exa.ai/search returns 402 (keyless is MCP-only), Reddit JSON often 403/429. Do not burn budget retrying them.`,
+    `- **exa MCP (key-free, prefer over websearch):** \`web_search_exa\` for semantic+dated discovery, \`web_search_advanced_exa\` with \`startPublishedDate\`/\`includeDomains\` to time-box a sweep, \`web_fetch_exa\` to batch-read several URLs in one call.`,
+    `- **firecrawl MCP (key-free):** \`firecrawl_search\` (add \`categories:["research"]\` for papers, \`["developer"]\` for GitHub issues/PRs) and \`firecrawl_scrape\` for JS-heavy pages.`,
     `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, api-changelog.md, releases.md, npm.md, huggingface.md, discover-seen.json) — start here to dedup`,
     `- bash + curl : the workhorse. All of these are key-free and verified working — use at least 8:`,
     `  • Blog + API: \`curl -s https://www.deepseek.com/en/news/\` | \`curl -s https://api-docs.deepseek.com/updates\``,
@@ -230,11 +237,12 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
     `  • Google News RSS (broad media sweep, key-free): \`curl -s "https://news.google.com/rss/search?q=deepseek&hl=en-US&gl=US&ceid=US:en" | grep -o '<title>[^<]*' | head -30\``,
     `  • OpenRouter (catches new model IDs served by aggregators before DeepSeek blogs): \`curl -s https://openrouter.ai/api/v1/models | jq -r '.data[] | select(.id | test("deepseek";"i")) | .id'\``,
     `  • PyPI: \`curl -s https://pypi.org/pypi/deepseek/json | jq '.info.version'\``,
-    `  • Chinese press via websearch: "deepseek 官方 发布" / "深度求索 新模型" — WeChat/Weibo/36kr/机器之心 relays often break first`,
+    `  • Chinese press is already collected for you (google-news-zh + cn-tech-media + V2EX corners: 量子位 / InfoQ / Solidot / 国内媒体). Use exa only to go deeper: \`web_search_exa "deepseek 官方发布 新模型"\``,
     `- websearch : use for gaps the endpoints miss (WeChat, Weibo, Discord, Chinese media). 4-6 searches minimum.`,
     `- webfetch : static HTML fetch`,
     `- Remote browser (kitesurf MCP over wss://kitesurf.dev/devtools/browser, rendered, stateless, no key): use for JS-heavy pages — x.com/deepseek_ai timeline, huggingface.co/deepseek-ai trending. Top 2 high-value targets only; compare with a curl result before trusting.${browserOk === false ? ' **PROBE SAYS UNUSABLE THIS RUN — skip it, do not retry, and note the gap in Risk/Confidence.**' : ''}`,
     `- edit : write insights.md  |  todowrite / task : plan your 4 phases`,
+    `- DEAD ENDS (verified, do not retry): s.jina.ai → 401 · api.exa.ai/search REST → 402 (use exa MCP) · jiqizhixin.com/rss/articles → 404 · 36kr.com/feed → empty · lobste.rs/search.json → 400`,
     ``,
     `## Deep discovery methodology — 4 phases (MANDATORY, use todowrite to track)`,
     `### Phase 1 — Ground truth (30% time, must do first)`,
@@ -271,13 +279,14 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
     `  3. ## Summary — 3-4 sentences, high level + trend`,
     `  4. ## New findings (verified) — for each *verified official* item: **title** — date — 1-2 sentence why it matters — [Source](official url). Group by type (Blog / API / GitHub / HF / npm). If none, write "No new verified official updates after full 4-phase check — <timestamp> UTC" but still show you did the work.`,
     `  5. ## Secondary signals — arXiv / HF papers / GitHub trending / tech media hits with [Source], labeled "secondary — authoritative, not official blog".`,
-    `  6. ## Community signals — X / Reddit / HN hits with [Source], clearly labeled "unverified — pending official confirmation". Even if no official update, always try to fill this from Phase 3.`,
+    `  6. ## Community signals — X / Reddit / HN / V2EX / GitHub-community hits with [Source], clearly labeled "unverified — pending official confirmation". Even if no official update, always try to fill this from Phase 3.`,
+    `  6b. ## Rumours — 疑似 / unverified — forward-looking claims about UNANNOUNCED work, from the RUMOURS tier. Every bullet must carry 疑似/unverified inline, give the claim date + [Source], and state what would confirm it. Say whether each is confirmed, disproved, or still open. If there are none, write "No active rumours in the last 21 days." — never invent one to fill the section, and never promote a rumour into New findings.`,
     `  7. ## Trends & Context — connect to prior FEED: cadence, e.g., "V4-Flash-Vision-Exp (08-21) follows V4-Pro 0813 by 8 days — multimodal push continues".`,
     `  8. ## Cross-check — table/bullets vs website-news.md / api-changelog.md / NEWS.md / huggingface.md / releases.md / data/state.json — note "already tracked" vs "new".`,
     `  9. ## Risk / Confidence — low/medium/high + justification + what to manually verify.`,
     `  10. ## Next steps — suggest \`node scripts/track.mjs\` if new, else "wait for next 6h cron".`,
     `  11. ## FEED preview — first 20 lines of FEED.md (code fence)`,
-    `  12. ## Appendix — Sources fetched — bullet list of every URL you actually fetched with tool tag [jina]/[browser]/[api]/[websearch] for audit (12+ bullets, at least 2 browser).`,
+    `  12. ## Appendix — Sources fetched — bullet list of every URL you actually fetched with tool tag [exa]/[firecrawl]/[browser]/[api]/[curl] for audit (12+ bullets, at least 2 via exa or firecrawl).`,
     `- If you did 10+ tool calls, your Appendix will prove it. A thin Appendix = incomplete job.`,
     `- NEVER invent slug/date/title. If uncertain, write "unverified" and ask for manual webfetch.`,
     `- Prefer jina.ai when webfetch returns Next.js shell or 403.`,

@@ -13,8 +13,15 @@
  * - No API key required. Uses public JSON/RSS endpoints only.
  * - Each signal gets a stable `id` so it can be diffed across runs and folded
  *   into a "seen" baseline. Ids are `<source>:<stable-key>`.
- * - `tier` marks trust level: official (first-party) vs secondary (authoritative
- *   but not DeepSeek) vs community (unverified). The agent still re-verifies.
+ * - `tier` marks trust level. Four tiers, ordered by how much they can be
+ *   asserted without hedging:
+ *     official   — first-party DeepSeek surface
+ *     secondary  — authoritative reporting, not DeepSeek (media, arXiv, OpenRouter)
+ *     community  — user-generated; leads, does not prove (HN, Reddit, X, GitHub forks)
+ *     rumor      — forward-looking speculation about unreleased work. Collected
+ *                  on purpose so it is dated and attributed rather than dropped,
+ *                  and always labelled unverified / 疑似. Never a headline.
+ *   The agent still re-verifies anything it wants to assert.
  *
  * Optional env: FIRECRAWL_API_KEY lifts the Firecrawl Keyless quota; every
  * Firecrawl corner degrades to a reported error when unset.
@@ -359,6 +366,201 @@ async function collectGoogleNews() {
   return out;
 }
 
+// ------------------------------------------- additional media / community tiers
+//
+// The original corners were English-only and official-leaning, so the agent kept
+// re-discovering the same Chinese coverage from scratch and had no place to put
+// a leak claim. These collectors fix both: real Chinese tech media as `secondary`
+// (authoritative reporting, still not first-party), and forward-looking chatter
+// as `rumor` — a tier that exists so speculation gets *recorded and dated*
+// instead of either being dropped or laundered into a headline.
+//
+// Every one of these was probed live before being added; the ones that failed
+// (机器之心 /rss/articles → 404, 36kr /feed → 0 items, lobste.rs/search.json →
+// 400) are deliberately not here.
+
+function parseRssItems(xml, { limit = 20 } = {}) {
+  const out = [];
+  for (const item of xml.split('<item>').slice(1, limit + 1)) {
+    const pick = (tag) => {
+      const raw = (item.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`)) || [])[1] || '';
+      // Feeds wrap payloads in CDATA; strip the wrapper or the whole title reads
+      // as "<![CDATA[https://…]]>".
+      return stripHtml(raw.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')).trim();
+    };
+    const title = pick('title');
+    const link = pick('link');
+    if (!title || !link) continue;
+    out.push({ title, link, date: pick('pubDate'), description: pick('description') });
+  }
+  return out;
+}
+
+// A DeepSeek-mentioning item is the only reason to report a general tech feed.
+const MENTIONS_DEEPSEEK = /deepseek|深度求索|dsh\b/i;
+
+async function collectChineseTechMedia() {
+  // Three independent Chinese tech outlets, all plain RSS, no key, no scraping.
+  // Together they cover the 机器之心/量子位 class of reporting that Google News
+  // only reaches intermittently and often with an opaque redirect link.
+  const feeds = [
+    ['量子位', 'https://www.qbitai.com/feed'],
+    ['InfoQ 中国', 'https://www.infoq.cn/feed'],
+    ['Solidot', 'https://www.solidot.org/index.rss'],
+  ];
+  const out = [];
+  for (const [name, url] of feeds) {
+    const xml = await get(url, { accept: 'application/rss+xml' }).catch(() => null);
+    if (!xml) continue;
+    for (const it of parseRssItems(xml, { limit: 40 })) {
+      if (!MENTIONS_DEEPSEEK.test(`${it.title} ${it.description}`)) continue;
+      let host = name;
+      try { host = new URL(it.link).hostname; } catch { /* keep outlet name */ }
+      out.push({
+        id: `cnmedia:${host}:${it.title.toLowerCase().slice(0, 60).replace(/\s+/g, '-')}`,
+        source: name,
+        tier: 'secondary',
+        title: it.title,
+        date: it.date ? dayKey(it.date) : null,
+        url: it.link,
+        detail: it.description.slice(0, 260),
+      });
+    }
+  }
+  if (!out.length) throw new Error('no DeepSeek items in Chinese tech RSS');
+  return out;
+}
+
+async function collectChineseGoogleNews() {
+  // The zh-CN feed surfaces 国内报道 that the en-US feed ranks out, including the
+  // 公众号/知乎 long-form pieces DeepSeek publishes outside its own blog.
+  const queries = [
+    ['zh', '深度求索', 'hl=zh-CN&gl=CN&ceid=CN:zh-Hans'],
+    ['harness', '"DeepSeek Harness"', 'hl=zh-CN&gl=CN&ceid=CN:zh-Hans'],
+  ];
+  const out = [];
+  for (const [tag, q, locale] of queries) {
+    const xml = await get(
+      `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&${locale}`,
+      { accept: 'application/rss+xml' }
+    ).catch(() => null);
+    if (!xml) continue;
+    for (const item of xml.split('<item>').slice(1, 16)) {
+      const title = stripHtml((item.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '');
+      const link = ((item.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || '').trim();
+      const pub = ((item.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || '').trim();
+      if (!title || !link) continue;
+      out.push({
+        id: `gnewszh:${tag}:${title.toLowerCase().slice(0, 70).replace(/\s+/g, '-')}`,
+        source: 'Google News 中文',
+        tier: 'secondary',
+        title,
+        date: pub ? dayKey(pub) : null,
+        url: link,
+        detail: '中文媒体报道 — 需回溯 deepseek.com / github.com/deepseek-ai 一手来源后才算已证实。',
+      });
+    }
+  }
+  if (!out.length) throw new Error('zh Google News returned nothing');
+  return out;
+}
+
+// Rumours and leaks. Deliberately a separate tier: these are the highest-value
+// early warnings and the highest-risk thing to state as fact, so they are kept
+// in their own bucket where the prompt requires an explicit unverified label and
+// the site renders them outside the numbered official system.
+const RUMOUR_RE = /rumou?r|leak|leaked|speculat|unconfirmed|report(ed|s)?\b|传|传闻|泄露|消息人士|据报|即将|下个|下一代|计划|内测|preview|expected|said to be/i;
+
+async function collectRumours() {
+  const feeds = [
+    ['en', 'deepseek rumor OR leak OR "next model" OR unconfirmed', 'hl=en-US&gl=US&ceid=US:en'],
+    ['zh', 'deepseek 传闻 OR 泄露 OR 即将发布 OR 下一代', 'hl=zh-CN&gl=CN&ceid=CN:zh-Hans'],
+  ];
+  const cutoff = daysAgo(21);
+  const out = [];
+  for (const [tag, q, locale] of feeds) {
+    const xml = await get(
+      `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&${locale}`,
+      { accept: 'application/rss+xml' }
+    ).catch(() => null);
+    if (!xml) continue;
+    for (const item of xml.split('<item>').slice(1, 25)) {
+      const title = stripHtml((item.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '');
+      const link = ((item.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || '').trim();
+      const pub = ((item.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || '').trim();
+      const date = pub ? dayKey(pub) : null;
+      if (!title || !link || !date || date < cutoff) continue;
+      if (!RUMOUR_RE.test(title)) continue;
+      out.push({
+        id: `rumour:${tag}:${title.toLowerCase().slice(0, 70).replace(/\s+/g, '-')}`,
+        source: tag === 'zh' ? '传闻聚合（中文）' : 'Rumour wire',
+        tier: 'rumor',
+        title,
+        date,
+        url: link,
+        detail: '未经官方确认。可能是真的，也可能是过期或臆测 — 引用时必须标注 unverified / 疑似。',
+      });
+    }
+  }
+  if (!out.length) throw new Error('no rumour items matched');
+  return out;
+}
+
+// Third-party ports, quant recipes and wrappers. These appear on GitHub days
+// before DeepSeek's own post when a weights drop is imminent, and they are the
+// most concrete "leak" evidence available without an official source.
+async function collectCommunityRepos() {
+  const queries = [
+    ['weights', 'deepseek in:name created:>' + daysAgo(30)],
+    ['next', 'deepseek-v4.2 OR deepseek-v5 OR deepseek-next created:>' + daysAgo(60)],
+  ];
+  const out = [];
+  for (const [tag, q] of queries) {
+    const res = await getJson(
+      `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=15`
+    ).catch(() => null);
+    for (const r of res?.items || []) {
+      out.push({
+        id: `ghcommunity:${tag}:${r.full_name}`,
+        source: 'GitHub (community)',
+        tier: 'community',
+        title: `${r.full_name} — ${(r.description || 'no description').slice(0, 120)}`,
+        date: dayKey(r.created_at),
+        url: r.html_url,
+        detail: `★${r.stargazers_count}, created ${dayKey(r.created_at)}, pushed ${dayKey(r.pushed_at)}. Third-party, not DeepSeek — port/quant work often precedes an official weights drop.`,
+      });
+    }
+  }
+  if (!out.length) throw new Error('community repo search returned nothing');
+  return out;
+}
+
+// V2EX is the highest-signal Chinese developer forum for DeepSeek specifically,
+// and its API needs no key. hot.json is a bare array of 10 topics — no envelope,
+// no paging — so a miss is a genuinely quiet day rather than a parse bug.
+async function collectV2ex() {
+  const res = await getJson('https://www.v2ex.com/api/topics/hot.json');
+  if (!Array.isArray(res)) throw new Error('v2ex hot.json was not an array');
+  const out = [];
+  for (const t of res) {
+    if (!MENTIONS_DEEPSEEK.test(`${t.title || ''} ${t.content || ''}`)) continue;
+    out.push({
+      id: `v2ex:${t.id}`,
+      source: 'V2EX',
+      tier: 'community',
+      title: t.title,
+      date: dayKey((t.created || 0) * 1000),
+      url: `https://www.v2ex.com/t/${t.id}`,
+      detail: `${t.member?.username || 'unknown'} · ${t.replies || 0} replies`,
+    });
+  }
+  // Deliberately returns [] rather than throwing on no match. The discover gate
+  // treats >2 corner errors as "degraded" and runs anyway, so a day when V2EX
+  // simply has no DeepSeek topic must not be reported as a dead endpoint — the
+  // throw is reserved for a fetch that actually failed.
+  return out;
+}
+
 async function collectPyPi() {
   const res = await getJson('https://pypi.org/pypi/deepseek/json').catch(() => null);
   const version = res?.info?.version;
@@ -522,6 +724,11 @@ const COLLECTORS = [
   ['hackernews', collectHackerNews],
   ['reddit', collectReddit],
   ['google-news', collectGoogleNews],
+  ['google-news-zh', collectChineseGoogleNews],
+  ['cn-tech-media', collectChineseTechMedia],
+  ['rumours', collectRumours],
+  ['community-repos', collectCommunityRepos],
+  ['v2ex', collectV2ex],
   ['pypi', collectPyPi],
   ['openrouter', collectOpenRouter],
   ['x-timeline', collectXTimeline],

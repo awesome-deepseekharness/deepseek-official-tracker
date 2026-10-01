@@ -410,6 +410,7 @@ function syncReadmes() {
     const news = parseSections(read(FILES.news)).filter((e) => isValidDate(e.date));
     const website = parseSections(read(FILES.websiteNews)).filter((e) => isValidDate(e.date));
     const hf = parseSections(read(FILES.huggingface)).filter((e) => isValidDate(e.date));
+    const releases = parseSections(read(FILES.releases)).filter((e) => isValidDate(e.date));
     const primary = [
       ...changelog.map((e) => ({ ...e, src: 'changelog' })),
       ...news.map((e) => ({ ...e, src: 'news' })),
@@ -431,6 +432,18 @@ function syncReadmes() {
       w?.url ? `[Website](${w.url})` : '',
       ...hfSame.filter((h) => h.url).map((h) => `[HuggingFace ${h.title.split('/').pop()}](${h.url})`),
     ].filter(Boolean).join(' · ');
+
+    // Product releases shipped between model launches. The headline above is
+    // model-only, which made the README look frozen whenever DeepSeek shipped
+    // `dsh` without a model — 17 harness releases landed between 2026-09-10 and
+    // 2026-09-29 while the headline stayed on V4.1-Flash and readers concluded
+    // the tracker had died. Product lines get their own line here, dated, so a
+    // harness-only week still shows movement.
+    const product = releases
+      .filter((e) => /deepseek-harness/i.test(e.title))
+      .sort((a, b) => (a.date < b.date ? 1 : -1))[0];
+    const showProduct = product && product.date > latestDate;
+
     const dates = [...new Set(primary.map((e) => e.date))].filter((d) => d !== latestDate).sort().reverse().slice(0, 5);
     const prevLines = dates.map((d) => {
       const e = primary.find((x) => x.src === 'changelog' && x.date === d) || primary.find((x) => x.date === d);
@@ -441,6 +454,7 @@ function syncReadmes() {
       `**${(w?.title || n?.title || headline)}**${lead ? ` — ${lead}` : ''}\n\n` +
       (bench ? `- **Official excerpt:** ${bench}${bench.length >= 320 ? '…' : ''}\n` : '') +
       (hfSame.length ? `- **Weights same-day:** ${hfSame.map((h) => `\`${h.title}\``).join(', ')}\n` : '') +
+      (showProduct ? `- **Also shipped ${product.date} (newer than the model above):** ${product.title}${product.url ? ` · [Release](${product.url})` : ''}\n` : '') +
       `\n${links}\n\n`;
     const enDetails = `<details>\n<summary>Previous highlights</summary>\n\n${prevLines.join('\n')}\n</details>`;
     syncOneReadme(path.join(ROOT, 'README.md'), '^## 🔥 Latest —.*$', enLatest, enDetails);
@@ -448,6 +462,7 @@ function syncReadmes() {
       `## 🔥 最新 — ${headline} (${latestDate})\n\n` +
       `**${(w?.title || n?.title || headline)}**${lead ? ` — ${lead}` : ''}\n\n` +
       (bench ? `- **官方摘录：** ${bench}${bench.length >= 320 ? '…' : ''}\n` : '') +
+      (showProduct ? `- **同期还有更新（${product.date}，比上方模型更新）：** ${product.title}${product.url ? ` · [Release](${product.url})` : ''}\n` : '') +
       (hfSame.length ? `- **同日权重：** ${hfSame.map((h) => `\`${h.title}\``).join(', ')}\n` : '') +
       `\n${links}\n\n`;
     const zhDetails = `<details>\n<summary>往期重点</summary>\n\n${prevLines.join('\n')}\n</details>`;

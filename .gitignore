@@ -9,6 +9,15 @@ node_modules/
 .impeccable/review/
 AGENTS.md
 
+# Local design-tooling installs (`npx impeccable install`). These carry a
+# platform-specific engine binary (~14 MB, windows-x64) that has no business in
+# a public repo and would bloat every clone. The skills are reproducible from the
+# package; the .impeccable/ context files that carry the actual design decisions
+# are committed.
+.github/skills/
+.github/agents/
+.github/hooks/
+
 # The site source is committed (Astro project); its generated output is not.
 site/node_modules/
 site/dist/

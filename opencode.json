@@ -62,15 +62,26 @@
     }
   },
   "mcp": {
-    "kitesurf": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "chrome-devtools-mcp@latest",
-        "--wsEndpoint=wss://kitesurf.dev/devtools/browser"
-      ],
-      "enabled": true
+    "servers": {
+      "kitesurf": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "chrome-devtools-mcp@latest",
+          "--wsEndpoint=wss://kitesurf.dev/devtools/browser"
+        ]
+      },
+      "firecrawl": {
+        "type": "remote",
+        "url": "https://mcp.firecrawl.dev/v2/mcp",
+        "oauth": false
+      },
+      "exa": {
+        "type": "remote",
+        "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
+        "oauth": false
+      }
     }
   },
   "model": "opencode/muse-spark-1.2-contributor-free",
