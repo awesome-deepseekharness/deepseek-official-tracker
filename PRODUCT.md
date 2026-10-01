@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Astro, static output, no client hydration. `scripts/build-pages.mjs` stages the eight tracked markdown files and `feed.json` into `site/public/`, then runs `astro build`; the page is `site/src/pages/index.astro` plus `site/src/lib/transit.mjs`, which recovers the release-to-source structure from the committed markdown. `pages.yml` runs the same build on pull requests and deploys `site/dist` only from `main`.
+delegated — the maintainer chose to introduce a framework for the Pages redesign. Framework selection was raised but not yet confirmed; the incumbent generator is `scripts/build-pages.mjs`, which emits a single inline HTML/CSS file with no build step, no `package.json`, and no npm dependencies, consumed by `.github/workflows/pages.yml` (Node 22, bare `node scripts/build-pages.mjs`).
 
 ## Users
 
@@ -37,12 +37,7 @@ Against 20+ generic RSS options, the stated differentials are: 6 official endpoi
 
 - **Automation is the product.** Seven GitHub Actions workflows carry it: `track` (every 6h, commits `FEED.md`), `discover` (daily 03:30 UTC, PR-gated AI insights), `pages` (deploys the static site), `scope` (weekly, proposes new official repos), `health` (daily janitor, opens a rolling issue), plus `auto-review` and `triage` (AI agents with PR write paths).
 - **The consumer loop is GitHub-native:** Watch the repo → email on push. `README.md:102` states "No RSS needed" and offers the commits `.atom` feed as an alternative. Raw `curl` against `FEED.md` and `data/state.json` is a documented consumption path, as is `site/feed.json`.
-- **Append-only, idempotent data files.** Re-running `track.mjs` with no new
-  upstream items writes zero bytes and the cron commits nothing. This includes
-  the `FEED.md` build stamp: it used to be rewritten unconditionally, so every
-  six-hour run produced a one-line commit whether or not DeepSeek had shipped
-  anything, which made the commit history read as activity and left "last
-  updated" meaning "last run".
+- **Append-only, idempotent data files.** Re-running `track.mjs` with no new upstream items is a no-op; it skips the write entirely when nothing is new.
 - **Bilingual docs, English-only data.** `README.md` and `README.zh.md` are structurally 1:1 and a CI health check fails on drift between them. `FEED.md` and all six source files are English-only; `insights.md` carries an optional one-sentence Chinese summary.
 - **Rate limits shape the design.** `GITHUB_TOKEN` is auto-injected to lift GitHub's 60 req/h anonymous limit; `CONTRIBUTING.md` states 403 is expected without it and asks for ~300ms between paginated fetches. arXiv additionally 429s on rapid repeat calls.
 
@@ -50,13 +45,7 @@ Against 20+ generic RSS options, the stated differentials are: 6 official endpoi
 
 - **Six tracked official sources**, each with a dedicated output file: `api-changelog.md`, `NEWS.md`, `website-news.md`, `releases.md` (28 hardcoded repos in `OFFICIAL_REPOS`), `huggingface.md`, `npm.md`. Aggregated newest-first into `FEED.md`, capped at 80 items.
 - **Multi-corner AI discovery** (`scripts/corners.mjs`, 12 corners, all key-free) layered on top of the deterministic tracker, tiered `official` / `secondary` / `community`.
-- **Node 22+. The data pipeline has zero npm dependencies; the site does not.**
-  No `package.json` exists at the repo root and `scripts/*.mjs` are plain Node.
-  The Pages surface is a separate Astro project under `site/` with its own
-  committed `package-lock.json`, installed by `pages.yml` with `npm ci` and built
-  by `scripts/build-pages.mjs`, which stages the tracker's markdown into
-  `site/public/` before running `astro build`. `scripts/scope-watch.test.mjs` runs
-  under `node:test` as a gate step inside `scope.yml`.
+- **Node 22+, zero npm dependencies.** No `package.json` exists. `scripts/scope-watch.test.mjs` runs under `node:test` as a gate step inside `scope.yml` — there is no standalone CI test job.
 - **Secrets:** the deterministic pipeline needs none. The experimental AI workflows use `OPENCODE_API_KEY` and/or `ANTHROPIC_API_KEY` / `OPENAI_API_KEY`, and fall back to a deterministic template when absent.
 - **Agents must never push to `main`** or run `git push` (`.opencode/agent/triage.md:48`).
 - **Undecided:** whether unverified community signals (Reddit, HN, X replies, media headlines) may appear on the public site. The maintainer asked for the fastest possible signal including "rumors", which conflicts with the zero-hallucination positioning above. Not resolved.
@@ -74,10 +63,10 @@ Against 20+ generic RSS options, the stated differentials are: 6 official endpoi
 Real, currently-live material the surface can and should render:
 
 - `FEED.md` — 80 real entries, dated, with `[Source]` links.
-- `site/feed.json` — machine-readable `{generatedAt, count, items[]}`, `count: 80`.
+- `site/feed.json` — machine-readable `{generatedAt, count, items[]}`, `count: 80` as of 2026-10-01T04:13Z.
 - `data/state.json` — 6 arrays of seen IDs (`changelog`, `news`, `websiteNews`, `releases`, `npm`, `huggingface`), content reaching back to 2024-05-17.
-- `data/health.json` — written by the daily janitor, `ok`, with per-file entry counts.
-- `insights.md` — real AI research output behind a PR gate, covering the V4.1-Flash launch with Reddit, HN, X, and tech-media sources.
+- `data/health.json` — last written 2026-09-14, `ok: true`, `issueCount: 0`, per-file entry counts, `feedItems: 79`.
+- `insights.md` — 15,312 chars of real AI research output (2026-09-10), covering the V4.1-Flash launch with Reddit, HN, X, and tech-media sources.
 - Verified live first-party content: the deepseek.com blog (V4.1-Flash, 2026-09-10), `api-docs.deepseek.com/updates`, `deepseek-ai/deepseek-harness` releases (`dsh-v0.2.0-rc.2`, 2026-09-29), HuggingFace `deepseek-ai/DeepSeek-V4.1-Flash`, npm `@deepseek-ai/dsh`.
 
 **Absences future work must not fabricate:** no testimonials, no user counts, no star counts, no performance or benchmark claims, no pricing claims beyond what the changelog itself states, no uptime or coverage guarantees. GitHub Actions badges are the only proof-of-operation available.
@@ -87,12 +76,9 @@ Real, currently-live material the surface can and should render:
 1. **The link is the product.** A claim without a `[Source]` is a defect. Every surface must make verification one click away, never more.
 2. **Deterministic first, AI second.** The tracked feed is zero-LLM by design. AI output is a clearly-labeled draft behind human review, never the substrate.
 3. **Append-only and idempotent.** Nothing is rewritten or removed; re-running with no new upstream data changes no bytes.
-4. **Six hours is the promise.** Latency is a product feature, and the UI should
-   make the feed's last-change time continuously legible. It is labelled as the
-   last *change*, distinct from the page compile time, because the two are
-   different facts.
+4. **Six hours is the promise.** Latency is a product feature, and the UI should make the last-build time continuously legible.
 5. **No API keys in the critical path.** The deterministic pipeline and all twelve discovery corners must keep working with zero configuration.
 
 ## Accessibility & Inclusion
 
-The page ships a skip link, `aria-label`s on the nav, source legend and step numbers, and `aria-hidden` on decorative glyphs. No accessibility tooling, component library or design system exists in the repo — `DESIGN.md` documents the visual rules by hand, and `scripts/contrast.mjs` checks the palette against WCAG on the built CSS as a CI gate. There is no automated axe or keyboard-order test.
+No product-specific requirement has been established. No framework, accessibility tooling, or design system currently exists in the repo; the incumbent page has no skip link, no focus styling, and no ARIA.
