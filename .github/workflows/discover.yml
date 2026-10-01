@@ -64,6 +64,38 @@ jobs:
           echo "---.discover-prompt preview---"
           head -n 30 .discover-prompt.md 2>/dev/null || true
 
+      # The seen baseline is operational state (same role as data/state.json from
+      # track.mjs), not AI output — it must NOT wait on human review of a PR, or
+      # an unreviewed run would re-report the same signals every day forever.
+      # insights.md stays the only PR-gated, human-reviewed artifact.
+      - name: Commit & push seen baseline (operational state, not PR-gated)
+        continue-on-error: true
+        run: |
+          set -e
+          if [ ! -f data/discover-seen.json ]; then
+            echo "No data/discover-seen.json produced (run was gated or skipped) — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/discover-seen.json
+          if git diff --cached --quiet; then
+            echo "Seen baseline unchanged — nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore(discover): update seen baseline ($(date -u +%Y-%m-%dT%H:%MZ))"
+          for i in 1 2 3; do
+            echo "Push attempt $i/3..."
+            git pull --rebase --autostash || true
+            if git push; then
+              echo "Seen baseline pushed (attempt $i)"
+              exit 0
+            fi
+            echo "Push failed, retrying in $((i*5))s..."
+            sleep $((i*5))
+          done
+          echo "::warning::Failed to push seen baseline — next run may re-report recent signals."
+
       - name: Create PR if insights changed (safe default)
         id: cpr
         continue-on-error: true
@@ -78,7 +110,7 @@ jobs:
             **Experimental Opencode discovery — needs human review before merge**
 
             - Prompt: `.discover-prompt.md` (not committed, see Action logs)
-            - Source diff: vs `data/state.json` websiteNews
+            - Source diff: multi-corner live signals from `scripts/corners.mjs` vs `data/discover-seen.json`
             - **Do not auto-merge**: verify every `[Source]` link and date, check for hallucinations.
             - To enable AI summarization, set `OPENCODE_API_KEY` (https://opencode.ai/auth) in repo Secrets. Without it, fallback deterministic template is used.
 

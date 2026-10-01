@@ -1,0 +1,567 @@
+/* page.css — masthead, lede, call-out, signals, sources, footer.
+ * The assembly geometry lives in diagram.css because it is the composition. */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in oklch, var(--navy) 92%, transparent);
+  backdrop-filter: blur(12px) saturate(140%);
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead-in {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* The mark is the brand blue and nothing else in the chrome is. */
+.wordmark-glyph {
+  width: 19px;
+  height: 19px;
+  color: var(--brand);
+  flex: none;
+}
+
+.masthead-nav {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  justify-self: center;
+}
+
+.masthead-nav a {
+  color: var(--text-muted);
+}
+
+.masthead-nav a:hover {
+  color: var(--white);
+}
+
+.masthead-stamp {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.masthead-sep {
+  opacity: 0.5;
+  margin: 0 5px;
+}
+
+.masthead-time {
+  color: var(--text-muted);
+}
+
+/* --- first viewport ------------------------------------------------------ */
+
+.lede {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(28px, 3.8vw, 52px) var(--gutter) var(--section-pad);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 372px);
+  /* The aside spans both rows so it can run the full height of the assembly.
+     Named areas also let the narrow layout reorder to claim -> featured release
+     -> steps, which matters because the assembly is 80 entries long and would
+     otherwise push the newest release off the bottom of a phone. */
+  grid-template-areas:
+    'claim aside'
+    'main  aside';
+  gap: 0 clamp(24px, 3.6vw, 56px);
+  align-items: start;
+}
+
+.lede-claim {
+  grid-area: claim;
+  margin: 0 0 clamp(26px, 3.4vw, 44px);
+  font-family: var(--font);
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+.lede-claim strong {
+  font-weight: 600;
+  color: var(--brand-light);
+}
+
+.col-main {
+  grid-area: main;
+  min-width: 0;
+}
+
+.lede-aside {
+  grid-area: aside;
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* --- the call-out -------------------------------------------------------- */
+
+/* A printed parts list frames a 1:1 reference in a cornered box with no fill.
+   One brand-coloured edge, so the accent marks the primary object rather than
+   decorating a surface. */
+.callout {
+  position: relative;
+  background: var(--navy-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-md);
+  padding: 20px 22px 22px;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 18px;
+  width: 44px;
+  height: 2px;
+  background: var(--brand);
+}
+
+.callout-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.callout-ref {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: 0.04em;
+}
+
+.callout-date {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.callout-title {
+  font-family: var(--font);
+  font-size: clamp(1.4rem, 2.1vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.005em;
+  color: var(--white);
+  margin: 0 0 8px;
+  text-wrap: balance;
+}
+
+.callout-summary {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+  max-width: var(--measure);
+}
+
+.callout-pieces {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 7px;
+}
+
+/* The one primary action. --brand-deep (#3a65c2) rather than --brand (#4d6bfe):
+   white on #4d6bfe measures 4.33:1, just under AA for 14px semibold text.
+   #3a65c2 is DeepSeek's own deep brand step and clears it at 5.4:1 while
+   staying unmistakably the brand blue. */
+.callout-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  background: var(--brand-deep);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  transition: background 0.12s var(--ease);
+}
+
+.callout-cta:hover {
+  /* Deliberately not --brand (#4d6bfe): white on it is 4.3:1 and the hover state
+     is a real state a reader lands on. Hover darkens toward the deep step
+     instead, which reads as press-down and stays above AA. */
+  background: #2f4fa3;
+  text-decoration: none;
+}
+
+.callout-cta .ext {
+  opacity: 0.85;
+}
+
+/* --- source roster ------------------------------------------------------- */
+
+.route-legend {
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+.route {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+/* The numbered badge, reused everywhere a source is named. */
+.route-no,
+.piece-no,
+.signal-no {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--brand-light);
+  border-radius: 2px;
+  min-width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transform: translateY(3px);
+}
+
+.route-name {
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 1px solid transparent;
+}
+
+.route-name:hover {
+  color: var(--white);
+  border-bottom-color: var(--brand);
+}
+
+.route-count {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+/* --- sections ------------------------------------------------------------ */
+
+.section-head {
+  max-width: 64ch;
+  margin-bottom: clamp(20px, 2.8vw, 32px);
+}
+
+.section-head h2 {
+  font-family: var(--font);
+  font-size: clamp(1.25rem, 1.9vw, 1.55rem);
+  font-weight: 500;
+  color: var(--white);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-sub {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.section-sub strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.empty {
+  font-size: 0.875rem;
+  color: var(--text-faint);
+  padding: 22px 0;
+  margin: 0;
+}
+
+/* --- early signals ------------------------------------------------------- */
+
+.signals-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--section-pad);
+}
+
+/* Signals sit outside the numbered system entirely: a numbered step is a fact
+   DeepSeek published, so an unverified row carries no number. */
+.signals-stamp {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal);
+  border: 1px solid var(--signal-line);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.signal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.signal-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.signal-tier {
+  font-family: var(--font);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.signal-link {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.signal-link:hover {
+  color: var(--white);
+}
+
+.signals-foot {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  margin: 18px 0 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--navy-sunk);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.35em;
+}
+
+/* --- sources ------------------------------------------------------------- */
+
+.sources-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--section-pad);
+}
+
+.source-table {
+  list-style: none;
+  margin: 0 0 38px;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  max-width: 900px;
+}
+
+.source-table li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 180px 100px;
+  gap: 16px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.source-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.source-file,
+.source-count {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.source-count {
+  text-align: right;
+}
+
+.consume {
+  background: var(--navy-deep);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  max-width: 780px;
+}
+
+.consume h3 {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+
+.consume pre {
+  margin: 0 0 8px;
+  overflow-x: auto;
+}
+
+.consume pre code {
+  display: block;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0.78rem;
+  color: var(--brand-light);
+  white-space: pre;
+}
+
+.consume p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 14px 0 0;
+}
+
+/* --- footer -------------------------------------------------------------- */
+
+.site-foot {
+  border-top: 1px solid var(--rule);
+  background: var(--navy-deep);
+}
+
+.foot-in {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 26px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  justify-content: space-between;
+}
+
+.foot-in p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.foot-legal {
+  max-width: 56ch;
+}
+
+/* --- responsive ---------------------------------------------------------- */
+
+@media (max-width: 1040px) {
+  .lede {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'claim'
+      'aside'
+      'main';
+    row-gap: clamp(26px, 4vw, 40px);
+  }
+
+  .lede-claim {
+    max-width: 24ch;
+  }
+
+  .lede-aside {
+    position: static;
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 760px) {
+  .masthead-in {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 11px var(--gutter);
+  }
+
+  .masthead-nav {
+    justify-self: start;
+    gap: 16px;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .masthead-stamp {
+    text-align: left;
+  }
+
+  .signal {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .source-table li {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    row-gap: 4px;
+  }
+
+  .source-file {
+    grid-column: 2 / -1;
+  }
+}

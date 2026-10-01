@@ -1,0 +1,230 @@
+/* diagram.css — the assembly.
+ *
+ * A release tracker read as build instructions. Every dated release is a
+ * numbered step, newest first, and the sources it appeared on are the numbered
+ * pieces of that step. The stud grid rules the columns underneath so version
+ * numbers line up down the page: an unaligned version column is the failure a
+ * tracker cannot afford.
+ *
+ * Sources are identified by badge number, not by hue. Six distinguishable hues
+ * would dilute the single brand colour DeepSeek actually owns, and on a navy
+ * ground six near-identical blues would be unreadable anyway.
+ */
+
+.diagram-section {
+  padding: 0;
+}
+
+.diagram {
+  position: relative;
+}
+
+/* The stud grid: two hairlines, one per content column, running the full
+   height of the assembly so every step hangs on the same ruling. */
+.diagram::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--stud) 1px, transparent 1px) 46px 0 / calc(100% - 46px) 100% no-repeat,
+    linear-gradient(90deg, var(--stud) 1px, transparent 1px) 196px 0 / calc(100% - 196px) 100% no-repeat;
+}
+
+.stop {
+  display: grid;
+  grid-template-columns: 46px 150px minmax(0, 1fr);
+  gap: 0 16px;
+  padding: 15px 0 17px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Step number, hung on the grid's first rule. */
+.stop-num {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--brand);
+  padding-left: 12px;
+  letter-spacing: 0.04em;
+}
+
+.stop-col {
+  min-width: 0;
+}
+
+/* Date sits on its own rule so the whole column of dates aligns. */
+.stop-date {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.stop-ver {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--brand-light);
+  margin-top: 2px;
+}
+
+.stop-name {
+  font-family: var(--font);
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 0 0 6px;
+  text-wrap: pretty;
+}
+
+.stop-name .step-badge {
+  color: var(--brand-light);
+  font-weight: 500;
+}
+
+.stop-summary {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 9px;
+  max-width: var(--measure);
+}
+
+/* Pieces: the sources this step was assembled from. */
+.stop-pieces {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 7px;
+}
+
+.piece {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px 2px 5px;
+}
+
+.piece:hover {
+  color: var(--white);
+  border-color: var(--brand);
+}
+
+/* The piece number is the badge that replaces a coloured dot. */
+.piece-no {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--brand-light);
+  border-radius: 2px;
+  min-width: 15px;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+/* A step corroborated by several sources carries a 1px brand rule down its
+   left edge: the only place the accent touches the assembly. */
+.stop.is-corroborated .stop-col {
+  box-shadow: inset 2px 0 0 var(--brand);
+  padding-left: 14px;
+}
+
+/* Undated GitHub tags, folded away: real, but carrying no timestamp they cannot
+   sit in a numbered sequence without lying about their position. */
+.undated {
+  margin-top: 10px;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+}
+
+.undated summary {
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  list-style: none;
+}
+
+.undated summary::-webkit-details-marker {
+  display: none;
+}
+
+.undated summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1em;
+  font-family: var(--mono);
+  color: var(--brand);
+}
+
+.undated[open] summary::before {
+  content: '−';
+}
+
+.undated summary:hover {
+  color: var(--text-muted);
+}
+
+.undated-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 5px 24px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.undated-list a {
+  color: var(--text-faint);
+}
+
+.undated-list a:hover {
+  color: var(--brand-light);
+}
+
+@media (max-width: 860px) {
+  /* The two-column stud ruling needs 200px of labels; below that it collapses
+     to a single column and the grid reduces to the step-number rule. */
+  .diagram::before {
+    background: linear-gradient(90deg, var(--stud) 1px, transparent 1px) 38px 0 / calc(100% - 38px) 100% no-repeat;
+  }
+
+  .stop {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 0 12px;
+  }
+
+  .stop-num {
+    padding-left: 10px;
+  }
+
+  .stop-date,
+  .stop-ver {
+    grid-column: 2;
+    display: inline;
+    margin-right: 10px;
+  }
+
+  .stop-name {
+    grid-column: 2;
+    font-size: 1rem;
+  }
+}

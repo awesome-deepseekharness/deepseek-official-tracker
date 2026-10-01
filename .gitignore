@@ -5,6 +5,13 @@ node_modules/
 !.opencode/agent/discover.md
 *.tmp
 .DS_Store
-site/
+.corners.json
+.impeccable/review/
 AGENTS.md
+
+# The site source is committed (Astro project); its generated output is not.
+site/node_modules/
+site/dist/
+site/public/
+site/.astro/
 

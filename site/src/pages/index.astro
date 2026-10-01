@@ -1,0 +1,298 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseFeedStamp, resolveDataDir } from '../lib/transit.mjs';
+import '../styles/tokens.css';
+import '../styles/page.css';
+import '../styles/diagram.css';
+
+// ../scripts/build-pages.mjs stages the tracker's markdown into site/public/
+// before astro build. The directory is resolved by walking up from the working
+// directory rather than from import.meta.url, which Vite rewrites during the
+// build and which silently yields an empty page.
+const DATA = resolveDataDir();
+const read = f => {
+  try { return fs.readFileSync(path.join(DATA, f), 'utf8'); }
+  catch { return ''; }
+};
+
+const feed = read('FEED.md');
+const insights = read('insights.md');
+
+const perLine = LINES.map(l => parseSourceFile(read(l.file), l.id));
+const stops = buildNetwork(perLine);
+const totals = lineTotals(stops);
+const signals = parseSignals(insights);
+const stamp = parseFeedStamp(feed);
+const builtAt = new Date().toISOString();
+
+const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
+const lineNo = Object.fromEntries(LINES.map((l, i) => [l.id, i + 1]));
+const dated = stops.filter(s => s.date !== 'n/a');
+const undated = stops.filter(s => s.date === 'n/a');
+const corroborated = dated.filter(s => s.lines.length > 1);
+const latest = dated[0] || stops[0];
+
+const REPO = 'https://github.com/awesome-deepseekharness/deepseek-official-tracker';
+const RAW = 'https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-official-tracker/main';
+
+const d = iso => {
+  if (!iso || iso === 'n/a') return 'undated';
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC',
+  });
+};
+const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOString().slice(0, 10) : undefined);
+
+// The version on its own line beside the date, so the column is readable
+// without parsing it out of the step title. Empty when a release has no
+// version-shaped name, which is most blog posts.
+const shortVersion = name => {
+  const m = name.match(/\bv\d[\w.+-]*/);
+  return m ? m[0] : '';
+};
+
+// The version has its own ruled column, so the step title drops it rather than
+// printing it twice. Blog posts without a version are returned unchanged.
+const stepLabel = name => {
+  const v = shortVersion(name);
+  if (!v) return name;
+  return name.replace(v, '').replace(/[\s·\-—:]+$/, '').trim() || name;
+};
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DeepSeek Official Tracker — every official release, assembled in order</title>
+<meta name="description" content="Six official DeepSeek sources as six lines. See what shipped, which sources corroborated it, and open the source. Zero LLM in the tracked feed."/>
+<meta name="keywords" content="deepseek, deepseek api, deepseek v4.1, deepseek v4, deepseek r1, deepseek harness, deepseek changelog, huggingface, dsh, deepseek official"/>
+<link rel="canonical" href="https://awesome-deepseekharness.github.io/deepseek-official-tracker/"/>
+<meta property="og:title" content="DeepSeek Official Tracker"/>
+<meta property="og:description" content="Six official sources as six lines. Every station links to its source."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://awesome-deepseekharness.github.io/deepseek-official-tracker/"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="wordmark">
+      <svg class="wordmark-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4.5 3 L19.5 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+        <path d="M19.5 3 L4.5 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" opacity="0.4"/>
+      </svg>
+      <span>DeepSeek Official Tracker</span>
+    </div>
+    <nav class="masthead-nav" aria-label="Primary">
+      <a href="#diagram">Assembly</a>
+      <a href="#signals">Early signals</a>
+      <a href="#sources">Sources</a>
+      <a href={REPO}>GitHub</a>
+    </nav>
+    <p class="masthead-stamp mono">
+      Built {stamp ? d(stamp.slice(0, 10)) : '—'}{stamp && <span class="masthead-time"> {stamp.slice(11, 16)}Z</span>}
+      <span class="masthead-sep">·</span> every 6h
+    </p>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- The assembly is the thesis, so it is not parked below a hero block. The
+       claim heads the step list's own column, the featured release and source
+       roster sit beside it and follow the reader down the page, and the newest
+       steps are already on screen at 1440x900. -->
+  <div class="lede">
+    <p class="lede-claim">
+      DeepSeek ships to <strong>six</strong> official channels and announces
+      them one at a time. This is every official release, assembled in order.
+    </p>
+
+    <div class="col-main">
+      <section id="diagram" class="diagram-section">
+        <div class="section-head">
+          <h2>The assembly</h2>
+          <p class="section-sub">
+            Newest step first. Each release is assembled from the numbered
+            sources it appeared on — a step with more than one piece was
+            corroborated across channels before it was announced.
+            {corroborated.length > 0 && <> <strong>{corroborated.length}</strong> corroborated steps.</>}
+          </p>
+        </div>
+
+        <div class="diagram">
+          {dated.length === 0 ? (
+            <p class="empty">No dated releases captured yet. Run <code>node scripts/track.mjs</code>.</p>
+          ) : (
+            dated.map((s, i) => (
+              <article class={`stop ${s.lines.length > 1 ? 'is-corroborated' : ''}`}>
+                <span class="stop-num" aria-label={`Step ${i + 1}`}>{String(i + 1).padStart(2, '0')}</span>
+                <div class="stop-col">
+                  <time class="stop-date mono" datetime={rfc(s.date)}>{d(s.date)}</time>
+                  {shortVersion(s.name) && <span class="stop-ver mono">{shortVersion(s.name)}</span>}
+                </div>
+                <div class="stop-col">
+                  <h3 class="stop-name" title={s.verbatim}>{stepLabel(s.name)}</h3>
+                  {s.summary && <p class="stop-summary">{s.summary}</p>}
+                  <ul class="stop-pieces">
+                    {s.sources.map(src => (
+                      <li>
+                        <a class="piece" href={src.url} target="_blank" rel="noopener" title={src.title}>
+                          <span class="piece-no">{String(lineNo[src.line] ?? 0).padStart(2, '0')}</span>
+                          {lineById[src.line]?.short || src.line}
+                          <span class="ext" aria-hidden="true">↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          )}
+        </div>
+
+        {undated.length > 0 && (
+          <details class="undated">
+            <summary><span class="num">{undated.length}</span> GitHub tags with no publish date</summary>
+            <ul class="undated-list">
+              {undated.map(s => (
+                <li><a href={s.url || `${REPO}/blob/main/releases.md`} target="_blank" rel="noopener">{s.name}</a></li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </section>
+    </div>
+
+    <aside class="lede-aside">
+      {latest && (
+        <article class="callout">
+          <div class="callout-head">
+            <span class="callout-ref">STEP 01</span>
+            <time class="callout-date mono" datetime={rfc(latest.date)}>{d(latest.date)}</time>
+          </div>
+          <h2 class="callout-title" title={latest.verbatim}>{latest.name}</h2>
+          {latest.summary && <p class="callout-summary">{latest.summary}</p>}
+          <ul class="callout-pieces">
+            {latest.sources.map(s => (
+              <li>
+                <a class="piece" href={s.url} target="_blank" rel="noopener" title={s.title}>
+                  <span class="piece-no">{String(lineNo[s.line] ?? 0).padStart(2, '0')}</span>
+                  {lineById[s.line]?.short || s.line}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {latest.url && (
+            <a class="callout-cta" href={latest.url} target="_blank" rel="noopener">
+              Open source <span class="ext" aria-hidden="true">↗</span>
+            </a>
+          )}
+        </article>
+      )}
+
+      <ul class="route-legend" aria-label="Official sources">
+        {LINES.map(l => (
+          <li class="route">
+            <span class="route-no">{String(lineNo[l.id]).padStart(2, '0')}</span>
+            <a class="route-name" href={l.endpoint} target="_blank" rel="noopener">{l.label}</a>
+            <span class="route-count num">{totals[l.id] ?? 0}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Unverified material, shaped unlike a station so provenance is readable
+       without reading a word. -->
+  <section id="signals" class="signals-section">
+    <div class="section-head">
+      <h2>Early signals <span class="signals-stamp">unverified</span></h2>
+      <p class="section-sub">
+        Community threads, media reports and research notes. These are
+        <strong>not</strong> confirmed by an official source — they lead, they do
+        not prove. Anything here becomes a numbered step above the moment DeepSeek
+        publishes it.
+      </p>
+    </div>
+
+    {signals.length === 0 ? (
+      <p class="empty">
+        No signals captured in the latest research pass.{' '}
+        <a href={`${REPO}/blob/main/insights.md`}>Read insights.md →</a>
+      </p>
+    ) : (
+      <ul class="signal-list">
+        {signals.map(s => (
+          <li class={`signal signal-${s.tier}`}>
+            <div class="signal-meta">
+              <span class="signal-tier">{s.tier === 'community' ? 'community' : 'media'}</span>
+              {s.date && <time class="mono" datetime={rfc(s.date)}>{d(s.date)}</time>}
+            </div>
+            <a class="signal-link" href={s.url} target="_blank" rel="noopener">
+              {s.title}<span class="ext" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+    <p class="signals-foot">
+      Draft from <code>scripts/discover.mjs</code> over <code>scripts/corners.mjs</code>,
+      reviewed via pull request.{' '}
+      <a href={`${REPO}/blob/main/insights.md`}>Full research →</a>
+    </p>
+  </section>
+
+  <section id="sources" class="sources-section">
+    <div class="section-head">
+      <h2>Where this comes from</h2>
+      <p class="section-sub">
+        Six first-party endpoints, scraped with zero LLM involvement. Official
+        titles are copied verbatim and every entry links to its source.
+      </p>
+    </div>
+    <ol class="source-table">
+      {LINES.map(l => (
+        <li style={`--c:${l.color}`}>
+          <a class="source-name" href={l.endpoint} target="_blank" rel="noopener">
+            <i aria-hidden="true"></i>{l.label}<span class="ext" aria-hidden="true">↗</span>
+          </a>
+          <span class="source-file mono">{l.file}</span>
+          <span class="source-count num">{totals[l.id] ?? 0} entries</span>
+        </li>
+      ))}
+    </ol>
+    <div class="consume">
+      <h3>Use it in your own tooling</h3>
+      <pre><code>{`curl -s ${RAW}/FEED.md`}</code></pre>
+      <pre><code>curl -s https://awesome-deepseekharness.github.io/deepseek-official-tracker/feed.json</code></pre>
+      <p>
+        Or <strong>Watch</strong> the repo — you get an email within six hours of
+        any official push. <a href={`${REPO}#subscribe`}>Subscribe →</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-in">
+    <p>
+      {stops.length} releases · {corroborated.length} corroborated across sources · page built{' '}
+      <time class="mono" datetime={builtAt}>{builtAt.slice(0, 16).replace('T', ' ')}Z</time>
+    </p>
+    <p class="foot-legal">
+      Not affiliated with DeepSeek. Data belongs to its respective sources;
+      mirrored with citations under <a href={`${REPO}/blob/main/LICENSE`}>CC0-1.0</a>.
+    </p>
+  </div>
+</footer>
+</body>
+</html>
