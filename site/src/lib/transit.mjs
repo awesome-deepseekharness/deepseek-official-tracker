@@ -78,30 +78,45 @@ export const LINES = [
  * "Introducing DeepSeek-V4.1-Flash: ...", with no shared substring worth
  * trusting.
  */
-function releaseKeys(title) {
+function releaseKeys(title, date = '') {
   const t = title.trim();
-  const keys = new Set([`t:${t.toLowerCase()}`]);
+  const d = (date || '').trim();
+  // The date is part of the identity. Nine different API changelog entries are
+  // all titled `deepseek-chat`; keyed on the title alone they collapsed into a
+  // single step that printed five "02 API" badges, which reads as a rendering
+  // bug because it is one.
+  const keys = new Set([`t:${d}:${t.toLowerCase()}`]);
 
-  // deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2  ->  v0.2.0-rc.2
-  // The leading v is kept: the npm line spells the same version v0.2.0-rc.2, and
-  // normalising it away here is what stops the two lines from bridging.
-  const gh = t.match(/^deepseek-ai\/[\w.-]+ release\s+(\S+)$/);
+  // deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2
+  //   -> tag:deepseek-harness:v0.2.0-rc.2  and  ver:deepseek-harness:v0.2.0-rc.2
+  // The leading v is kept: the npm line spells the same v0.2.0-rc.2, and
+  // normalising it away is what stops the two lines from bridging. The repo is
+  // kept for the opposite reason — DeepSeek-V3 and DeepSeek-R1 both shipped
+  // v1.0.0, and an unscoped version key welded two unrelated model launches into
+  // one step.
+  const gh = t.match(/^deepseek-ai\/([\w.-]+) (?:release|tag)\s+(\S+)$/);
   if (gh) {
-    keys.add(`tag:${gh[1].toLowerCase()}`);
-    keys.add(`ver:${gh[1].replace(/^dsh-/, '').toLowerCase()}`);
+    const repo = gh[1].toLowerCase();
+    const ver = gh[2].replace(/^dsh-/, '').toLowerCase();
+    keys.add(`tag:${repo}:${ver}`);
+    keys.add(`ver:${repo}:${ver}`);
   }
 
-  // Bare npm version lines: v0.2.0-rc.2
+  // Bare npm version lines: v0.2.0-rc.2. npm carries exactly one DeepSeek
+  // package, so the harness is the only repository a bare version can belong to.
   const bareVer = t.match(/^(?:dsh-)?(v\d[\w.+-]*)$/);
-  if (bareVer) keys.add(`ver:${bareVer[1].toLowerCase()}`);
+  if (bareVer) keys.add(`ver:deepseek-harness:${bareVer[1].toLowerCase()}`);
 
   // Model weights and model launch titles, one pattern for both spellings:
   //   deepseek-ai/DeepSeek-V4.1-Flash       -> v4.1-flash
   //   Introducing DeepSeek-V4.1-Flash: ...  -> v4.1-flash
   //   DeepSeek-V4-Flash-Vision-Exp Release  -> v4-flash-vision-exp
-  // Lowercasing after capture is what makes the blog title and the HuggingFace
-  // model id land on the same key.
-  const model = t.match(/deepseek-(v?[\d.]+(?:-[a-z]+)+)/i);
+  //   DeepSeek-V4-Pro-0813                  -> v4-pro-0813
+  // Suffix groups accept digits, not only letters: DeepSeek-V4-Pro-0813 and
+  // DeepSeek-V4-Pro are two separate weight drops, and merging them printed the
+  // HF badge twice on a single step. Lowercasing after capture is what makes the
+  // blog title and the HuggingFace model id land on the same key.
+  const model = t.match(/deepseek-(v?[\d.]+(?:-[a-z0-9]+)+)/i);
   if (model) keys.add(`model:${model[1].toLowerCase()}`);
 
   return keys;
@@ -148,6 +163,57 @@ function isEcho(summary, title) {
 }
 
 /**
+ * Cut to a length without leaving half a word behind.
+ *
+ * A hard slice at 220 characters is how the DeepSeek-V3.2 and deepseek-chat
+ * summaries ended mid-token; the ellipsis makes the cut legible as a cut rather
+ * than as the end of the official text.
+ */
+function clip(text, max) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const sp = cut.lastIndexOf(' ');
+  return `${(sp > max * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,;:.—-]+$/, '')}…`;
+}
+
+/**
+ * True when the body line is machine metadata rather than something a reader
+ * should read.
+ *
+ * Two sources emit a body that is not prose. huggingface.md writes the model
+ * card's own metadata row — "❤️ 765 · 📥 90,822 · text-generation · transformers,
+ * safetensors, deepseek_v4, text-generation, conversational" — and npm.md writes
+ * the dist-tag it was published under, which is the single word "latest". Both
+ * landed in the page verbatim as the step's summary, so a model launch read as
+ * "❤️ 3,748 · 📥 3,959,575 · text-generation · …". That is the one place on the
+ * page where scraper output is shown as if a human had written it, and the page
+ * claims the opposite everywhere else.
+ *
+ * Detection is by shape, not by source, so a future seventh source is judged the
+ * same way: a metadata row is a list of short tokens joined by the same
+ * separator, and a dist-tag is a single lowercase word with no sentence in it.
+ */
+function isMetadata(summary) {
+  const s = summary.trim();
+  if (!s) return true;
+
+  // npm dist-tags: latest, next, beta, canary, alpha.
+  if (/^[a-z][a-z\d.-]{0,14}$/.test(s)) return true;
+
+  // HF model-card rows. They always open with a like count and a heart, or a
+  // download count and the inbox tray; the separator is U+00B7 with the emoji
+  // that PowerShell rendered as "??" on a non-UTF8 console.
+  if (/^[\u2764\u2665\u2763\uD83D\uDCE5]/u.test(s) && /[\u00b7|,]/.test(s)) return true;
+  // The same row with the leading emoji stripped by an earlier normaliser.
+  if (/^\d[\d,]*\s*[\u00b7|,]\s*\d/.test(s) && /safetensors|text-generation|tokenizers|transformers|arxiv:|region:/.test(s)) return true;
+  // A bare tag list with no numbers and no prose: "safetensors, qwen3, region:us".
+  if (/^[a-z][a-z\d_:+.-]*(?:\s*[\u00b7|,]\s*[a-z][a-z\d_:+.-]*)+$/.test(s)
+      && /safetensors|tokenizers|transformers|text-generation|region:|arxiv:/.test(s)) return true;
+
+  return false;
+}
+
+/**
  * Parse one per-source markdown file into stations.
  * Shape written by track.mjs: `## [date] title`, optional summary,
  * `[Source](url)`, `---`.
@@ -170,13 +236,14 @@ export function parseSourceFile(md, lineId) {
       .slice(1)
       .map(l => l.trim())
       .find(l => l && !l.startsWith('[Source]') && !l.startsWith('#'))) || '';
+    const clean = summary.replace(/\[([^\]]*)\]\([^)]*\)/g, '').trim();
     out.push({
       line: lineId,
       date,
       title,
       url: src,
-      summary: isEcho(summary, title) ? '' : summary.replace(/\[([^\]]*)\]\([^)]*\)/g, '').trim().slice(0, 220),
-      keys: [...releaseKeys(title)],
+      summary: isEcho(summary, title) || isMetadata(clean) ? '' : clip(clean, 220),
+      keys: [...releaseKeys(title, date)],
     });
   }
   return out;
@@ -250,7 +317,22 @@ export function buildNetwork(perLineStations) {
         url,
         summary: nameMember.summary || '',
         // Every source link, so verification never costs more than one click.
-        sources: members.filter(m => m.url).map(m => ({ line: m.line, title: m.title, url: m.url })),
+        //
+        // One badge per line, not one per entry: the badge *is* the line
+        // identifier, so two entries on the same line printed "02 API" twice and
+        // read as a duplicate. When a line contributed several entries the extra
+        // ones are folded into the badge's tooltip instead of dropped, so
+        // nothing becomes unreachable — the link is the product.
+        sources: (() => {
+          const byLine = new Map();
+          for (const m of members) {
+            if (!m.url) continue;
+            const cur = byLine.get(m.line);
+            if (!cur) byLine.set(m.line, { line: m.line, title: m.title, url: m.url, also: [] });
+            else cur.also.push(m.title);
+          }
+          return [...byLine.values()];
+        })(),
       };
     })
     .sort((a, b) => {

@@ -76,6 +76,7 @@ jobs:
       - name: Test data model
         run: |
           node site/src/lib/transit.test.mjs
+          node site/src/lib/summary.test.mjs
           node scripts/corners.x.test.mjs
 
       - name: Build site
