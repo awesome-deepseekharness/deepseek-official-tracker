@@ -1,0 +1,487 @@
+#!/usr/bin/env node
+/**
+ * corners.mjs — multi-corner live signal collector for deep discovery
+ *
+ * Purpose: give the Discover agent a *deterministic, key-free* precomputed
+ * signal set drawn from many independent sources, instead of relying solely on
+ * new deepseek.com blog slugs (which was the only trigger, and which track.mjs
+ * already consumes — so the gate was effectively always empty).
+ *
+ * Design rules:
+ * - Every collector is independent and failure-tolerant: one dead endpoint must
+ *   never break the run.
+ * - No API keys required. Uses public JSON/RSS endpoints only.
+ * - Each signal gets a stable `id` so it can be diffed across runs and folded
+ *   into a "seen" baseline. Ids are `<source>:<stable-key>`.
+ * - `tier` marks trust level: official (first-party) vs secondary (authoritative
+ *   but not DeepSeek) vs community (unverified). The agent still re-verifies.
+ *
+ * Usage:
+ *   node scripts/corners.mjs                 # print JSON of live signals
+ *   import { collectSignals } from './corners.mjs'
+ */
+
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
+const SEEN_FILE = path.join(ROOT, 'data', 'discover-seen.json');
+
+const UA = 'deepseek-official-tracker-corners/1.0';
+
+const GITHUB_REPOS = [
+  'deepseek-harness',
+  'DeepSeek-V3',
+  'DeepSeek-R1',
+  'DeepSeek-V3.2-Exp',
+  'DeepEP',
+  'DeepGEMM',
+  'FlashMLA',
+  'TileKernels',
+  'DeepSelect',
+  'DeepJIT',
+  'Engram',
+  'EPLB',
+  'DeepSpec',
+  'DualPipe',
+  '3FS',
+];
+
+// ---------------------------------------------------------------- utilities
+
+async function get(url, opts = {}) {
+  const headers = {
+    'User-Agent': UA,
+    'Accept': opts.accept || '*/*',
+    ...(opts.headers || {}),
+  };
+  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), opts.timeoutMs || 15000);
+  try {
+    const res = await fetch(url, { headers, signal: ctrl.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return opts.as === 'json' ? await res.json() : await res.text();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function getJson(url, opts = {}) {
+  return get(url, { ...opts, as: 'json' });
+}
+
+function stripHtml(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isValidDate(d) {
+  if (!/^\d{4}-\d{2}-\d{2}/.test(d)) return false;
+  const y = Number(d.slice(0, 4));
+  return y >= 2023 && y <= 2030;
+}
+
+function dayKey(ts) {
+  try {
+    const d = new Date(ts);
+    return isValidDate(d.toISOString()) ? d.toISOString().slice(0, 10) : null;
+  } catch {
+    return null;
+  }
+}
+
+function daysAgo(n) {
+  return new Date(Date.now() - n * 86400000).toISOString().slice(0, 10);
+}
+
+// ------------------------------------------------------------- collectors
+// Each returns an array of signal objects:
+//   { id, source, tier, title, date, url, detail }
+
+async function collectWebsiteNews() {
+  const html = await get('https://www.deepseek.com/en/news/', { accept: 'text/html' });
+  const seen = new Set();
+  const out = [];
+  const push = (slug) => {
+    if (seen.has(slug)) return;
+    seen.add(slug);
+    out.push({
+      id: `blog:${slug}`,
+      source: 'deepseek.com blog',
+      tier: 'official',
+      title: slug,
+      date: null,
+      url: `https://www.deepseek.com/en/news/${slug}/`,
+      detail: 'New blog slug present on deepseek.com/en/news/ — fetch title+date.',
+    });
+  };
+  for (const re of [/href="\/en\/news\/([^"/]+)\/"/g, /href="\/news\/([^"/]+)\/"/g]) {
+    let m;
+    while ((m = re.exec(html)) !== null) push(m[1].trim());
+  }
+  return out;
+}
+
+async function collectChangelog() {
+  const html = await get('https://api-docs.deepseek.com/updates', { accept: 'text/html' });
+  const out = [];
+  const h2Re = /<h2[^>]*>\s*Date:\s*([0-9]{4}-[0-2-9][0-9]-[0-3][0-9])[\s\S]*?<\/h2>([\s\S]*?)(?=<h2[^>]*>\s*Date:|$)/gi;
+  let m;
+  while ((m = h2Re.exec(html)) !== null) {
+    const date = m[1];
+    if (!isValidDate(date)) continue;
+    const h3Re = /<h3[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3[^>]*>|$)/gi;
+    let t;
+    while ((t = h3Re.exec(m[2])) !== null) {
+      const title = stripHtml(t[1]).replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\s*[?#]\s*$/, '');
+      if (!title) continue;
+      const anchor = ((t[1].match(/id="([^"]+)"/) || [])[1] || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+        .replace(/-+$/, '');
+      out.push({
+        id: `changelog:${date}:${anchor}`,
+        source: 'API changelog',
+        tier: 'official',
+        title,
+        date,
+        url: `https://api-docs.deepseek.com/updates#${anchor}`,
+        detail: stripHtml(t[2]).slice(0, 400),
+      });
+    }
+  }
+  return out;
+}
+
+async function collectGithubReleases() {
+  const out = [];
+  const results = await Promise.allSettled(
+    GITHUB_REPOS.map(async (repo) => {
+      const rels = await getJson(`https://api.github.com/repos/deepseek-ai/${repo}/releases?per_page=4`);
+      const tags = await getJson(`https://api.github.com/repos/deepseek-ai/${repo}/tags?per_page=4`).catch(() => []);
+      const items = [
+        ...(Array.isArray(rels) ? rels.map(r => ({ tag: r.tag_name, date: r.published_at || r.created_at, url: r.html_url, kind: 'release', body: r.body || '' })) : []),
+        ...(Array.isArray(tags) ? tags.map(t => ({ tag: t.name, date: null, url: `https://github.com/deepseek-ai/${repo}/releases/tag/${t.name}`, kind: 'tag', body: '' })) : []),
+      ];
+      return { repo, items };
+    })
+  );
+  for (const r of results) {
+    if (r.status !== 'fulfilled') continue;
+    for (const it of r.value.items) {
+      if (!it.tag) continue;
+      out.push({
+        id: `gh:${r.value.repo}:${it.tag}`,
+        source: `GitHub ${r.value.repo} ${it.kind}`,
+        tier: 'official',
+        title: `${r.value.repo} ${it.tag}`,
+        date: it.date ? dayKey(it.date) : null,
+        url: it.url,
+        detail: stripHtml(it.body).slice(0, 400),
+      });
+    }
+  }
+  return out;
+}
+
+async function collectGithubOrgRepos() {
+  const repos = await getJson('https://api.github.com/orgs/deepseek-ai/repos?per_page=100&sort=pushed');
+  if (!Array.isArray(repos)) return [];
+  return repos
+    .filter(r => !r.fork && !r.archived && r.pushed_at && r.pushed_at.slice(0, 10) >= daysAgo(10))
+    .map(r => ({
+      id: `ghrepo:${r.full_name}`,
+      source: 'GitHub org repo',
+      tier: 'official',
+      title: r.full_name,
+      date: dayKey(r.pushed_at),
+      url: r.html_url,
+      detail: `${r.description || 'no description'} — stars ${r.stargazers_count}, created ${dayKey(r.created_at) || 'n/a'}`,
+    }));
+}
+
+async function collectHuggingFace() {
+  const models = await getJson('https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified&limit=15');
+  if (!Array.isArray(models)) return [];
+  return models.map(m => ({
+    id: `hf:${m.modelId}`,
+    source: 'HuggingFace',
+    tier: 'official',
+    title: m.modelId,
+    date: dayKey(m.lastModified),
+    url: `https://huggingface.co/${m.modelId}`,
+    detail: `pipeline ${m.pipeline_tag || 'n/a'}, downloads ${m.downloads ?? 0}, likes ${m.likes ?? 0}, tags: ${(m.tags || []).slice(0, 8).join(', ')}`,
+  }));
+}
+
+async function collectNpm() {
+  const out = [];
+  const meta = await getJson('https://registry.npmjs.org/@deepseek-ai/dsh');
+  const dist = meta['dist-tags'] || {};
+  for (const [tag, version] of Object.entries(dist)) {
+    out.push({
+      id: `npm:dsh:${tag}:${version}`,
+      source: 'npm',
+      tier: 'official',
+      title: `@deepseek-ai/dsh dist-tag ${tag}`,
+      date: dayKey(meta.time?.[version]),
+      url: `https://www.npmjs.com/package/@deepseek-ai/dsh/v/${version}`,
+      detail: `dist-tags: ${JSON.stringify(dist)}`,
+    });
+  }
+  const search = await getJson('https://registry.npmjs.org/-/v1/search?text=%40deepseek-ai&size=20').catch(() => null);
+  for (const o of search?.objects || []) {
+    out.push({
+      id: `npmsearch:${o.package.name}:${o.package.version}`,
+      source: 'npm search',
+      tier: 'official',
+      title: o.package.name,
+      date: dayKey(o.package.date),
+      url: o.package.links?.npm || `https://www.npmjs.com/package/${o.package.name}`,
+      detail: `${o.package.version} — ${o.package.description || ''}`.slice(0, 300),
+    });
+  }
+  return out;
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function collectArxiv() {
+  // arXiv aggressively rate-limits (429) and asks for a 3s gap between calls.
+  // Retry a couple of times with backoff before giving up on this corner.
+  const url = 'https://export.arxiv.org/api/query?search_query=ti:%22DeepSeek%22&sortBy=submittedDate&max_results=12';
+  let xml = null;
+  let lastErr;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      xml = await get(url, { accept: 'application/atom+xml', timeoutMs: 20000 });
+      break;
+    } catch (e) {
+      lastErr = e;
+      await sleep(3000 * (attempt + 1));
+    }
+  }
+  if (xml == null) throw lastErr;
+  const out = [];
+  const entries = xml.split('<entry>').slice(1);
+  for (const e of entries) {
+    const title = stripHtml((e.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '');
+    const id = ((e.match(/<id>([\s\S]*?)<\/id>/) || [])[1] || '').trim();
+    const published = ((e.match(/<published>([\s\S]*?)<\/published>/) || [])[1] || '').trim();
+    const summary = stripHtml((e.match(/<summary>([\s\S]*?)<\/summary>/) || [])[1] || '').slice(0, 400);
+    if (!title || !id) continue;
+    out.push({
+      id: `arxiv:${id}`,
+      source: 'arXiv',
+      tier: 'secondary',
+      title,
+      date: published ? dayKey(published) : null,
+      url: id,
+      detail: summary,
+    });
+  }
+  return out;
+}
+
+async function collectHackerNews() {
+  const cutoff = Math.floor(Date.now() / 1000) - 30 * 86400;
+  const res = await getJson(`https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&numericFilters=created_at_i>${cutoff},points>15&hitsPerPage=15`);
+  return (res.hits || []).map(h => ({
+    id: `hn:${h.objectID}`,
+    source: 'HackerNews',
+    tier: 'community',
+    title: h.title || h.story_title || '(untitled)',
+    date: dayKey(h.created_at),
+    url: h.url || `https://news.ycombinator.com/item?id=${h.objectID}`,
+    detail: `${h.points || 0} pts, ${h.num_comments || 0} comments`,
+  }));
+}
+
+async function collectReddit() {
+  const out = [];
+  const subs = ['LocalLLaMA', 'deepseek', 'MachineLearning'];
+  for (const sub of subs) {
+    const res = await getJson(
+      `https://www.reddit.com/r/${sub}/search.json?q=deepseek&sort=new&t=week&limit=15`,
+      { headers: { 'User-Agent': `${UA} reddit-app` } }
+    ).catch(() => null);
+    for (const c of res?.data?.children || []) {
+      const d = c.data || {};
+      if (!d.title) continue;
+      out.push({
+        id: `reddit:${d.id}`,
+        source: `r/${sub}`,
+        tier: 'community',
+        title: d.title,
+        date: dayKey((d.created_utc || 0) * 1000),
+        url: `https://www.reddit.com${d.permalink}`,
+        detail: `${d.num_comments || 0} comments, score ${d.score || 0}`,
+      });
+    }
+  }
+  return out;
+}
+
+async function collectGoogleNews() {
+  const xml = await get('https://news.google.com/rss/search?q=deepseek&hl=en-US&gl=US&ceid=US:en', {
+    accept: 'application/rss+xml',
+  });
+  const out = [];
+  for (const item of xml.split('<item>').slice(1, 21)) {
+    const title = stripHtml((item.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '');
+    const link = ((item.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || '').trim();
+    const pub = ((item.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || '').trim();
+    if (!title || !link) continue;
+    out.push({
+      id: `gnews:${title.toLowerCase().slice(0, 80).replace(/\s+/g, '-')}`,
+      source: 'Google News',
+      tier: 'secondary',
+      title,
+      date: pub ? dayKey(pub) : null,
+      url: link,
+      detail: 'Media headline — find the first-party DeepSeek source before calling verified.',
+    });
+  }
+  return out;
+}
+
+async function collectPyPi() {
+  const res = await getJson('https://pypi.org/pypi/deepseek/json').catch(() => null);
+  const version = res?.info?.version;
+  if (!version) return [];
+  const files = res.releases?.[version] || [];
+  return [{
+    id: `pypi:deepseek:${version}`,
+    source: 'PyPI',
+    tier: 'secondary',
+    title: `pypi deepseek ${version}`,
+    date: files[0] ? dayKey(files[0].upload_time_iso_8601 || files[0].upload_time) : null,
+    url: 'https://pypi.org/project/deepseek/',
+    detail: `${res.info?.summary || ''}`.slice(0, 300),
+  }];
+}
+
+async function collectOpenRouter() {
+  const res = await getJson('https://openrouter.ai/api/v1/models').catch(() => null);
+  const models = (res?.data || []).filter(m => /deepseek/i.test(m.id));
+  return models
+    .sort((a, b) => (b.created || 0) - (a.created || 0))
+    .slice(0, 12)
+    .map(m => ({
+      id: `openrouter:${m.id}`,
+      source: 'OpenRouter',
+      tier: 'secondary',
+      title: m.id,
+      date: m.created ? dayKey(new Date(m.created * 1000).toISOString()) : null,
+      url: `https://openrouter.ai/${m.id}`,
+      detail: `${m.context_length ? `${m.context_length} ctx` : ''} ${m.pricing?.prompt ? `in $${m.pricing.prompt}` : ''} ${m.pricing?.completion ? `out $${m.pricing.completion}` : ''}`.trim(),
+    }));
+}
+
+// ------------------------------------------------------------------ runner
+
+const COLLECTORS = [
+  ['website-news', collectWebsiteNews],
+  ['api-changelog', collectChangelog],
+  ['github-releases', collectGithubReleases],
+  ['github-org-repos', collectGithubOrgRepos],
+  ['huggingface', collectHuggingFace],
+  ['npm', collectNpm],
+  ['arxiv', collectArxiv],
+  ['hackernews', collectHackerNews],
+  ['reddit', collectReddit],
+  ['google-news', collectGoogleNews],
+  ['pypi', collectPyPi],
+  ['openrouter', collectOpenRouter],
+];
+
+/**
+ * Collect all live signals. Never throws; per-corner failures are reported in
+ * `errors` so the caller can tell "nothing new" apart from "corner broke".
+ */
+export async function collectSignals() {
+  const entries = await Promise.allSettled(COLLECTORS.map(([, fn]) => fn()));
+  const signals = [];
+  const errors = [];
+  COLLECTORS.forEach(([name], i) => {
+    const r = entries[i];
+    if (r.status === 'fulfilled') signals.push(...r.value);
+    else errors.push(`${name}: ${r.reason?.message || r.reason}`);
+  });
+  // Dedup by id, keeping first occurrence
+  const byId = new Map();
+  for (const s of signals) if (!byId.has(s.id)) byId.set(s.id, s);
+  return { signals: [...byId.values()], errors };
+}
+
+// ------------------------------------------------------------- seen baseline
+
+export function loadSeen() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(SEEN_FILE, 'utf8'));
+    return { ids: new Set(raw.ids || []), updatedAt: raw.updatedAt || null };
+  } catch {
+    return { ids: new Set(), updatedAt: null };
+  }
+}
+
+export function saveSeen(ids, extra = {}) {
+  fs.mkdirSync(path.dirname(SEEN_FILE), { recursive: true });
+  const arr = [...new Set(ids)].sort();
+  fs.writeFileSync(
+    SEEN_FILE,
+    `${JSON.stringify({ updatedAt: new Date().toISOString(), count: arr.length, ids: arr, ...extra }, null, 2)}\n`,
+    'utf8'
+  );
+  console.log(`[corners] seen baseline saved: ${arr.length} ids -> ${path.relative(ROOT, SEEN_FILE)}`);
+}
+
+export { SEEN_FILE };
+
+// ------------------------------------------------------------------- CLI
+
+async function main() {
+  const { signals, errors } = await collectSignals();
+  const seen = loadSeen();
+  const fresh = signals.filter(s => !seen.ids.has(s.id));
+  const byTier = fresh.reduce((acc, s) => {
+    (acc[s.tier] ||= []).push(s);
+    return acc;
+  }, {});
+  console.log(`[corners] total signals: ${signals.length}`);
+  console.log(`[corners] seen baseline: ${seen.ids.size} ids (updated ${seen.updatedAt || 'never'})`);
+  console.log(`[corners] FRESH (not yet reported): ${fresh.length}`);
+  for (const [tier, list] of Object.entries(byTier)) {
+    console.log(`\n--- ${tier} (${list.length}) ---`);
+    for (const s of list.slice(0, 25)) {
+      console.log(`  [${s.source}] ${s.date || '????-??-??'} ${s.title}`);
+      console.log(`     ${s.url}`);
+    }
+  }
+  if (errors.length) {
+    console.log(`\n[corners] ERRORS (${errors.length}):`);
+    for (const e of errors) console.log(`  ! ${e}`);
+  }
+  if (process.argv.includes('--json')) {
+    fs.writeFileSync(path.join(ROOT, '.corners.json'), `${JSON.stringify({ signals, fresh, errors }, null, 2)}\n`, 'utf8');
+    console.log('\n[corners] wrote .corners.json');
+  }
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))) {
+  main().catch(e => {
+    console.error(e);
+    process.exit(1);
+  });
+}

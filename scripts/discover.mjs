@@ -2,15 +2,21 @@
 /**
  * discover.mjs — experimental AI agent discovery for DeepSeek official updates
  *
- * - Detects diff vs data/state.json (websiteNews, changelog, huggingface)
+ * - Collects live signals from 12 independent corners via scripts/corners.mjs
+ *   (blog, changelog, GitHub releases/tags/repos, HF, npm, arXiv, HN, Reddit,
+ *   Google News, PyPI, OpenRouter) — all key-free
+ * - Diffs them against data/discover-seen.json (written only by this script, so
+ *   track.mjs cannot mask new signals the way data/state.json used to)
  * - Fetches live free models from https://opencode.ai/zen/v1/models
  * - Tries each free model via `opencode run --model opencode/<id>` with fallback
  * - Always succeeds: if opencode unavailable or all models fail, falls back to deterministic template
  * - Writes insights.md (AI-generated draft, needs human review via PR)
  *
- * Usage: node scripts/discover.mjs  (or via GitHub Action)
+ * Usage: node scripts/discover.mjs [--force] [--dry-run]
+ *   --force   run even when no fresh signals (same as DISCOVER_FORCE=1)
+ *   --dry-run stop after gate + prompt, do not invoke an LLM or write files
  * Requires: OPENCODE_API_KEY (optional, for Zen free models) / GITHUB_TOKEN for rate limits
- * Output: insights.md at repo root
+ * Output: insights.md + data/discover-seen.json at repo root
  */
 
 import fs from 'node:fs';
@@ -18,6 +24,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { setTimeout as sleep } from 'node:timers/promises';
+import { collectSignals, loadSeen, saveSeen } from './corners.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -25,8 +32,6 @@ const STATE_FILE = path.join(ROOT, 'data', 'state.json');
 const INSIGHTS_FILE = path.join(ROOT, 'insights.md');
 const FEED_FILE = path.join(ROOT, 'FEED.md');
 const ZEN_MODELS_URL = 'https://opencode.ai/zen/v1/models';
-const WEBSITE_NEWS_URL = 'https://www.deepseek.com/en/news/';
-const API_DOCS_UPDATES = 'https://api-docs.deepseek.com/updates';
 
 // Fallback static free models if Zen endpoint fails (keep in sync with docs)
 const STATIC_FREE_FALLBACK = [
@@ -57,15 +62,6 @@ async function fetchText(url, opts = {}) {
 
 function loadState() {
   try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch { return {}; }
-}
-
-function extractWebsiteSlugs(html) {
-  const slugs = new Set();
-  const re = /href="\/en\/news\/([^"/]+)\/"/g;
-  let m; while ((m = re.exec(html)) !== null) slugs.add(m[1].trim());
-  const re2 = /href="\/news\/([^"/]+)\/"/g;
-  while ((m = re2.exec(html)) !== null) slugs.add(m[1].trim());
-  return [...slugs];
 }
 
 async function fetchLiveFreeModels() {
@@ -178,8 +174,14 @@ async function generateWithTraversal(prompt) {
   throw lastErr || new Error('all free models failed');
 }
 
-function buildPrompt({ newSlugs, state, feedPreview }) {
+function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = [] }) {
   const now = new Date().toISOString();
+  const byTier = fresh.reduce((acc, s) => {
+    (acc[s.tier] ||= []).push(s);
+    return acc;
+  }, {});
+  const fmtList = (list, cap = 22) =>
+    list.slice(0, cap).map(s => `  - [${s.source}] ${s.date || 'date-unknown'} — ${s.title}${s.detail ? ` — ${s.detail}` : ''}\n    ${s.url}`).join('\n');
   return [
     `You are the DeepSeek Deep Discovery Agent (see .opencode/agent/discover.md). You are *autonomous, thorough, multi-source, max reasoning (xhigh thinking)*. This is a 25-minute deep dive — NOT a 2-minute quick check. Use your time fully. Exhaust tools before writing.`,
     ``,
@@ -189,35 +191,55 @@ function buildPrompt({ newSlugs, state, feedPreview }) {
     `- changelog/news/huggingface (last 5): ${JSON.stringify({ changelog: (state.changelog||[]).slice(-5), news: (state.news||[]).slice(-5), huggingface: (state.huggingface||[]).slice(-5) }).slice(0, 800)}`,
     `- releases (last 5): ${JSON.stringify((state.releases||[]).slice(-5)).slice(0, 600)}`,
     `- Precomputed diff on https://www.deepseek.com/en/news/ vs state: ${newSlugs.length ? newSlugs.join(', ') : '(none — but do NOT trust this alone, you must re-verify live with tools)'}`,
+    ``,
+    `## PRECOMPUTED LIVE SIGNALS — ${fresh.length} fresh across ${Object.keys(byTier).length} tiers`,
+    `These were collected just now by scripts/corners.mjs from ${fresh.length ? 'independent live endpoints' : 'live endpoints'} and diffed against data/discover-seen.json (which only this script writes). Treat them as a worklist of LEADS: verify each with a fetch before calling it real, dedup against the repo files, and drop anything already tracked. Do NOT just restate this list — it is your starting point, not your output.`,
+    ...(fresh.length ? [
+      ``,
+      `### OFFICIAL first-party (${(byTier.official || []).length}) — verify date+title, these are the ones that count`,
+      fmtList(byTier.official || []),
+      ``,
+      `### SECONDARY authoritative (${(byTier.secondary || []).length}) — corroboration, not primary`,
+      fmtList(byTier.secondary || []),
+      ``,
+      `### COMMUNITY unverified (${(byTier.community || []).length}) — early signals only, label unverified`,
+      fmtList(byTier.community || []),
+    ] : [`- (none fresh this run — that is why you were triggered; go find what the precomputed corners missed, use websearch/browser aggressively)`]),
+    ...(cornerErrors.length ? [
+      ``,
+      `### CORNERS THAT FAILED THIS RUN — probe these yourself with tools and say so`,
+      ...cornerErrors.map(e => `  - ${e}`),
+    ] : []),
+    ``,
     `- FEED preview (newest 22):`,
     ...feedPreview.split('\n').slice(0, 22).map(l => `  ${l}`),
     ``,
-    `## Your toolbox — use BOTH jina + remote browser intelligently, prefer search-then-fetch`,
-    `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, api-changelog.md, etc.) — start here to avoid duplicate work`,
+    `## Your toolbox — prioritise the key-free endpoints that actually work, then escalate to browser/websearch`,
+    `NOTE: s.jina.ai now returns 401 (key-gated) and Reddit JSON often 403/429. Do not burn your budget retrying them — go straight to the alternatives below, and only fall back to jina/websearch if listed ones fail.`,
+    `- read / grep / glob : inspect repo (FEED.md, state.json, website-news.md, api-changelog.md, releases.md, npm.md, huggingface.md, discover-seen.json) — start here to dedup`,
+    `- bash + curl : the workhorse. All of these are key-free and verified working — use at least 8:`,
+    `  • Blog + API: \`curl -s https://www.deepseek.com/en/news/\` | \`curl -s https://api-docs.deepseek.com/updates\``,
+    `  • GitHub releases (the harness releases come from HERE, not the blog — check it every run): \`curl -s "https://api.github.com/repos/deepseek-ai/deepseek-harness/releases?per_page=5" | jq '.[] | {tag_name, published_at, body}'\``,
+    `  • GitHub org activity (catches brand-new repos + new releases the 28-repo allowlist misses): \`curl -s "https://api.github.com/orgs/deepseek-ai/repos?per_page=100&sort=pushed" | jq -r '.[] | select(.pushed_at > "'"$(date -u -d '14 days ago' +%Y-%m-%d)"'") | "\(.full_name) \(.pushed_at) ★\(.stargazers_count)"'\``,
+    `  • GitHub discussions (where devs announce things first): \`curl -s "https://api.github.com/repos/deepseek-ai/deepseek-harness/discussions?per_page=5" | jq\``,
+    `  • HuggingFace: \`curl -s "https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified&limit=15" | jq -r '.[] | "\(.lastModified[0:10]) \(.modelId)"'\` + \`curl -s "https://huggingface.co/api/daily_papers?limit=10" | jq -r '.[].title'\``,
+    `  • npm: \`curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq '.["dist-tags"]'\` + \`curl -s "https://registry.npmjs.org/-/v1/search?text=%40deepseek-ai&size=20" | jq -r '.objects[].package | "\(.date[0:10]) \(.name)@\(.version)"'\``,
+    `  • arXiv (rate-limited — sleep 3s between calls, retry on 429): \`curl -s "https://export.arxiv.org/api/query?search_query=ti:%22DeepSeek%22&sortBy=submittedDate&max_results=10"\``,
+    `  • HackerNews: \`curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=15" | jq -r '.hits[] | "\(.created_at[0:10]) \(.points)p \(.title)"'\``,
+    `  • Google News RSS (broad media sweep, key-free): \`curl -s "https://news.google.com/rss/search?q=deepseek&hl=en-US&gl=US&ceid=US:en" | grep -o '<title>[^<]*' | head -30\``,
+    `  • OpenRouter (catches new model IDs served by aggregators before DeepSeek blogs): \`curl -s https://openrouter.ai/api/v1/models | jq -r '.data[] | select(.id | test("deepseek";"i")) | .id'\``,
+    `  • PyPI: \`curl -s https://pypi.org/pypi/deepseek/json | jq '.info.version'\``,
+    `  • Chinese press via websearch: "deepseek 官方 发布" / "深度求索 新模型" — WeChat/Weibo/36kr/机器之心 relays often break first`,
+    `- websearch : use for gaps the endpoints miss (WeChat, Weibo, Discord, Chinese media). 4-6 searches minimum.`,
     `- webfetch : static HTML fetch`,
-    `- websearch : discover URLs before fetching (use extensively: 4-6 searches minimum)`,
-    `- bash : run shell. Free helpers (no key needed) — use at least 4-6 of these, mix jina + browser:`,
-    `  • Jina reader (fast, JS-proof): \`curl -s https://s.jina.ai/http://www.deepseek.com/en/news/\`  |  \`curl -s https://s.jina.ai/https://www.deepseek.com/en/news/<slug>/\`  |  \`curl -s https://r.jina.ai/http://x.com/deepseek_ai\`  |  \`curl -s "https://cc.bingj.com/cache.cgi?d=3&m=https://x.com/deepseek_ai"\``,
-    `  • Remote browser kitesurf (rendered, via wss://kitesurf.cloudflare.app — works on ubuntu-latest, no local Chrome): use MCP chrome-devtools to navigate to \`https://www.deepseek.com/en/news/\` Next.js shell, \`https://x.com/deepseek_ai\` timeline, any JS-heavy page where jina returns shell — **for high-value targets (top 2 slugs, X timeline) use BOTH jina and browser and compare**`,
-    `  • GitHub: \`curl -s "https://api.github.com/orgs/deepseek-ai/repos?per_page=10&sort=updated" | jq -r ".[].full_name"\`  |  \`curl -s "https://api.github.com/repos/deepseek-ai/DeepSeek-V3/releases?per_page=3" | jq\`  |  \`curl -s "https://api.github.com/repos/deepseek-ai/deepseek-harness/releases?per_page=3" | jq\``,
-    `  • HuggingFace: \`curl -s "https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified&limit=10" | jq -r ".[].modelId"\`  |  \`curl -s "https://huggingface.co/api/models?search=deepseek&sort=likes&limit=5" | jq\` — browser to huggingface.co/deepseek-ai for visual trending if needed`,
-    `  • arXiv: \`curl -s "https://export.arxiv.org/api/query?search_query=all:deepseek&sortBy=submittedDate&max_results=5"\`  +  \`websearch "deepseek arxiv"\``,
-    `  • npm: \`curl -s https://registry.npmjs.org/@deepseek-ai/dsh | jq '.["dist-tags"]'\`  +  \`curl -s "https://registry.npmjs.org/-/v1/search?text=@deepseek-ai&size=5" | jq\``,
-    `  • X/Twitter: \`websearch "deepseek_ai site:x.com"\`  →  **BOTH** \`bash curl s.jina.ai/http://x.com/deepseek_ai\` (fast) **and** \`kitesurf browser\` navigate to \`https://x.com/deepseek_ai\` (rendered, scroll)`,
-    `  • Reddit: \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/LocalLLaMA/search.json?q=deepseek&sort=new&t=week&limit=10" | jq\`  +  \`curl -s -A "Mozilla/5.0" "https://www.reddit.com/r/deepseek/search.json?q=&sort=new&t=week&limit=10" | jq\`  +  fallback \`https://s.jina.ai/https://www.reddit.com/r/deepseek/\` or browser`,
-    `  • HN: \`curl -s "https://hn.algolia.com/api/v1/search?query=deepseek&tags=story&hitsPerPage=10" | jq '.hits[] | {title, url}'\``,
-    `  • Tech media: \`websearch "DeepSeek V4 OR V3.2 release news"\` → fetch top 2-3 hits via **jina + browser double-check** for paywalled/dynamic sites`,
+    `- Remote browser (kitesurf MCP, rendered): use for JS-heavy pages — x.com/deepseek_ai timeline, huggingface.co/deepseek-ai trending. Top 2 high-value targets only; compare with a curl result before trusting.`,
     `- edit : write insights.md  |  todowrite / task : plan your 4 phases`,
     ``,
     `## Deep discovery methodology — 4 phases (MANDATORY, use todowrite to track)`,
     `### Phase 1 — Ground truth (30% time, must do first)`,
-    `- Read data/state.json + FEED.md to avoid reporting old news.`,
-    `- Verify official primaries LIVE yourself with BOTH tools — do NOT trust precomputed diff:`,
-    `  1) webfetch OR jina \`https://www.deepseek.com/en/news/\` → extract all slugs, fetch 2-3 newest slug pages for title/date.`,
-    `  2) webfetch \`https://api-docs.deepseek.com/updates\` (date headers) + 1-2 news slugs.`,
-    `  3) GitHub: fetch org repos + DeepSeek-V3/R1/harness releases.`,
-    `  4) HF + npm as above.`,
-    `- Record which official items are *new vs already tracked*.`,
+    `- Work the PRECOMPUTED SIGNALS list above. For each OFFICIAL lead: fetch it live, confirm title + date + that it is real, and grep the repo to check whether it is already tracked.`,
+    `- GitHub harness releases are first-class news — check \`deepseek-ai/deepseek-harness\` releases AND the org repo list every run, even if the blog shows nothing new.`,
+    `- Record which items are *new vs already tracked*.`,
     ``,
     `### Phase 2 — Secondary authoritative (30% time, this is NEW — go beyond blog)`,
     `- arXiv recent DeepSeek papers (export.arxiv API) — any new V4/V3/R1 paper in last 14 days?`,
@@ -269,30 +291,40 @@ function buildPrompt({ newSlugs, state, feedPreview }) {
   ].join('\n');
 }
 
-function buildDeterministicInsights({ newSlugs, state }) {
+function buildDeterministicInsights({ newSlugs, state, fresh = [] }) {
   const now = new Date().toISOString();
   const feed = fs.existsSync(FEED_FILE) ? fs.readFileSync(FEED_FILE, 'utf8').split('\n').slice(0, 25).join('\n') : '(no FEED)';
   const hasNew = newSlugs.length > 0;
+  const official = fresh.filter(s => s.tier === 'official');
+  const other = fresh.filter(s => s.tier !== 'official');
   return `# Insights — DeepSeek Official Discovery — ${now.slice(0, 10)}
 
 > Auto-generated by discover.mjs (deterministic fallback, no LLM). This is a draft for PR review — opencode free models unavailable or no OPENCODE_API_KEY.
 
 ## Summary
-${hasNew ? `Detected ${newSlugs.length} new deepseek.com blog slug(s) vs data/state.json: ${newSlugs.join(', ')}. Needs verification via webfetch.` : `No new deepseek.com diff detected vs state. The tracker appears up-to-date as of ${now} UTC.`}
+${hasNew || official.length ? `Collected ${fresh.length} fresh live signal(s) across corners via scripts/corners.mjs, ${official.length} of them first-party. Needs AI summarization/verification.` : `No new deepseek.com diff detected vs state. The tracker appears up-to-date as of ${now} UTC.`}
 
 ## New findings
-${hasNew ? newSlugs.map(s => `- **${s}** — https://www.deepseek.com/en/news/${s}/ — [Source](https://www.deepseek.com/en/news/${s}/) — *pending AI summarization, run opencode with free model to fill*`).join('\n') : `- No new slugs. Last known websiteNews: ${(state.websiteNews||[]).slice(-7).join(', ') || '(empty)'}`}
+${official.length
+    ? official.slice(0, 30).map(s => `- **${s.title}** — ${s.date || 'date-unknown'} — [${s.source}](${s.url})${s.detail ? ` — ${s.detail}` : ''}`).join('\n')
+    : `- No new official items. Last known websiteNews: ${(state.websiteNews||[]).slice(-7).join(', ') || '(empty)'}`}
+
+## Secondary / community signals (unverified)
+${other.length
+    ? other.slice(0, 25).map(s => `- ${s.title} — ${s.date || 'date-unknown'} — [${s.source}](${s.url})`).join('\n')
+    : `- None captured.`}
 
 ## Cross-check
+- Signals diffed against data/discover-seen.json (agent-owned) — see scripts/corners.mjs.
 - api-changelog.md / NEWS.md / website-news.md / huggingface.md compared. See FEED preview below.
 
 ## Risk / Confidence
-- Confidence: ${hasNew ? 'medium — new slugs need manual webfetch verification' : 'high — no diff'}
+- Confidence: ${official.length ? 'medium — deterministic collection, but no LLM verification pass' : 'high — no diff'}
 - Risk: low — fallback template, no hallucination.
 
 ## Next steps
-- If new slugs verified, run \`node scripts/track.mjs\` (or wait for next 6h cron) to ingest.
-- Reviewer: please webfetch each [Source] and confirm title/date before merging.
+- If new items verified, run \`node scripts/track.mjs\` (or wait for next 6h cron) to ingest.
+- Reviewer: please fetch each [Source] and confirm title/date before merging.
 
 ## FEED preview
 \`\`\`
@@ -307,37 +339,53 @@ ${feed}
 async function main() {
   console.log(`[discover] Deep discovery starting at ${new Date().toISOString()}`);
   const state = loadState();
-  let newSlugs = [];
   let feedPreview = '';
   try { feedPreview = fs.readFileSync(FEED_FILE, 'utf8').slice(0, 2500); } catch {}
-  try {
-    const html = await fetchText(WEBSITE_NEWS_URL, { timeoutMs: 15000 });
-    const liveSlugs = extractWebsiteSlugs(html);
-    const known = new Set(state.websiteNews || []);
-    newSlugs = liveSlugs.filter(s => !known.has(s));
-    console.log(`[discover] Live slugs: ${liveSlugs.slice(0, 12).join(', ')}`);
-    console.log(`[discover] Known: ${(state.websiteNews||[]).slice(-8).join(', ')}`);
-    console.log(`[discover] New diff: ${newSlugs.length ? newSlugs.join(', ') : '(none)'}`);
-  } catch (e) {
-    console.warn(`[discover] Website fetch failed: ${e.message}, treating as no diff`);
-  }
 
-  // Noise gate: with no new slugs the run would only reproduce the
-  // "no updates" template (timestamps differ → empty PR pile-up that
-  // auto-review has to close). Skip early; --force / DISCOVER_FORCE=1
-  // (used by workflow_dispatch) still runs the full 4-phase dive.
+  // Multi-corner live probe. Unlike the old blog-slug-only diff (which track.mjs
+  // already consumed every 6h, so the gate was effectively always empty), this
+  // covers blog + changelog + GitHub releases/tags/repos + HF + npm + arXiv + HN
+  // + Reddit + Google News + PyPI + OpenRouter.
+  let corners = { signals: [], errors: [] };
+  try {
+    corners = await collectSignals();
+  } catch (e) {
+    console.warn(`[discover] Corner collection failed: ${e.message}`);
+  }
+  const seen = loadSeen();
+  const fresh = corners.signals.filter(s => !seen.ids.has(s.id));
+  const newSlugs = fresh.filter(s => s.id.startsWith('blog:')).map(s => s.id.slice(5));
+  console.log(`[discover] Corners: ${corners.signals.length} signals, ${corners.errors.length} errors, ${fresh.length} fresh vs ${seen.ids.size} seen`);
+  if (corners.errors.length) console.warn(`[discover] Corner errors: ${corners.errors.join(' | ')}`);
+
+  // Fresh-signal gate. Previously this compared live blog slugs against
+  // data/state.json — but track.mjs writes that same file, so non-blog news
+  // (harness releases, npm, HF) could never trip it and the agent almost never
+  // ran. Now we diff against our own data/discover-seen.json, which only this
+  // script writes, so anything genuinely unreported triggers a run.
   const force = process.argv.includes('--force') || process.env.DISCOVER_FORCE === 'true';
-  if (newSlugs.length === 0 && !force) {
-    console.log('[discover] No new slugs vs data/state.json — skipping run (no PR noise).');
-    console.log(`[discover] Known websiteNews: ${(state.websiteNews || []).slice(-5).join(', ')}`);
+  const CORNER_FAILURE_MARGIN = 2;
+  const cornerDegraded = corners.errors.length > CORNER_FAILURE_MARGIN;
+  if (fresh.length === 0 && !force && !cornerDegraded) {
+    console.log('[discover] No fresh signals vs data/discover-seen.json — skipping run (no PR noise).');
     return;
   }
+  if (fresh.length === 0 && cornerDegraded) {
+    console.warn('[discover] No fresh signals but corners are degraded — running anyway so gaps get reported.');
+  }
 
-  const prompt = buildPrompt({ newSlugs, state, feedPreview });
+  const prompt = buildPrompt({ newSlugs, state, feedPreview, fresh, cornerErrors: corners.errors });
 
   // Write prompt to temp file for debugging (optional)
   fs.writeFileSync(path.join(ROOT, '.discover-prompt.md'), prompt, 'utf8');
   console.log(`[discover] Prompt written to .discover-prompt.md (${prompt.length} chars)`);
+
+  // --dry-run: stop after gate + prompt so the pipeline can be tested without
+  // invoking an LLM. Never writes insights.md or the seen baseline.
+  if (process.argv.includes('--dry-run')) {
+    console.log('[discover] --dry-run: skipping agent traversal and seen-baseline write.');
+    return;
+  }
 
   // Always proceed to agentic run — even with no diff, agent will check community signals (X/Reddit/HN) via tools
   console.log(`[discover] Env check — OPENCODE_API_KEY:${process.env.OPENCODE_API_KEY ? 'yes('+process.env.OPENCODE_API_KEY.length+' chars)' : 'no'} ANTHROPIC:${process.env.ANTHROPIC_API_KEY ? 'yes' : 'no'} OPENAI:${process.env.OPENAI_API_KEY ? 'yes' : 'no'} — proceeding to agentic run regardless of diff`);
@@ -352,18 +400,27 @@ async function main() {
     // Success — insights.md already written by agent
   } catch (e) {
     console.warn(`[discover] All opencode attempts failed (${e.message}), falling back to deterministic template`);
-    const fallback = buildDeterministicInsights({ newSlugs, state });
+    const fallback = buildDeterministicInsights({ newSlugs, state, fresh });
     fs.writeFileSync(INSIGHTS_FILE, fallback, 'utf8');
     console.log(`[discover] Fallback insights.md written (${fallback.length} chars)`);
   }
 
   // Ensure insights.md exists and has required structure
   if (!fs.existsSync(INSIGHTS_FILE)) {
-    const fallback = buildDeterministicInsights({ newSlugs, state });
+    const fallback = buildDeterministicInsights({ newSlugs, state, fresh });
     fs.writeFileSync(INSIGHTS_FILE, fallback, 'utf8');
   }
   const final = fs.readFileSync(INSIGHTS_FILE, 'utf8');
   console.log(`[discover] Done. insights.md preview:\n${final.slice(0, 800)}\n...`);
+
+  // Mark these signals as reported so tomorrow's gate does not re-fire on them.
+  // Only fold in signals we actually surfaced; on a corner failure we still
+  // record the rest so one dead endpoint cannot cause a permanent stall.
+  saveSeen([...seen.ids, ...fresh.map(s => s.id)], {
+    lastRunAt: new Date().toISOString(),
+    lastFreshCount: fresh.length,
+    cornerErrors: corners.errors,
+  });
 
   // Exit code 0 always (PR will be created only if file changed)
 }
