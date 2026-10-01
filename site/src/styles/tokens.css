@@ -1,54 +1,59 @@
 /*
- * tokens.css — the midnight transit enamel mural.
+ * tokens.css — DeepSeek navy, white type, one brand blue.
  *
- * Palette follows the wayfinding/signage world: a dark enamel wall panel lit at
- * night, porcelain station ticks, and six line inks readable at hairline weight.
- * Every colour is oklch so perceived lightness steps stay even across hues, which
- * matters when six coloured lines sit side by side and one must clearly lead.
+ * Every value here is DeepSeek's own published token, read from their CSS
+ * custom properties rather than eyeballed from a screenshot:
+ *   --ds-color-brand               #4d6bfe
+ *   --ds-color-brand-deep          #3a65c2
+ *   --ds-color-brand-light         #73a3d2
+ *   --ds-color-text-primary        #1e232c
+ *   --ds-color-text-primary-bluish #121c31 / #152443
+ *   --ds-btn-primary-bg            #fff  (text #0a0a0a)
  *
- * The line inks separate in lightness as well as hue so they remain
- * distinguishable with a red-green deficiency, where a scarlet-vs-verdigris pair
- * would otherwise collapse into one another.
+ * The ground is #121c31, DeepSeek's own dark "bluish primary" — not a neutral
+ * near-black. The accent is #4d6bfe and it is used ONCE: sources are told apart
+ * by a numbered badge rather than by hue, so six competing colours never dilute
+ * the one colour the brand actually owns.
  */
 
 :root {
   color-scheme: dark;
 
-  /* Ground: enamel panel, not glass. Blue-shifted, never pure black — a black
-     ground with bright lines reads as neon, which is the wrong world. */
-  --enamel: oklch(23% 0.055 258);
-  --enamel-deep: oklch(19% 0.05 258);
-  --enamel-raised: oklch(27.5% 0.05 258);
+  /* Ground: DeepSeek's own dark navy. Three planes, all in the same hue so the
+     page reads as one material rather than a stack of greys. */
+  --navy: #121c31;
+  --navy-raised: #152443;
+  --navy-deep: #0d1526;
+  --navy-sunk: #182340;
 
-  --porcelain: oklch(97.8% 0 0);
-  --text: oklch(93% 0.032 250);
-  --text-muted: oklch(77% 0.03 252);
-  /* Both secondary inks carry real chroma at the ground's hue rather than
-     reading as neutral grey: on a coloured panel, grey text looks washed out.
-     --text-faint was also lifted 58% -> 64% because dates measured 3.96:1. */
-  --text-faint: oklch(67% 0.032 252);
+  /* Type: white, stepping down rather than off to grey. Each step stays tinted
+     at the ground's hue — neutral grey text on a navy panel looks washed out. */
+  --white: #ffffff;
+  --text: oklch(94% 0.012 255);
+  --text-muted: oklch(78% 0.026 255);
+  --text-faint: oklch(68% 0.03 255);
 
-  --rule: oklch(97.8% 0 0 / 0.11);
-  --rule-strong: oklch(97.8% 0 0 / 0.2);
-  --edge: oklch(97.8% 0 0 / 0.34);
+  /* Hairlines. The stud grid is #73a3d2 at low alpha. */
+  --rule: oklch(100% 0 0 / 0.12);
+  --rule-strong: oklch(100% 0 0 / 0.22);
+  --edge: oklch(100% 0 0 / 0.38);
+  --stud: oklch(75% 0.06 250 / 0.16);
 
-  /* Six line inks. */
-  --line-blog: oklch(74% 0.14 210);
-  --line-api: oklch(62% 0.17 255);
-  --line-github: oklch(76% 0.15 78);
-  --line-hf: oklch(68% 0.12 172);
-  --line-npm: oklch(62% 0.16 305);
-  --line-news: oklch(70% 0.11 40);
+  /* Brand. Used once per component, never per line. */
+  --brand: #4d6bfe;
+  --brand-deep: #3a65c2;
+  --brand-light: #73a3d2;
+  --brand-wash: oklch(60% 0.17 272 / 0.16);
 
-  /* Unverified material, deliberately outside the line palette so a signal can
-     never be mistaken for a station: warm, desaturated, lower contrast. */
-  --signal: oklch(62% 0.045 60);
-  --signal-line: oklch(40% 0.03 60);
+  /* Unverified material: deliberately outside the navy/blue system — a warm
+     neutral — so a signal can never be mistaken for a numbered step. */
+  --signal: oklch(72% 0.045 75);
+  --signal-line: oklch(60% 0.04 75 / 0.5);
 
-  --focus-ring: oklch(80% 0.13 210);
+  --focus-ring: var(--brand-light);
 
-  --radius-sm: 3px;
-  --radius-md: 8px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
 
   --measure: 68ch;
   --gutter: clamp(18px, 4vw, 40px);
@@ -63,12 +68,13 @@
 
 /*
  * Browser surfaces carry the design too. These are the parts nobody draws:
- * selection, scrollbars, focus rings, and the numerals in tables. Left at browser
- * defaults they are the cheapest way to look assembled rather than built.
+ * selection, scrollbars, focus rings, and the numerals in a version column.
+ * Left at defaults they are the cheapest way to look assembled rather than
+ * built.
  */
 ::selection {
-  background: oklch(74% 0.14 210 / 0.3);
-  color: var(--porcelain);
+  background: color-mix(in oklch, var(--brand) 40%, transparent);
+  color: var(--white);
 }
 
 * {
@@ -76,15 +82,15 @@
 }
 
 html {
-  scrollbar-color: oklch(40% 0.04 258) var(--enamel-deep);
-  background: var(--enamel);
-  /* Anchor jumps land under the sticky masthead instead of behind it. */
+  scrollbar-color: var(--brand-deep) var(--navy-deep);
+  background: var(--navy);
+  /* Anchor jumps land below the sticky masthead instead of behind it. */
   scroll-padding-top: 76px;
 }
 
 body {
   margin: 0;
-  background: var(--enamel);
+  background: var(--navy);
   color: var(--text);
   font-family: var(--font-text);
   font-size: 1rem;
@@ -93,8 +99,8 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Dates and counts are compared column-wise, so they must be tabular or the
-   whole timetable jitters as the feed updates. */
+/* A version column is compared down the page, so its numerals must be tabular
+   or the whole assembly jitters on every six-hourly rebuild. */
 time,
 .mono,
 .num {
@@ -104,7 +110,7 @@ time,
 }
 
 a {
-  color: var(--porcelain);
+  color: var(--white);
   text-decoration: none;
   text-underline-offset: 0.22em;
   text-decoration-thickness: 1px;
@@ -113,7 +119,7 @@ a {
 }
 
 a:hover {
-  text-decoration-color: var(--line-blog);
+  text-decoration-color: var(--brand);
 }
 
 :focus-visible {
@@ -126,8 +132,8 @@ a:hover {
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--porcelain);
-  color: var(--ink, oklch(13% 0 0));
+  background: var(--white);
+  color: var(--navy);
   padding: 10px 16px;
   z-index: 100;
   font-family: var(--font);

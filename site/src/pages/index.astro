@@ -27,9 +27,10 @@ const stamp = parseFeedStamp(feed);
 const builtAt = new Date().toISOString();
 
 const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
+const lineNo = Object.fromEntries(LINES.map((l, i) => [l.id, i + 1]));
 const dated = stops.filter(s => s.date !== 'n/a');
 const undated = stops.filter(s => s.date === 'n/a');
-const interchanges = dated.filter(s => s.interchange);
+const corroborated = dated.filter(s => s.lines.length > 1);
 const latest = dated[0] || stops[0];
 
 const REPO = 'https://github.com/awesome-deepseekharness/deepseek-official-tracker';
@@ -42,6 +43,22 @@ const d = iso => {
   });
 };
 const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOString().slice(0, 10) : undefined);
+
+// The version on its own line beside the date, so the column is readable
+// without parsing it out of the step title. Empty when a release has no
+// version-shaped name, which is most blog posts.
+const shortVersion = name => {
+  const m = name.match(/\bv\d[\w.+-]*/);
+  return m ? m[0] : '';
+};
+
+// The version has its own ruled column, so the step title drops it rather than
+// printing it twice. Blog posts without a version are returned unchanged.
+const stepLabel = name => {
+  const v = shortVersion(name);
+  if (!v) return name;
+  return name.replace(v, '').replace(/[\s·\-—:]+$/, '').trim() || name;
+};
 ---
 
 <!doctype html>
@@ -49,7 +66,7 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DeepSeek Official Tracker — every official release, on one map</title>
+<title>DeepSeek Official Tracker — every official release, assembled in order</title>
 <meta name="description" content="Six official DeepSeek sources as six lines. See what shipped, which sources corroborated it, and open the source. Zero LLM in the tracked feed."/>
 <meta name="keywords" content="deepseek, deepseek api, deepseek v4.1, deepseek v4, deepseek r1, deepseek harness, deepseek changelog, huggingface, dsh, deepseek official"/>
 <link rel="canonical" href="https://awesome-deepseekharness.github.io/deepseek-official-tracker/"/>
@@ -75,7 +92,7 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
       <span>DeepSeek Official Tracker</span>
     </div>
     <nav class="masthead-nav" aria-label="Primary">
-      <a href="#diagram">Diagram</a>
+      <a href="#diagram">Assembly</a>
       <a href="#signals">Early signals</a>
       <a href="#sources">Sources</a>
       <a href={REPO}>GitHub</a>
@@ -89,24 +106,25 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
 
 <main id="main">
 
-  <!-- The diagram is the thesis, so it is not parked below a hero block. The
-       claim heads the diagram's own column, the featured station and route
+  <!-- The assembly is the thesis, so it is not parked below a hero block. The
+       claim heads the step list's own column, the featured release and source
        roster sit beside it and follow the reader down the page, and the newest
-       stops are already on screen at 1440x900. -->
+       steps are already on screen at 1440x900. -->
   <div class="lede">
     <p class="lede-claim">
       DeepSeek ships to <strong>six</strong> official channels and announces
-      them one at a time. This is all of them, on one map.
+      them one at a time. This is every official release, assembled in order.
     </p>
 
     <div class="col-main">
       <section id="diagram" class="diagram-section">
         <div class="section-head">
-          <h2>Every official stop</h2>
+          <h2>The assembly</h2>
           <p class="section-sub">
-            Newest at the top. A dot is a stop on one source. A ring is an
-            interchange — one release that showed up on several sources at once.
-            {interchanges.length > 0 && <> <strong>{interchanges.length}</strong> interchanges here.</>}
+            Newest step first. Each release is assembled from the numbered
+            sources it appeared on — a step with more than one piece was
+            corroborated across channels before it was announced.
+            {corroborated.length > 0 && <> <strong>{corroborated.length}</strong> corroborated steps.</>}
           </p>
         </div>
 
@@ -114,23 +132,22 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
           {dated.length === 0 ? (
             <p class="empty">No dated releases captured yet. Run <code>node scripts/track.mjs</code>.</p>
           ) : (
-            dated.map(s => (
-              <article class={`stop ${s.interchange ? 'is-interchange' : ''}`}>
-                <div class="stop-rail" aria-hidden="true">
-                  {s.lines.map(l => <i class="stop-tick" style={`--c:${lineById[l]?.color}`}></i>)}
+            dated.map((s, i) => (
+              <article class={`stop ${s.lines.length > 1 ? 'is-corroborated' : ''}`}>
+                <span class="stop-num" aria-label={`Step ${i + 1}`}>{String(i + 1).padStart(2, '0')}</span>
+                <div class="stop-col">
+                  <time class="stop-date mono" datetime={rfc(s.date)}>{d(s.date)}</time>
+                  {shortVersion(s.name) && <span class="stop-ver mono">{shortVersion(s.name)}</span>}
                 </div>
-                <div class="stop-body">
-                  <div class="stop-meta">
-                    <time class="mono" datetime={rfc(s.date)}>{d(s.date)}</time>
-                    {s.interchange && <span class="stop-badge">interchange</span>}
-                  </div>
-                  <h3 class="stop-name" title={s.verbatim}>{s.name}</h3>
+                <div class="stop-col">
+                  <h3 class="stop-name" title={s.verbatim}>{stepLabel(s.name)}</h3>
                   {s.summary && <p class="stop-summary">{s.summary}</p>}
-                  <ul class="stop-sources">
+                  <ul class="stop-pieces">
                     {s.sources.map(src => (
-                      <li style={`--c:${lineById[src.line]?.color || 'var(--text-faint)'}`}>
-                        <a href={src.url} target="_blank" rel="noopener" title={src.title}>
-                          <i aria-hidden="true"></i>{lineById[src.line]?.short || src.line}
+                      <li>
+                        <a class="piece" href={src.url} target="_blank" rel="noopener" title={src.title}>
+                          <span class="piece-no">{String(lineNo[src.line] ?? 0).padStart(2, '0')}</span>
+                          {lineById[src.line]?.short || src.line}
                           <span class="ext" aria-hidden="true">↗</span>
                         </a>
                       </li>
@@ -157,34 +174,35 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
 
     <aside class="lede-aside">
       {latest && (
-        <article class="station-card" style={`--c:${lineById[latest.lines[0]]?.color}`}>
-          <div class="station-card-head">
-            {latest.interchange && (
-              <span class="interchange-badge">
-                <i aria-hidden="true"></i> interchange · {latest.lines.length} sources
-              </span>
-            )}
-            <time class="station-card-date mono" datetime={rfc(latest.date)}>{d(latest.date)}</time>
+        <article class="callout">
+          <div class="callout-head">
+            <span class="callout-ref">STEP 01</span>
+            <time class="callout-date mono" datetime={rfc(latest.date)}>{d(latest.date)}</time>
           </div>
-          <h2 class="station-card-title" title={latest.verbatim}>{latest.name}</h2>
-          {latest.summary && <p class="station-card-summary">{latest.summary}</p>}
-          <ul class="station-card-lines">
+          <h2 class="callout-title" title={latest.verbatim}>{latest.name}</h2>
+          {latest.summary && <p class="callout-summary">{latest.summary}</p>}
+          <ul class="callout-pieces">
             {latest.sources.map(s => (
-              <li style={`--c:${lineById[s.line]?.color || 'var(--text-faint)'}`}>
-                <a href={s.url} target="_blank" rel="noopener">
-                  <i aria-hidden="true"></i>{lineById[s.line]?.short || s.line}
-                  <span class="ext" aria-hidden="true">↗</span>
+              <li>
+                <a class="piece" href={s.url} target="_blank" rel="noopener" title={s.title}>
+                  <span class="piece-no">{String(lineNo[s.line] ?? 0).padStart(2, '0')}</span>
+                  {lineById[s.line]?.short || s.line}
                 </a>
               </li>
             ))}
           </ul>
+          {latest.url && (
+            <a class="callout-cta" href={latest.url} target="_blank" rel="noopener">
+              Open source <span class="ext" aria-hidden="true">↗</span>
+            </a>
+          )}
         </article>
       )}
 
       <ul class="route-legend" aria-label="Official sources">
         {LINES.map(l => (
-          <li class="route" style={`--c:${l.color}`}>
-            <i class="route-tick" aria-hidden="true"></i>
+          <li class="route">
+            <span class="route-no">{String(lineNo[l.id]).padStart(2, '0')}</span>
             <a class="route-name" href={l.endpoint} target="_blank" rel="noopener">{l.label}</a>
             <span class="route-count num">{totals[l.id] ?? 0}</span>
           </li>
@@ -201,7 +219,7 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
       <p class="section-sub">
         Community threads, media reports and research notes. These are
         <strong>not</strong> confirmed by an official source — they lead, they do
-        not prove. Anything here becomes a station above the moment DeepSeek
+        not prove. Anything here becomes a numbered step above the moment DeepSeek
         publishes it.
       </p>
     </div>
@@ -267,7 +285,7 @@ const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOStr
 <footer class="site-foot">
   <div class="foot-in">
     <p>
-      {stops.length} stops · {interchanges.length} interchanges · page built{' '}
+      {stops.length} releases · {corroborated.length} corroborated across sources · page built{' '}
       <time class="mono" datetime={builtAt}>{builtAt.slice(0, 16).replace('T', ' ')}Z</time>
     </p>
     <p class="foot-legal">

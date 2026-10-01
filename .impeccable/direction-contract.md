@@ -1,15 +1,56 @@
 # Direction contract
 
-THESIS: A multi-source release tracker is literally a transit map — six official sources are six lines, and one release touching several sources is an interchange station where those lines meet. The category default this refuses: a vertical reverse-chronological list inside stacked cards with emoji headings, where a V4.1-Flash launch and an `npm` patch bump look equally important because both are list rows. We refuse it by making provenance spatial: you read which lines a release touched before you read its title.
+**Supersedes the first contract (seed b19bf514).** Re-rolled at the maintainer's
+request after the colour direction was pinned to DeepSeek's own brand tokens.
+New seed: `ebf5cce5`, scope `direction`, mode `read`.
 
-OWN-WORLD: Midnight-blue enamel mural ground (`oklch(23% .055 258)`) carrying porcelain-white station ticks (`oklch(97.8% 0 0)`) — the DeepSeek-to-HuggingFace line is scarlet (`oklch(58% .19 28)`), API changelog is cobalt (`oklch(62% .17 255)`), GitHub releases amber (`oklch(76% .15 78)`), HuggingFace verdigris (`oklch(68% .12 172)`), npm violet (`oklch(62% .16 305)`), deepseek.com blog is the trunk line in luminous cyan (`oklch(74% .14 210)`). The chosen line burns brightest and every other line dims to a hairline route. Enamel surface is a physical dusk-lit wall panel, not glass. Hairline interchange rings at 1px in porcelain. Type is one condensed grotesk for all station names and route labels, with monospace reserved strictly for dates, versions, and counts — numerals in tables are tabular, never costume. Station dots are 4px porcelain; interchanges are 12px rings.
+Pinned by the maintainer, and it outranks the roll: **deep navy ground, white
+type, DeepSeek blue as the accent.** These come from DeepSeek's own published
+CSS, not approximation — `--ds-color-brand #4d6bfe`, `--ds-color-text-primary
+#1e232c`, `--ds-color-text-primary-bluish #121c31`, `--ds-color-brand-deep
+#3a65c2`, `--ds-color-brand-light #73a3d2`, `--ds-btn-primary-bg #fff`.
 
-STORY: The visitor sees a dark enamel panel with six colored routes and today's stations lit along them. The single most recent official item is presented as a large porcelain station card with its date in mono and its source links as actual line-taps. Scrolling walks time downward — the diagram's vertical axis is a depth-and-time scrub, taken from the deep-dive challenger. Every entry carries a visible `[Source]` target, so verification is always one click. Below the diagram, a visually distinct "early signals" strip carries unverified community and media leads in a flat hairline list, each stamped `unverified`, never shaped like a station, so provenance is readable at a glance.
+THESIS: A release tracker is a set of build instructions, not a feed. Every
+official release is a numbered step; the sources it appeared on are the numbered
+pieces of that step; and a page whose grid does not rule its own columns cannot
+be trusted to report version numbers accurately. The category default this
+refuses — a reverse-chronological list of equally-weighted rows — is what a
+tracker falls back into when it has no opinion about what makes a release
+different from a version bump.
 
-FIRST VIEWPORT: A full-bleed enamel panel occupying the first screen at 1440×900. Left two-thirds: the six-line diagram with its newest stations, the trunk cyan line leading. Right one-third: the single most recent official release as a porcelain station card — its title at display weight, its date in mono, its `[Source]` link as the primary action reading "Open source ↗". Above both, a single-line masthead in the condensed grotesk: "DeepSeek Official Tracker" with the build timestamp in small mono beneath it. No badges, no hero-metric, no icon grid. The primary action sits inside the station card, not floating in a hero.
+OWN-WORLD: DeepSeek's navy `#121c31` as the ground, white as the type, and
+`#4d6bfe` as the single saturated accent — the brand blue carried over from the
+inbox paper, never restated per line. Sources are identified by a **numbered
+badge**, not by hue: six same-family inks would be indistinguishable, and six
+competing hues would dilute the one colour the brand actually owns. The studs
+that rule the grid are `#73a3d2` at 1px. A call-out is a cornered frame with no
+fill and a 1px `#4d6bfe` rule, the way a printed parts list frames a 1:1
+reference. Type is Barlow Condensed for step titles and numbers, Barlow for
+prose, JetBrains Mono for versions and dates — monospace reserved strictly for
+data, never as costume.
 
-FORM: Wayfinding cartography / signage, midnight transit diagram. Position on the ordered list: the roll's winner against the assigned candidate. Seed key `b19bf514`.
+STORY: The visitor reads the newest release as step 01, sees which numbered
+pieces it was assembled from, and opens the source. A release corroborated by
+several sources shows more pieces under its step. Older steps descend, ruled by
+the same stud grid, so version numbers line up column-wise down the page.
+Unverified material sits below the assembly, outside the numbered system
+entirely — a numbered step is a fact DeepSeek published.
 
-RAISES: From the deep-dive challenger, declined but kept — one vertical depth-and-time axis rules every line of copy; the scrub is vertical, not a reversed list. From the paper-folds challenger, declined but kept — the diagram's composition is ruled by the sweep of the route geometry rather than a rigid rectangular card grid.
+FIRST VIEWPORT: Deep navy panel. Left two-thirds: the claim, then step 01 and
+step 02 with their stud grid already ruling beneath. Right third: the featured
+release as a cornered call-out — its version in mono, its title, its numbered
+source badges, and the single primary action opening the source. The masthead
+carries the wordmark and the build timestamp in mono.
 
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+FORM: Brick build-instruction book — numbered exploded steps, a stud grid ruling
+every alignment, 1:1 call-outs in cornered frames, wordless reference arrows.
+Assigned candidate 5 of the re-rolled hand, seed `ebf5cce5`.
+
+RAISES: From the cutting-bench challenger, declined but kept — state is a mark,
+not a hue, and anything set aside stays reachable below the rail rather than
+being deleted. From the modular-identity challenger, declined but kept — the real
+datum snaps into the module instead of floating beside it, so a release and its
+provenance share one alignment.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.

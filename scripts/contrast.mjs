@@ -45,7 +45,21 @@ const cssText = fs.readdirSync(distDir)
   .map(f => fs.readFileSync(path.join(distDir, f), 'utf8'))
   .join('\n');
 
+// oklch or plain hex, so the palette can carry DeepSeek's own literal values
+// (#121c31, #4d6bfe, #73a3d2) alongside the derived steps.
 const token = name => {
+  const hex = cssText.match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{3,8})`));
+  if (hex) {
+    let h = hex[1];
+    if (h.length === 4) h = `#${h[1]}${h[1]}${h[2]}${h[2]}${h[3]}${h[3]}`;
+    const n = parseInt(h.slice(1), 16);
+    // sRGB -> linear, because WCAG is defined on linearised values.
+    const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => {
+      const s = v / 255;
+      return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+    });
+    return ch;
+  }
   const m = cssText.match(new RegExp(`--${name}:\\s*oklch\\(([^)]+)\\)`));
   if (!m) return null;
   // Channels may or may not carry a percent sign ("97.8%" and "0" both occur),
@@ -55,32 +69,40 @@ const token = name => {
   return oklchToSrgb(l / 100, c, h);
 };
 
-const enamel = token('enamel');
-const porcelain = token('porcelain');
-if (!enamel || !porcelain) {
-  console.error('could not read --enamel / --porcelain from the built CSS');
+const ground = token('navy');
+if (!ground) {
+  console.error('could not read --navy from the built CSS');
   process.exit(1);
 }
 
 let fail = 0;
 const check = (label, fg, min) => {
   if (!fg) { fail++; console.log(`FAIL ${label.padEnd(26)} token not found`); return; }
-  const r = ratio(fg, enamel);
+  const r = ratio(fg, ground);
   const ok = r >= min;
   if (!ok) fail++;
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${label.padEnd(26)} ${r.toFixed(2)}:1  (needs ${min})`);
 };
 
-console.log('contrast on the enamel panel, from the built CSS\n');
-check('body text', porcelain, 4.5);
+console.log('contrast on the DeepSeek navy ground, from the built CSS\n');
+check('white type', token('white'), 4.5);
+check('body text', token('text'), 4.5);
 check('muted text', token('text-muted'), 4.5);
-// Dates and counts: small text readers scan, so the 4.5 floor applies. This
-// caught --text-faint at 3.96:1, which is why that token sits at 67%.
+// Dates and versions: small text readers scan down a column, so 4.5 applies.
 check('faint text (dates)', token('text-faint'), 4.5);
+check('brand light (versions)', token('brand-light'), 4.5);
+// The brand blue is a large CTA surface with white text, judged as a non-text
+// UI element at 3:1 — and its white label is checked against it below.
+check('brand (non-text)', token('brand'), 3);
 check('signal tint (badge)', token('signal'), 4.5);
-// Line inks only ever render as dots, rings and rules — never as body copy —
-// so 3:1 for non-text is the right bar.
-check('line inks (non-text)', token('line-blog'), 3);
+
+const white = token('white');
+const brandDeep = token('brand-deep');
+// Judged against the token the CTA actually paints, not the lighter brand step.
+const onBrand = ratio(white, brandDeep);
+const okBrand = onBrand >= 4.5;
+if (!okBrand) fail++;
+console.log(`${okBrand ? 'ok  ' : 'FAIL'} ${'white on CTA (brand-deep)'.padEnd(26)} ${onBrand.toFixed(2)}:1  (needs 4.5)`);
 
 console.log(`\n${fail ? `${fail} failure(s)` : 'all contrast checks pass'}`);
 process.exit(fail ? 1 : 0);

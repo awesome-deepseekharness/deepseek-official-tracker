@@ -1,11 +1,11 @@
-/* page.css — masthead, lede, signals, sources, footer. The diagram's geometry
-   lives in diagram.css because it is the composition, not chrome. */
+/* page.css — masthead, lede, call-out, signals, sources, footer.
+ * The assembly geometry lives in diagram.css because it is the composition. */
 
 .masthead {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in oklch, var(--enamel) 90%, transparent);
+  background: color-mix(in oklch, var(--navy) 92%, transparent);
   backdrop-filter: blur(12px) saturate(140%);
   border-bottom: 1px solid var(--rule);
 }
@@ -23,19 +23,20 @@
 .wordmark {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   font-family: var(--font);
   font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--porcelain);
+  color: var(--white);
 }
 
+/* The mark is the brand blue and nothing else in the chrome is. */
 .wordmark-glyph {
-  width: 18px;
-  height: 18px;
-  color: var(--line-blog);
+  width: 19px;
+  height: 19px;
+  color: var(--brand);
   flex: none;
 }
 
@@ -45,8 +46,7 @@
   font-family: var(--font);
   font-size: 0.84rem;
   font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  letter-spacing: 0.07em;
   justify-self: center;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .masthead-nav a:hover {
-  color: var(--porcelain);
+  color: var(--white);
 }
 
 .masthead-stamp {
@@ -83,10 +83,10 @@
   padding: clamp(28px, 3.8vw, 52px) var(--gutter) var(--section-pad);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 372px);
-  /* The aside spans both rows so it can run the full height of the diagram.
-     Named areas also let the narrow layout reorder to claim → featured station
-     → map, which matters because on a phone the diagram is 80 stops long and
-     would otherwise push the featured release off the bottom of the page. */
+  /* The aside spans both rows so it can run the full height of the assembly.
+     Named areas also let the narrow layout reorder to claim -> featured release
+     -> steps, which matters because the assembly is 80 entries long and would
+     otherwise push the newest release off the bottom of a phone. */
   grid-template-areas:
     'claim aside'
     'main  aside';
@@ -97,6 +97,19 @@
 .lede-claim {
   grid-area: claim;
   margin: 0 0 clamp(26px, 3.4vw, 44px);
+  font-family: var(--font);
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+.lede-claim strong {
+  font-weight: 600;
+  color: var(--brand-light);
 }
 
 .col-main {
@@ -104,38 +117,120 @@
   min-width: 0;
 }
 
-/* The claim heads the diagram's own column, so the map below it reads as the
-   same block of attention rather than a separate hero. */
-.lede-claim {
-  font-family: var(--font);
-  font-size: clamp(1.7rem, 3vw, 2.45rem);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--porcelain);
-  max-width: 20ch;
-  text-wrap: balance;
-}
-
-.lede-claim strong {
-  font-weight: 600;
-  color: var(--line-blog);
-}
-
-/* The station card and route roster follow the reader down the long diagram
-   instead of trailing off into empty enamel. */
 .lede-aside {
   grid-area: aside;
   position: sticky;
   top: 84px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
-/* The six lines, named and counted, so the reader learns the system before
-   reading a single station. Counts sit hard against their labels: stretched to
-   the column width they read as a disconnected data column. */
+/* --- the call-out -------------------------------------------------------- */
+
+/* A printed parts list frames a 1:1 reference in a cornered box with no fill.
+   One brand-coloured edge, so the accent marks the primary object rather than
+   decorating a surface. */
+.callout {
+  position: relative;
+  background: var(--navy-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-md);
+  padding: 20px 22px 22px;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 18px;
+  width: 44px;
+  height: 2px;
+  background: var(--brand);
+}
+
+.callout-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.callout-ref {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: 0.04em;
+}
+
+.callout-date {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.callout-title {
+  font-family: var(--font);
+  font-size: clamp(1.4rem, 2.1vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.005em;
+  color: var(--white);
+  margin: 0 0 8px;
+  text-wrap: balance;
+}
+
+.callout-summary {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+  max-width: var(--measure);
+}
+
+.callout-pieces {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 7px;
+}
+
+/* The one primary action. --brand-deep (#3a65c2) rather than --brand (#4d6bfe):
+   white on #4d6bfe measures 4.33:1, just under AA for 14px semibold text.
+   #3a65c2 is DeepSeek's own deep brand step and clears it at 5.4:1 while
+   staying unmistakably the brand blue. */
+.callout-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  background: var(--brand-deep);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  transition: background 0.12s var(--ease);
+}
+
+.callout-cta:hover {
+  /* Deliberately not --brand (#4d6bfe): white on it is 4.3:1 and the hover state
+     is a real state a reader lands on. Hover darkens toward the deep step
+     instead, which reads as press-down and stays above AA. */
+  background: #2f4fa3;
+  text-decoration: none;
+}
+
+.callout-cta .ext {
+  opacity: 0.85;
+}
+
+/* --- source roster ------------------------------------------------------- */
+
 .route-legend {
   list-style: none;
   margin: 0;
@@ -145,33 +240,42 @@
 
 .route {
   display: grid;
-  grid-template-columns: 16px minmax(0, 1fr) auto;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
   align-items: baseline;
   gap: 10px;
-  padding: 6px 0;
+  padding: 5px 0;
 }
 
-.route-tick {
-  width: 16px;
-  height: 3px;
-  background: var(--c);
+/* The numbered badge, reused everywhere a source is named. */
+.route-no,
+.piece-no,
+.signal-no {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--brand-light);
   border-radius: 2px;
-  transform: translateY(-4px);
+  min-width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: none;
+  transform: translateY(3px);
 }
 
 .route-name {
   font-family: var(--font);
   font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
   color: var(--text-muted);
   border-bottom: 1px solid transparent;
 }
 
 .route-name:hover {
-  color: var(--porcelain);
-  border-bottom-color: var(--c);
+  color: var(--white);
+  border-bottom-color: var(--brand);
 }
 
 .route-count {
@@ -179,143 +283,27 @@
   color: var(--text-faint);
 }
 
-/* --- the featured station ------------------------------------------------ */
-
-.station-card {
-  position: relative;
-  background: var(--enamel-raised);
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--radius-md);
-  padding: 22px 24px 24px;
-  overflow: hidden;
-}
-
-/* A hairline of the trunk line's colour along the top edge: the card is a panel
-   on the wall and its line bleeds into it. 1px, never a thick accent bar. */
-.station-card::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--c), transparent 72%);
-}
-
-.station-card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-/* 0.6875rem, the smallest size that still clears the 11px functional-text floor
-   the detector enforces; the letter-spacing was what read as all-caps. */
-.interchange-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--font);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--porcelain);
-}
-
-.interchange-badge i {
-  width: 12px;
-  height: 12px;
-  border: 1.5px solid var(--porcelain);
-  border-radius: 50%;
-  flex: none;
-}
-
-.station-card-date {
-  font-size: 0.75rem;
-  color: var(--text-faint);
-}
-
-.station-card-title {
-  font-family: var(--font);
-  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
-  font-weight: 500;
-  line-height: 1.16;
-  letter-spacing: -0.006em;
-  color: var(--porcelain);
-  margin: 0 0 10px;
-  text-wrap: balance;
-}
-
-.station-card-summary {
-  font-size: 0.855rem;
-  color: var(--text-muted);
-  margin: 0 0 18px;
-  max-width: var(--measure);
-}
-
-.station-card-lines,
-.stop-sources {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px 16px;
-}
-
-.station-card-lines a,
-.stop-sources a {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--font);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.station-card-lines a:hover,
-.stop-sources a:hover {
-  color: var(--porcelain);
-}
-
-.station-card-lines i,
-.stop-sources i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--c);
-  flex: none;
-}
-
-.ext {
-  font-size: 0.72em;
-  opacity: 0.55;
-}
-
 /* --- sections ------------------------------------------------------------ */
 
 .section-head {
   max-width: 64ch;
-  margin-bottom: clamp(22px, 3vw, 34px);
+  margin-bottom: clamp(20px, 2.8vw, 32px);
 }
 
 .section-head h2 {
   font-family: var(--font);
-  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-size: clamp(1.25rem, 1.9vw, 1.55rem);
   font-weight: 500;
-  color: var(--porcelain);
+  color: var(--white);
   margin: 0 0 8px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
 }
 
 .section-sub {
-  font-size: 0.885rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
   margin: 0;
   max-width: var(--measure);
@@ -327,7 +315,7 @@
 }
 
 .empty {
-  font-size: 0.885rem;
+  font-size: 0.875rem;
   color: var(--text-faint);
   padding: 22px 0;
   margin: 0;
@@ -341,8 +329,8 @@
   padding: 0 var(--gutter) var(--section-pad);
 }
 
-/* The stamp is the point: a reader must be able to tell this material is not a
-   station without reading the prose. */
+/* Signals sit outside the numbered system entirely: a numbered step is a fact
+   DeepSeek published, so an unverified row carries no number. */
 .signals-stamp {
   font-family: var(--mono);
   font-size: 0.6875rem;
@@ -364,7 +352,7 @@
 
 .signal {
   display: grid;
-  grid-template-columns: 170px minmax(0, 1fr);
+  grid-template-columns: 176px minmax(0, 1fr);
   gap: 20px;
   align-items: baseline;
   padding: 13px 0;
@@ -388,14 +376,13 @@
   color: var(--signal);
 }
 
-/* Flat hairline rows, never station cards: the shape carries the provenance. */
 .signal-link {
-  font-size: 0.865rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
 }
 
 .signal-link:hover {
-  color: var(--porcelain);
+  color: var(--white);
 }
 
 .signals-foot {
@@ -407,7 +394,7 @@
 code {
   font-family: var(--mono);
   font-size: 0.9em;
-  background: var(--enamel-deep);
+  background: var(--navy-sunk);
   border: 1px solid var(--rule);
   border-radius: var(--radius-sm);
   padding: 0.1em 0.35em;
@@ -423,7 +410,7 @@ code {
 
 .source-table {
   list-style: none;
-  margin: 0 0 40px;
+  margin: 0 0 38px;
   padding: 0;
   border-top: 1px solid var(--rule);
   max-width: 900px;
@@ -431,10 +418,10 @@ code {
 
 .source-table li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 190px 104px;
-  gap: 20px;
+  grid-template-columns: 34px minmax(0, 1fr) 180px 100px;
+  gap: 16px;
   align-items: baseline;
-  padding: 12px 0;
+  padding: 11px 0;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -443,18 +430,9 @@ code {
   align-items: baseline;
   gap: 9px;
   font-family: var(--font);
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: var(--porcelain);
-}
-
-.source-name i {
-  width: 16px;
-  height: 3px;
-  background: var(--c);
-  border-radius: 2px;
-  transform: translateY(-4px);
-  flex: none;
+  color: var(--white);
 }
 
 .source-file,
@@ -468,7 +446,7 @@ code {
 }
 
 .consume {
-  background: var(--enamel-deep);
+  background: var(--navy-deep);
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
   padding: 22px 24px;
@@ -479,7 +457,7 @@ code {
   font-family: var(--font);
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin: 0 0 14px;
@@ -495,13 +473,13 @@ code {
   background: transparent;
   border: 0;
   padding: 0;
-  font-size: 0.76rem;
-  color: var(--line-hf);
+  font-size: 0.78rem;
+  color: var(--brand-light);
   white-space: pre;
 }
 
 .consume p {
-  font-size: 0.79rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   margin: 14px 0 0;
 }
@@ -510,7 +488,7 @@ code {
 
 .site-foot {
   border-top: 1px solid var(--rule);
-  background: var(--enamel-deep);
+  background: var(--navy-deep);
 }
 
 .foot-in {
@@ -538,8 +516,6 @@ code {
 @media (max-width: 1040px) {
   .lede {
     grid-template-columns: minmax(0, 1fr);
-    /* Featured release and route roster move above the map, so the thing the
-       page is about is on screen before an 80-station list starts. */
     grid-template-areas:
       'claim'
       'aside'
@@ -551,7 +527,6 @@ code {
     max-width: 24ch;
   }
 
-  /* Sticky is meaningless once the aside is no longer a narrow rail. */
   .lede-aside {
     position: static;
     max-width: 560px;
@@ -565,8 +540,6 @@ code {
     padding: 11px var(--gutter);
   }
 
-  /* The nav collapses to the top of the page instead of wrapping into the
-     wordmark's row, where four items would push the stamp off-screen. */
   .masthead-nav {
     justify-self: start;
     gap: 16px;
@@ -576,7 +549,6 @@ code {
 
   .masthead-stamp {
     text-align: left;
-    font-size: 0.75rem;
   }
 
   .signal {
@@ -585,11 +557,11 @@ code {
   }
 
   .source-table li {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
     row-gap: 4px;
   }
 
   .source-file {
-    grid-column: 1 / -1;
+    grid-column: 2 / -1;
   }
 }
