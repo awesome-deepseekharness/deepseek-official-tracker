@@ -600,6 +600,11 @@ code {
 .consume pre {
   margin: 0 0 8px;
   overflow-x: auto;
+  /* Without an explicit min-width the pre's min-content floor is the full width
+     of the curl command inside it, and it drags the whole page sideways on a
+     phone. The command is meant to scroll in place, not to resize the document. */
+  min-width: 0;
+  max-width: 100%;
 }
 
 .consume pre code {

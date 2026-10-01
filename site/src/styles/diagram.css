@@ -118,6 +118,25 @@
   margin-top: 3px;
 }
 
+/* Every string on this page arrives from a third party: a GitHub release body, a
+   Chinese media headline, a URL in a changelog excerpt. Those routinely contain
+   tokens longer than any column — a model id, a package name, a bare URL — and
+   a single unbreakable token is enough to push the whole document sideways. On
+   a phone the table column is ~224px, so this is not an edge case.
+   `anywhere` rather than `break-word` because break-word still lets the token
+   set its own min-content width, which is the thing grid and flex sizing reads. */
+.stop-name,
+.stop-summary,
+.stop-pieces,
+.callout-title,
+.callout-summary,
+.signal-link,
+.section-sub,
+.lede-claim,
+.cadence-caption {
+  overflow-wrap: anywhere;
+}
+
 .stop-name {
   font-family: var(--font);
   font-size: 1.18rem;
@@ -250,10 +269,21 @@
 
 @media (max-width: 900px) {
   /* Two columns of labels need ~200px; below that the magnitude moves inline
-     under the date and its rule is dropped, leaving a single date column. */
+     under the date and its rule is dropped, leaving a single date column.
+
+     .stop-col must be placed in column 2 explicitly. Auto-placement does not do
+     it: .stop-num takes column 1 row 1 and .mag is pinned to column 2 row 1, so
+     the third item falls into column 1 of row 2 — cramming every title,
+     summary and source badge into the 116px date column. That is what made the
+     mobile capture show text clipped mid-word and the roster counts vanish. */
   .stop {
     grid-template-columns: var(--col-date) minmax(0, 1fr);
     gap: 0 14px;
+  }
+
+  .stop-col {
+    grid-column: 2;
+    min-width: 0;
   }
 
   .mag {
@@ -270,27 +300,16 @@
     padding-left: 11px;
   }
 
-  .stop-date,
-  .stop-ver {
-    grid-column: 2;
-  }
-
   .stop-ver {
     display: inline;
     margin-right: 12px;
   }
 
   .stop-name {
-    grid-column: 2;
     font-size: 1.08rem;
   }
 
   .stop:first-child .stop-name {
     font-size: 1.25rem;
-  }
-
-  .stop-summary,
-  .stop-pieces {
-    grid-column: 2;
   }
 }
