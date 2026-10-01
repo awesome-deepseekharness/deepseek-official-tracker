@@ -1,79 +1,87 @@
 /*
- * tokens.css — DeepSeek navy, white type, one brand blue.
+ * tokens.css — DeepSeek's own sky.
  *
- * Every value here is DeepSeek's own published token, read from their CSS
- * custom properties rather than eyeballed from a screenshot:
- *   --ds-color-brand               #4d6bfe
- *   --ds-color-brand-deep          #3a65c2
- *   --ds-color-brand-light         #73a3d2
- *   --ds-color-text-primary        #1e232c
- *   --ds-color-text-primary-bluish #121c31 / #152443
- *   --ds-btn-primary-bg            #fff  (text #0a0a0a)
+ * An astronomical almanac, read at night. The ground is DeepSeek's published
+ * brand blue used as a full-bleed field rather than a hairline accent: this is a
+ * page about what appears in a particular sky on particular dates, so the sky is
+ * the surface and the entries are the light on it.
  *
- * The ground is #121c31, DeepSeek's own dark "bluish primary" — not a neutral
- * near-black. The accent is #4d6bfe and it is used ONCE: sources are told apart
- * by a numbered badge rather than by hue, so six competing colours never dilute
- * the one colour the brand actually owns.
+ * Every DeepSeek value is still read from their own CSS custom properties
+ * rather than eyeballed — --ds-color-brand #4d6bfe, --ds-color-brand-deep
+ * #3a65c2, --ds-color-brand-light #73a3d2. What changed is the role they play.
+ * The previous system spent the brand blue on 2px rules and 15px badges, so the
+ * one colour DeepSeek owns never appeared as colour at all. Here the deepest
+ * step is the field and the brightest step is the light.
+ *
+ * Type is set the way an almanac sets it: tabular figures everywhere a number is
+ * compared down a column, because this page rebuilds every six hours and
+ * non-tabular numerals make the whole table jitter when they do.
  */
 
 :root {
   color-scheme: dark;
 
-  /* Ground: DeepSeek's own dark navy. Three planes, all in the same hue so the
-     page reads as one material rather than a stack of greys. */
-  --navy: #121c31;
-  --navy-raised: #152443;
-  --navy-deep: #0d1526;
-  --navy-sunk: #182340;
+  /* The sky. Four planes, all one hue, stepping away from the brand blue. */
+  --sky: #0a1030;
+  --sky-deep: #060a20;
+  --sky-raised: #141d4a;
+  --sky-sunk: #0d1438;
 
-  /* Type: white, stepping down rather than off to grey. Each step stays tinted
-     at the ground's hue — neutral grey text on a navy panel looks washed out. */
+  /* Light on it. Bone-white, stepping down but staying at the field's hue — a
+     neutral grey against a saturated blue reads dirty. */
   --white: #ffffff;
-  --text: oklch(94% 0.012 255);
-  --text-muted: oklch(78% 0.026 255);
-  --text-faint: oklch(68% 0.03 255);
+  --text: oklch(97% 0.008 265);
+  --text-muted: oklch(85% 0.022 265);
+  --text-faint: oklch(72% 0.03 265);
 
-  /* Hairlines. The stud grid is #73a3d2 at low alpha. */
-  --rule: oklch(100% 0 0 / 0.12);
-  --rule-strong: oklch(100% 0 0 / 0.22);
-  --edge: oklch(100% 0 0 / 0.38);
-  --stud: oklch(75% 0.06 250 / 0.16);
+  /* Rules. A printed table is mostly ink of varying weight; the whole structure
+     of this page lives in these three, and there are no shadows or radii doing
+     the work instead. */
+  --rule: oklch(100% 0 0 / 0.14);
+  --rule-strong: oklch(100% 0 0 / 0.3);
+  --rule-faint: oklch(100% 0 0 / 0.07);
+  --edge: oklch(100% 0 0 / 0.5);
 
-  /* Brand. Used once per component, never per line. */
+  /* The brand, in its published steps. */
   --brand: #4d6bfe;
   --brand-deep: #3a65c2;
+  --brand-darker: #2f4fa3;
   --brand-light: #73a3d2;
-  --brand-wash: oklch(60% 0.17 272 / 0.16);
+  --brand-pale: #a8c4ff;
 
-  /* Unverified material: deliberately outside the navy/blue system — a warm
-     neutral — so a signal can never be mistaken for a numbered step. */
-  --signal: oklch(72% 0.045 75);
-  --signal-line: oklch(60% 0.04 75 / 0.5);
+  /* Signal tiers. Three hues, none of them the brand blue, because the single
+     hardest judgement on this page is official vs not and it has to be makeable
+     in under a second. Rumour is the warm one: it is the only tier that can be
+     wrong about something that has not happened yet. */
+  --tier-rumor: #f0b429;
+  --tier-community: #4ec9e0;
+  --tier-media: #9d8cff;
 
-  --focus-ring: var(--brand-light);
+  --focus-ring: var(--brand-pale);
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  /* An almanac page is a ruled table, so it has almost no corner language. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
 
-  --measure: 68ch;
-  --gutter: clamp(18px, 4vw, 40px);
-  --section-pad: clamp(56px, 7vw, 104px);
+  --measure: 70ch;
+  --gutter: clamp(18px, 4.5vw, 56px);
+  --section-pad: clamp(60px, 8vw, 128px);
+  --shell: 1440px;
+
+  /* Columns of the table itself, so the rules land on real content edges
+     instead of magic numbers repeated across three stylesheets. */
+  --col-date: 116px;
+  --col-mag: 84px;
 
   --font: 'Barlow Condensed', 'Oswald', 'Avenir Next Condensed', 'Helvetica Neue', Arial, sans-serif;
   --font-text: 'Barlow', ui-sans, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/*
- * Browser surfaces carry the design too. These are the parts nobody draws:
- * selection, scrollbars, focus rings, and the numerals in a version column.
- * Left at defaults they are the cheapest way to look assembled rather than
- * built.
- */
 ::selection {
-  background: color-mix(in oklch, var(--brand) 40%, transparent);
+  background: color-mix(in oklch, var(--brand-light) 40%, transparent);
   color: var(--white);
 }
 
@@ -82,28 +90,34 @@
 }
 
 html {
-  scrollbar-color: var(--brand-deep) var(--navy-deep);
-  background: var(--navy);
+  scrollbar-color: var(--brand-deep) var(--sky-deep);
+  background: var(--sky);
   /* Anchor jumps land below the sticky masthead instead of behind it. */
-  scroll-padding-top: 76px;
+  scroll-padding-top: 92px;
 }
 
 body {
   margin: 0;
-  background: var(--navy);
+  background: var(--sky);
   color: var(--text);
   font-family: var(--font-text);
+  /* 1rem, deliberately. A non-standard 17px root is a small convenience that
+     costs more than it buys: every unitless line-height in the cascade is
+     resolved against it, so a 1.0625rem base makes correct 1.3 leading measure
+     as 1.22 and reads as a defect. Generosity here comes from the spacing
+     scale, not from inflating the root. */
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* A version column is compared down the page, so its numerals must be tabular
-   or the whole assembly jitters on every six-hourly rebuild. */
+/* Every number here is compared down a column. Without tabular figures the
+   whole table shifts sideways on each six-hourly rebuild. */
 time,
 .mono,
-.num {
+.num,
+.mag {
   font-family: var(--mono);
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum' 1;
@@ -112,20 +126,19 @@ time,
 a {
   color: var(--white);
   text-decoration: none;
-  text-underline-offset: 0.22em;
+  text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
   text-decoration-color: var(--edge);
-  transition: text-decoration-color 0.12s var(--ease), color 0.12s var(--ease);
+  transition: text-decoration-color 0.14s var(--ease), color 0.14s var(--ease);
 }
 
 a:hover {
-  text-decoration-color: var(--brand);
+  text-decoration-color: var(--brand-pale);
 }
 
 :focus-visible {
   outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
+  outline-offset: 3px;
 }
 
 .skip-link {
@@ -133,8 +146,8 @@ a:hover {
   left: -9999px;
   top: 0;
   background: var(--white);
-  color: var(--navy);
-  padding: 10px 16px;
+  color: var(--sky);
+  padding: 12px 18px;
   z-index: 100;
   font-family: var(--font);
   font-weight: 600;

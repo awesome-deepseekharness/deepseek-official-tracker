@@ -69,32 +69,40 @@ const token = name => {
   return oklchToSrgb(l / 100, c, h);
 };
 
-const ground = token('navy');
+const ground = token('sky');
 if (!ground) {
-  console.error('could not read --navy from the built CSS');
+  console.error('could not read --sky from the built CSS');
   process.exit(1);
 }
 
 let fail = 0;
-const check = (label, fg, min) => {
+const check = (label, fg, min, bg = ground) => {
   if (!fg) { fail++; console.log(`FAIL ${label.padEnd(26)} token not found`); return; }
-  const r = ratio(fg, ground);
+  const r = ratio(fg, bg);
   const ok = r >= min;
   if (!ok) fail++;
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${label.padEnd(26)} ${r.toFixed(2)}:1  (needs ${min})`);
 };
 
-console.log('contrast on the DeepSeek navy ground, from the built CSS\n');
+console.log('contrast on the DeepSeek sky ground, from the built CSS\n');
 check('white type', token('white'), 4.5);
 check('body text', token('text'), 4.5);
 check('muted text', token('text-muted'), 4.5);
 // Dates and versions: small text readers scan down a column, so 4.5 applies.
 check('faint text (dates)', token('text-faint'), 4.5);
 check('brand light (versions)', token('brand-light'), 4.5);
-// The brand blue is a large CTA surface with white text, judged as a non-text
-// UI element at 3:1 — and its white label is checked against it below.
+check('brand pale (primary entry)', token('brand-pale'), 4.5);
+// The brand blue is a large mark and a CTA surface, judged as a non-text UI
+// element at 3:1 — and its white label is checked against it below.
 check('brand (non-text)', token('brand'), 3);
-check('signal tint (badge)', token('signal'), 4.5);
+
+// The three signal tiers are the one place on the page that uses hue to carry
+// meaning, so each is held to the full body-text ratio rather than the 3:1 a
+// decorative mark would get. If one of them ever fails, the honest fix is to
+// lighten that tier, not to drop the check.
+check('tier: rumour', token('tier-rumor'), 4.5);
+check('tier: community', token('tier-community'), 4.5);
+check('tier: media', token('tier-media'), 4.5);
 
 const white = token('white');
 const brandDeep = token('brand-deep');
@@ -103,6 +111,16 @@ const onBrand = ratio(white, brandDeep);
 const okBrand = onBrand >= 4.5;
 if (!okBrand) fail++;
 console.log(`${okBrand ? 'ok  ' : 'FAIL'} ${'white on CTA (brand-deep)'.padEnd(26)} ${onBrand.toFixed(2)}:1  (needs 4.5)`);
+
+// The hover state is a state a reader actually lands on, so it gets measured
+// too rather than being assumed to follow the resting value.
+const brandDarker = token('brand-darker');
+if (brandDarker) {
+  const onHover = ratio(white, brandDarker);
+  const okHover = onHover >= 4.5;
+  if (!okHover) fail++;
+  console.log(`${okHover ? 'ok  ' : 'FAIL'} ${'white on CTA hover'.padEnd(26)} ${onHover.toFixed(2)}:1  (needs 4.5)`);
+}
 
 console.log(`\n${fail ? `${fail} failure(s)` : 'all contrast checks pass'}`);
 process.exit(fail ? 1 : 0);

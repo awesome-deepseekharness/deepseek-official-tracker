@@ -274,6 +274,97 @@ export function lineTotals(stops) {
 }
 
 /**
+ * Apparent magnitude for a release, from how many independent sources carry it.
+ *
+ * An almanac reader judges an object by magnitude: lower number, brighter, more
+ * notable. That is exactly the judgement this product's data supports and a
+ * reverse-chronological feed cannot express — a release corroborated by three
+ * independent first-party surfaces is a genuinely different event from one that
+ * appeared on a single npm registry, and on the old page the two rows were
+ * typographically identical.
+ *
+ * The scale is the real astronomical one, not a 1-3 badge dressed up as one:
+ * magnitude is logarithmic and inverted, so brighter means smaller. Mapping
+ * corroboration count onto that curve means the gap between 1 source and 2
+ * sources is large (both real and unremarkable) and the gap between 4 and 5 is
+ * small (both exceptional), which is the truth about this data.
+ *
+ * Undated GitHub tags get no magnitude: they carry no position on the table, so
+ * assigning them a brightness would assert something the data does not support.
+ */
+const MAGNITUDE_STEPS = [
+  { sources: 1, mag: 5.4 },
+  { sources: 2, mag: 4.3 },
+  { sources: 3, mag: 3.1 },
+  { sources: 4, mag: 2.2 },
+  { sources: 5, mag: 1.5 },
+  { sources: 6, mag: 0.9 },
+];
+
+export function magnitudeOf(stop) {
+  if (!stop || stop.date === 'n/a') return null;
+  const n = new Set(stop.lines || []).size;
+  const step = MAGNITUDE_STEPS.find(s => n <= s.sources) || MAGNITUDE_STEPS[MAGNITUDE_STEPS.length - 1];
+  // One decimal is what a printed almanac prints; a second place would imply a
+  // precision the underlying count cannot support.
+  return { value: step.mag, sources: n };
+}
+
+/**
+ * Weekly release density, for the transit strip.
+ *
+ * The tracker rebuilt every six hours for weeks while its headline sat on a
+ * single September release, and the honest reaction was "this thing is dead."
+ * A band of marks shows the opposite fact — shipping is continuous and the page
+ * is keeping up — without asking anyone to trust a timestamp or read a log.
+ *
+ * Weeks are bucketed newest-last so the strip reads left-to-right in time like
+ * a printed almanac's year spread, and empty weeks are emitted rather than
+ * skipped: a gap in the band is itself information, and collapsing it would
+ * hide exactly the quiet period a reader needs to see.
+ */
+export function weeklyCadence(stops, { weeks = 16 } = {}) {
+  const dated = stops.filter(s => s.date && s.date !== 'n/a');
+  if (!dated.length) return [];
+
+  const dayMs = 86400000;
+  const latest = Math.max(...dated.map(s => Date.parse(`${s.date}T00:00:00Z`)));
+  const latestWeekStart = latest - ((latest + 3 * dayMs) % 7 === 0 ? 0 : 0); // anchor on the date itself
+  // Anchor every bucket to a Monday so the column heads can print a real weekday.
+  const mondayOffset = (new Date(latestWeekStart).getUTCDay() + 6) % 7;
+  const end = latestWeekStart - mondayOffset * dayMs + dayMs; // exclusive
+  const start = end - weeks * 7 * dayMs;
+
+  const buckets = new Map();
+  for (let t = start; t < end; t += 7 * dayMs) {
+    buckets.set(t, { weekStart: t, stops: [], maxSourceCount: 0 });
+  }
+  for (const s of dated) {
+    const t = Date.parse(`${s.date}T00:00:00Z`);
+    const monday = t - ((new Date(t).getUTCDay() + 6) % 7) * dayMs;
+    const b = buckets.get(monday);
+    if (!b) continue;
+    b.stops.push(s);
+    b.maxSourceCount = Math.max(b.maxSourceCount, new Set(s.lines).size);
+  }
+
+  return [...buckets.values()]
+    .sort((a, b) => a.weekStart - b.weekStart)
+    .map(b => {
+      const strongest = b.stops.reduce((acc, s) => {
+        const n = new Set(s.lines).size;
+        return n > acc.count ? { count: n, stop: s } : acc;
+      }, { count: 0, stop: null });
+      return {
+        weekStart: new Date(b.weekStart).toISOString().slice(0, 10),
+        count: b.stops.length,
+        strongest: strongest.stop,
+        strongestSources: strongest.count,
+      };
+    });
+}
+
+/**
  * Parse insights.md's signal sections into the unverified strip.
  * Only Secondary and Community qualify — the verified findings are already on
  * the diagram and must not be repeated as if they were rumours.
@@ -334,6 +425,60 @@ export function parseSignals(insights) {
         title,
         date: (raw.match(/(\d{4}-\d{2}-\d{2})/) || [])[1] || null,
         url: links[links.length - 1][2],
+      });
+    }
+  }
+  return out;
+}
+
+/**
+ * Parse SIGNALS.md's deterministic tier tables.
+ *
+ * insights.md is the AI narrative and is gated behind a PR, so it froze for
+ * three weeks while releases kept shipping — the page's "Early signals" strip
+ * emptied out with it. SIGNALS.md is generated from the same key-free corners
+ * with no model in the loop and commits every 6h, so it is the strip's primary
+ * source; insights.md still contributes its Secondary/Community sections when
+ * they exist.
+ *
+ * Rows look like:
+ *   | 🆕 | 2026-09-29 | 量子位 | [headline](url) — detail |
+ */
+export function parseSignalTables(signalsMd) {
+  const out = [];
+  if (!signalsMd) return out;
+  const text = signalsMd.replace(/\r\n/g, '\n');
+  // Bound each section at the next level-3 heading so the trailing "How to read
+  // this" table is not mistaken for signal rows.
+  for (const section of text.split(/^###\s+/m).slice(1)) {
+    const heading = (section.match(/^([^\n]+)/) || [])[1] || '';
+    const tier = /rumou?r/i.test(heading) ? 'rumor'
+      : /^community/i.test(heading) ? 'community'
+        : /^secondary/i.test(heading) ? 'secondary'
+          : null;
+    if (!tier) continue;
+
+    for (const line of section.split('\n')) {
+      // The optional 🆕 column sits between two pipes, so a data row reads
+      // "| 🆕 | 2026-09-22 | Source | …". The leading-cell group must tolerate
+      // the space after that closing pipe — matching `\d{4}` straight off the
+      // pipe silently skipped every 🆕 row, which is most of them on a busy day.
+      const row = line.match(/^\|\s*(?:🆕\s*\|)?\s*(\d{4}-\d{2}-\d{2})\s*\|\s*([^|]*?)\s*\|/);
+      if (!row) continue;
+      const date = row[1];
+      const source = row[2] || '';
+      const link = line.match(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/);
+      if (!link) continue;
+      const detail = line.split('—').slice(1).join('—').trim();
+      out.push({
+        tier,
+        section: heading.replace(/\s*·.*$/, '').trim(),
+        title: link[1],
+        date,
+        source,
+        isNew: /🆕/.test(line),
+        url: link[2],
+        detail: detail.slice(0, 160),
       });
     }
   }

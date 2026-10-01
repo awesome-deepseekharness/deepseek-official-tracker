@@ -35,6 +35,7 @@ const MARKDOWN = [
   'npm.md',
   'huggingface.md',
   'insights.md',
+  'SIGNALS.md',
 ];
 
 function readIfExists(p) {

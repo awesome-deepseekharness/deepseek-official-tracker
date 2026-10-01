@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseFeedStamp, releaseKeys as mReleaseKeys } from './transit.mjs';
+import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseSignalTables, parseFeedStamp, releaseKeys as mReleaseKeys } from './transit.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const read = f => { try { return fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch { return ''; } };
@@ -72,6 +72,48 @@ check('insights signals extracted', sigs.length > 0);
 check('signals all carry a url', sigs.every(s => s.url.startsWith('http')));
 check('no verified findings leaked into signals', sigs.every(s => /Secondary|Community/.test(s.section)));
 check('no non-signal sections swallowed', !sigs.some(s => /Risk|Next steps|Trends|Cross-check/i.test(s.title)));
+
+// --- SIGNALS.md tables -------------------------------------------------------
+// The strip's primary source, and the only one that refreshes on a fixed
+// cadence. If this parser silently returns [] the strip empties with no error,
+// which is the same class of bug the CRLF fixture above exists to catch.
+const tableSigs = parseSignalTables(read('SIGNALS.md'));
+console.log(`\nSIGNALS.md rows: ${tableSigs.length} (rumor=${tableSigs.filter(s => s.tier === 'rumor').length} community=${tableSigs.filter(s => s.tier === 'community').length} secondary=${tableSigs.filter(s => s.tier === 'secondary').length})`);
+check('SIGNALS.md rows extracted', tableSigs.length > 0);
+check('SIGNALS rows all carry a url', tableSigs.every(s => s.url.startsWith('http')));
+check('SIGNALS rows all carry a valid date', tableSigs.every(s => /^\d{4}-\d{2}-\d{2}$/.test(s.date)));
+check('every tier is one of the three signal tiers',
+  tableSigs.every(s => ['rumor', 'community', 'secondary'].includes(s.tier)),
+  JSON.stringify([...new Set(tableSigs.map(s => s.tier))]));
+check('the trailing "How to read this" table is not parsed as signals',
+  !tableSigs.some(s => /not official DeepSeek updates|first-party surface/i.test(s.title)));
+check('no official releases leaked into the signal tiers',
+  !tableSigs.some(s => /^deepseek-ai\/deepseek-harness release/.test(s.title)),
+  tableSigs.find(s => /^deepseek-ai\//.test(s.title))?.title || '');
+check('rumour tier carries the 疑似 / unverified stamp in its section',
+  tableSigs.filter(s => s.tier === 'rumor').every(s => /rumou?r|rumour/i.test(s.section)),
+  JSON.stringify(tableSigs.filter(s => s.tier === 'rumor').map(s => s.section)));
+
+// Regression: the 🆕 column sits between two pipes, so a fresh row is
+// "| 🆕 | 2026-09-22 | Source | …". A row matcher that goes straight from the
+// closing pipe to \d{4} skips every fresh row — i.e. most of them on a busy
+// day — and returns a plausible short list rather than an error. Pinned here
+// because the real SIGNALS.md cannot cover both shapes on every run.
+const freshRow = '| 🆕 | 2026-09-22 | Rumour wire | [something leaked](https://example.com/a) — detail |';
+const quietRow = '| 2026-09-21 | 量子位 | [a report](https://example.com/b) — detail |';
+const fixture = `### Rumours — unconfirmed speculation\n\n| New | Date | Source | Signal |\n|---|---|---|---|\n${freshRow}\n${quietRow}\n`;
+const fx = parseSignalTables(fixture);
+check('both 🆕 and quiet rows parse', fx.length === 2, `got ${fx.length}`);
+check('🆕 row is flagged new', fx[0]?.isNew === true && fx[0]?.date === '2026-09-22' && fx[0]?.source === 'Rumour wire',
+  JSON.stringify(fx[0] || null));
+check('quiet row is not flagged new', fx[1]?.isNew === false && fx[1]?.source === '量子位',
+  JSON.stringify(fx[1] || null));
+check('fixture rows classified as rumour tier', fx.every(s => s.tier === 'rumor'));
+
+if (tableSigs.length) {
+  console.log('newest signals:');
+  for (const s of tableSigs.slice(0, 5)) console.log(`  ${s.date}  ${s.tier.padEnd(9)}  ${s.source.slice(0, 18).padEnd(18)}  ${s.title.slice(0, 60)}`);
+}
 
 console.log(fail ? `\n${fail} failure(s)` : '\ntransit model OK');
 process.exit(fail ? 1 : 0);

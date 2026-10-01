@@ -1,52 +1,62 @@
-/* page.css — masthead, lede, call-out, signals, sources, footer.
- * The assembly geometry lives in diagram.css because it is the composition. */
+/* page.css — masthead, the almanac header, the featured observation, the
+ * transit strip, the source roster, signals, sources, footer.
+ *
+ * The table geometry lives in diagram.css because the table is the composition.
+ *
+ * There are no cards on this page and no soft-shadowed panels. An almanac is a
+ * ruled surface: structure comes from ink weight and alignment, and anything
+ * that needs a container to hold it together is a layout bug, not a component.
+ */
+
+/* --- masthead ------------------------------------------------------------ */
 
 .masthead {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in oklch, var(--navy) 92%, transparent);
-  backdrop-filter: blur(12px) saturate(140%);
+  background: color-mix(in oklch, var(--sky) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
   border-bottom: 1px solid var(--rule);
 }
 
 .masthead-in {
-  max-width: 1360px;
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 12px var(--gutter);
+  padding: 13px var(--gutter);
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 20px;
+  align-items: baseline;
+  gap: 24px;
 }
 
 .wordmark {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   font-family: var(--font);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--white);
 }
 
-/* The mark is the brand blue and nothing else in the chrome is. */
+/* The mark is the brightest brand step — the one piece of light in the chrome. */
 .wordmark-glyph {
-  width: 19px;
-  height: 19px;
-  color: var(--brand);
+  width: 20px;
+  height: 20px;
+  color: var(--brand-light);
   flex: none;
+  align-self: center;
 }
 
 .masthead-nav {
   display: flex;
-  gap: 20px;
+  gap: 26px;
   font-family: var(--font);
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   font-weight: 500;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.04em;
   justify-self: center;
 }
 
@@ -58,6 +68,8 @@
   color: var(--white);
 }
 
+/* The observation epoch. A tracker whose whole promise is latency should make
+   its last observation time continuously legible, not buried in a footer. */
 .masthead-stamp {
   margin: 0;
   font-size: 0.75rem;
@@ -67,8 +79,8 @@
 }
 
 .masthead-sep {
-  opacity: 0.5;
-  margin: 0 5px;
+  opacity: 0.45;
+  margin: 0 6px;
 }
 
 .masthead-time {
@@ -78,38 +90,41 @@
 /* --- first viewport ------------------------------------------------------ */
 
 .lede {
-  max-width: 1360px;
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: clamp(28px, 3.8vw, 52px) var(--gutter) var(--section-pad);
+  padding: clamp(30px, 4vw, 60px) var(--gutter) var(--section-pad);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 372px);
-  /* The aside spans both rows so it can run the full height of the assembly.
-     Named areas also let the narrow layout reorder to claim -> featured release
-     -> steps, which matters because the assembly is 80 entries long and would
-     otherwise push the newest release off the bottom of a phone. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 388px);
+  /* Named areas so the narrow layout can reorder to header -> featured
+     observation -> roster -> table. That matters because the table is 80 rows
+     long and would otherwise push tonight's entry off a phone entirely. */
   grid-template-areas:
     'claim aside'
     'main  aside';
-  gap: 0 clamp(24px, 3.6vw, 56px);
+  gap: 0 clamp(24px, 3.4vw, 60px);
   align-items: start;
 }
 
+/* The almanac's own header line: what is tracked, and the edition. An almanac
+   never writes "Latest posts" — it names the body and the date of observation.
+   That framing is also the honest one: this page is a record of observations,
+   not a blog roll. */
 .lede-claim {
   grid-area: claim;
-  margin: 0 0 clamp(26px, 3.4vw, 44px);
+  margin: 0 0 clamp(24px, 3vw, 40px);
   font-family: var(--font);
-  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-size: clamp(1.85rem, 3.3vw, 2.7rem);
   font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
   color: var(--white);
-  max-width: 20ch;
+  max-width: 24ch;
   text-wrap: balance;
 }
 
 .lede-claim strong {
   font-weight: 600;
-  color: var(--brand-light);
+  color: var(--brand-pale);
 }
 
 .col-main {
@@ -120,49 +135,48 @@
 .lede-aside {
   grid-area: aside;
   position: sticky;
-  top: 84px;
+  top: 92px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 28px;
 }
 
-/* --- the call-out -------------------------------------------------------- */
+/* --- the featured observation -------------------------------------------- */
 
-/* A printed parts list frames a 1:1 reference in a cornered box with no fill.
-   One brand-coloured edge, so the accent marks the primary object rather than
-   decorating a surface. */
+/* A printed almanac frames tonight's primary entry with rules, not a panel. The
+   only thing marking it is the brand step at its brightest and a heavier rule
+   above — ink weight, which is the way a table says "this row is the one." */
 .callout {
   position: relative;
-  background: var(--navy-raised);
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--radius-md);
-  padding: 20px 22px 22px;
+  border-top: 2px solid var(--brand-light);
+  padding-top: 20px;
 }
 
-.callout::before {
+.callout::after {
   content: '';
   position: absolute;
-  top: -1px;
-  left: 18px;
-  width: 44px;
+  top: -2px;
+  left: 0;
+  width: 64px;
   height: 2px;
-  background: var(--brand);
+  background: var(--brand-pale);
 }
 
 .callout-head {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
 .callout-ref {
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--brand);
+  color: var(--brand-pale);
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .callout-date {
@@ -172,19 +186,19 @@
 
 .callout-title {
   font-family: var(--font);
-  font-size: clamp(1.4rem, 2.1vw, 1.8rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
   font-weight: 500;
-  line-height: 1.16;
+  line-height: 1.3;
   letter-spacing: -0.005em;
   color: var(--white);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   text-wrap: balance;
 }
 
 .callout-summary {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   max-width: var(--measure);
 }
 
@@ -194,34 +208,32 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 7px;
+  gap: 6px 8px;
 }
 
-/* The one primary action. --brand-deep (#3a65c2) rather than --brand (#4d6bfe):
-   white on #4d6bfe measures 4.33:1, just under AA for 14px semibold text.
-   #3a65c2 is DeepSeek's own deep brand step and clears it at 5.4:1 while
-   staying unmistakably the brand blue. */
+/* The one primary action. --brand-deep (#3a65c2) rather than --brand
+   (#4d6bfe): white on #4d6bfe measures 4.33:1, under AA for 14px semibold. The
+   deep step clears it at 5.50:1 and still reads unmistakably as the brand.
+   Checked by scripts/contrast.mjs against the built CSS, not by eye. */
 .callout-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 18px;
+  gap: 9px;
+  margin-top: 20px;
   font-family: var(--font);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--white);
   background: var(--brand-deep);
-  border-radius: var(--radius-sm);
-  padding: 10px 16px;
-  transition: background 0.12s var(--ease);
+  padding: 11px 18px;
+  transition: background 0.14s var(--ease);
 }
 
 .callout-cta:hover {
-  /* Deliberately not --brand (#4d6bfe): white on it is 4.3:1 and the hover state
-     is a real state a reader lands on. Hover darkens toward the deep step
-     instead, which reads as press-down and stays above AA. */
-  background: #2f4fa3;
+  /* Darkens on hover rather than lightening: the hover state is a real state a
+     reader lands on, and this one stays above AA at 7.0:1. */
+  background: var(--brand-darker);
   text-decoration: none;
 }
 
@@ -229,45 +241,141 @@
   opacity: 0.85;
 }
 
+/* --- transit strip ------------------------------------------------------- */
+
+/* Sixteen weeks of shipping as a band of marks. This exists because the tracker
+   ran every six hours for weeks while its headline sat on one September
+   release, and the only honest answer to "is this thing dead?" is a picture of
+   the cadence. Left to right is time, the way a printed almanac's spread reads. */
+.cadence {
+  margin: 0 0 clamp(28px, 3.4vw, 44px);
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cadence-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.cadence-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.cadence-total {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cadence-band {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  align-items: end;
+  height: 64px;
+}
+
+/* Each week is one column whose height is that week's release count, scaled to
+   the busiest week on the page so the busiest mark always reaches full height.
+   A quiet week is a short mark, not a missing one — the gap is the information. */
+.cadence-week {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  background: var(--rule-faint);
+}
+
+.cadence-week[data-empty='true'] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule-faint);
+}
+
+.cadence-mark {
+  width: 100%;
+  background: linear-gradient(to top, var(--brand-deep), var(--brand-light));
+  min-height: 3px;
+}
+
+/* A week whose best release was corroborated across several sources gets the
+   bright step, so the strip carries the same magnitude idea as the table. */
+.cadence-mark.is-strong {
+  background: linear-gradient(to top, var(--brand), var(--brand-pale));
+}
+
+.cadence-axis {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.cadence-tick {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cadence-caption {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  max-width: var(--measure);
+}
+
 /* --- source roster ------------------------------------------------------- */
 
 .route-legend {
   list-style: none;
   margin: 0;
-  padding: 14px 0 0;
+  padding: 16px 0 0;
   border-top: 1px solid var(--rule);
 }
 
 .route {
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr) auto;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
   align-items: baseline;
-  gap: 10px;
-  padding: 5px 0;
+  gap: 11px;
+  padding: 6px 0;
 }
 
-/* The numbered badge, reused everywhere a source is named. */
+/* The numbered badge, reused everywhere a source is named. An almanac's
+   columns are identified by header, not by colour — six hues on one field
+   would be unreadable and would dilute the one colour DeepSeek owns. */
 .route-no,
 .piece-no,
 .signal-no {
   font-family: var(--mono);
   font-size: 0.6875rem;
   font-weight: 500;
-  color: var(--navy);
+  color: var(--sky);
   background: var(--brand-light);
-  border-radius: 2px;
-  min-width: 16px;
-  height: 16px;
+  min-width: 17px;
+  height: 17px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
-  transform: translateY(3px);
 }
 
 .route-name {
   font-family: var(--font);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-muted);
   border-bottom: 1px solid transparent;
@@ -275,7 +383,7 @@
 
 .route-name:hover {
   color: var(--white);
-  border-bottom-color: var(--brand);
+  border-bottom-color: var(--brand-light);
 }
 
 .route-count {
@@ -286,24 +394,25 @@
 /* --- sections ------------------------------------------------------------ */
 
 .section-head {
-  max-width: 64ch;
-  margin-bottom: clamp(20px, 2.8vw, 32px);
+  max-width: 66ch;
+  margin-bottom: clamp(22px, 3vw, 38px);
 }
 
 .section-head h2 {
   font-family: var(--font);
-  font-size: clamp(1.25rem, 1.9vw, 1.55rem);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 500;
+  line-height: 1.3;
   color: var(--white);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .section-sub {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text-muted);
   margin: 0;
   max-width: var(--measure);
@@ -315,32 +424,43 @@
 }
 
 .empty {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text-faint);
-  padding: 22px 0;
+  padding: 26px 0;
   margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--sky-sunk);
+  border: 1px solid var(--rule);
+  padding: 0.1em 0.35em;
 }
 
 /* --- early signals ------------------------------------------------------- */
 
+/* The horizon. Everything below this rule is not an observation, and the rule
+   plus the register change is what says so before a single word is read. */
 .signals-section {
-  max-width: 1360px;
+  max-width: var(--shell);
   margin: 0 auto;
   padding: 0 var(--gutter) var(--section-pad);
+  border-top: 2px solid var(--rule-strong);
+  padding-top: clamp(40px, 5vw, 72px);
 }
 
-/* Signals sit outside the numbered system entirely: a numbered step is a fact
-   DeepSeek published, so an unverified row carries no number. */
+/* Signals sit outside the observation system entirely: an almanac entry is a
+   thing that was seen, so a conjecture carries no magnitude and no number. */
 .signals-stamp {
   font-family: var(--mono);
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--signal);
-  border: 1px solid var(--signal-line);
-  border-radius: 999px;
-  padding: 3px 10px;
+  color: var(--tier-community);
+  border: 1px solid color-mix(in oklch, var(--tier-community) 45%, transparent);
+  padding: 4px 11px;
 }
 
 .signal-list {
@@ -352,17 +472,17 @@
 
 .signal {
   display: grid;
-  grid-template-columns: 176px minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 24px;
   align-items: baseline;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--rule);
+  padding: 15px 0;
+  border-bottom: 1px solid var(--rule-faint);
 }
 
 .signal-meta {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 12px;
   font-size: 0.75rem;
   color: var(--text-faint);
 }
@@ -371,13 +491,19 @@
   font-family: var(--font);
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--signal);
+  color: var(--tier-community);
+}
+
+.signal-source {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
 }
 
 .signal-link {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text-muted);
 }
 
@@ -385,52 +511,61 @@
   color: var(--white);
 }
 
+/* Media reads as violet, community as cyan, and a rumour as the warm one — the
+   only tier that can be wrong about something that has not happened yet, so it
+   is the only tier that gets the colour usually reserved for a warning. */
+.signal-secondary .signal-tier { color: var(--tier-media); }
+.signal-community .signal-tier { color: var(--tier-community); }
+.signal-rumor .signal-tier { color: var(--tier-rumor); }
+
+/* A rumour is set apart structurally as well as by colour, so it survives a
+   greyscale print and a colour-blind reader: dashed rule, dimmed link. */
+.signal-rumor {
+  border-bottom-style: dashed;
+}
+
+.signal-rumor .signal-link {
+  color: var(--text-faint);
+}
+
 .signals-foot {
   font-size: 0.75rem;
   color: var(--text-faint);
-  margin: 18px 0 0;
-}
-
-code {
-  font-family: var(--mono);
-  font-size: 0.9em;
-  background: var(--navy-sunk);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  padding: 0.1em 0.35em;
+  margin: 20px 0 0;
+  max-width: var(--measure);
 }
 
 /* --- sources ------------------------------------------------------------- */
 
 .sources-section {
-  max-width: 1360px;
+  max-width: var(--shell);
   margin: 0 auto;
   padding: 0 var(--gutter) var(--section-pad);
 }
 
 .source-table {
   list-style: none;
-  margin: 0 0 38px;
+  margin: 0 0 40px;
   padding: 0;
-  border-top: 1px solid var(--rule);
-  max-width: 900px;
+  border-top: 1px solid var(--rule-strong);
+  max-width: 940px;
 }
 
 .source-table li {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 180px 100px;
-  gap: 16px;
+  grid-template-columns: 36px minmax(0, 1fr) 190px 110px;
+  gap: 18px;
   align-items: baseline;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--rule);
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule-faint);
 }
 
 .source-name {
   display: inline-flex;
   align-items: baseline;
-  gap: 9px;
+  gap: 10px;
   font-family: var(--font);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--white);
 }
@@ -446,21 +581,20 @@ code {
 }
 
 .consume {
-  background: var(--navy-deep);
   border: 1px solid var(--rule);
-  border-radius: var(--radius-md);
-  padding: 22px 24px;
-  max-width: 780px;
+  border-top: 2px solid var(--brand-deep);
+  padding: 24px 26px;
+  max-width: 800px;
 }
 
 .consume h3 {
   font-family: var(--font);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .consume pre {
@@ -473,31 +607,31 @@ code {
   background: transparent;
   border: 0;
   padding: 0;
-  font-size: 0.78rem;
-  color: var(--brand-light);
+  font-size: 0.8rem;
+  color: var(--brand-pale);
   white-space: pre;
 }
 
 .consume p {
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
-  margin: 14px 0 0;
+  margin: 16px 0 0;
 }
 
 /* --- footer -------------------------------------------------------------- */
 
 .site-foot {
   border-top: 1px solid var(--rule);
-  background: var(--navy-deep);
+  background: var(--sky-deep);
 }
 
 .foot-in {
-  max-width: 1360px;
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 26px var(--gutter);
+  padding: 28px var(--gutter);
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 32px;
+  gap: 10px 36px;
   justify-content: space-between;
 }
 
@@ -508,41 +642,41 @@ code {
 }
 
 .foot-legal {
-  max-width: 56ch;
+  max-width: 58ch;
 }
 
 /* --- responsive ---------------------------------------------------------- */
 
-@media (max-width: 1040px) {
+@media (max-width: 1080px) {
   .lede {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       'claim'
       'aside'
       'main';
-    row-gap: clamp(26px, 4vw, 40px);
+    row-gap: clamp(28px, 4vw, 44px);
   }
 
   .lede-claim {
-    max-width: 24ch;
+    max-width: 28ch;
   }
 
   .lede-aside {
     position: static;
-    max-width: 560px;
+    max-width: 580px;
   }
 }
 
 @media (max-width: 760px) {
   .masthead-in {
     grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 11px var(--gutter);
+    gap: 9px;
+    padding: 12px var(--gutter);
   }
 
   .masthead-nav {
     justify-self: start;
-    gap: 16px;
+    gap: 18px;
     overflow-x: auto;
     max-width: 100%;
   }
@@ -551,14 +685,28 @@ code {
     text-align: left;
   }
 
+  .cadence-band {
+    height: 48px;
+    gap: 3px;
+  }
+
+  .cadence-axis {
+    gap: 3px;
+  }
+
+  /* Below this width only every other week can carry a readable tick. */
+  .cadence-tick:nth-child(even) {
+    visibility: hidden;
+  }
+
   .signal {
     grid-template-columns: minmax(0, 1fr);
-    gap: 5px;
+    gap: 6px;
   }
 
   .source-table li {
-    grid-template-columns: 28px minmax(0, 1fr) auto;
-    row-gap: 4px;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    row-gap: 5px;
   }
 
   .source-file {

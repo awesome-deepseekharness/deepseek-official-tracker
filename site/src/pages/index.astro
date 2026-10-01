@@ -1,7 +1,7 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
-import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseFeedStamp, resolveDataDir } from '../lib/transit.mjs';
+import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseSignalTables, parseFeedStamp, magnitudeOf, weeklyCadence, resolveDataDir } from '../lib/transit.mjs';
 import '../styles/tokens.css';
 import '../styles/page.css';
 import '../styles/diagram.css';
@@ -18,11 +18,24 @@ const read = f => {
 
 const feed = read('FEED.md');
 const insights = read('insights.md');
+const signalsMd = read('SIGNALS.md');
 
 const perLine = LINES.map(l => parseSourceFile(read(l.file), l.id));
 const stops = buildNetwork(perLine);
 const totals = lineTotals(stops);
-const signals = parseSignals(insights);
+const weeks = weeklyCadence(stops, { weeks: 16 });
+
+// SIGNALS.md first: it is deterministic and refreshes every 6h, whereas
+// insights.md is an AI draft behind a PR and has been stale before. insights.md
+// still contributes, so a rich narrative is never thrown away.
+const signalRows = [...parseSignalTables(signalsMd), ...parseSignals(insights)];
+const seenSignalUrls = new Set();
+const signals = signalRows.filter(s => {
+  if (!s.url || seenSignalUrls.has(s.url)) return false;
+  seenSignalUrls.add(s.url);
+  return true;
+}).slice(0, 24);
+const rumourCount = signals.filter(s => s.tier === 'rumor').length;
 const stamp = parseFeedStamp(feed);
 const builtAt = new Date().toISOString();
 
@@ -33,6 +46,10 @@ const undated = stops.filter(s => s.date === 'n/a');
 const corroborated = dated.filter(s => s.lines.length > 1);
 const latest = dated[0] || stops[0];
 
+// The busiest week sets the scale for the transit strip, so the band's shape is
+// comparable week to week and the busiest mark always reaches full height.
+const peakWeek = weeks.reduce((m, w) => Math.max(m, w.count), 1);
+
 const REPO = 'https://github.com/awesome-deepseekharness/deepseek-official-tracker';
 const RAW = 'https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-official-tracker/main';
 
@@ -42,23 +59,32 @@ const d = iso => {
     day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC',
   });
 };
+const dShort = iso => {
+  if (!iso || iso === 'n/a') return 'undated';
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', timeZone: 'UTC',
+  });
+};
 const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOString().slice(0, 10) : undefined);
 
 // The version on its own line beside the date, so the column is readable
-// without parsing it out of the step title. Empty when a release has no
+// without parsing it out of the entry title. Empty when a release has no
 // version-shaped name, which is most blog posts.
 const shortVersion = name => {
   const m = name.match(/\bv\d[\w.+-]*/);
   return m ? m[0] : '';
 };
 
-// The version has its own ruled column, so the step title drops it rather than
+// The version gets its own ruled column, so the entry title drops it rather than
 // printing it twice. Blog posts without a version are returned unchanged.
 const stepLabel = name => {
   const v = shortVersion(name);
   if (!v) return name;
   return name.replace(v, '').replace(/[\s·\-—:]+$/, '').trim() || name;
 };
+
+// Magnitude bands: three weights, so corroboration reads as rank without colour.
+const magBand = sources => (sources >= 3 ? 'bright' : sources === 2 ? 'mid' : 'faint');
 ---
 
 <!doctype html>
@@ -66,18 +92,18 @@ const stepLabel = name => {
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DeepSeek Official Tracker — every official release, assembled in order</title>
-<meta name="description" content="Six official DeepSeek sources as six lines. See what shipped, which sources corroborated it, and open the source. Zero LLM in the tracked feed."/>
-<meta name="keywords" content="deepseek, deepseek api, deepseek v4.1, deepseek v4, deepseek r1, deepseek harness, deepseek changelog, huggingface, dsh, deepseek official"/>
+<title>DeepSeek Official Tracker — an almanac of every official release</title>
+<meta name="description" content="Every official DeepSeek release, recorded as a dated observation across six first-party sources, with the corroboration count and a direct link to the source. Rumours and community signals kept separately and labelled."/>
+<meta name="keywords" content="deepseek, deepseek api, deepseek v4.1, deepseek v4, deepseek r1, deepseek harness, deepseek changelog, huggingface, dsh, deepseek official, deepseek almanac"/>
 <link rel="canonical" href="https://awesome-deepseekharness.github.io/deepseek-official-tracker/"/>
 <meta property="og:title" content="DeepSeek Official Tracker"/>
-<meta property="og:description" content="Six official sources as six lines. Every station links to its source."/>
+<meta property="og:description" content="An almanac of every official DeepSeek release, across six first-party sources, with magnitude and source."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://awesome-deepseekharness.github.io/deepseek-official-tracker/"/>
 <meta name="twitter:card" content="summary"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500;700&display=swap"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -89,16 +115,16 @@ const stepLabel = name => {
         <path d="M4.5 3 L19.5 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
         <path d="M19.5 3 L4.5 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" opacity="0.4"/>
       </svg>
-      <span>DeepSeek Official Tracker</span>
+      <span>DeepSeek Almanac</span>
     </div>
     <nav class="masthead-nav" aria-label="Primary">
-      <a href="#diagram">Assembly</a>
-      <a href="#signals">Early signals</a>
+      <a href="#table">Observations</a>
+      <a href="#cadence">Cadence</a>
+      <a href="#signals">Conjectures</a>
       <a href="#sources">Sources</a>
-      <a href={REPO}>GitHub</a>
     </nav>
     <p class="masthead-stamp mono">
-      Built {stamp ? d(stamp.slice(0, 10)) : '—'}{stamp && <span class="masthead-time"> {stamp.slice(11, 16)}Z</span>}
+      Observed {stamp ? d(stamp.slice(0, 10)) : '—'}{stamp && <span class="masthead-time"> {stamp.slice(11, 16)}Z</span>}
       <span class="masthead-sep">·</span> every 6h
     </p>
   </div>
@@ -106,25 +132,61 @@ const stepLabel = name => {
 
 <main id="main">
 
-  <!-- The assembly is the thesis, so it is not parked below a hero block. The
-       claim heads the step list's own column, the featured release and source
-       roster sit beside it and follow the reader down the page, and the newest
-       steps are already on screen at 1440x900. -->
+  <!-- The first viewport is the thesis: an almanac states what it tracks and the
+       date of observation, then shows tonight's primary entry. The claim heads
+       the table's own column and the featured observation sits beside it. -->
   <div class="lede">
     <p class="lede-claim">
-      DeepSeek ships to <strong>six</strong> official channels and announces
-      them one at a time. This is every official release, assembled in order.
+      An almanac of every <strong>DeepSeek</strong> release, recorded the moment
+      it appears on a first-party source.
     </p>
 
     <div class="col-main">
-      <section id="diagram" class="diagram-section">
+      <section id="cadence" class="cadence">
+        <div class="cadence-head">
+          <span class="cadence-label">16 weeks · shipping cadence</span>
+          <span class="cadence-total">
+            {weeks.reduce((n, w) => n + w.count, 0)} releases in {weeks.length} weeks
+          </span>
+        </div>
+        <div class="cadence-band" role="img" aria-label={
+          `Weekly release counts for the last ${weeks.length} weeks. Busiest week: ${peakWeek} releases.`
+        }>
+          {weeks.map(w => (
+            <div
+              class="cadence-week"
+              data-empty={w.count === 0 ? 'true' : 'false'}
+              title={`Week of ${d(w.weekStart)} — ${w.count} release${w.count === 1 ? '' : 's'}${w.strongest ? `, brightest corroborated across ${w.strongestSources} sources` : ''}`}
+            >
+              {w.count > 0 && (
+                <div
+                  class={`cadence-mark ${w.strongestSources >= 3 ? 'is-strong' : ''}`}
+                  style={`height:${Math.max(6, (w.count / peakWeek) * 100)}%`}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <div class="cadence-axis" aria-hidden="true">
+          {weeks.map(w => <span class="cadence-tick">{dShort(w.weekStart).split(' ')[0]}</span>)}
+        </div>
+        <p class="cadence-caption">
+          Each column is one week, scaled to the busiest week on this page. A short
+          column is a quiet week, not a gap in tracking — the almanac is a standing
+          record, not a report.
+        </p>
+      </section>
+
+      <section id="table" class="diagram-section">
         <div class="section-head">
-          <h2>The assembly</h2>
+          <h2>Observations</h2>
           <p class="section-sub">
-            Newest step first. Each release is assembled from the numbered
-            sources it appeared on — a step with more than one piece was
-            corroborated across channels before it was announced.
-            {corroborated.length > 0 && <> <strong>{corroborated.length}</strong> corroborated steps.</>}
+            Every official release, newest first. <strong>Magnitude</strong> is the
+            number of independent first-party sources that carried it — the
+            brighter the entry, the more corroborated the event. A model launch
+            and a CLI patch bump are not the same kind of thing, and the table
+            never pretends they are.
+            {corroborated.length > 0 && <> <strong>{corroborated.length}</strong> entries are corroborated across two or more sources.</>}
           </p>
         </div>
 
@@ -132,30 +194,35 @@ const stepLabel = name => {
           {dated.length === 0 ? (
             <p class="empty">No dated releases captured yet. Run <code>node scripts/track.mjs</code>.</p>
           ) : (
-            dated.map((s, i) => (
-              <article class={`stop ${s.lines.length > 1 ? 'is-corroborated' : ''}`}>
-                <span class="stop-num" aria-label={`Step ${i + 1}`}>{String(i + 1).padStart(2, '0')}</span>
-                <div class="stop-col">
-                  <time class="stop-date mono" datetime={rfc(s.date)}>{d(s.date)}</time>
-                  {shortVersion(s.name) && <span class="stop-ver mono">{shortVersion(s.name)}</span>}
-                </div>
-                <div class="stop-col">
-                  <h3 class="stop-name" title={s.verbatim}>{stepLabel(s.name)}</h3>
-                  {s.summary && <p class="stop-summary">{s.summary}</p>}
-                  <ul class="stop-pieces">
-                    {s.sources.map(src => (
-                      <li>
-                        <a class="piece" href={src.url} target="_blank" rel="noopener" title={src.title}>
-                          <span class="piece-no">{String(lineNo[src.line] ?? 0).padStart(2, '0')}</span>
-                          {lineById[src.line]?.short || src.line}
-                          <span class="ext" aria-hidden="true">↗</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))
+            dated.map((s, i) => {
+              const mag = magnitudeOf(s);
+              return (
+                <article class={`stop ${s.lines.length > 1 ? 'is-corroborated' : ''}`}>
+                  <span class="stop-num" aria-label={`Entry ${i + 1}`}>{String(i + 1).padStart(3, '0')}</span>
+                  <span class={`mag mag-${magBand(mag.sources)}`} data-band={magBand(mag.sources)}
+                        title={`Seen on ${mag.sources} independent source${mag.sources === 1 ? '' : 's'}`}>
+                    {mag.value.toFixed(1)}<span class="mag-units">mag</span>
+                  </span>
+                  <div class="stop-col">
+                    <time class="stop-date mono" datetime={rfc(s.date)}>{d(s.date)}</time>
+                    {shortVersion(s.name) && <span class="stop-ver mono">{shortVersion(s.name)}</span>}
+                    <h3 class="stop-name" title={s.verbatim}>{stepLabel(s.name)}</h3>
+                    {s.summary && <p class="stop-summary">{s.summary}</p>}
+                    <ul class="stop-pieces">
+                      {s.sources.map(src => (
+                        <li>
+                          <a class="piece" href={src.url} target="_blank" rel="noopener" title={`${src.title} — ${lineById[src.line]?.label || src.line}`}>
+                            <span class="piece-no">{String(lineNo[src.line] ?? 0).padStart(2, '0')}</span>
+                            {lineById[src.line]?.short || src.line}
+                            <span class="ext" aria-hidden="true">↗</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })
           )}
         </div>
 
@@ -176,7 +243,7 @@ const stepLabel = name => {
       {latest && (
         <article class="callout">
           <div class="callout-head">
-            <span class="callout-ref">STEP 01</span>
+            <span class="callout-ref">Primary entry</span>
             <time class="callout-date mono" datetime={rfc(latest.date)}>{d(latest.date)}</time>
           </div>
           <h2 class="callout-title" title={latest.verbatim}>{latest.name}</h2>
@@ -211,30 +278,40 @@ const stepLabel = name => {
     </aside>
   </div>
 
-  <!-- Unverified material, shaped unlike a station so provenance is readable
-       without reading a word. -->
+  <!-- Everything below this rule is not an observation. The 2px horizon rule and
+       the register change say so before a word is read. -->
   <section id="signals" class="signals-section">
     <div class="section-head">
-      <h2>Early signals <span class="signals-stamp">unverified</span></h2>
+      <h2>Conjectures <span class="signals-stamp">unverified</span></h2>
       <p class="section-sub">
-        Community threads, media reports and research notes. These are
-        <strong>not</strong> confirmed by an official source — they lead, they do
-        not prove. Anything here becomes a numbered step above the moment DeepSeek
-        publishes it.
+        Community threads, media reports and <strong>rumours</strong>. None of these
+        are DeepSeek announcements — they lead, they do not prove. Each carries the
+        tier it was collected under, so you can tell a report from a rumour at a
+        glance. Anything here becomes an observation the moment DeepSeek publishes
+        it.
+        {rumourCount > 0 && (
+          <>
+            {' '}<strong>{rumourCount}</strong> of these are <strong>rumours</strong> about
+            work DeepSeek has not announced — speculation, and treated as such.
+          </>
+        )}
       </p>
     </div>
 
     {signals.length === 0 ? (
       <p class="empty">
-        No signals captured in the latest research pass.{' '}
-        <a href={`${REPO}/blob/main/insights.md`}>Read insights.md →</a>
+        No conjectures captured in the latest pass.{' '}
+        <a href={`${REPO}/blob/main/SIGNALS.md`}>Read SIGNALS.md →</a>
       </p>
     ) : (
       <ul class="signal-list">
         {signals.map(s => (
           <li class={`signal signal-${s.tier}`}>
             <div class="signal-meta">
-              <span class="signal-tier">{s.tier === 'community' ? 'community' : 'media'}</span>
+              <span class="signal-tier">
+                {s.tier === 'rumor' ? 'rumour 疑似' : s.tier === 'community' ? 'community' : 'media'}
+              </span>
+              {s.source && <span class="signal-source">{s.source}</span>}
               {s.date && <time class="mono" datetime={rfc(s.date)}>{d(s.date)}</time>}
             </div>
             <a class="signal-link" href={s.url} target="_blank" rel="noopener">
@@ -245,9 +322,11 @@ const stepLabel = name => {
       </ul>
     )}
     <p class="signals-foot">
-      Draft from <code>scripts/discover.mjs</code> over <code>scripts/corners.mjs</code>,
-      reviewed via pull request.{' '}
-      <a href={`${REPO}/blob/main/insights.md`}>Full research →</a>
+      Collected every 6h by <code>scripts/signals.mjs</code> over{' '}
+      <code>scripts/corners.mjs</code> — no LLM in that path, so nothing here can be
+      invented — with the AI narrative from <code>scripts/discover.mjs</code> added on
+      review.{' '}
+      <a href={`${REPO}/blob/main/SIGNALS.md`}>Full signal table →</a>
     </p>
   </section>
 
@@ -256,14 +335,16 @@ const stepLabel = name => {
       <h2>Where this comes from</h2>
       <p class="section-sub">
         Six first-party endpoints, scraped with zero LLM involvement. Official
-        titles are copied verbatim and every entry links to its source.
+        titles are copied verbatim and every entry links to its source. Nothing
+        in the table above was summarised, translated, or rewritten.
       </p>
     </div>
     <ol class="source-table">
       {LINES.map(l => (
-        <li style={`--c:${l.color}`}>
+        <li>
+          <span class="route-no">{String(lineNo[l.id]).padStart(2, '0')}</span>
           <a class="source-name" href={l.endpoint} target="_blank" rel="noopener">
-            <i aria-hidden="true"></i>{l.label}<span class="ext" aria-hidden="true">↗</span>
+            {l.label}<span class="ext" aria-hidden="true">↗</span>
           </a>
           <span class="source-file mono">{l.file}</span>
           <span class="source-count num">{totals[l.id] ?? 0} entries</span>
