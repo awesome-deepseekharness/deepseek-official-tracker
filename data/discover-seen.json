@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T13:30:15.487Z",
+  "updatedAt": "2026-10-01T14:17:14.625Z",
   "count": 259,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
@@ -262,11 +262,11 @@
     "x:2090730032574631962",
     "x:2097930608790167907"
   ],
-  "lastSignalsRunAt": "2026-10-01T13:30:15.486Z",
-  "lastFreshCount": 71,
+  "lastSignalsRunAt": "2026-10-01T14:17:14.625Z",
+  "lastFreshCount": 0,
   "cornerErrors": [
-    "github-org-repos: HTTP 403",
-    "x-timeline: firecrawl 429 rate limited",
-    "firecrawl-search: firecrawl 429 rate limited"
+    "google-news: HTTP 503",
+    "google-news-zh: zh Google News returned nothing",
+    "rumours: no rumour items matched"
   ]
 }
