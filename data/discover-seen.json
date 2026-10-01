@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-01T14:17:14.625Z",
-  "count": 259,
+  "updatedAt": "2026-10-01T14:21:49.030Z",
+  "count": 264,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -140,9 +140,11 @@
     "gnews:deepseek-and-huawei-open-ascend-ai-programming-tools---technode.global",
     "gnews:deepseek-and-huawei-open-ascend-ai-programming-tools---tnglobal",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
+    "gnews:deepseek-and-huawei-release-open-source-ascend-ai-programming-tools-to-reduce-re",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---the-new-yor",
     "gnews:deepseek-and-huawei-team-up-to-build-beyond-nvidia---finimize",
     "gnews:deepseek-bets-big-on-huawei-chips-to-bypass-u.s.-export-controls---the-informati",
+    "gnews:deepseek-bets-big-on-huawei-chips-to-bypass-u.s.-export-controls---theinformatio",
     "gnews:deepseek-brings-ai-software-to-huawei’s-ascend-chips---techzine-global",
     "gnews:deepseek-brings-ai-software-to-huawei’s-ascend-chips---techzine.eu",
     "gnews:deepseek-builds-for-huawei-ascend---geopolitechs",
@@ -161,12 +163,15 @@
     "gnewszh:harness:deepseek-harness-v0.2-发布桌面版：装插件靠npm-包名，还能让ai-自己写插件--oschina---开源-×-ai-",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---i.ifeng.com",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---finance.sina.com.cn",
+    "gnewszh:harness:deepseek-harness-桌面端：现在，开箱即用。---53ai",
     "gnewszh:harness:deepseek-harness-桌面端：现在，开箱即用。---53ai.com",
+    "gnewszh:harness:deepseek-harness出桌面版了！---wallstreetcn.com",
     "gnewszh:harness:deepseek-harness出桌面版了！---华尔街见闻",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness桌面版实测：更像「个人助理」，还给你送钱---爱范儿",
     "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用---投资界",
     "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用---搜狐网",
+    "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---news.qq.com",
     "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---qq-news",
     "gnewszh:harness:deepseek终于开箱即用-deepseek-harness官方桌面端实测：不用命令行启动，常用功能开箱即用。从自动整理桌面，到自己写个猫",
     "gnewszh:harness:刚刚，deepseek-harness桌面端上线，梁文锋开送token了---智东西",
@@ -262,11 +267,11 @@
     "x:2090730032574631962",
     "x:2097930608790167907"
   ],
-  "lastSignalsRunAt": "2026-10-01T14:17:14.625Z",
-  "lastFreshCount": 0,
+  "lastSignalsRunAt": "2026-10-01T14:21:49.029Z",
+  "lastFreshCount": 5,
   "cornerErrors": [
-    "google-news: HTTP 503",
-    "google-news-zh: zh Google News returned nothing",
-    "rumours: no rumour items matched"
+    "github-org-repos: HTTP 403",
+    "x-timeline: firecrawl 429 rate limited",
+    "firecrawl-search: firecrawl 429 rate limited"
   ]
 }

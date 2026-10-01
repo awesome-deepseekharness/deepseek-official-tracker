@@ -509,6 +509,12 @@ async function collectRumours() {
 // Third-party ports, quant recipes and wrappers. These appear on GitHub days
 // before DeepSeek's own post when a weights drop is imminent, and they are the
 // most concrete "leak" evidence available without an official source.
+//
+// A repo-search also surfaces deepseek-ai/* itself, which is not community at
+// all — a brand-new official repo is a first-party fact and belongs in the
+// official tier. Filing those under "community" was wrong in the exact direction
+// that matters: it would have labelled DeepSeek's own Ascend open-source drop
+// (DeepGEMM-Ascend, DeepEP-Ascend, clangd-ascend) as third-party chatter.
 async function collectCommunityRepos() {
   const queries = [
     ['weights', 'deepseek in:name created:>' + daysAgo(30)],
@@ -520,14 +526,19 @@ async function collectCommunityRepos() {
       `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=15`
     ).catch(() => null);
     for (const r of res?.items || []) {
+      const firstParty = /^deepseek-ai\//i.test(r.full_name || '');
       out.push({
         id: `ghcommunity:${tag}:${r.full_name}`,
-        source: 'GitHub (community)',
-        tier: 'community',
-        title: `${r.full_name} — ${(r.description || 'no description').slice(0, 120)}`,
+        source: firstParty ? 'GitHub (deepseek-ai)' : 'GitHub (community)',
+        tier: firstParty ? 'official' : 'community',
+        title: firstParty
+          ? `${r.full_name} — new official repo`
+          : `${r.full_name} — ${(r.description || 'no description').slice(0, 120)}`,
         date: dayKey(r.created_at),
         url: r.html_url,
-        detail: `★${r.stargazers_count}, created ${dayKey(r.created_at)}, pushed ${dayKey(r.pushed_at)}. Third-party, not DeepSeek — port/quant work often precedes an official weights drop.`,
+        detail: firstParty
+          ? `★${r.stargazers_count}, created ${dayKey(r.created_at)} — a first-party DeepSeek repository not yet in OFFICIAL_REPOS. Verify it appears in track.mjs before treating it as tracked news.`
+          : `★${r.stargazers_count}, created ${dayKey(r.created_at)}, pushed ${dayKey(r.pushed_at)}. Third-party — port/quant work often precedes an official weights drop.`,
       });
     }
   }
