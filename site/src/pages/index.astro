@@ -97,12 +97,9 @@ const stepLabel = name => {
       <a href="#sources">Sources</a>
       <a href={REPO}>GitHub</a>
     </nav>
-    <!-- The stamp is when the tracked feed last gained an entry, not when this
-         page was compiled: the footer's "page built" is that, and printing both
-         as "built" made a 40-minute-old deploy look like a stale feed. -->
     <p class="masthead-stamp mono">
-      Feed updated {stamp ? d(stamp.slice(0, 10)) : '—'}{stamp && <span class="masthead-time"> {stamp.slice(11, 16)}Z</span>}
-      <span class="masthead-sep">·</span> checked every 6h
+      Built {stamp ? d(stamp.slice(0, 10)) : '—'}{stamp && <span class="masthead-time"> {stamp.slice(11, 16)}Z</span>}
+      <span class="masthead-sep">·</span> every 6h
     </p>
   </div>
 </header>
@@ -148,15 +145,7 @@ const stepLabel = name => {
                   <ul class="stop-pieces">
                     {s.sources.map(src => (
                       <li>
-                        <a
-                          class="piece"
-                          href={src.url}
-                          target="_blank"
-                          rel="noopener"
-                          title={src.also?.length
-                            ? `${src.title}  ·  also on this source: ${src.also.join(' / ')}`
-                            : src.title}
-                        >
+                        <a class="piece" href={src.url} target="_blank" rel="noopener" title={src.title}>
                           <span class="piece-no">{String(lineNo[src.line] ?? 0).padStart(2, '0')}</span>
                           {lineById[src.line]?.short || src.line}
                           <span class="ext" aria-hidden="true">↗</span>
@@ -195,13 +184,7 @@ const stepLabel = name => {
           <ul class="callout-pieces">
             {latest.sources.map(s => (
               <li>
-                <a
-                  class="piece"
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener"
-                  title={s.also?.length ? `${s.title}  ·  also on this source: ${s.also.join(' / ')}` : s.title}
-                >
+                <a class="piece" href={s.url} target="_blank" rel="noopener" title={s.title}>
                   <span class="piece-no">{String(lineNo[s.line] ?? 0).padStart(2, '0')}</span>
                   {lineById[s.line]?.short || s.line}
                 </a>

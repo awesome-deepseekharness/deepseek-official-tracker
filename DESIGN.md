@@ -72,36 +72,13 @@ and a feed that rebuilds every six hours would otherwise jitter.
    rule down its left edge. That and the piece badges are the only emphasis —
    if everything is emphasised, nothing is.
 3. **The version gets its own column** and is stripped from the step title, so
-   it is never printed twice. The same rule governs the source badges: one badge
-   per line, never one per entry. A badge *is* a line identifier, so a line that
-   contributed two entries printed "02 API" twice and read as a duplicate. The
-   extra entries move into the badge's tooltip rather than being dropped — the
-   link is the product, so nothing may become unreachable.
-4. **A summary is prose or it is nothing.** Two scrapers emit a body that is not
-   prose: HuggingFace writes the model card's metadata row (`❤️ 765 · 📥 90,822 ·
-   text-generation · transformers, safetensors, …`) and npm writes its dist-tag
-   (`latest`). Both reached the page as the step's summary, so a model launch
-   read as scraped trivia. `track.mjs` now writes a real body for HF entries (the
-   pipeline tag and any `arxiv:` link, the two facts not already in the model id)
-   and none for npm, and `transit.mjs` filters historical metadata rows by shape
-   so the ~20 already-committed ones are corrected without rewriting data the
-   tracker treats as append-only.
-5. **A release's identity includes its date and its repository.** Nine API
-   changelog entries are all titled `deepseek-chat`; DeepSeek-V3 and DeepSeek-R1
-   both shipped `v1.0.0`; `DeepSeek-V4-Pro-0813` and `DeepSeek-V4-Pro` are two
-   weight drops. Keying on title alone, or on a bare version, or on a model stem
-   that stopped before its numeric suffix, merged unrelated products and printed
-   the duplicated badges above.
-6. **Unverified material carries no number.** A numbered step is a fact DeepSeek
+   it is never printed twice.
+4. **Unverified material carries no number.** A numbered step is a fact DeepSeek
    published, so signals sit outside the system: flat hairline rows, warm
    neutral tint outside the navy/blue family, stamped `unverified`.
-7. **Hairlines are 1px.** The call-out's brand mark is a 2px tab, not a thick bar.
-8. **No client-side JavaScript.** One static document built from committed markdown.
-9. **Minimum functional text is 11px**, most metadata at 12px.
-10. **Two timestamps, each labelled for what it is.** The masthead carries the
-    feed's last-*change* stamp ("Feed updated …, checked every 6h"); the footer
-    carries the page compile time ("page built …"). They are different facts, and
-    labelling both "built" made a deploy 40 minutes old look like a stale feed.
+5. **Hairlines are 1px.** The call-out's brand mark is a 2px tab, not a thick bar.
+6. **No client-side JavaScript.** One static document built from committed markdown.
+7. **Minimum functional text is 11px**, most metadata at 12px.
 
 ## Composition
 
@@ -120,15 +97,7 @@ Both run against the built artifact and both are gates:
   It reads the built CSS, so it cannot drift from what ships.
 - `node site/src/lib/transit.test.mjs` — the data model against real committed
   markdown. This is what caught the CRLF bug that made every source file parse
-  as empty, and the three identity-keying bugs that printed one source badge
-  several times on a single step. Its assertions are derived from the committed
-  data rather than from fixtures, so they fail when the parser drifts from what
-  `track.mjs` writes.
-- `node site/src/lib/summary.test.mjs` — the summary filter, with fixtures rather
-  than committed data, because the failure mode is asymmetric: a filter tuned only
-  on today's junk would silently silence every future real body too. It asserts
-  four real bodies survive and seven metadata shapes do not, including the exact
-  body `track.mjs` now writes for HuggingFace.
+  as empty.
 - `impeccable detect` — reports 2 findings, both deliberate: `tight-leading`
   (the 2.45rem claim at 1.10; 1.3 would space a display line wrongly) and
   `wide-tracking` (0.06em on 14px step titles, a condensed-face convention).
