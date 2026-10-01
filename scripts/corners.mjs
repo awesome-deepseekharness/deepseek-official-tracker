@@ -10,11 +10,14 @@
  * Design rules:
  * - Every collector is independent and failure-tolerant: one dead endpoint must
  *   never break the run.
- * - No API keys required. Uses public JSON/RSS endpoints only.
+ * - No API key required. Uses public JSON/RSS endpoints only.
  * - Each signal gets a stable `id` so it can be diffed across runs and folded
  *   into a "seen" baseline. Ids are `<source>:<stable-key>`.
  * - `tier` marks trust level: official (first-party) vs secondary (authoritative
  *   but not DeepSeek) vs community (unverified). The agent still re-verifies.
+ *
+ * Optional env: FIRECRAWL_API_KEY lifts the Firecrawl Keyless quota; every
+ * Firecrawl corner degrades to a reported error when unset.
  *
  * Usage:
  *   node scripts/corners.mjs                 # print JSON of live signals
@@ -389,6 +392,123 @@ async function collectOpenRouter() {
     }));
 }
 
+// ------------------------------------------------- Firecrawl Keyless corners
+//
+// Firecrawl Keyless (https://www.firecrawl.dev/blog/firecrawl-keyless-launch)
+// serves search and scrape with no API key, 1000 free credits/month. Verified
+// working here: it renders x.com timelines, which s.jina.ai can no longer do
+// (401 key-gated) and the remote browser can only do slowly.
+//
+// Known limit found in testing: Reddit returns 403 through Firecrawl as well as
+// directly — Reddit blocks datacentre IPs outright. Site-scoped search is the
+// working substitute, so collectReddit keeps its own paths and we add search
+// rather than pretending scrape works.
+//
+// Optional: if FIRECRAWL_API_KEY is set the same endpoints get a higher quota.
+// Everything here degrades to a reported error when Firecrawl is unreachable.
+
+const FIRECRAWL_API = 'https://api.firecrawl.dev/v1';
+
+// Firecrawl Keyless is rate-limited per IP on the free tier and returns 429
+// under exactly the kind of back-to-back calls a collector run makes. Retry
+// with backoff, then give up cleanly so the corner reports an error instead of
+// failing the run.
+async function firecrawl(endpoint, body, { attempts = 3, baseDelayMs = 4000 } = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (process.env.FIRECRAWL_API_KEY) headers.Authorization = `Bearer ${process.env.FIRECRAWL_API_KEY}`;
+  let lastErr;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    if (attempt > 0) await sleep(baseDelayMs * attempt);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 40000);
+    try {
+      const res = await fetch(`${FIRECRAWL_API}/${endpoint}`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+        signal: ctrl.signal,
+      });
+      if (res.status === 429) throw new Error('firecrawl 429 rate limited');
+      if (!res.ok) throw new Error(`firecrawl ${endpoint} -> HTTP ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      lastErr = e;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw lastErr;
+}
+
+// X/Twitter timeline — the single highest-value community source, and the one
+// no other key-free endpoint can reach.
+async function collectXTimeline() {
+  const data = await firecrawl('scrape', { url: 'https://x.com/deepseek_ai' });
+  const md = data?.data?.markdown || '';
+  if (!md) throw new Error('firecrawl scrape returned no markdown');
+  const out = [];
+  const posts = md.split(/###\s*\d+\.\s*Post/).slice(1);
+  for (const raw of posts.slice(0, 12)) {
+    // Firecrawl escapes markdown-significant chars inside values, so a posted
+    // date arrives as 2026\-09\-10T06:10:09\.000Z. Unescape before matching or
+    // the character class swallows the timestamp's tail.
+    const post = raw.replace(/\\([\\`*_{}[\]()#+\-.!>~|])/g, '$1');
+    const url = ((post.match(/URL:\s*\[([^\]]*)\]\((https:\/\/x\.com\/[^)]+)\)/) || [])[2])
+      || ((post.match(/https:\/\/x\.com\/[A-Za-z0-9_]+\/status\/\d+/) || [])[0]);
+    const posted = (post.match(/Posted:\s*(\d{4}-\d{2}-\d{2})/) || [])[1] || null;
+    // Body lives in the blockquote between the metadata and the engagement line.
+    const quoted = [...post.matchAll(/^>\s?(.*)$/gm)].map(m => m[1]).join(' ').trim();
+    const engagement = (post.match(/Likes:\s*([\d,]+)\s*\|\s*Retweets:\s*([\d,]+)/) || []);
+    const body = stripHtml(quoted).replace(/\s+/g, ' ').trim();
+    if (!url) continue;
+    const id = url.match(/status\/(\d+)/)?.[1] || url.slice(-24);
+    out.push({
+      id: `x:${id}`,
+      source: 'X @deepseek_ai',
+      tier: 'community',
+      title: body.slice(0, 200) || '(no text)',
+      date: posted,
+      url,
+      detail: engagement[1]
+        ? `${engagement[1]} likes, ${engagement[2]} retweets — official account; still unverified until an official source page confirms it.`
+        : 'Official account — still unverified until an official source page confirms it.',
+    });
+  }
+  if (!out.length) throw new Error('firecrawl x scrape produced no posts');
+  return out;
+}
+
+// Site-scoped web search — covers Reddit, WeChat relays, and Chinese media,
+// which direct fetches and Reddit's own JSON both refuse.
+async function collectFirecrawlSearch() {
+  const queries = [
+    ['reddit', 'site:reddit.com/r/LocalLLaMA deepseek'],
+    ['reddit-deepseek', 'site:reddit.com deepseek release'],
+    ['cn-media', 'deepseek 官方发布 新模型'],
+  ];
+  const out = [];
+  // Sequential with a gap: the keyless tier rate-limits per IP, and firing the
+  // three queries back to back is what trips it.
+  for (const [tag, query] of queries) {
+    const data = await firecrawl('search', { query, limit: 6 });
+    await sleep(1500);
+    for (const hit of data?.data || []) {
+      if (!hit.url || !hit.title) continue;
+      out.push({
+        id: `fcsearch:${tag}:${hit.url.slice(0, 120)}`,
+        source: `Firecrawl search (${tag})`,
+        tier: 'community',
+        title: hit.title,
+        date: dayKey(hit.date || hit.metadata?.date),
+        url: hit.url,
+        detail: stripHtml(hit.description || hit.markdown || '').slice(0, 280),
+      });
+    }
+  }
+  if (!out.length) throw new Error('firecrawl search returned nothing');
+  return out;
+}
+
 // ------------------------------------------------------------------ runner
 
 const COLLECTORS = [
@@ -404,6 +524,8 @@ const COLLECTORS = [
   ['google-news', collectGoogleNews],
   ['pypi', collectPyPi],
   ['openrouter', collectOpenRouter],
+  ['x-timeline', collectXTimeline],
+  ['firecrawl-search', collectFirecrawlSearch],
 ];
 
 /**
@@ -447,7 +569,7 @@ export function saveSeen(ids, extra = {}) {
   console.log(`[corners] seen baseline saved: ${arr.length} ids -> ${path.relative(ROOT, SEEN_FILE)}`);
 }
 
-export { SEEN_FILE };
+export { SEEN_FILE, stripHtml };
 
 // ------------------------------------------------------------------- CLI
 
