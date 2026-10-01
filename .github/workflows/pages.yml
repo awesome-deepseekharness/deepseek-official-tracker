@@ -17,6 +17,25 @@ on:
       - 'site/**'
       - 'package-lock.json'
       - '.github/workflows/pages.yml'
+  # Pull requests get the build, the tests and the contrast check, but never a
+  # deploy. Without this the gates only ran after merge, so a broken site build
+  # landed on main and failed Pages there instead of failing the PR.
+  pull_request:
+    paths:
+      - 'FEED.md'
+      - 'README.md'
+      - 'api-changelog.md'
+      - 'NEWS.md'
+      - 'website-news.md'
+      - 'releases.md'
+      - 'npm.md'
+      - 'huggingface.md'
+      - 'insights.md'
+      - 'scripts/build-pages.mjs'
+      - 'scripts/contrast.mjs'
+      - 'site/**'
+      - 'package-lock.json'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -65,10 +84,13 @@ jobs:
       - name: Check contrast
         run: node scripts/contrast.mjs
 
+      # Pages plumbing only makes sense on a branch that actually deploys.
       - name: Setup Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           # Astro writes to site/dist; the markdown staged into public/ is
@@ -77,6 +99,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
