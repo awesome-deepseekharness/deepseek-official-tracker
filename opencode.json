@@ -68,7 +68,7 @@
         "npx",
         "-y",
         "chrome-devtools-mcp@latest",
-        "--wsEndpoint=wss://kitesurf.cloudflare.app/devtools/browser"
+        "--wsEndpoint=wss://kitesurf.dev/devtools/browser"
       ],
       "enabled": true
     }

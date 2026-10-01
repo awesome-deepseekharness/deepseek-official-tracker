@@ -25,6 +25,7 @@ import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { collectSignals, loadSeen, saveSeen } from './corners.mjs';
+import { probeBrowser } from './kitesurf-probe.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -174,7 +175,7 @@ async function generateWithTraversal(prompt) {
   throw lastErr || new Error('all free models failed');
 }
 
-function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = [] }) {
+function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = [], browserOk = null }) {
   const now = new Date().toISOString();
   const byTier = fresh.reduce((acc, s) => {
     (acc[s.tier] ||= []).push(s);
@@ -232,7 +233,7 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
     `  • Chinese press via websearch: "deepseek 官方 发布" / "深度求索 新模型" — WeChat/Weibo/36kr/机器之心 relays often break first`,
     `- websearch : use for gaps the endpoints miss (WeChat, Weibo, Discord, Chinese media). 4-6 searches minimum.`,
     `- webfetch : static HTML fetch`,
-    `- Remote browser (kitesurf MCP, rendered): use for JS-heavy pages — x.com/deepseek_ai timeline, huggingface.co/deepseek-ai trending. Top 2 high-value targets only; compare with a curl result before trusting.`,
+    `- Remote browser (kitesurf MCP over wss://kitesurf.dev/devtools/browser, rendered, stateless, no key): use for JS-heavy pages — x.com/deepseek_ai timeline, huggingface.co/deepseek-ai trending. Top 2 high-value targets only; compare with a curl result before trusting.${browserOk === false ? ' **PROBE SAYS UNUSABLE THIS RUN — skip it, do not retry, and note the gap in Risk/Confidence.**' : ''}`,
     `- edit : write insights.md  |  todowrite / task : plan your 4 phases`,
     ``,
     `## Deep discovery methodology — 4 phases (MANDATORY, use todowrite to track)`,
@@ -374,7 +375,18 @@ async function main() {
     console.warn('[discover] No fresh signals but corners are degraded — running anyway so gaps get reported.');
   }
 
-  const prompt = buildPrompt({ newSlugs, state, feedPreview, fresh, cornerErrors: corners.errors });
+  // The remote browser is experimental and its endpoint already moved hosts
+  // once, breaking it silently: the old host completed TCP and TLS but failed
+  // every CDP call, so the agent kept being told to use a dead tool. One
+  // handshake per run turns that into a stated fact in the prompt.
+  const browser = await probeBrowser();
+  console.log(`[discover] Browser ${browser.ok ? `usable (${browser.targets} targets)` : `UNUSABLE: ${browser.error}`}`);
+
+  const prompt = buildPrompt({
+    newSlugs, state, feedPreview, fresh,
+    cornerErrors: corners.errors,
+    browserOk: browser.ok,
+  });
 
   // Write prompt to temp file for debugging (optional)
   fs.writeFileSync(path.join(ROOT, '.discover-prompt.md'), prompt, 'utf8');
