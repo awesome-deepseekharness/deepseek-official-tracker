@@ -1,0 +1,10 @@
+# The index already stores LF for every tracked file, so core.autocrlf on a
+# Windows checkout was rewriting the working tree to CRLF and back. transit.mjs
+# had a real bug born from exactly this (a /m regex whose `$` sits before `\r`,
+# making every source file parse as empty) — the fix belonged in the parser, but
+# the cause belonged here.
+* text=auto eol=lf
+
+# Committed data and generated output that must never be rewritten.
+*.md text eol=lf
+site/package-lock.json text eol=lf
