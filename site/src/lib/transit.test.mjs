@@ -1,7 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseSignalTables, parseFeedStamp, releaseKeys as mReleaseKeys } from './transit.mjs';
+import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseSignalTables, parseFeedStamp, magnitudeOf, weeklyCadence, releaseKeys as mReleaseKeys } from './transit.mjs';
+
+// The page bands magnitude into three weights so rank reads without colour.
+// Duplicated here rather than imported so a change to the page's banding cannot
+// silently satisfy the data model's own test.
+const magBandFor = n => (n >= 3 ? 'bright' : n === 2 ? 'mid' : 'faint');
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const read = f => { try { return fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch { return ''; } };
@@ -114,6 +119,44 @@ if (tableSigs.length) {
   console.log('newest signals:');
   for (const s of tableSigs.slice(0, 5)) console.log(`  ${s.date}  ${s.tier.padEnd(9)}  ${s.source.slice(0, 18).padEnd(18)}  ${s.title.slice(0, 60)}`);
 }
+
+// --- magnitude & cadence -----------------------------------------------------
+// Both were shipped untested once and the cadence strip rendered sixteen empty
+// columns captioned "0 releases in 16 weeks" — the one element whose whole job
+// is proving the tracker is alive, confidently reporting that nothing was.
+
+const two = { date: '2026-09-29', lines: ['github', 'npm'] };
+const one = { date: '2026-09-29', lines: ['github'] };
+
+check('magnitude: more sources means a lower (brighter) magnitude',
+  magnitudeOf({ date: '2026-09-29', lines: ['blog', 'api', 'hf'] }).value < magnitudeOf(two).value);
+check('magnitude: two sources is mid-banded', magnitudeOf(two).value === 4.3 && magBandFor(2) === 'mid',
+  JSON.stringify(magnitudeOf(two)));
+check('magnitude: one source is faint-banded', magBandFor(1) === 'faint');
+check('magnitude: three sources is bright-banded', magBandFor(3) === 'bright');
+check('magnitude: duplicate line ids count once', magnitudeOf({ date: 'x', lines: ['github', 'github'] }).sources === 1);
+check('undated entries get no magnitude at all', magnitudeOf({ date: 'n/a', lines: ['github', 'npm'] }) === null);
+
+const cad = weeklyCadence([
+  { date: '2026-09-29', lines: ['github', 'npm'] },
+  { date: '2026-09-30', lines: ['github'] },
+  { date: '2026-09-28', lines: ['github', 'npm'] },
+  { date: '2026-07-01', lines: ['github'] },
+], { weeks: 16 });
+check('cadence: returns the requested number of weeks', cad.length === 16, `got ${cad.length}`);
+check('cadence: the busiest week is not empty', cad.some(w => w.count > 0), 'all weeks empty');
+check('cadence: counts add up to every dated stop in range',
+  cad.reduce((n, w) => n + w.count, 0) === 4, `got ${cad.reduce((n, w) => n + w.count, 0)}`);
+check('cadence: empty weeks are present rather than skipped',
+  cad.some(w => w.count === 0), 'no quiet week emitted');
+check('cadence: oldest first, newest last',
+  cad.every((w, i) => i === 0 || cad[i - 1].weekStart < w.weekStart));
+check('cadence: every bucket is a Monday', cad.every(w => new Date(`${w.weekStart}T00:00:00Z`).getUTCDay() === 1),
+  cad.filter(w => new Date(`${w.weekStart}T00:00:00Z`).getUTCDay() !== 1).map(w => w.weekStart).join(','));
+check('cadence: the strongest release in a week is reported',
+  cad.some(w => w.strongest && w.strongestSources >= 2), 'no multi-source week found');
+check('cadence: real repo data produces a populated strip',
+  weeklyCadence(stops, { weeks: 16 }).some(w => w.count > 0), 'strip would render empty');
 
 console.log(fail ? `\n${fail} failure(s)` : '\ntransit model OK');
 process.exit(fail ? 1 : 0);

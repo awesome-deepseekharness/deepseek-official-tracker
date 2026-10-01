@@ -329,32 +329,37 @@ export function weeklyCadence(stops, { weeks = 16 } = {}) {
 
   const dayMs = 86400000;
   const latest = Math.max(...dated.map(s => Date.parse(`${s.date}T00:00:00Z`)));
-  const latestWeekStart = latest - ((latest + 3 * dayMs) % 7 === 0 ? 0 : 0); // anchor on the date itself
-  // Anchor every bucket to a Monday so the column heads can print a real weekday.
-  const mondayOffset = (new Date(latestWeekStart).getUTCDay() + 6) % 7;
-  const end = latestWeekStart - mondayOffset * dayMs + dayMs; // exclusive
-  const start = end - weeks * 7 * dayMs;
+
+  // Both the bucket keys and the per-stop lookup have to be anchored to the same
+  // weekday or nothing ever matches. Anchoring only the lookup is the bug this
+  // comment replaced: buckets were keyed off the newest release's weekday while
+  // stops were looked up by Monday, so every column came back empty and the
+  // caption read "0 releases in 16 weeks" — a confidently wrong number on the
+  // one element whose entire job is to prove the tracker is alive.
+  const mondayOf = t => t - ((new Date(t).getUTCDay() + 6) % 7) * dayMs;
+  const thisMonday = mondayOf(latest);
+  const start = thisMonday - (weeks - 1) * 7 * dayMs;
+  const end = thisMonday + 7 * dayMs; // exclusive
 
   const buckets = new Map();
   for (let t = start; t < end; t += 7 * dayMs) {
-    buckets.set(t, { weekStart: t, stops: [], maxSourceCount: 0 });
+    buckets.set(t, { weekStart: t, stops: [] });
   }
   for (const s of dated) {
-    const t = Date.parse(`${s.date}T00:00:00Z`);
-    const monday = t - ((new Date(t).getUTCDay() + 6) % 7) * dayMs;
-    const b = buckets.get(monday);
-    if (!b) continue;
-    b.stops.push(s);
-    b.maxSourceCount = Math.max(b.maxSourceCount, new Set(s.lines).size);
+    const b = buckets.get(mondayOf(Date.parse(`${s.date}T00:00:00Z`)));
+    if (b) b.stops.push(s);
   }
 
   return [...buckets.values()]
     .sort((a, b) => a.weekStart - b.weekStart)
     .map(b => {
-      const strongest = b.stops.reduce((acc, s) => {
-        const n = new Set(s.lines).size;
-        return n > acc.count ? { count: n, stop: s } : acc;
-      }, { count: 0, stop: null });
+      const strongest = b.stops.reduce(
+        (acc, s) => {
+          const n = new Set(s.lines).size;
+          return n > acc.count ? { count: n, stop: s } : acc;
+        },
+        { count: 0, stop: null }
+      );
       return {
         weekStart: new Date(b.weekStart).toISOString().slice(0, 10),
         count: b.stops.length,
