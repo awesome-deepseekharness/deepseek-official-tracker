@@ -1,4 +1,4 @@
-import { parseSourceFile } from 'file:///C:/Users/runneradmin/Desktop/deepseek-official-tracker/site/src/lib/transit.mjs';
+import { parseSourceFile } from './transit.mjs';
 
 // [line, date, title, body] — bodies that must survive the metadata filter.
 const KEEP = [
