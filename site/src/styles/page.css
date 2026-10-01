@@ -1,0 +1,595 @@
+/* page.css — masthead, lede, signals, sources, footer. The diagram's geometry
+   lives in diagram.css because it is the composition, not chrome. */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in oklch, var(--enamel) 90%, transparent);
+  backdrop-filter: blur(12px) saturate(140%);
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead-in {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--porcelain);
+}
+
+.wordmark-glyph {
+  width: 18px;
+  height: 18px;
+  color: var(--line-blog);
+  flex: none;
+}
+
+.masthead-nav {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  justify-self: center;
+}
+
+.masthead-nav a {
+  color: var(--text-muted);
+}
+
+.masthead-nav a:hover {
+  color: var(--porcelain);
+}
+
+.masthead-stamp {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.masthead-sep {
+  opacity: 0.5;
+  margin: 0 5px;
+}
+
+.masthead-time {
+  color: var(--text-muted);
+}
+
+/* --- first viewport ------------------------------------------------------ */
+
+.lede {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(28px, 3.8vw, 52px) var(--gutter) var(--section-pad);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 372px);
+  /* The aside spans both rows so it can run the full height of the diagram.
+     Named areas also let the narrow layout reorder to claim → featured station
+     → map, which matters because on a phone the diagram is 80 stops long and
+     would otherwise push the featured release off the bottom of the page. */
+  grid-template-areas:
+    'claim aside'
+    'main  aside';
+  gap: 0 clamp(24px, 3.6vw, 56px);
+  align-items: start;
+}
+
+.lede-claim {
+  grid-area: claim;
+  margin: 0 0 clamp(26px, 3.4vw, 44px);
+}
+
+.col-main {
+  grid-area: main;
+  min-width: 0;
+}
+
+/* The claim heads the diagram's own column, so the map below it reads as the
+   same block of attention rather than a separate hero. */
+.lede-claim {
+  font-family: var(--font);
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--porcelain);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+.lede-claim strong {
+  font-weight: 600;
+  color: var(--line-blog);
+}
+
+/* The station card and route roster follow the reader down the long diagram
+   instead of trailing off into empty enamel. */
+.lede-aside {
+  grid-area: aside;
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* The six lines, named and counted, so the reader learns the system before
+   reading a single station. Counts sit hard against their labels: stretched to
+   the column width they read as a disconnected data column. */
+.route-legend {
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+.route {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.route-tick {
+  width: 16px;
+  height: 3px;
+  background: var(--c);
+  border-radius: 2px;
+  transform: translateY(-4px);
+  flex: none;
+}
+
+.route-name {
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  border-bottom: 1px solid transparent;
+}
+
+.route-name:hover {
+  color: var(--porcelain);
+  border-bottom-color: var(--c);
+}
+
+.route-count {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+/* --- the featured station ------------------------------------------------ */
+
+.station-card {
+  position: relative;
+  background: var(--enamel-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-md);
+  padding: 22px 24px 24px;
+  overflow: hidden;
+}
+
+/* A hairline of the trunk line's colour along the top edge: the card is a panel
+   on the wall and its line bleeds into it. 1px, never a thick accent bar. */
+.station-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c), transparent 72%);
+}
+
+.station-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* 0.6875rem, the smallest size that still clears the 11px functional-text floor
+   the detector enforces; the letter-spacing was what read as all-caps. */
+.interchange-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--porcelain);
+}
+
+.interchange-badge i {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--porcelain);
+  border-radius: 50%;
+  flex: none;
+}
+
+.station-card-date {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.station-card-title {
+  font-family: var(--font);
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.006em;
+  color: var(--porcelain);
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+
+.station-card-summary {
+  font-size: 0.855rem;
+  color: var(--text-muted);
+  margin: 0 0 18px;
+  max-width: var(--measure);
+}
+
+.station-card-lines,
+.stop-sources {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+}
+
+.station-card-lines a,
+.stop-sources a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.station-card-lines a:hover,
+.stop-sources a:hover {
+  color: var(--porcelain);
+}
+
+.station-card-lines i,
+.stop-sources i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  flex: none;
+}
+
+.ext {
+  font-size: 0.72em;
+  opacity: 0.55;
+}
+
+/* --- sections ------------------------------------------------------------ */
+
+.section-head {
+  max-width: 64ch;
+  margin-bottom: clamp(22px, 3vw, 34px);
+}
+
+.section-head h2 {
+  font-family: var(--font);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 500;
+  color: var(--porcelain);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-sub {
+  font-size: 0.885rem;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.section-sub strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.empty {
+  font-size: 0.885rem;
+  color: var(--text-faint);
+  padding: 22px 0;
+  margin: 0;
+}
+
+/* --- early signals ------------------------------------------------------- */
+
+.signals-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--section-pad);
+}
+
+/* The stamp is the point: a reader must be able to tell this material is not a
+   station without reading the prose. */
+.signals-stamp {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal);
+  border: 1px solid var(--signal-line);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.signal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.signal-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.signal-tier {
+  font-family: var(--font);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+/* Flat hairline rows, never station cards: the shape carries the provenance. */
+.signal-link {
+  font-size: 0.865rem;
+  color: var(--text-muted);
+}
+
+.signal-link:hover {
+  color: var(--porcelain);
+}
+
+.signals-foot {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  margin: 18px 0 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--enamel-deep);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.35em;
+}
+
+/* --- sources ------------------------------------------------------------- */
+
+.sources-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--section-pad);
+}
+
+.source-table {
+  list-style: none;
+  margin: 0 0 40px;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  max-width: 900px;
+}
+
+.source-table li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px 104px;
+  gap: 20px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.source-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  font-family: var(--font);
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--porcelain);
+}
+
+.source-name i {
+  width: 16px;
+  height: 3px;
+  background: var(--c);
+  border-radius: 2px;
+  transform: translateY(-4px);
+  flex: none;
+}
+
+.source-file,
+.source-count {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.source-count {
+  text-align: right;
+}
+
+.consume {
+  background: var(--enamel-deep);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  max-width: 780px;
+}
+
+.consume h3 {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+
+.consume pre {
+  margin: 0 0 8px;
+  overflow-x: auto;
+}
+
+.consume pre code {
+  display: block;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0.76rem;
+  color: var(--line-hf);
+  white-space: pre;
+}
+
+.consume p {
+  font-size: 0.79rem;
+  color: var(--text-muted);
+  margin: 14px 0 0;
+}
+
+/* --- footer -------------------------------------------------------------- */
+
+.site-foot {
+  border-top: 1px solid var(--rule);
+  background: var(--enamel-deep);
+}
+
+.foot-in {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 26px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  justify-content: space-between;
+}
+
+.foot-in p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.foot-legal {
+  max-width: 56ch;
+}
+
+/* --- responsive ---------------------------------------------------------- */
+
+@media (max-width: 1040px) {
+  .lede {
+    grid-template-columns: minmax(0, 1fr);
+    /* Featured release and route roster move above the map, so the thing the
+       page is about is on screen before an 80-station list starts. */
+    grid-template-areas:
+      'claim'
+      'aside'
+      'main';
+    row-gap: clamp(26px, 4vw, 40px);
+  }
+
+  .lede-claim {
+    max-width: 24ch;
+  }
+
+  /* Sticky is meaningless once the aside is no longer a narrow rail. */
+  .lede-aside {
+    position: static;
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 760px) {
+  .masthead-in {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 11px var(--gutter);
+  }
+
+  /* The nav collapses to the top of the page instead of wrapping into the
+     wordmark's row, where four items would push the stamp off-screen. */
+  .masthead-nav {
+    justify-self: start;
+    gap: 16px;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .masthead-stamp {
+    text-align: left;
+    font-size: 0.75rem;
+  }
+
+  .signal {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .source-table li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 4px;
+  }
+
+  .source-file {
+    grid-column: 1 / -1;
+  }
+}

@@ -1,0 +1,151 @@
+/*
+ * tokens.css — the midnight transit enamel mural.
+ *
+ * Palette follows the wayfinding/signage world: a dark enamel wall panel lit at
+ * night, porcelain station ticks, and six line inks readable at hairline weight.
+ * Every colour is oklch so perceived lightness steps stay even across hues, which
+ * matters when six coloured lines sit side by side and one must clearly lead.
+ *
+ * The line inks separate in lightness as well as hue so they remain
+ * distinguishable with a red-green deficiency, where a scarlet-vs-verdigris pair
+ * would otherwise collapse into one another.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Ground: enamel panel, not glass. Blue-shifted, never pure black — a black
+     ground with bright lines reads as neon, which is the wrong world. */
+  --enamel: oklch(23% 0.055 258);
+  --enamel-deep: oklch(19% 0.05 258);
+  --enamel-raised: oklch(27.5% 0.05 258);
+
+  --porcelain: oklch(97.8% 0 0);
+  --text: oklch(93% 0.032 250);
+  --text-muted: oklch(77% 0.03 252);
+  /* Both secondary inks carry real chroma at the ground's hue rather than
+     reading as neutral grey: on a coloured panel, grey text looks washed out.
+     --text-faint was also lifted 58% -> 64% because dates measured 3.96:1. */
+  --text-faint: oklch(67% 0.032 252);
+
+  --rule: oklch(97.8% 0 0 / 0.11);
+  --rule-strong: oklch(97.8% 0 0 / 0.2);
+  --edge: oklch(97.8% 0 0 / 0.34);
+
+  /* Six line inks. */
+  --line-blog: oklch(74% 0.14 210);
+  --line-api: oklch(62% 0.17 255);
+  --line-github: oklch(76% 0.15 78);
+  --line-hf: oklch(68% 0.12 172);
+  --line-npm: oklch(62% 0.16 305);
+  --line-news: oklch(70% 0.11 40);
+
+  /* Unverified material, deliberately outside the line palette so a signal can
+     never be mistaken for a station: warm, desaturated, lower contrast. */
+  --signal: oklch(62% 0.045 60);
+  --signal-line: oklch(40% 0.03 60);
+
+  --focus-ring: oklch(80% 0.13 210);
+
+  --radius-sm: 3px;
+  --radius-md: 8px;
+
+  --measure: 68ch;
+  --gutter: clamp(18px, 4vw, 40px);
+  --section-pad: clamp(56px, 7vw, 104px);
+
+  --font: 'Barlow Condensed', 'Oswald', 'Avenir Next Condensed', 'Helvetica Neue', Arial, sans-serif;
+  --font-text: 'Barlow', ui-sans, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/*
+ * Browser surfaces carry the design too. These are the parts nobody draws:
+ * selection, scrollbars, focus rings, and the numerals in tables. Left at browser
+ * defaults they are the cheapest way to look assembled rather than built.
+ */
+::selection {
+  background: oklch(74% 0.14 210 / 0.3);
+  color: var(--porcelain);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-color: oklch(40% 0.04 258) var(--enamel-deep);
+  background: var(--enamel);
+  /* Anchor jumps land under the sticky masthead instead of behind it. */
+  scroll-padding-top: 76px;
+}
+
+body {
+  margin: 0;
+  background: var(--enamel);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dates and counts are compared column-wise, so they must be tabular or the
+   whole timetable jitters as the feed updates. */
+time,
+.mono,
+.num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+a {
+  color: var(--porcelain);
+  text-decoration: none;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--edge);
+  transition: text-decoration-color 0.12s var(--ease), color 0.12s var(--ease);
+}
+
+a:hover {
+  text-decoration-color: var(--line-blog);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--porcelain);
+  color: var(--ink, oklch(13% 0 0));
+  padding: 10px 16px;
+  z-index: 100;
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

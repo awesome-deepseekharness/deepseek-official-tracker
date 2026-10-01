@@ -1,0 +1,197 @@
+/* diagram.css — the transit map composition.
+ *
+ * The vertical axis is time: newest at the top, older as you descend. Each stop
+ * carries its lines as a short tick group on one left rail, so scanning the rail
+ * shows which sources are busy on which day before any title is read. Interchanges
+ * get a porcelain ring instead of a filled dot — the one place the page spends
+ * real emphasis, because a corroborated release is the fact worth noticing.
+ */
+
+/* Lives inside the .lede grid's main column, so it needs no page gutter or
+   max-width of its own — the column already bounds it. */
+.diagram-section {
+  padding: 0;
+}
+
+.diagram {
+  position: relative;
+}
+
+/* The continuous route spine the stations hang off. */
+.diagram::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--line-blog) 0%,
+    color-mix(in oklch, var(--line-blog) 26%, transparent) 20%,
+    var(--rule) 52%,
+    var(--rule-strong) 100%
+  );
+}
+
+.stop {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 18px;
+  padding-bottom: 24px;
+}
+
+.stop-rail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+  gap: 3px;
+}
+
+/* A plain stop is one filled dot; an interchange is a ring, 13px across. The two
+   differ by shape and size, not colour alone. */
+.stop-tick {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  flex: none;
+}
+
+.stop.is-interchange .stop-tick {
+  width: 13px;
+  height: 13px;
+  background: var(--enamel);
+  border: 1.5px solid var(--c);
+  margin-bottom: 2px;
+}
+
+.stop-body {
+  min-width: 0;
+}
+
+.stop-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 11px;
+  margin-bottom: 3px;
+}
+
+.stop-meta time {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.stop-badge {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stop-name {
+  font-family: var(--font);
+  font-size: 1.04rem;
+  font-weight: 500;
+  /* 1.3, not tighter: a release title can run to two lines and 1.1 crushed the
+     descenders together at this size. */
+  line-height: 1.3;
+  color: var(--text);
+  margin: 0 0 7px;
+  text-wrap: pretty;
+}
+
+.stop.is-interchange .stop-name {
+  color: var(--porcelain);
+  font-weight: 600;
+}
+
+.stop-summary {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  max-width: var(--measure);
+}
+
+.stop-sources a {
+  font-size: 0.75rem;
+}
+
+.stop-sources i {
+  width: 6px;
+  height: 6px;
+}
+
+/* Undated GitHub tags, folded away: real, but carrying no timestamp they cannot
+   sit on a time axis without lying about their position. */
+.undated {
+  margin-top: 4px;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+}
+
+.undated summary {
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  list-style: none;
+}
+
+.undated summary::-webkit-details-marker {
+  display: none;
+}
+
+.undated summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1em;
+  font-family: var(--mono);
+  color: var(--text-muted);
+}
+
+.undated[open] summary::before {
+  content: '−';
+}
+
+.undated summary:hover {
+  color: var(--text-muted);
+}
+
+.undated-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 5px 24px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.undated-list a {
+  color: var(--text-faint);
+}
+
+.undated-list a:hover {
+  color: var(--text-muted);
+}
+
+@media (max-width: 760px) {
+  .stop {
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 13px;
+    padding-bottom: 20px;
+  }
+
+  .stop-name {
+    font-size: 0.98rem;
+  }
+}

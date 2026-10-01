@@ -6,10 +6,16 @@ on:
     paths:
       - 'FEED.md'
       - 'README.md'
+      - 'api-changelog.md'
+      - 'NEWS.md'
       - 'website-news.md'
+      - 'releases.md'
+      - 'npm.md'
       - 'huggingface.md'
       - 'insights.md'
       - 'scripts/build-pages.mjs'
+      - 'site/**'
+      - 'package-lock.json'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -35,9 +41,29 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      # The site is an Astro project under site/. build-pages.mjs stages the
+      # tracker's markdown into site/public/ and then runs the build, so this
+      # step is the whole pipeline.
+      - name: Install site dependencies
+        working-directory: site
+        run: npm ci
+
+      # These read the real committed data, so they fail when the parser drifts
+      # from what track.mjs writes — which is how the CRLF bug that made every
+      # source file parse as empty was caught in the first place.
+      - name: Test data model
+        run: |
+          node site/src/lib/transit.test.mjs
+          node scripts/corners.x.test.mjs
 
       - name: Build site
         run: node scripts/build-pages.mjs
+
+      - name: Check contrast
+        run: node scripts/contrast.mjs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -45,7 +71,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          # Astro writes to site/dist; the markdown staged into public/ is
+          # copied there, so the documented raw-markdown URLs keep resolving.
+          path: site/dist
 
   deploy:
     needs: build
