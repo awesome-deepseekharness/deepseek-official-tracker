@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-01T22:29:05.511Z",
-  "count": 279,
+  "updatedAt": "2026-10-02T04:05:16.888Z",
+  "count": 286,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -151,6 +151,7 @@
     "gnews:deepseek-brings-ai-software-to-huawei’s-ascend-chips---techzine-global",
     "gnews:deepseek-brings-ai-software-to-huawei’s-ascend-chips---techzine.eu",
     "gnews:deepseek-builds-for-huawei-ascend---geopolitechs",
+    "gnews:deepseek-effect?-how-china’s-quant-funds-thrive-amid-tight-regulatory-scrutiny--",
     "gnews:deepseek-just-gave-huawei-a-new-weapon-in-the-race-against-nvidia---yahoo-financ",
     "gnews:deepseek-open-sources-huawei-chip-tools-as-a-simpler-alternative-to-cuda---the-n",
     "gnews:deepseek-open-sources-software-tools-for-huawei-ai-chips---the-information",
@@ -161,11 +162,13 @@
     "gnews:deepseek-unveils-huawei-ai-chip-software-to-challenge-nvidia---seeking-alpha",
     "gnews:deepseek-unveils-huawei-ai-chip-tools-that-may-replace-nvidia’s---bloomberg.com",
     "gnews:deepseek-unveils-huawei-ai-chip-tools-that-may-replace-nvidia’s---yahoo-finance",
+    "gnews:exclusive:-china's-deepseek-taps-citic-securities-for-domestic-ipo,-sources-say-",
     "gnews:exclusive:-deepseek-to-brief-un-security-council-on-ai-this-week,-sources-say---",
     "gnews:firm-rents-four-nvidia-h200s-to-test-'80x-cheaper'-deepseek-claim-—-$13,200-mont",
     "gnews:nvidia’s-software-advantage-under-threat-by-deepseek-huawei-alliance---benzinga",
     "gnews:nvidia’s-software-advantage-under-threat-by-deepseek-huawei-alliance---benzinga.",
     "gnewszh:harness:deepseek-harness-v0.2-发布桌面版：装插件靠npm-包名，还能让ai-自己写插件--oschina---开源-×-ai-",
+    "gnewszh:harness:deepseek-harness-v0.2-预览版发布，上线桌面安装包---cryptorank",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---i.ifeng.com",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---凤凰网",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---finance.sina.com.cn",
@@ -181,6 +184,7 @@
     "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用---搜狐网",
     "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---news.qq.com",
     "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---qq-news",
+    "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---腾讯新闻",
     "gnewszh:harness:deepseek终于开箱即用-deepseek-harness官方桌面端实测：不用命令行启动，常用功能开箱即用。从自动整理桌面，到自己写个猫",
     "gnewszh:harness:【deepseek-harness-推出桌面端预览版】-#deeps---凤凰网科技",
     "gnewszh:harness:刚刚，deepseek-harness桌面端上线，梁文锋开送token了---智东西",
@@ -188,10 +192,13 @@
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---guancha.cn",
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---观察者网",
     "gnewszh:harness:黑鲸入水：deepseek开源“ai手脚”，ai时代商业模式逐渐清晰---finance.sina.cn",
+    "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---凤凰网",
     "gnewszh:zh:anthropic发布ai滥用报告后-中国监管部门据报对deepseek和月之暗面展开调查---rfi",
+    "gnewszh:zh:anthropic发布ai滥用报告后-中国监管部门据报对deepseek和月之暗面展开调查---rfi.fr",
     "gnewszh:zh:deepseek-再扔“王炸”-美国指责-中国反驳---dw.com",
     "gnewszh:zh:deepseek据报在内蒙古数据中心部署16万片华为晶片---联合早报",
     "gnewszh:zh:deepseek最新论文，作者超130人，梁文锋最后署名---finance.sina.cn",
+    "gnewszh:zh:deepseek最新论文，作者超130人，梁文锋最后署名---新浪财经",
     "gnewszh:zh:声明：本人从未在互联网上诋毁过深度求索，并没有称梁文锋为梁白开。-本人实际上是深度求索2年老粉，经过...-|-机组---gcores.co",
     "gnewszh:zh:声明：本人从未在互联网上诋毁过深度求索，并没有称梁文锋为梁白开。-本人实际上是深度求索2年老粉，经过...-|-机组---机核gcores",
     "gnewszh:zh:安理会本周开会讨论ai和国际安全问题，deepseek公司被曝将作通报---guancha.cn",
@@ -282,7 +289,9 @@
     "x:2090730032574631962",
     "x:2097930608790167907"
   ],
-  "lastSignalsRunAt": "2026-10-01T22:29:05.511Z",
-  "lastFreshCount": 15,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-02T04:05:16.887Z",
+  "lastFreshCount": 9,
+  "cornerErrors": [
+    "arxiv: HTTP 429"
+  ]
 }
