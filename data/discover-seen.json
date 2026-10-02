@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-02T04:05:16.888Z",
-  "count": 286,
+  "updatedAt": "2026-10-02T04:24:38.335Z",
+  "count": 307,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -49,6 +49,24 @@
     "cnmedia:www.qbitai.com:deepseek知乎独家发文，首次公开v4.1-agent训练“大本营”dsec",
     "cnmedia:www.solidot.org:cnnic-称中国生成式-ai-用户超-7-亿",
     "cnmedia:www.solidot.org:中国-ai-智能体也会撒谎和欺骗",
+    "exa:community:https://aidaily.fyi/zh/a/how-to-give-local-models-reliable-web-browsing-260927",
+    "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5856",
+    "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
+    "exa:community:https://www.v2ex.com/t/1239251",
+    "exa:community:https://www.v2ex.com/t/1240128",
+    "exa:community:https://www.v2ex.com/t/1241664",
+    "exa:rumor:https://cellcog.ai/blog/deepseek-v5-release-date/",
+    "exa:rumor:https://nitter.jaydenha.uk/Priyannkaaaa/status/2103699253273247809",
+    "exa:rumor:https://promptblueprints.tech/leaks/what-the-deepseek-v5-leak-actually-reports/",
+    "exa:rumor:https://www.orcarouter.ai/zh-CN/blog/deepseek-v5-preview-leak",
+    "exa:rumor:https://www.orcarouter.ai/zh-CN/blog/dsh-0-2-v4-1-pro-leak",
+    "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-v4-1-pro-release-window-leak",
+    "exa:secondary:https://eu.36kr.com/zh/p/4005355518726025",
+    "exa:secondary:https://fluxbbs.com/deepseek-harness-v0-2-desktop-release/",
+    "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
+    "exa:secondary:https://www.80aj.com/2026/09/29/deepseek-desktop-dsh-0-2-0-rc1/",
+    "exa:secondary:https://www.okyn.com/ai/1042.html",
+    "exa:secondary:https://zhidx.com/p/598364.html",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/api/list-models",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news250821/",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news251201/",
@@ -108,6 +126,7 @@
     "ghcommunity:weights:deepseek-ai/DeepJIT",
     "ghcommunity:weights:deepseek-ai/DeepSelect",
     "ghcommunity:weights:deepseek-ai/deepseek-recipe",
+    "ghcommunity:weights:deepseek-ai/dsh-libreoffice-kit",
     "ghcommunity:weights:mini-yifan/deepseek-harness-orb",
     "ghcommunity:weights:shi3z/deepseekv4.1-A100-custom",
     "ghcommunity:weights:tonyd2wild/DeepSeek-V4.1-Flash-vLLM-DGX-Spark",
@@ -261,6 +280,7 @@
     "npmsearch:@deepseek-ai/dsh-skill:0.0.1-rc.1",
     "npmsearch:@deepseek-ai/dsh-spill:0.0.1-rc.1",
     "npmsearch:@deepseek-ai/dsh-storage:0.0.1-rc.1",
+    "npmsearch:@deepseek-ai/dsh-subprocess:0.0.1-rc.1",
     "npmsearch:@deepseek-ai/dsh-web-frontend:0.0.1-rc.5",
     "npmsearch:@deepseek-ai/dsh-web:0.0.1-rc.1",
     "npmsearch:@deepseek-ai/dsh-workspace:0.0.1-rc.1",
@@ -280,6 +300,7 @@
     "openrouter:~deepseek/deepseek-flash-latest",
     "openrouter:~deepseek/deepseek-pro-latest",
     "openrouter:~deepseek/deepseek-v4-flash-latest",
+    "product:harness:1fee217ac8cf651cb85fa819d9c582495503b73d32dec8e620fc8d6b82bd6e8c",
     "pypi:deepseek:1.0.0",
     "rumour:en:chinese-authorities-investigate-deepseek-and-moonshot-ai-over-suspecte",
     "rumour:zh:热点追击丨deepseek即将发布新模型-助力ai应用广泛落地---搜狐网",
@@ -289,9 +310,12 @@
     "x:2090730032574631962",
     "x:2097930608790167907"
   ],
-  "lastSignalsRunAt": "2026-10-02T04:05:16.887Z",
-  "lastFreshCount": 9,
+  "lastRunAt": "2026-10-02T04:24:38.335Z",
+  "lastFreshCount": 21,
   "cornerErrors": [
-    "arxiv: HTTP 429"
+    "arxiv: This operation was aborted",
+    "google-news: HTTP 503",
+    "google-news-zh: zh Google News returned nothing",
+    "rumours: no rumour items matched"
   ]
 }
