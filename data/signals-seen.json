@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-02T05:00:46.129Z",
-  "count": 182,
+  "updatedAt": "2026-10-02T05:20:31.697Z",
+  "count": 184,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -89,6 +89,7 @@
     "gnews:deepseek,-huawei-challenge-the-software-powering-nvidia’s-ai-dominance---the-dai",
     "gnews:deepseek,-huawei-team-on-ai-chip-software---mobile-world-live",
     "gnews:deepseek,-huawei-team-on-ai-chip-software---mobileworldlive.com",
+    "gnews:deepseek,-moonshot-reportedly-face-china-scrutiny-over-anthropic-claims-ahead-of",
     "gnews:deepseek-and-huawei-partner-on-open-source-ai-chip-software---yahoo-tech",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---nytimes.com",
@@ -108,6 +109,7 @@
     "gnews:nvidia’s-software-advantage-under-threat-by-deepseek-huawei-alliance---benzinga",
     "gnewszh:harness:deepseek-harness-v0.2-发布桌面版：装插件靠npm-包名，还能让ai-自己写插件--oschina---开源-×-ai-",
     "gnewszh:harness:deepseek-harness-v0.2-预览版发布，上线桌面安装包---cryptorank",
+    "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---i.ifeng.com",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---凤凰网",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---新浪财经",
@@ -185,10 +187,10 @@
     "x:2090730032574631962",
     "x:2097930608790167907"
   ],
-  "lastSignalsRunAt": "2026-10-02T05:00:46.128Z",
+  "lastSignalsRunAt": "2026-10-02T05:20:31.697Z",
   "lastFreshCount": 104,
   "cornerErrors": [
-    "exa-news: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
-    "exa-community: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
+    "x-timeline: firecrawl scrape -> HTTP 403",
+    "firecrawl-search: firecrawl search -> HTTP 403"
   ]
 }
