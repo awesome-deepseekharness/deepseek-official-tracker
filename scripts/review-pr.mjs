@@ -22,8 +22,11 @@ export function validDecision(value, head, draft) {
       typeof value.reason !== 'string' || value.reason.trim().length < 10) return false;
   if (value.decision === 'MERGE') {
     return value.confidence === 'high' && Array.isArray(value.sources) && value.sources.length > 0 &&
-      value.sources.every(s => s.url?.startsWith('https://') && draft.includes(s.url) &&
+      value.sources.every(s => s.url?.startsWith('https://') &&
         typeof s.evidence === 'string' && s.evidence.length >= 20) &&
+      // Independent verification often uses the API behind a cited webpage.
+      // Require an anchor to the draft, without rejecting alternate evidence.
+      value.sources.some(s => draft.includes(s.cited_url || s.url)) &&
       typeof value.new_information === 'string' && value.new_information.length >= 20;
   }
   return true;

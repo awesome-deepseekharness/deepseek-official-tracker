@@ -55,7 +55,7 @@ Write ONLY `.review-decision.json`:
   "reason": "Explain the concrete editorial decision.",
   "confidence": "high",
   "new_information": "What is new compared with the published insights report.",
-  "sources": [{"url": "https://a-url-cited-in-the-draft", "evidence": "What the fetched content actually confirms, including dates."}]
+  "sources": [{"url": "https://the-url-actually-fetched", "cited_url": "https://the-corresponding-url-in-the-draft", "evidence": "What the fetched content actually confirms, including dates."}]
 }
 ```
 MERGE requires high confidence and a nonempty sources array. The workflow handles
