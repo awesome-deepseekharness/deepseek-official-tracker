@@ -21,6 +21,12 @@ The tracker has separate collection, research, review and publishing stages.
   official announcement. A tool outage requests retry, not human editorial review.
   Source evidence, head SHA, build and tests are checked before the merge API is
   called. A failed merge fails the Action; no success comment is posted first.
+  The base workflow first fetches a compact live evidence bundle from fixed
+  official URLs, preserving desktop download links and release/npm metadata.
+  This avoids repeated browser emulation and large package-history downloads;
+  missing or contradictory evidence still requires source checks. The bundle
+  and review decision are retained as Action artifacts. The final context check
+  reads the live main Git ref, not the PR's potentially stale base SHA.
 - After bot data commits or merges, Pages is explicitly dispatched, because
   pushes made using `GITHUB_TOKEN` do not trigger other push workflows.
 

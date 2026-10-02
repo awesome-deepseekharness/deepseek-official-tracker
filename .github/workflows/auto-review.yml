@@ -63,5 +63,6 @@ jobs:
           path: |
             .review-decision.json
             .review-input/pr.json
+            .review-input/evidence.json
           include-hidden-files: true
           if-no-files-found: ignore

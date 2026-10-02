@@ -86,7 +86,7 @@ jobs:
           node site/src/lib/transit.test.mjs
           node scripts/corners.x.test.mjs
           node scripts/signals.test.mjs
-          node --test scripts/readme-latest.test.mjs scripts/automation.test.mjs scripts/review-pr.test.mjs scripts/products.test.mjs
+          node --test scripts/readme-latest.test.mjs scripts/automation.test.mjs scripts/review-pr.test.mjs scripts/review-evidence.test.mjs scripts/products.test.mjs
 
       - name: Build site
         run: node scripts/build-pages.mjs
