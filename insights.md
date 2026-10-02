@@ -48,13 +48,13 @@ September 10 model headline was an incomplete view of what changed.
 
 ## Secondary signals
 
-- **2026-09-30 — media report:** 爱范儿's desktop hands-on report, republished
+- **Harness desktop hands-on** (2026-09-30, media report): 爱范儿's desktop hands-on report, republished
   by 36Kr, describes Windows/macOS installation, plugin management and scheduled
   automation. These are the outlet's reported experiences, not independent
   benchmarks by this tracker. Desktop download availability was separately
   confirmed on the official product page above.
   [Source](https://eu.36kr.com/zh/p/4005355518726025)
-- **2026-09-30 — media report:** InfoQ describes the Ascend infrastructure
+- **Ascend infrastructure overview** (2026-09-30, media report): InfoQ describes the Ascend infrastructure
   collection and differentiates the roles and limitations of TileLang,
   DeepGEMM, DeepEP, FlashMLA, TileKernels and DeepSelect. The broader six-component
   framing is attributed to InfoQ; only the first-party items actually checked
