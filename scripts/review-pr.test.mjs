@@ -19,4 +19,7 @@ test('merge decisions bind verified evidence to the reviewed head and cited URLs
   assert.equal(validDecision({ ...decision, confidence: 'low' }, 'abc', draft), false);
   assert.equal(validDecision({ ...decision, sources: [] }, 'abc', draft), false);
   assert.equal(validDecision(decision, 'abc', 'Unrelated content'), false);
+  assert.equal(validDecision({ ...decision, sources: [...decision.sources,
+    { url: 'https://api.example.com/news/1', evidence: 'The source API independently confirms the original publication date.' },
+  ] }, 'abc', draft), true);
 });

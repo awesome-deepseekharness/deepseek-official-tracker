@@ -394,11 +394,10 @@ export function parseSignals(insights) {
     if (!tier) continue;
     const start = h.index + h[0].length;
     const end = i + 1 < allH2.length ? allH2[i + 1].index : text.length;
-    for (const line of text.slice(start, end).split('\n')) {
-      // Entries look like: - **Headline** (date) — detail. [Source](url)
-      const bullet = line.match(/^\s*[-*]\s+(.+)$/);
-      if (!bullet) continue;
-      const raw = bullet[1];
+    // Markdown writers may wrap a bullet and its citation onto indented lines.
+    // Keep that content together, while still stopping at the next bullet.
+    for (const bullet of text.slice(start, end).matchAll(/^\s*[-*][ \t]+([^\n]+(?:\n[ \t]+[^\n]+)*)/gm)) {
+      const raw = bullet[1].replace(/\n[ \t]+/g, ' ');
       const links = [...raw.matchAll(/\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g)];
       if (!links.length) continue;
 
