@@ -34,6 +34,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { searchExa } from './search-mcp.mjs';
+import { parseProduct, PRODUCT_URL } from './products.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -67,7 +69,9 @@ async function get(url, opts = {}) {
     'Accept': opts.accept || '*/*',
     ...(opts.headers || {}),
   };
-  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  if (process.env.GITHUB_TOKEN && new URL(url).hostname === 'api.github.com') {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), opts.timeoutMs || 15000);
   try {
@@ -724,7 +728,26 @@ async function collectFirecrawlSearch() {
 
 // ------------------------------------------------------------------ runner
 
+async function collectExa(query, tier) {
+  const results = await searchExa(query, { since: daysAgo(30) });
+  return results.filter(hit => hit.url && hit.title).map(hit => ({
+    id: `exa:${tier}:${hit.url}`,
+    source: `Exa · ${new URL(hit.url).hostname}`,
+    tier, // Search results are leads, including results on first-party domains.
+    title: hit.title,
+    date: dayKey(hit.publishedDate), // Never substitute crawl time for publication.
+    url: hit.url,
+    detail: stripHtml(hit.text || '').slice(0, 280),
+  }));
+}
+
 const COLLECTORS = [
+  ['harness-product', async () => {
+    const product = parseProduct(await get(PRODUCT_URL));
+    return [{ id: `product:harness:${product.fingerprint}`, tier: 'official', source: 'Harness product page',
+      title: product.title, date: product.published, url: PRODUCT_URL,
+      detail: `${product.summary} Publication date is unknown unless explicitly stated; observation is not launch.` }];
+  }],
   ['website-news', collectWebsiteNews],
   ['api-changelog', collectChangelog],
   ['github-releases', collectGithubReleases],
@@ -744,6 +767,9 @@ const COLLECTORS = [
   ['openrouter', collectOpenRouter],
   ['x-timeline', collectXTimeline],
   ['firecrawl-search', collectFirecrawlSearch],
+  ['exa-news', () => collectExa('DeepSeek Harness desktop release plugins automation 昇腾 开源 最新新闻', 'secondary')],
+  ['exa-community', () => collectExa('DeepSeek Harness latest developer discussions Reddit LocalLLaMA V2EX experiences', 'community')],
+  ['exa-rumours', () => collectExa('DeepSeek upcoming model leak rumor 疑似 传闻 爆料', 'rumor')],
 ];
 
 /**
@@ -767,24 +793,24 @@ export async function collectSignals() {
 
 // ------------------------------------------------------------- seen baseline
 
-export function loadSeen() {
+export function loadSeen(file = SEEN_FILE) {
   try {
-    const raw = JSON.parse(fs.readFileSync(SEEN_FILE, 'utf8'));
+    const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
     return { ids: new Set(raw.ids || []), updatedAt: raw.updatedAt || null };
   } catch {
     return { ids: new Set(), updatedAt: null };
   }
 }
 
-export function saveSeen(ids, extra = {}) {
-  fs.mkdirSync(path.dirname(SEEN_FILE), { recursive: true });
+export function saveSeen(ids, extra = {}, file = SEEN_FILE) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   const arr = [...new Set(ids)].sort();
   fs.writeFileSync(
-    SEEN_FILE,
+    file,
     `${JSON.stringify({ updatedAt: new Date().toISOString(), count: arr.length, ids: arr, ...extra }, null, 2)}\n`,
     'utf8'
   );
-  console.log(`[corners] seen baseline saved: ${arr.length} ids -> ${path.relative(ROOT, SEEN_FILE)}`);
+  console.log(`[corners] seen baseline saved: ${arr.length} ids -> ${path.relative(ROOT, file)}`);
 }
 
 export { SEEN_FILE, stripHtml };

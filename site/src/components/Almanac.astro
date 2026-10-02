@@ -50,7 +50,7 @@ const allSignals = signalRows.filter(s => {
 }).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 const signals = allSignals.slice(0, 24);
 const rumourCount = signals.filter(s => s.tier === 'rumor').length;
-const stamp = parseFeedStamp(feed);
+const stamp = [parseFeedStamp(feed), (signalsMd.match(/last run: ([0-9T:.Z-]+)/) || [])[1], product?.observedAt].filter(Boolean).sort().at(-1);
 const builtAt = new Date().toISOString();
 
 const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));

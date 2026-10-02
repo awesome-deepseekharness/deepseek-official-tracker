@@ -28,25 +28,41 @@
 
 **Perfect for:** API users tracking model `deepseek-v4.1-flash`/`deepseek-v4-pro`/`deepseek-v4-flash` pricing & deprecations · researchers watching DeepSeek-V3/R1/V3.2/V4/V4.1 open-source weights · `dsh`/`DeepSeek-Harness` developers tracking CLI releases.
 
-## 🔥 Latest — DeepSeek-V4.1-Flash Release (2026-09-10)
+## 🔥 Latest — DeepSeek Harness｜共探智能上限 (first observed / 首次观测) (2026-10-02)
 
-**Introducing DeepSeek-V4.1-Flash: smarter, faster, more efficient.** — Introducing the smallest model in our new architecture family, with native visual understanding. Designed for greater capability, faster inference, and higher throughput.
+**Product page observed; publication date may be unknown** · [DeepSeek Harness｜共探智能上限 (first observed / 首次观测)](https://www.deepseek.com/harness/)
 
-- **Official excerpt:** Today, we officially release the DeepSeek-V4.1-Flash model. It is the smallest model in our new architecture family, with native multimodal visual understanding. The new architecture is designed for a higher capability ceiling, faster inference, higher throughput, and scaling to larger models. GPQA Diamond: 90.9 HLE: 3…
-- **Weights same-day:** `deepseek-ai/DeepSeek-V4.1-Flash`
-- **Also shipped 2026-09-29 (newer than the model above):** deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2 · [Release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.2)
+使用 DeepSeek Harness 整理文档、分析表格、编写代码和安排定时任务，通过可自由组合的插件拓展 Agent 能力。 Observation date / 观测日期: 2026-10-02. The page does not state a publication date; this is not a release date. 官方页面未注明发布日期，此日期不代表发布日。
 
-[Official announcement](https://api-docs.deepseek.com/news/news260910) · [Change Log](https://api-docs.deepseek.com/updates#date-2026-09-10) · [Website](https://www.deepseek.com/en/news/deepseek-v4-1-flash/) · [HuggingFace DeepSeek-V4.1-Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash)
+- **Harness:** 2026-09-29 · [deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.2) · Prerelease / preview
+- **Latest model / API announcement:** 2026-09-10 · [DeepSeek-V4.1-Flash Release](https://api-docs.deepseek.com/updates#date-2026-09-10)
+- **All official updates:** [FEED.md](FEED.md) · [GitHub releases](releases.md) · [npm](npm.md)
+- **Media, community & rumours (unverified):** [SIGNALS.md](SIGNALS.md) · [Insights](insights.md)
 
 <details>
-<summary>Previous highlights</summary>
+<summary>Recent official updates</summary>
 
-- **2026-08-21** DeepSeek-V4-Flash-Vision-Exp Release
-- **2026-08-13** DeepSeek-V4-Pro Update
-- **2026-07-31** DeepSeek-V4-Flash Update
-- **2026-04-24** DeepSeek-V4
-- **2025-12-01** DeepSeek-V3.2-Speciale
+- **2026-10-02** [DeepSeek Harness｜共探智能上限 (first observed / 首次观测)](https://www.deepseek.com/harness/)
+- **2026-09-29** [deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.2)
+- **2026-09-29** [v0.2.0-rc.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.0-rc.2)
+- **2026-09-28** [deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.1)
+- **2026-09-28** [v0.2.0-rc.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.0-rc.1)
+- **2026-09-24** [deepseek-ai/deepseek-harness release dsh-v0.1.7-rc.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.7-rc.2)
+- **2026-09-24** [v0.1.7-rc.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.7-rc.2)
+- **2026-09-23** [deepseek-ai/deepseek-harness release dsh-v0.1.7-rc.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.7-rc.1)
 </details>
+
+## Harness desktop, release tracking and community news
+
+Track **DeepSeek Harness desktop (Windows/macOS)**, `dsh` CLI releases, DeepSeek models, API changes and model weights. The official product page is monitored directly at [deepseek.com/harness](https://www.deepseek.com/harness/), alongside GitHub, npm, HuggingFace and the official news feeds. [Product observations](product-news.md) distinguish first-seen dates from launch dates.
+
+Media, community discussion and **unverified rumours** live in [SIGNALS.md](SIGNALS.md); reviewed research lives in [insights.md](insights.md). They are never presented as official releases.
+
+- [English website](https://awesome-deepseekharness.github.io/deepseek-official-tracker/) · [中文网站](https://awesome-deepseekharness.github.io/deepseek-official-tracker/zh/) — system/light/dark themes.
+- [How collection and automatic PR review work](AUTOMATION.md) — free-model retries, keyless Exa/Firecrawl and Kitesurf.
+- [Machine-readable source guide](llms.txt) — citation rules and data endpoints for AI readers.
+
+
 
 ---
 
@@ -136,7 +152,7 @@ curl -s https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-offic
 - **Schedule:** `cron: 0 */6 * * *` (every 6h) + `workflow_dispatch` + push on `scripts/**` (so a fix instantly re-crawls).
 - **Past failures:** 2 early `rejected` pushes on `2026-08-15 09:1x UTC` due to concurrent `git push` race. **Fixed:** `fetch-depth:0`, `pull --rebase --autostash` with 3-retry loop (`scripts/track.mjs:fetchText` also retries 3× with backoff, 15s timeout). Since fix: consecutive successes (see Actions tab).
 - **State:** `data/state.json` dedupes IDs (live counts — see file). Corrupted entries auto-heal (date validation `YYYY-MM-DD`, tag vs release dedup).
-- **README showcase:** `🔥 Latest` + Previous highlights are auto-synced by `scripts/track.mjs:syncReadmes` from changelog/news/website-news (verbatim titles + excerpts, no LLM) — no manual bump needed.
+- **README showcase:** `🔥 Latest` + Previous highlights are auto-synced by `scripts/track.mjs:syncReadmes` from all official channels and product observations (verbatim titles + excerpts, no LLM) — no manual bump needed.
 - **No timestamp churn:** `FEED.md` header is stable except `last update:` ISO timestamp; no empty commits.
 
 ## 🛠️ Manual Run

@@ -13,6 +13,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  actions: write
 
 concurrency:
   group: triage-${{ github.event.issue.number || inputs.issue_number }}
@@ -21,7 +22,7 @@ concurrency:
 jobs:
   triage:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -33,16 +34,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install opencode
+      - name: Install pinned OpenCode
         run: |
-          set -e
-          if npm install -g opencode-ai 2>&1 | head -n 20; then
-            echo "opencode via npm done"
-          else
-            curl -fsSL https://opencode.ai/install | bash
-            echo "$HOME/.local/bin" >> $GITHUB_PATH
-          fi
-          opencode --version || echo "opencode not found, fallback will label needs-human"
+          npm install -g opencode-ai@1.18.34
+          opencode debug config > /dev/null
 
       - name: AI triage
         id: triage
@@ -52,14 +47,8 @@ jobs:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          set +e
-          NUM="${{ github.event.issue.number || inputs.issue_number }}"
-          echo "Triaging issue #$NUM"
-          timeout 720 opencode run --model opencode/muse-spark-1.2-contributor-free --agent triage --thinking "Issue #$NUM" 2>&1 | tee /tmp/triage.log
-          echo "exit=$?" | tee -a /tmp/triage.log
-          tail -n 30 /tmp/triage.log >> $GITHUB_STEP_SUMMARY
-          exit 0
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue_number }}
+        run: node scripts/triage.mjs
 
       - name: Fallback label if agent failed
         if: always()
@@ -72,10 +61,11 @@ jobs:
           COUNT=$(gh issue view "$NUM" --json comments --jq '[.comments[] | select(.author.login == "github-actions[bot]")] | length')
           if [ "$COUNT" = "0" ]; then
             gh issue edit "$NUM" --add-label "needs-human" || true
-            gh issue comment "$NUM" --body "🤖 Triage agent could not run (missing key/binary). A human will take a look." || true
+            gh issue comment "$NUM" --body "🤖 Triage agent could not run (all free-model attempts failed; see the failed Action logs). A human will take a look." || true
           fi
 
       - name: Open PR if triage changed tracked files
+        if: success()
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -96,8 +96,10 @@ defect. Generosity comes from the spacing scale, not from inflating the root.
    data does not support.
 5. **A corroborated entry takes a 2px brand rule** down its left edge — the same
    fact as its magnitude, expressed as weight.
-6. **No client-side JavaScript.** One static document built from committed
-   markdown. The transit strip is a CSS grid of marks; the folds are `<details>`.
+6. **Static content with small preference controls.** English and Chinese pages
+   are built from committed markdown. Small scripts remember language/theme,
+   follow operating-system theme changes and preserve anchor navigation. The
+   cadence strip remains a CSS grid; the reading guide uses native `<details>`.
 7. **Minimum functional text is 11px** (`0.6875rem`). Below that the page is
    legible on a 27" monitor and useless on a phone.
 8. **The horizon is explicit.** A 2px rule plus a register change separates
@@ -152,3 +154,24 @@ a non-colour cue too — a rule style or a dimmed link — so it survives greysc
 New section? `--sky-raised` for a plane, `--rule` for separation, Barlow Condensed
 for its heading, and no new hue. Three tier hues plus the brand is the whole
 budget.
+## October 2026 extension: first-visit reading and themes
+
+The first task is to see **what is new with DeepSeek**, across channels. The
+latest-news list leads, sorted by source date. Official releases, product-page
+observations, media, community and unverified rumours keep explicit labels.
+The desktop app is a news item, not the site's primary conversion. The optional
+“How to read the labels” disclosure explains trust and dates without blocking
+access or showing a repeated tour. Source links and subscriptions are real actions.
+
+English and Chinese have separate static URLs. Original source titles remain
+verbatim. A single SVG mark extends the existing crossed-stroke wordmark.
+
+System is the default theme. The light variant uses the same blue identity on
+`#f6f8ff`, with `#15244a` headline ink and darker accessible signal hues. Dark
+retains the night-sky palette. `--on-brand` keeps CTA labels white in both themes.
+Both variants pass the built-CSS 4.5:1 text and 3:1 UI contrast checks.
+
+Browser verification covered 320, 390, 768 and 1440px in both languages, theme
+persistence, live system changes and both language-link directions. No horizontal
+overflow or JavaScript exceptions were observed. Impeccable onboard's first-value
+path is the current news list and its source links; the mechanical scan was clear.

@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildHighlights } from './readme-latest.mjs';
+import { trackProducts } from './products.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -13,6 +15,7 @@ const FILES = {
   npm: path.join(ROOT, 'npm.md'),
   websiteNews: path.join(ROOT, 'website-news.md'),
   huggingface: path.join(ROOT, 'huggingface.md'),
+  products: path.join(ROOT, 'product-news.md'),
 };
 
 const API_DOCS = 'https://api-docs.deepseek.com';
@@ -374,6 +377,7 @@ function renderMarkdownEntry(e) {
 // 2026-09-10 V4.1-Flash was already in NEWS/changelog/website-news).
 // This mirrors verbatim titles + excerpts + Source links, never rewrites.
 function parseSections(md) {
+  md = md.replace(/\r\n/g, '\n');
   const headers = [...md.matchAll(/^## \[([^\]]+)\] (.*)$/gm)];
   const out = [];
   for (let i = 0; i < headers.length; i++) {
@@ -416,62 +420,12 @@ function syncReadmes() {
     const website = parseSections(read(FILES.websiteNews)).filter((e) => isValidDate(e.date));
     const hf = parseSections(read(FILES.huggingface)).filter((e) => isValidDate(e.date));
     const releases = parseSections(read(FILES.releases)).filter((e) => isValidDate(e.date));
-    const primary = [
-      ...changelog.map((e) => ({ ...e, src: 'changelog' })),
-      ...news.map((e) => ({ ...e, src: 'news' })),
-      ...website.map((e) => ({ ...e, src: 'website' })),
-    ];
-    if (!primary.length) return;
-    primary.sort((a, b) => (a.date < b.date ? 1 : -1));
-    const latestDate = primary[0].date;
-    const bySrc = (src) => primary.find((e) => e.src === src && e.date === latestDate);
-    const c = bySrc('changelog'), n = bySrc('news'), w = bySrc('website');
-    const headline = (c?.title || n?.title || w?.title || '').replace(/\s+/g, ' ').trim();
-    if (!headline) return;
-    const hfSame = hf.filter((e) => e.date === latestDate).slice(0, 3);
-    const lead = (w?.summary || n?.summary || c?.summary || '').replace(/\s+/g, ' ').trim().slice(0, 300);
-    const bench = (c?.summary || '').replace(/\s+/g, ' ').trim().slice(0, 320);
-    const links = [
-      n?.url ? `[Official announcement](${n.url})` : '',
-      c?.url ? `[Change Log](${c.url})` : '',
-      w?.url ? `[Website](${w.url})` : '',
-      ...hfSame.filter((h) => h.url).map((h) => `[HuggingFace ${h.title.split('/').pop()}](${h.url})`),
-    ].filter(Boolean).join(' · ');
-
-    // Product releases shipped between model launches. The headline above is
-    // model-only, which made the README look frozen whenever DeepSeek shipped
-    // `dsh` without a model — 17 harness releases landed between 2026-09-10 and
-    // 2026-09-29 while the headline stayed on V4.1-Flash and readers concluded
-    // the tracker had died. Product lines get their own line here, dated, so a
-    // harness-only week still shows movement.
-    const product = releases
-      .filter((e) => /deepseek-harness/i.test(e.title))
-      .sort((a, b) => (a.date < b.date ? 1 : -1))[0];
-    const showProduct = product && product.date > latestDate;
-
-    const dates = [...new Set(primary.map((e) => e.date))].filter((d) => d !== latestDate).sort().reverse().slice(0, 5);
-    const prevLines = dates.map((d) => {
-      const e = primary.find((x) => x.src === 'changelog' && x.date === d) || primary.find((x) => x.date === d);
-      return `- **${d}** ${e.title}`;
-    });
-    const enLatest =
-      `## 🔥 Latest — ${headline} (${latestDate})\n\n` +
-      `**${(w?.title || n?.title || headline)}**${lead ? ` — ${lead}` : ''}\n\n` +
-      (bench ? `- **Official excerpt:** ${bench}${bench.length >= 320 ? '…' : ''}\n` : '') +
-      (hfSame.length ? `- **Weights same-day:** ${hfSame.map((h) => `\`${h.title}\``).join(', ')}\n` : '') +
-      (showProduct ? `- **Also shipped ${product.date} (newer than the model above):** ${product.title}${product.url ? ` · [Release](${product.url})` : ''}\n` : '') +
-      `\n${links}\n\n`;
-    const enDetails = `<details>\n<summary>Previous highlights</summary>\n\n${prevLines.join('\n')}\n</details>`;
-    syncOneReadme(path.join(ROOT, 'README.md'), '^## 🔥 Latest —.*$', enLatest, enDetails);
-    const zhLatest =
-      `## 🔥 最新 — ${headline} (${latestDate})\n\n` +
-      `**${(w?.title || n?.title || headline)}**${lead ? ` — ${lead}` : ''}\n\n` +
-      (bench ? `- **官方摘录：** ${bench}${bench.length >= 320 ? '…' : ''}\n` : '') +
-      (showProduct ? `- **同期还有更新（${product.date}，比上方模型更新）：** ${product.title}${product.url ? ` · [Release](${product.url})` : ''}\n` : '') +
-      (hfSame.length ? `- **同日权重：** ${hfSame.map((h) => `\`${h.title}\``).join(', ')}\n` : '') +
-      `\n${links}\n\n`;
-    const zhDetails = `<details>\n<summary>往期重点</summary>\n\n${prevLines.join('\n')}\n</details>`;
-    syncOneReadme(path.join(ROOT, 'README.zh.md'), '^## 🔥 最新 —.*$', zhLatest, zhDetails);
+    const npm = parseSections(read(FILES.npm)).filter((e) => isValidDate(e.date));
+    const products = parseSections(read(FILES.products)).filter((e) => isValidDate(e.date));
+    const blocks = buildHighlights({ changelog, news, website, hf, releases, npm, products });
+    if (!blocks) return;
+    syncOneReadme(path.join(ROOT, 'README.md'), '^## 🔥 Latest —.*$', blocks.en.latest, blocks.en.details);
+    syncOneReadme(path.join(ROOT, 'README.zh.md'), '^## 🔥 最新 —.*$', blocks.zh.latest, blocks.zh.details);
   } catch (e) {
     console.warn(`readme sync: ${e.message}`);
   }
@@ -587,6 +541,11 @@ async function main() {
     console.warn(`huggingface: ${e.message}`);
   }
 
+  try {
+    summary.products = await trackProducts({ root: ROOT, fetchText, now });
+  } catch (error) {
+    console.warn(`products: ${error.message}`);
+  }
   saveState(state);
 
   // Combined feed
@@ -624,7 +583,9 @@ async function main() {
   console.log(JSON.stringify({ now, ...summary }));
 }
 
-main().catch((e) => {
+if (process.argv.includes('--sync-readmes')) {
+  syncReadmes();
+} else main().catch((e) => {
   console.error(e);
   process.exit(1);
 });

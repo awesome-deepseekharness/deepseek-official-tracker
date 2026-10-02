@@ -2,15 +2,15 @@
 /**
  * discover.mjs — experimental AI agent discovery for DeepSeek official updates
  *
- * - Collects live signals from 19 independent corners via scripts/corners.mjs
+ * - Collects live signals from multiple independent corners via scripts/corners.mjs
  *   (blog, changelog, GitHub releases/tags/repos, HF, npm, arXiv, HN, Reddit,
  *   Google News, PyPI, OpenRouter) — all key-free
  * - Diffs them against data/discover-seen.json (written only by this script, so
  *   track.mjs cannot mask new signals the way data/state.json used to)
- * - Fetches live free models from https://opencode.ai/zen/v1/models
+ * - Refreshes and ranks zero-cost tool-capable models from the CLI registry
  * - Tries each free model via `opencode run --model opencode/<id>` with fallback
- * - Always succeeds: if opencode unavailable or all models fail, falls back to deterministic template
- * - Writes insights.md (AI-generated draft, needs human review via PR)
+ * - Reports failure and preserves the previous report if every free model fails
+ * - Writes insights.md (AI-generated draft, independently reviewed via PR)
  *
  * Usage: node scripts/discover.mjs [--force] [--dry-run]
  *   --force   run even when no fresh signals (same as DISCOVER_FORCE=1)
@@ -22,157 +22,37 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawn } from 'node:child_process';
-import { setTimeout as sleep } from 'node:timers/promises';
 import { collectSignals, loadSeen, saveSeen } from './corners.mjs';
 import { probeBrowser } from './kitesurf-probe.mjs';
+import { runAgent } from './opencode-runner.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const STATE_FILE = path.join(ROOT, 'data', 'state.json');
 const INSIGHTS_FILE = path.join(ROOT, 'insights.md');
 const FEED_FILE = path.join(ROOT, 'FEED.md');
-const ZEN_MODELS_URL = 'https://opencode.ai/zen/v1/models';
-
-// Fallback static free models if Zen endpoint fails (keep in sync with docs)
-const STATIC_FREE_FALLBACK = [
-  'deepseek-v4-flash-free',
-  'muse-spark-1.2-contributor-free',
-  'mimo-v2.5-free',
-  'hy3-free',
-  'nemotron-3-ultra-free',
-  'nemotron-3.5-lightning-free',
-  'laguna-s-2.1-free',
-  'big-pickle',
-  'north-mini-code-free',
-  'grok-build-0.1', // sometimes free in rotation
-];
-
-async function fetchText(url, opts = {}) {
-  const headers = { 'User-Agent': 'deepseek-official-tracker-discover/1.0', ...(opts.headers || {}) };
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), opts.timeoutMs || 15000);
-  try {
-    const res = await fetch(url, { headers, signal: ctrl.signal });
-    if (!res.ok) throw new Error(`GET ${url} -> ${res.status}`);
-    return await res.text();
-  } finally {
-    clearTimeout(t);
-  }
-}
-
 function loadState() {
   try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch { return {}; }
 }
 
-async function fetchLiveFreeModels() {
-  // Always try live Zen endpoint first for "latest" free models
-  try {
-    const raw = await fetchText(ZEN_MODELS_URL, { timeoutMs: 8000 });
-    const data = JSON.parse(raw);
-    const list = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : [];
-    // Filter free: id contains -free or name contains free, or pricing free if present
-    const free = list
-      .filter(m => {
-        const id = (m.id || '').toLowerCase();
-        const name = (m.name || '').toLowerCase();
-        if (id.includes('-free') || name.includes(' free')) return true;
-        // pricing heuristic if present
-        if (m.pricing && m.pricing.input === 0 && m.pricing.output === 0) return true;
-        return false;
-      })
-      .map(m => m.id)
-      .filter(Boolean);
-    if (free.length) {
-      // Deduplicate, keep order as returned (API is roughly latest first), but prioritize deepseek-v4-flash-free for this repo
-      const uniq = [...new Set(free)];
-      // Move deepseek free to front if present
-      uniq.sort((a, b) => {
-        if (a === 'deepseek-v4-flash-free') return -1;
-        if (b === 'deepseek-v4-flash-free') return 1;
-        return 0;
-      });
-      console.log(`Live free models from Zen: ${uniq.join(', ')}`);
-      return uniq;
-    }
-  } catch (e) {
-    console.warn(`Zen models fetch failed, using static fallback: ${e.message}`);
-  }
-  console.log(`Using static free fallback: ${STATIC_FREE_FALLBACK.slice(0, 7).join(', ')}`);
-  return STATIC_FREE_FALLBACK;
-}
-
-function runOpencode(modelId, prompt) {
-  return new Promise((resolve, reject) => {
-    const model = `opencode/${modelId}`;
-    const args = ['run', '--model', model, '--agent', 'discover', '--thinking', prompt];
-    console.log(`\n[discover] Trying model: ${model} (agent:discover, thinking) ...`);
-    const isWin = process.platform === 'win32';
-    const child = spawn('opencode', args, {
-      cwd: ROOT,
-      env: process.env,
-      stdio: ['ignore', 'pipe', 'pipe'],
-      shell: isWin, // win32 needs shell for opencode.ps1
-    });
-    let out = '', err = '';
-    const timeout = setTimeout(() => {
-      child.kill('SIGTERM');
-      reject(new Error(`opencode timeout for ${model}`));
-    }, 300000); // 5min per model — deep research needs longer reasoning
-    child.stdout.on('data', d => { out += d.toString(); process.stdout.write(d); });
-    child.stderr.on('data', d => { err += d.toString(); process.stderr.write(d); });
-    child.on('error', e => {
-      clearTimeout(timeout);
-      reject(e);
-    });
-    child.on('close', code => {
-      clearTimeout(timeout);
-      if (code === 0) resolve({ code, out, err });
-      else reject(new Error(`opencode ${model} exit ${code}: ${err.slice(0, 500)}`));
-    });
-  });
-}
-
 async function generateWithTraversal(prompt) {
-  const freeModels = await fetchLiveFreeModels();
-  // Ensure we try latest first, but also keep static fallback order as last resort
-  const combined = [...new Set([...freeModels, ...STATIC_FREE_FALLBACK])];
-  let lastErr = null;
-  for (const modelId of combined) {
-    try {
-      // Check if opencode binary exists (win32 needs shell for .ps1)
-      const isWin = process.platform === 'win32';
-      const hasOpencode = await new Promise(res => {
-        const c = spawn('opencode', ['--version'], { stdio: 'ignore', shell: isWin });
-        c.on('error', () => res(false));
-        c.on('close', code => res(code === 0));
-      });
-      if (!hasOpencode) throw new Error('opencode binary not found (fallback to template)');
-      await runOpencode(modelId, prompt);
-      // Verify insights.md was created and contains sources
-      if (fs.existsSync(INSIGHTS_FILE)) {
-        const content = fs.readFileSync(INSIGHTS_FILE, 'utf8');
-        if (content.includes('[Source]') || content.includes('http')) {
-          console.log(`[discover] Success with model ${modelId}, insights.md updated`);
-          return { modelId, success: true };
-        } else {
-          console.warn(`[discover] Model ${modelId} produced insights.md without sources, trying next`);
-          lastErr = new Error('no sources in insights');
-          continue;
-        }
-      } else {
-        console.warn(`[discover] Model ${modelId} did not create insights.md, trying next`);
-        lastErr = new Error('no insights.md');
-        continue;
-      }
-    } catch (e) {
-      console.warn(`[discover] Model ${modelId} failed: ${e.message}`);
-      lastErr = e;
-      await sleep(1200);
-      continue;
-    }
+  const previous = fs.existsSync(INSIGHTS_FILE) ? fs.readFileSync(INSIGHTS_FILE, 'utf8') : '';
+  const restore = () => fs.writeFileSync(INSIGHTS_FILE, previous, 'utf8');
+  try {
+    return await runAgent({
+      agent: 'discover', prompt,
+      timeoutMs: 360000, totalMs: 1200000,
+      beforeAttempt: restore,
+      validate: () => {
+        const next = fs.readFileSync(INSIGHTS_FILE, 'utf8');
+        return next !== previous && next.includes('[Source](') &&
+          next.includes('## Summary') && next.includes('## Risk / Confidence');
+      },
+    });
+  } catch (error) {
+    restore();
+    throw error;
   }
-  throw lastErr || new Error('all free models failed');
 }
 
 function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = [], browserOk = null }) {
@@ -184,7 +64,7 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
   const fmtList = (list, cap = 22) =>
     list.slice(0, cap).map(s => `  - [${s.source}] ${s.date || 'date-unknown'} — ${s.title}${s.detail ? ` — ${s.detail}` : ''}\n    ${s.url}`).join('\n');
   return [
-    `You are the DeepSeek Deep Discovery Agent (see .opencode/agent/discover.md). You are *autonomous, thorough, multi-source, max reasoning (xhigh thinking)*. This is a 25-minute deep dive — NOT a 2-minute quick check. Use your time fully. Exhaust tools before writing.`,
+    `You are the DeepSeek Deep Discovery Agent (see .opencode/agent/discover.md). You are *autonomous, thorough, multi-source, max reasoning (xhigh thinking)*. Use the bounded research window to verify material new claims and write a sourced report. Do not wait to satisfy a time quota.`,
     ``,
     `## Context (as of ${now} UTC)`,
     `- Repo: https://github.com/awesome-deepseekharness/deepseek-official-tracker`,
@@ -275,7 +155,7 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
     `- IMPORTANT: Do NOT write a ## Thinking section to insights.md. Your internal reasoning is via --thinking (streams to Action logs); insights.md must start directly with ## Summary after the header.`,
     `- Structure (follow exactly, keep headers):`,
     `  1. # Insights — DeepSeek Deep Discovery — <YYYY-MM-DD>`,
-    `  2. > Auto-generated by opencode (model: <model-id>, reasoning:xhigh, thinking) — <ISO> UTC. Deep research (4-phase, multi-source). AI draft, needs human review via PR.`,
+    `  2. > Auto-generated by opencode (model: <model-id>, independently reviewed research) — <ISO> UTC. Deep research (4-phase, multi-source). AI draft, independently reviewed via PR.`,
     `  3. ## Summary — 3-4 sentences, high level + trend`,
     `  4. ## New findings (verified) — for each *verified official* item: **title** — date — 1-2 sentence why it matters — [Source](official url). Group by type (Blog / API / GitHub / HF / npm). If none, write "No new verified official updates after full 4-phase check — <timestamp> UTC" but still show you did the work.`,
     `  5. ## Secondary signals — arXiv / HF papers / GitHub trending / tech media hits with [Source], labeled "secondary — authoritative, not official blog".`,
@@ -299,51 +179,6 @@ function buildPrompt({ newSlugs, state, feedPreview, fresh = [], cornerErrors = 
     ``,
     `Proceed: todowrite Phase 1→4, then execute. After writing insights.md, echo "DONE" and list all [Source] URLs you fetched.`,
   ].join('\n');
-}
-
-function buildDeterministicInsights({ newSlugs, state, fresh = [] }) {
-  const now = new Date().toISOString();
-  const feed = fs.existsSync(FEED_FILE) ? fs.readFileSync(FEED_FILE, 'utf8').split('\n').slice(0, 25).join('\n') : '(no FEED)';
-  const hasNew = newSlugs.length > 0;
-  const official = fresh.filter(s => s.tier === 'official');
-  const other = fresh.filter(s => s.tier !== 'official');
-  return `# Insights — DeepSeek Official Discovery — ${now.slice(0, 10)}
-
-> Auto-generated by discover.mjs (deterministic fallback, no LLM). This is a draft for PR review — opencode free models unavailable or no OPENCODE_API_KEY.
-
-## Summary
-${hasNew || official.length ? `Collected ${fresh.length} fresh live signal(s) across corners via scripts/corners.mjs, ${official.length} of them first-party. Needs AI summarization/verification.` : `No new deepseek.com diff detected vs state. The tracker appears up-to-date as of ${now} UTC.`}
-
-## New findings
-${official.length
-    ? official.slice(0, 30).map(s => `- **${s.title}** — ${s.date || 'date-unknown'} — [${s.source}](${s.url})${s.detail ? ` — ${s.detail}` : ''}`).join('\n')
-    : `- No new official items. Last known websiteNews: ${(state.websiteNews||[]).slice(-7).join(', ') || '(empty)'}`}
-
-## Secondary / community signals (unverified)
-${other.length
-    ? other.slice(0, 25).map(s => `- ${s.title} — ${s.date || 'date-unknown'} — [${s.source}](${s.url})`).join('\n')
-    : `- None captured.`}
-
-## Cross-check
-- Signals diffed against data/discover-seen.json (agent-owned) — see scripts/corners.mjs.
-- api-changelog.md / NEWS.md / website-news.md / huggingface.md compared. See FEED preview below.
-
-## Risk / Confidence
-- Confidence: ${official.length ? 'medium — deterministic collection, but no LLM verification pass' : 'high — no diff'}
-- Risk: low — fallback template, no hallucination.
-
-## Next steps
-- If new items verified, run \`node scripts/track.mjs\` (or wait for next 6h cron) to ingest.
-- Reviewer: please fetch each [Source] and confirm title/date before merging.
-
-## FEED preview
-\`\`\`
-${feed}
-\`\`\`
-
----
-*Generated by scripts/discover.mjs fallback at ${now} UTC. To enable AI summarization, set OPENCODE_API_KEY (https://opencode.ai/auth) in repo Secrets and re-run.*
-`;
 }
 
 async function main() {
@@ -373,7 +208,7 @@ async function main() {
   // (harness releases, npm, HF) could never trip it and the agent almost never
   // ran. Now we diff against our own data/discover-seen.json, which only this
   // script writes, so anything genuinely unreported triggers a run.
-  const force = process.argv.includes('--force') || process.env.DISCOVER_FORCE === 'true';
+  const force = process.argv.includes('--force') || process.env.DISCOVER_FORCE === 'true' || process.env.DISCOVER_FORCE === '1';
   const CORNER_FAILURE_MARGIN = 2;
   const cornerDegraded = corners.errors.length > CORNER_FAILURE_MARGIN;
   if (fresh.length === 0 && !force && !cornerDegraded) {
@@ -408,29 +243,9 @@ async function main() {
     return;
   }
 
-  // Always proceed to agentic run — even with no diff, agent will check community signals (X/Reddit/HN) via tools
-  console.log(`[discover] Env check — OPENCODE_API_KEY:${process.env.OPENCODE_API_KEY ? 'yes('+process.env.OPENCODE_API_KEY.length+' chars)' : 'no'} ANTHROPIC:${process.env.ANTHROPIC_API_KEY ? 'yes' : 'no'} OPENAI:${process.env.OPENAI_API_KEY ? 'yes' : 'no'} — proceeding to agentic run regardless of diff`);
-  // Note: PR spam is now handled by peter-evans/create-pull-request (branch not ahead → no PR), not by early return
-
-  // Try opencode traversal if binary and key present (or even without key, try — free models may still work with dummy)
-  const hasKey = !!process.env.OPENCODE_API_KEY || !!process.env.OPENCODE_API_KEY?.length || !!process.env.ANTHROPIC_API_KEY || !!process.env.OPENAI_API_KEY;
-  console.log(`[discover] OPENCODE_API_KEY present: ${hasKey}, attempting opencode traversal...`);
-
-  try {
-    await generateWithTraversal(prompt);
-    // Success — insights.md already written by agent
-  } catch (e) {
-    console.warn(`[discover] All opencode attempts failed (${e.message}), falling back to deterministic template`);
-    const fallback = buildDeterministicInsights({ newSlugs, state, fresh });
-    fs.writeFileSync(INSIGHTS_FILE, fallback, 'utf8');
-    console.log(`[discover] Fallback insights.md written (${fallback.length} chars)`);
-  }
-
-  // Ensure insights.md exists and has required structure
-  if (!fs.existsSync(INSIGHTS_FILE)) {
-    const fallback = buildDeterministicInsights({ newSlugs, state, fresh });
-    fs.writeFileSync(INSIGHTS_FILE, fallback, 'utf8');
-  }
+  // Preserve the last published report on model failure. A failed run must not
+  // mark its inputs as researched or replace useful reporting with a template.
+  await generateWithTraversal(prompt);
   const final = fs.readFileSync(INSIGHTS_FILE, 'utf8');
   console.log(`[discover] Done. insights.md preview:\n${final.slice(0, 800)}\n...`);
 
@@ -443,7 +258,7 @@ async function main() {
     cornerErrors: corners.errors,
   });
 
-  // Exit code 0 always (PR will be created only if file changed)
+  // A changed, sourced report is required before the run can succeed.
 }
 
 main().catch(e => {

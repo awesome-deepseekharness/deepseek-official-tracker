@@ -23,4 +23,6 @@ site/node_modules/
 site/dist/
 site/public/
 site/.astro/
+.review-input/
+.review-decision.json
 

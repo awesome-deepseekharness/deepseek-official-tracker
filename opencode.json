@@ -2,88 +2,37 @@
   "$schema": "https://opencode.ai/config.json",
   "provider": {
     "opencode": {
-      "baseUrl": "https://opencode.ai/zen/v1",
-      "apiKey": "public",
-      "headers": {
-        "x-opencode-client": "cli",
-        "x-opencode-session": "!printf 'ses_%s' \"$(openssl rand -hex 12)\"",
-        "x-opencode-project": "global",
-        "x-opencode-request": "!printf 'msg_%s' \"$(openssl rand -hex 12)\"",
-        "User-Agent": "opencode/1.18.18/cli"
-      },
-      "compat": {
-        "supportsLongCacheRetention": true
-      },
-      "models": {
-        "muse-spark-1.2-contributor-free": {
-          "options": {
-            "reasoningEffort": "xhigh",
-            "reasoningSummary": "detailed",
-            "textVerbosity": "medium"
-          }
-        },
-        "deepseek-v4-flash-free": {
-          "options": {
-            "reasoningEffort": "xhigh",
-            "reasoningSummary": "detailed"
-          }
-        },
-        "mimo-v2.5-free": {
-          "options": {
-            "reasoningEffort": "xhigh"
-          }
-        },
-        "hy3-free": {
-          "options": {
-            "reasoningEffort": "xhigh"
-          }
-        },
-        "nemotron-3-ultra-free": {
-          "options": {
-            "reasoningEffort": "xhigh"
-          }
-        },
-        "nemotron-3.5-lightning-free": {
-          "options": {
-            "reasoningEffort": "xhigh"
-          }
-        },
-        "laguna-s-2.1-free": {
-          "options": {
-            "reasoningEffort": "xhigh"
-          }
-        },
-        "big-pickle": {
-          "options": {
-            "reasoningEffort": "xhigh"
-          }
-        }
+      "options": {
+        "baseURL": "https://opencode.ai/zen/v1",
+        "apiKey": "public"
       }
     }
   },
   "mcp": {
-    "servers": {
-      "kitesurf": {
-        "type": "local",
-        "command": [
-          "npx",
-          "-y",
-          "chrome-devtools-mcp@latest",
-          "--wsEndpoint=wss://kitesurf.dev/devtools/browser"
-        ]
-      },
-      "firecrawl": {
-        "type": "remote",
-        "url": "https://mcp.firecrawl.dev/v2/mcp",
-        "oauth": false
-      },
-      "exa": {
-        "type": "remote",
-        "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
-        "oauth": false
-      }
+    "kitesurf": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--wsEndpoint=wss://kitesurf.dev/devtools/browser"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    },
+    "firecrawl": {
+      "type": "remote",
+      "url": "https://mcp.firecrawl.dev/v2/mcp",
+      "oauth": false,
+      "enabled": true,
+      "timeout": 30000
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
+      "oauth": false,
+      "enabled": true,
+      "timeout": 30000
     }
-  },
-  "model": "opencode/muse-spark-1.2-contributor-free",
-  "small_model": "opencode/muse-spark-1.2-contributor-free"
+  }
 }
