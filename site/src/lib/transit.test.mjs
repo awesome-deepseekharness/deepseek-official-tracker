@@ -77,6 +77,9 @@ check('insights signals extracted', sigs.length > 0);
 check('signals all carry a url', sigs.every(s => s.url.startsWith('http')));
 check('no verified findings leaked into signals', sigs.every(s => /Secondary|Community/.test(s.section)));
 check('no non-signal sections swallowed', !sigs.some(s => /Risk|Next steps|Trends|Cross-check/i.test(s.title)));
+const wrapped = parseSignals('## Secondary signals\n- **Desktop hands-on** (2026-09-30)\n  A report with a wrapped citation.\n  [Source](https://example.com/desktop)\n- **Second report** (2026-10-01) [Source](https://example.com/second)\n## New findings\n- **Official** [Source](https://example.com/official)');
+check('wrapped bullet citations remain visible and do not merge neighbouring entries',
+  wrapped.length === 2 && wrapped[0].title === 'Desktop hands-on' && wrapped[0].url === 'https://example.com/desktop' && wrapped[1].title === 'Second report');
 
 // --- SIGNALS.md tables -------------------------------------------------------
 // The strip's primary source, and the only one that refreshes on a fixed
