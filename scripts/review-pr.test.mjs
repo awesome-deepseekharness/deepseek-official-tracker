@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { trustedDraft, validDecision } from './review-pr.mjs';
+import { trustedDraft, validDecision, reviewIsCurrent } from './review-pr.mjs';
+
+test('stale PR base metadata does not block merging, but changed live revisions do', () => {
+  const pr = { head: { sha: 'reviewed-draft' }, base: { sha: 'old-pr-base' } };
+  assert.equal(reviewIsCurrent(pr, 'reviewed-draft', 'main-now', 'main-now'), true);
+  assert.equal(reviewIsCurrent(pr, 'reviewed-draft', 'new-main', 'main-now'), false);
+  assert.equal(reviewIsCurrent({ ...pr, head: { sha: 'new-draft' } },
+    'reviewed-draft', 'main-now', 'main-now'), false);
+});
 
 test('review only accepts the bot insights-only PR from this repository', () => {
   const repo = 'owner/tracker';

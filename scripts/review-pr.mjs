@@ -17,6 +17,12 @@ export function trustedDraft(pr, files, repository) {
     ['modified', 'added'].includes(files[0].status);
 }
 
+export function reviewIsCurrent(pr, reviewedHead, currentMain, reviewedMain) {
+  // pulls/:number base.sha can remain the PR's old base revision. The live
+  // refs/heads/main SHA is what tells us whether the reviewed context changed.
+  return pr.head.sha === reviewedHead && currentMain === reviewedMain;
+}
+
 export function validDecision(value, head, draft) {
   if (!value || value.head_sha !== head || !['MERGE', 'CLOSE', 'NEEDS_HUMAN'].includes(value.decision) ||
       typeof value.reason !== 'string' || value.reason.trim().length < 10) return false;
@@ -91,7 +97,8 @@ async function main() {
     } finally { fs.writeFileSync('insights.md', original); }
     const current = api(`repos/${repo}/pulls/${pr.number}`);
     const base = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
-    if (current.head.sha !== pr.head.sha || current.base.sha !== base) {
+    const currentMain = api(`repos/${repo}/git/ref/heads/main`).object.sha;
+    if (!reviewIsCurrent(current, pr.head.sha, currentMain, base)) {
       throw new Error('PR head or main changed during review; next run must review the current content');
     }
     const merged = api(`repos/${repo}/pulls/${pr.number}/merge`, ['--method', 'PUT', '-f', 'merge_method=squash', '-f', `sha=${pr.head.sha}`]);
