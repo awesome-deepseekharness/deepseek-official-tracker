@@ -468,7 +468,7 @@ export function parseSignalTables(signalsMd) {
       // "| 🆕 | 2026-09-22 | Source | …". The leading-cell group must tolerate
       // the space after that closing pipe — matching `\d{4}` straight off the
       // pipe silently skipped every 🆕 row, which is most of them on a busy day.
-      const row = line.match(/^\|\s*(?:🆕\s*\|)?\s*(\d{4}-\d{2}-\d{2})\s*\|\s*([^|]*?)\s*\|/);
+      const row = line.match(/^\|\s*(?:(?:🆕)?\s*\|)?\s*(\d{4}-\d{2}-\d{2})\s*\|\s*([^|]*?)\s*\|/);
       if (!row) continue;
       const date = row[1];
       const source = row[2] || '';

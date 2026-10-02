@@ -30,6 +30,7 @@
   /* Light on it. Bone-white, stepping down but staying at the field's hue — a
      neutral grey against a saturated blue reads dirty. */
   --white: #ffffff;
+  --on-brand: #ffffff;
   --text: oklch(97% 0.008 265);
   --text-muted: oklch(85% 0.022 265);
   --text-faint: oklch(72% 0.03 265);
@@ -166,5 +167,53 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --sky: #f6f8ff;
+  --sky-deep: #eaf0fc;
+  --sky-raised: #ffffff;
+  --sky-sunk: #edf2ff;
+  --white: #15244a;
+  --text: #1a2949;
+  --text-muted: #405273;
+  --text-faint: #52627d;
+  --rule: #cbd5e8;
+  --rule-strong: #97a9c8;
+  --rule-faint: #dfe6f4;
+  --edge: #7185ab;
+  --brand: #2f54cf;
+  --brand-deep: #315bb4;
+  --brand-darker: #24468e;
+  --brand-light: #295faa;
+  --brand-pale: #294ec0;
+  --tier-rumor: #825800;
+  --tier-community: #006775;
+  --tier-media: #6543b3;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+  color-scheme: light;
+  --sky: #f6f8ff;
+  --sky-deep: #eaf0fc;
+  --sky-raised: #ffffff;
+  --sky-sunk: #edf2ff;
+  --white: #15244a;
+  --text: #1a2949;
+  --text-muted: #405273;
+  --text-faint: #52627d;
+  --rule: #cbd5e8;
+  --rule-strong: #97a9c8;
+  --rule-faint: #dfe6f4;
+  --edge: #7185ab;
+  --brand: #2f54cf;
+  --brand-deep: #315bb4;
+  --brand-darker: #24468e;
+  --brand-light: #295faa;
+  --brand-pale: #294ec0;
+  --tier-rumor: #825800;
+  --tier-community: #006775;
+  --tier-media: #6543b3;
   }
 }

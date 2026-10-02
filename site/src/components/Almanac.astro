@@ -1,0 +1,474 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { LINES, parseSourceFile, buildNetwork, lineTotals, parseSignals, parseSignalTables, parseFeedStamp, magnitudeOf, weeklyCadence, resolveDataDir } from '../lib/transit.mjs';
+import '../styles/tokens.css';
+import '../styles/page.css';
+import '../styles/diagram.css';
+import favicon from '../assets/favicon.svg?url';
+const { lang = 'en' } = Astro.props;
+const zh = lang === 'zh';
+const t = (en, cn) => zh ? cn : en;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+const origin = 'https://awesome-deepseekharness.github.io';
+const canonical = new URL(base + (zh ? 'zh/' : ''), origin).href;
+const title = t('DeepSeek Tracker — Harness desktop, releases & news', 'DeepSeek 动态追踪 — Harness 桌面端、模型发布与社区消息');
+const description = t('Track DeepSeek Harness desktop updates, CLI releases, API changes and model weights. Dated first-party sources, plus clearly labelled community news and rumours.', '持续追踪 DeepSeek Harness 桌面端、CLI、模型权重与 API 更新；附官方来源、日期和独立标注的媒体、社区及疑似消息。');
+const sourceLabels = { blog: t('Website / blog', '官网 / 博客'), api: t('API changelog', 'API 更新日志'), github: t('GitHub releases', 'GitHub 发布'), hf: t('HuggingFace models', 'HuggingFace 模型'), npm: 'npm @deepseek-ai', news: t('API news', 'API 新闻') };
+let product;
+
+
+// ../scripts/build-pages.mjs stages the tracker's markdown into site/public/
+// before astro build. The directory is resolved by walking up from the working
+// directory rather than from import.meta.url, which Vite rewrites during the
+// build and which silently yields an empty page.
+const DATA = resolveDataDir();
+const read = f => {
+  try { return fs.readFileSync(path.join(DATA, f), 'utf8'); }
+  catch { return ''; }
+};
+
+try { product = JSON.parse(read('products.json')).harness; } catch {}
+const feed = read('FEED.md');
+const insights = read('insights.md');
+const signalsMd = read('SIGNALS.md');
+
+const perLine = LINES.map(l => parseSourceFile(read(l.file), l.id));
+const stops = buildNetwork(perLine);
+const totals = lineTotals(stops);
+const weeks = weeklyCadence(stops, { weeks: 16 });
+
+// SIGNALS.md first: it is deterministic and refreshes every 6h, whereas
+// insights.md is an AI draft behind a PR and has been stale before. insights.md
+// still contributes, so a rich narrative is never thrown away.
+const signalRows = [...parseSignalTables(signalsMd), ...parseSignals(insights)];
+const seenSignalUrls = new Set();
+const allSignals = signalRows.filter(s => {
+  if (!s.url || seenSignalUrls.has(s.url)) return false;
+  seenSignalUrls.add(s.url);
+  return true;
+}).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+const signals = allSignals.slice(0, 24);
+const rumourCount = signals.filter(s => s.tier === 'rumor').length;
+const stamp = parseFeedStamp(feed);
+const builtAt = new Date().toISOString();
+
+const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
+const lineNo = Object.fromEntries(LINES.map((l, i) => [l.id, i + 1]));
+const dated = stops.filter(s => s.date !== 'n/a');
+const undated = stops.filter(s => s.date === 'n/a');
+const corroborated = dated.filter(s => s.lines.length > 1);
+const latest = dated[0] || stops[0];
+
+// A first visit starts with what changed across all channels, not one product.
+const recent = [
+  ...dated.slice(0, 8).map(item => ({ date: item.date, title: item.name, url: item.url || item.sources[0]?.url, tier: 'official' })),
+  ...allSignals.map(item => ({ date: item.date, title: item.title, url: item.url, tier: item.tier })),
+  ...(product ? [{ date: product.observedAt.slice(0, 10), title: product.title, url: product.url, tier: 'observation' }] : []),
+].filter(item => item.date && item.url).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
+const tierName = tier => ({ official: t('Official release', '官方发布'), observation: t('Product page · observed', '官网产品页 · 观测'), secondary: t('Media report', '媒体报道'), community: t('Community', '社区讨论'), rumor: t('Rumour · unverified', '疑似 · 未证实') }[tier] || tier);
+
+// The busiest week sets the scale for the transit strip, so the band's shape is
+// comparable week to week and the busiest mark always reaches full height.
+const peakWeek = weeks.reduce((m, w) => Math.max(m, w.count), 1);
+
+const REPO = 'https://github.com/awesome-deepseekharness/deepseek-official-tracker';
+const RAW = 'https://raw.githubusercontent.com/awesome-deepseekharness/deepseek-official-tracker/main';
+
+const d = iso => {
+  if (!iso || iso === 'n/a') return t('undated', '日期未知');
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString(zh ? 'zh-CN' : 'en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC',
+  });
+};
+const dShort = iso => {
+  if (!iso || iso === 'n/a') return t('undated', '日期未知');
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString(zh ? 'zh-CN' : 'en-GB', {
+    day: '2-digit', month: 'short', timeZone: 'UTC',
+  });
+};
+const rfc = iso => (iso && iso !== 'n/a' ? new Date(`${iso}T00:00:00Z`).toISOString().slice(0, 10) : undefined);
+
+// The version on its own line beside the date, so the column is readable
+// without parsing it out of the entry title. Empty when a release has no
+// version-shaped name, which is most blog posts.
+const shortVersion = name => {
+  const m = name.match(/\bv\d[\w.+-]*/);
+  return m ? m[0] : '';
+};
+
+// The version gets its own ruled column, so the entry title drops it rather than
+// printing it twice. Blog posts without a version are returned unchanged.
+const stepLabel = name => {
+  const v = shortVersion(name);
+  if (!v) return name;
+  return name.replace(v, '').replace(/[\s·\-—:]+$/, '').trim() || name;
+};
+
+// Magnitude bands: three weights, so corroboration reads as rank without colour.
+const magBand = sources => (sources >= 3 ? 'bright' : sources === 2 ? 'mid' : 'faint');
+---
+
+<!doctype html>
+<html lang={zh ? 'zh-CN' : 'en'}>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>{title}</title>
+<meta name="description" content={description}/>
+<link rel="canonical" href={canonical}/>
+<link rel="alternate" hreflang="en" href={new URL(base, origin).href}/>
+<link rel="alternate" hreflang="zh-CN" href={new URL(base + 'zh/', origin).href}/>
+<link rel="alternate" hreflang="x-default" href={new URL(base, origin).href}/>
+<link rel="icon" type="image/svg+xml" href={favicon}/>
+<link rel="alternate" type="application/json" title="DeepSeek release feed" href={base + 'feed.json'}/>
+<link rel="alternate" type="text/plain" title="Information for AI readers" href={base + 'llms.txt'}/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#0a1030" media="(prefers-color-scheme: dark)"/>
+<meta name="theme-color" content="#f6f8ff" media="(prefers-color-scheme: light)"/>
+<meta property="og:title" content={title}/>
+<meta property="og:description" content={description}/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content={canonical}/>
+<meta property="og:locale" content={zh ? 'zh_CN' : 'en_US'}/>
+<meta property="og:site_name" content="DeepSeek Official Tracker"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content={title}/>
+<meta name="twitter:description" content={description}/>
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org', '@graph': [
+    { '@type': 'WebSite', '@id': origin + base + '#website', name: 'DeepSeek Official Tracker', url: origin + base, inLanguage: ['en', 'zh-CN'], description },
+    { '@type': 'WebPage', '@id': canonical, url: canonical, name: title, description, inLanguage: zh ? 'zh-CN' : 'en', isPartOf: { '@id': origin + base + '#website' } },
+    { '@type': 'Dataset', name: 'DeepSeek official release feed', description: 'Dated first-party release titles from DeepSeek APIs, website news, GitHub, npm and HuggingFace. Product observations and unverified signals are separate.',
+      url: origin + base + 'FEED.md', license: 'https://creativecommons.org/publicdomain/zero/1.0/', creator: { '@type': 'Organization', name: 'awesome-deepseekharness', url: REPO },
+      distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: origin + base + 'feed.json' }] },
+  ],
+}).replace(/</g, '\u003c')}/>
+<script is:inline define:vars={{base, lang}}>
+  (() => {
+    try {
+      const saved = localStorage.getItem('tracker-language');
+      if (saved === 'zh' && lang === 'en') location.replace(base + 'zh/' + location.hash);
+    } catch {}
+    let choice = 'system';
+    try { choice = localStorage.getItem('tracker-theme') || 'system'; } catch {}
+    if (!['light', 'dark', 'system'].includes(choice)) choice = 'system';
+    document.documentElement.dataset.themeChoice = choice;
+    document.documentElement.dataset.theme = choice === 'system'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : choice;
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500;700&display=swap"/>
+</head>
+<body>
+<a class="skip-link" href="#main">{t('Skip to content', '跳转到正文')}</a>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="wordmark">
+      <svg class="wordmark-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4.5 3 L19.5 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+        <path d="M19.5 3 L4.5 21" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" opacity="0.4"/>
+      </svg>
+      <span>{t('DeepSeek Almanac', 'DeepSeek 动态志')}</span>
+    </div>
+    <nav class="masthead-nav" aria-label={t('Primary', '主导航')}>
+      <a href="#recent">{t('Latest', '最新消息')}</a>
+      <a href="#table">{t('Observations', '官方动态')}</a>
+            <a href="#signals">{t('Signals', '社区消息')}</a>
+      <a href="#sources">{t('Sources', '信息来源')}</a>
+    </nav>
+    <div class="site-controls">
+      <a class="language-switch" href={base + (zh ? '' : 'zh/')} hreflang={zh ? 'en' : 'zh-CN'} lang={zh ? 'en' : 'zh-CN'} data-language={zh ? 'en' : 'zh'}>{zh ? 'English' : '中文'}</a>
+      <label class="theme-control">
+        <span>{t('Theme', '外观')}</span>
+        <select id="theme-select" aria-label={t('Color theme', '颜色主题')}>
+          <option value="system">{t('System', '跟随系统')}</option>
+          <option value="light">{t('Light', '浅色')}</option>
+          <option value="dark">{t('Dark', '深色')}</option>
+        </select>
+      </label>
+    </div>
+    <p class="masthead-stamp mono">
+      {t('Observed', '更新于')} {stamp ? d(stamp.slice(0, 10)) : '—'}{stamp && <span class="masthead-time"> {stamp.slice(11, 16)}Z</span>}
+      <span class="masthead-sep">·</span> {t('every 6h', '每 6 小时')}
+    </p>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- The first viewport is the thesis: an almanac states what it tracks and the
+       date of observation, then shows tonight's primary entry. The claim heads
+       the table's own column and the featured observation sits beside it. -->
+  <div class="lede">
+    <h1 class="lede-claim">
+      {t('The latest from', '最近的')} <strong>DeepSeek</strong>{t(', with the sources to check it.', ' 消息，一眼看清。')}
+    </h1>
+
+    <div class="col-main">
+      <section id="recent" class="recent-section" aria-labelledby="recent-heading">
+        <h2 id="recent-heading">{t('Latest across all channels', '各渠道最新消息')}</h2>
+        <p class="recent-intro">{t('Official updates, product changes and public discussion, newest first. Each label tells you what is confirmed and what is still a lead.', '官方发布、产品变化与公开讨论按日期汇集。每条均有来源，并区分已确认信息与待核实线索。')}</p>
+        <ol class="recent-list">
+          {recent.map(item => <li>
+            <div class="recent-meta"><time datetime={item.date}>{d(item.date)}</time><span class={`recent-tier tier-${item.tier}`}>{tierName(item.tier)}</span></div>
+            <a href={item.url} target="_blank" rel="noopener">{item.title}<span class="ext" aria-hidden="true"> ↗</span></a>
+          </li>)}
+        </ol>
+        <details class="reading-guide">
+          <summary>{t('How to read the labels', '如何判断这些消息？')}</summary>
+          <p>{t('Official releases link to first-party evidence. Product-page dates show when a change was observed, not necessarily when it launched. Media and community claims remain attributed reports; rumours are unverified.', '官方发布链接到一手证据。产品页日期表示我们观测到变化的时间，不一定是发布日期。媒体和社区内容保留原始归属；疑似消息尚未证实。')}</p>
+          <a href="#sources">{t('See all sources and subscribe', '查看全部来源与订阅方式')} →</a>
+        </details>
+      </section>
+      <section id="cadence" class="cadence">
+        <div class="cadence-head">
+          <span class="cadence-label">{t('16 weeks · shipping cadence', '近 16 周 · 发布节奏')}</span>
+          <span class="cadence-total">
+            {weeks.reduce((n, w) => n + w.count, 0)} {t('releases in', '次发布 /')} {weeks.length} {t('weeks', '周')}
+          </span>
+        </div>
+        <div class="cadence-band" role="img" aria-label={
+          t(`Weekly release counts for the last ${weeks.length} weeks. Busiest week: ${peakWeek} releases.`, `近 ${weeks.length} 周发布次数，最多的一周为 ${peakWeek} 次。`)
+        }>
+          {weeks.map(w => (
+            <div
+              class="cadence-week"
+              data-empty={w.count === 0 ? 'true' : 'false'}
+              title={`Week of ${d(w.weekStart)} — ${w.count} release${w.count === 1 ? '' : 's'}${w.strongest ? `, brightest corroborated across ${w.strongestSources} sources` : ''}`}
+            >
+              {w.count > 0 && (
+                <div
+                  class={`cadence-mark ${w.strongestSources >= 3 ? 'is-strong' : ''}`}
+                  style={`height:${Math.max(6, (w.count / peakWeek) * 100)}%`}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <div class="cadence-axis" aria-hidden="true">
+          {weeks.map(w => <span class="cadence-tick">{dShort(w.weekStart).split(' ')[0]}</span>)}
+        </div>
+        <p class="cadence-caption">
+          {t('Each column is one week, scaled to the busiest week. A short column means fewer releases; data collection continues.', '每列代表一周，以发布最密集的一周为高度基准。较短的列表示发布较少，采集仍在持续。')}
+        </p>
+      </section>
+
+      <section id="table" class="diagram-section">
+        <div class="section-head">
+          <h2>{t('Official updates', '官方动态')}</h2>
+          <p class="section-sub">
+            {t('Newest first. Magnitude reflects how many first-party channels carried the same event. It measures corroboration, not release importance.', '按日期倒序排列。亮度反映同一事件被多少个官方渠道记录，表示交叉印证程度，而非发布的重要性。')}
+            {corroborated.length > 0 && <> <strong>{corroborated.length}</strong> {t('entries appear across two or more sources.', '条动态得到至少两个来源的交叉印证。')}</>}
+          </p>
+        </div>
+
+        <div class="diagram">
+          {dated.length === 0 ? (
+            <p class="empty">{t('No dated releases captured yet.', '暂未收录有明确日期的发布。')} <a href="#sources">{t('Check the official sources →', '查看官方来源 →')}</a></p>
+          ) : (
+            dated.map((s, i) => {
+              const mag = magnitudeOf(s);
+              return (
+                <article class={`stop ${s.lines.length > 1 ? 'is-corroborated' : ''}`}>
+                  <span class="stop-num" aria-label={t(`Entry ${i + 1}`, `第 ${i + 1} 条`)}>{String(i + 1).padStart(3, '0')}</span>
+                  <span class={`mag mag-${magBand(mag.sources)}`} data-band={magBand(mag.sources)}
+                        title={t(`Seen on ${mag.sources} independent sources`, `${mag.sources} 个独立官方来源`)}>
+                    {mag.value.toFixed(1)}<span class="mag-units">mag</span>
+                  </span>
+                  <div class="stop-col">
+                    <time class="stop-date mono" datetime={rfc(s.date)}>{d(s.date)}</time>
+                    {shortVersion(s.name) && <span class="stop-ver mono">{shortVersion(s.name)}</span>}
+                    <h3 class="stop-name" title={s.verbatim}>{stepLabel(s.name)}</h3>
+                    {s.summary && <p class="stop-summary">{s.summary}</p>}
+                    <ul class="stop-pieces">
+                      {s.sources.map(src => (
+                        <li>
+                          <a class="piece" href={src.url} target="_blank" rel="noopener" title={`${src.title} — ${lineById[src.line]?.label || src.line}`}>
+                            <span class="piece-no">{String(lineNo[src.line] ?? 0).padStart(2, '0')}</span>
+                            {lineById[src.line]?.short || src.line}
+                            <span class="ext" aria-hidden="true">↗</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })
+          )}
+        </div>
+
+        {undated.length > 0 && (
+          <details class="undated">
+            <summary><span class="num">{undated.length}</span> {t('GitHub tags with no publish date', '个 GitHub 标签未注明发布日期')}</summary>
+            <ul class="undated-list">
+              {undated.map(s => (
+                <li><a href={s.url || `${REPO}/blob/main/releases.md`} target="_blank" rel="noopener">{s.name}</a></li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </section>
+    </div>
+
+    <aside class="lede-aside">
+      {latest && (
+        <article class="callout">
+          <div class="callout-head">
+            <span class="callout-ref">{t('Latest confirmed release', '最近的官方发布')}</span>
+            <time class="callout-date mono" datetime={rfc(latest.date)}>{d(latest.date)}</time>
+          </div>
+          <h2 class="callout-title" title={latest.verbatim}>{latest.name}</h2>
+          {latest.summary && <p class="callout-summary">{latest.summary}</p>}
+          <ul class="callout-pieces">
+            {latest.sources.map(s => (
+              <li>
+                <a class="piece" href={s.url} target="_blank" rel="noopener" title={s.title}>
+                  <span class="piece-no">{String(lineNo[s.line] ?? 0).padStart(2, '0')}</span>
+                  {lineById[s.line]?.short || s.line}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {latest.url && (
+            <a class="callout-cta" href={latest.url} target="_blank" rel="noopener">
+              {t('View source', '查看原始来源')} <span class="ext" aria-hidden="true">↗</span>
+            </a>
+          )}
+        </article>
+      )}
+
+      <ul class="route-legend" aria-label={t('Official sources', '官方来源')}>
+        {LINES.map(l => (
+          <li class="route">
+            <span class="route-no">{String(lineNo[l.id]).padStart(2, '0')}</span>
+            <a class="route-name" href={l.endpoint} target="_blank" rel="noopener">{sourceLabels[l.id] || l.label}</a>
+            <span class="route-count num">{totals[l.id] ?? 0}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Everything below this rule is not an observation. The 2px horizon rule and
+       the register change say so before a word is read. -->
+  <section id="signals" class="signals-section">
+    <div class="section-head">
+      <h2>{t('Community & media', '社区与媒体')} <span class="signals-stamp">{t('unverified', '未经官方证实')}</span></h2>
+      <p class="section-sub">
+        {t('Community discussions, media reports and rumours, each labelled with its source and confidence. These are leads; only first-party evidence establishes an official release.', '社区讨论、媒体报道与传闻均注明来源和可信层级。这些消息仅供参考；只有官方一手证据能够确认正式发布。')}
+        {rumourCount > 0 && (
+          <>
+            {' '}<strong>{rumourCount}</strong> {t('are unverified rumours about unannounced work.', '条为疑似消息，涉及尚未官宣的内容。')}
+          </>
+        )}
+      </p>
+    </div>
+
+    {signals.length === 0 ? (
+      <p class="empty">
+        {t('No community signals captured in the latest pass.', '本轮尚未收录社区消息。')}{' '}
+        <a href={`${REPO}/blob/main/SIGNALS.md`}>{t('Read SIGNALS.md →', '查看完整消息表 →')}</a>
+      </p>
+    ) : (
+      <ul class="signal-list">
+        {signals.map(s => (
+          <li class={`signal signal-${s.tier}`}>
+            <div class="signal-meta">
+              <span class="signal-tier">
+                {s.tier === 'rumor' ? t('rumour · unverified', '疑似 · 未证实') : s.tier === 'community' ? t('community', '社区讨论') : t('media', '媒体报道')}
+              </span>
+              {s.source && <span class="signal-source">{s.source}</span>}
+              {s.date && <time class="mono" datetime={rfc(s.date)}>{d(s.date)}</time>}
+            </div>
+            <a class="signal-link" href={s.url} target="_blank" rel="noopener">
+              {s.title}<span class="ext" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+    <p class="signals-foot">
+      {t('Collected every 6 hours from public sources. AI analysis is reviewed separately. Source titles and excerpts retain their original language.', '每 6 小时采集公开来源，AI 分析另经审查。来源标题和摘录保留原文语言。')}{' '}
+      <a href={`${REPO}/blob/main/SIGNALS.md`}>{t('Full signal table →', '完整消息表 →')}</a>
+    </p>
+  </section>
+
+  <section id="sources" class="sources-section">
+    <div class="section-head">
+      <h2>{t('Sources & data', '来源与数据')}</h2>
+      <p class="section-sub">
+        {t('Six release channels plus the Harness product page, collected directly without AI rewriting. Every entry keeps its original title and links to its source.', '直接采集六类官方发布渠道及 Harness 产品页，未经 AI 改写。每条记录保留原始标题与来源链接。')}
+      </p>
+    </div>
+    <ol class="source-table">
+      {LINES.map(l => (
+        <li>
+          <span class="route-no">{String(lineNo[l.id]).padStart(2, '0')}</span>
+          <a class="source-name" href={l.endpoint} target="_blank" rel="noopener">
+            {sourceLabels[l.id] || l.label}<span class="ext" aria-hidden="true">↗</span>
+          </a>
+          <span class="source-file mono">{l.file}</span>
+          <span class="source-count num">{totals[l.id] ?? 0} {t('entries', '条')}</span>
+        </li>
+      ))}
+    </ol>
+    <div class="consume">
+      <h3>{t('Follow future updates', '订阅后续消息')}</h3>
+      <p><a href={`${REPO}/subscription`}>{t('Watch on GitHub', '在 GitHub 关注')}</a> · <a href={`${REPO}/commits/main.atom`}>{t('Atom feed', 'Atom 订阅')}</a> · <a href={base + 'feed.json'}>JSON</a> · <a href={base + 'llms.txt'}>{t('AI source guide', 'AI 引用指南')}</a></p>
+      <h3>{t('Use this data', '使用这些数据')}</h3>
+      <pre><code>{`curl -s ${RAW}/FEED.md`}</code></pre>
+      <pre><code>curl -s https://awesome-deepseekharness.github.io/deepseek-official-tracker/feed.json</code></pre>
+      <p>
+        {t('Watch the repository for updates, or read the JSON feed and plain-text source files.', '关注仓库接收更新，也可直接读取 JSON 订阅和纯文本来源文件。')} <a href={`${REPO}#subscribe`}>{t('Subscribe →', '订阅 →')}</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-in">
+    <p>
+      {stops.length} {t('releases', '条发布')} · {corroborated.length} {t('corroborated', '条交叉印证')} · {t('page built', '页面构建于')}{' '}
+      <time class="mono" datetime={builtAt}>{builtAt.slice(0, 16).replace('T', ' ')}Z</time>
+    </p>
+    <p class="foot-legal">
+      {t('Independent project, not affiliated with DeepSeek. Sources retain their rights; this tracker is published under', '本项目独立维护，与 DeepSeek 无隶属关系。原始内容权利归各来源所有；追踪数据采用')} <a href={`${REPO}/blob/main/LICENSE`}>CC0-1.0</a>.
+    </p>
+  </div>
+</footer>
+<script>
+  const root = document.documentElement;
+  const select = document.querySelector<HTMLSelectElement>('#theme-select');
+  const system = matchMedia('(prefers-color-scheme: dark)');
+  const apply = () => {
+    const choice = root.dataset.themeChoice || 'system';
+    root.dataset.theme = choice === 'system' ? (system.matches ? 'dark' : 'light') : choice;
+    if (select) select.value = choice;
+  };
+  select?.addEventListener('change', () => {
+    root.dataset.themeChoice = select.value;
+    try { localStorage.setItem('tracker-theme', select.value); } catch {}
+    apply();
+  });
+  system.addEventListener('change', apply);
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'tracker-theme') {
+      root.dataset.themeChoice = ['light', 'dark'].includes(event.newValue || '') ? event.newValue! : 'system';
+      apply();
+    }
+  });
+  document.querySelector<HTMLAnchorElement>('[data-language]')?.addEventListener('click', (event) => {
+    const link = event.currentTarget as HTMLAnchorElement;
+    try { localStorage.setItem('tracker-language', link.dataset.language || 'en'); } catch {}
+    link.hash = location.hash;
+  });
+  apply();
+</script>
+</body>
+</html>

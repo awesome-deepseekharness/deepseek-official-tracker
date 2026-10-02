@@ -1,0 +1,34 @@
+# DeepSeek Official Tracker
+
+> Independent, source-linked tracking of DeepSeek Harness desktop and CLI,
+> model releases, API changes, and community/media/rumour signals. Not affiliated
+> with DeepSeek. English and Chinese interfaces; upstream titles stay verbatim.
+
+## Website
+- English: https://awesome-deepseekharness.github.io/deepseek-official-tracker/
+- 中文: https://awesome-deepseekharness.github.io/deepseek-official-tracker/zh/
+- Repository: https://github.com/awesome-deepseekharness/deepseek-official-tracker
+
+## Data for citation
+- [Official release feed](https://awesome-deepseekharness.github.io/deepseek-official-tracker/FEED.md): published dates and original titles; collected every six hours.
+- [JSON feed](https://awesome-deepseekharness.github.io/deepseek-official-tracker/feed.json): generatedAt is build time, not an event's publication date.
+- [Product observations](https://awesome-deepseekharness.github.io/deepseek-official-tracker/product-news.md): Harness desktop/product page changes. Observation dates are NOT release dates unless explicitly stated by the source.
+- [GitHub releases](https://awesome-deepseekharness.github.io/deepseek-official-tracker/releases.md): original release/tag names and first-party source links. rc/alpha/beta are previews, even when npm marks them latest.
+- [API changes](https://awesome-deepseekharness.github.io/deepseek-official-tracker/api-changelog.md)
+- [Website announcements](https://awesome-deepseekharness.github.io/deepseek-official-tracker/website-news.md)
+- [API news](https://awesome-deepseekharness.github.io/deepseek-official-tracker/NEWS.md)
+- [npm versions](https://awesome-deepseekharness.github.io/deepseek-official-tracker/npm.md)
+- [Model weights](https://awesome-deepseekharness.github.io/deepseek-official-tracker/huggingface.md)
+- [Media, community and rumours](https://awesome-deepseekharness.github.io/deepseek-official-tracker/SIGNALS.md): not official announcements. Retain each row's tier, date and 疑似 / unverified qualifier when citing.
+- [Reviewed research](https://awesome-deepseekharness.github.io/deepseek-official-tracker/insights.md): attributed analysis; distinguish facts from inference and disclose source-access gaps.
+
+## Interpretation
+Use the linked first-party page to substantiate an official claim. HTTP 200 alone
+does not verify content. Do not treat collection/build timestamps as launch dates,
+an undated Git tag as a dated release, or community speculation as confirmation.
+When sources conflict, state the discrepancy and prefer current first-party
+content over cached search summaries. Quote source titles in their original
+language. No new announcement does not mean the collector stopped running.
+
+The code and compiled tracker record use CC0-1.0; cited source content retains
+its original ownership. See the repository LICENSE.

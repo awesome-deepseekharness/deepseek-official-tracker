@@ -224,7 +224,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--white);
+  color: var(--on-brand);
   background: var(--brand-deep);
   padding: 11px 18px;
   transition: background 0.14s var(--ease);
@@ -717,4 +717,41 @@ code {
   .source-file {
     grid-column: 2 / -1;
   }
+}
+.site-controls { display: flex; align-items: center; justify-content: flex-end; gap: 16px; font-size: .85rem; }
+.language-switch { padding: 6px 0; border-bottom: 1px solid var(--edge); }
+.theme-control { display: flex; align-items: center; gap: 7px; color: var(--text-muted); }
+.theme-control select { font: inherit; color: var(--text); background: var(--sky-raised); border: 1px solid var(--edge); border-radius: 3px; padding: 6px 8px; min-height: 36px; }
+.masthead-stamp { grid-column: 1 / -1; font-size: .7rem; }
+.product-note { color: var(--text-faint); font-size: .75rem; margin: 12px 0 0; }
+.product-callout { padding-bottom: 22px; border-bottom: 1px solid var(--rule); }
+html[lang="zh-CN"] { --font: 'PingFang SC', 'Microsoft YaHei', var(--font-text); }
+html[lang="zh-CN"] .lede-claim { max-width: 24em; line-height: 1.5; }
+@media (max-width: 1080px) { .masthead-in { gap: 10px 20px; } .masthead-nav { gap: 14px; } }
+@media (max-width: 760px) {
+  .masthead-in { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .wordmark { font-size: .95rem; gap: 7px; }
+  .site-controls { grid-column: 2; grid-row: 1; gap: 10px; }
+  .theme-control > span { display: none; }
+  .theme-control select { max-width: 110px; }
+  .masthead-nav { grid-column: 1 / -1; grid-row: 2; }
+  .masthead-stamp { grid-row: 3; white-space: normal; }
+}
+
+.recent-section { margin-bottom: 44px; }
+.recent-section h2 { margin: 0 0 10px; color: var(--white); font-family: var(--font); font-size: 1.4rem; font-weight: 500; }
+.recent-intro { color: var(--text-muted); max-width: 65ch; margin: 0 0 18px; font-size: .95rem; }
+.recent-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
+.recent-list li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.recent-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-bottom: 4px; color: var(--text-faint); font-size: .75rem; }
+.recent-list a { display: block; font-size: 1.05rem; line-height: 1.5; overflow-wrap: anywhere; }
+.recent-tier { color: var(--brand-light); }
+.tier-secondary { color: var(--tier-media); }
+.tier-community { color: var(--tier-community); }
+.tier-rumor { color: var(--tier-rumor); }
+.reading-guide { margin-top: 16px; color: var(--text-muted); font-size: .85rem; }
+.reading-guide summary { cursor: pointer; color: var(--text); }
+.reading-guide p { max-width: 68ch; }
+@media (max-width: 1080px) {
+  .lede { grid-template-areas: 'claim' 'main' 'aside'; }
 }

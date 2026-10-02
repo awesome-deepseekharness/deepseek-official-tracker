@@ -1,0 +1,29 @@
+{
+  "harness": {
+    "title": "DeepSeek Harness｜共探智能上限",
+    "summary": "使用 DeepSeek Harness 整理文档、分析表格、编写代码和安排定时任务，通过可自由组合的插件拓展 Agent 能力。",
+    "headings": [
+      "DeepSeek Harness 现在，开箱即用",
+      "能力不断拓展，工作由你掌握",
+      "一切皆插件",
+      "完成各类任务",
+      "适应你的工作方式",
+      "开发者工具",
+      "开发者体验",
+      "命令启动",
+      "源码安装",
+      "加入 DSH 插件生态"
+    ],
+    "links": [
+      "https://deepseek-harness.github.io/deepseek-harness/guide/quickstart",
+      "https://download.deepseek.com/desktop/dsh-latest-macos-arm64.dmg",
+      "https://download.deepseek.com/desktop/dsh-latest-windows-x64.exe",
+      "https://github.com/deepseek-ai/deepseek-harness"
+    ],
+    "published": null,
+    "fingerprint": "1fee217ac8cf651cb85fa819d9c582495503b73d32dec8e620fc8d6b82bd6e8c",
+    "url": "https://www.deepseek.com/harness/",
+    "firstObservedAt": "2026-10-02T03:38:19.531Z",
+    "observedAt": "2026-10-02T03:38:19.531Z"
+  }
+}

@@ -36,6 +36,7 @@ const MARKDOWN = [
   'huggingface.md',
   'insights.md',
   'SIGNALS.md',
+  'product-news.md',
 ];
 
 function readIfExists(p) {
@@ -44,6 +45,13 @@ function readIfExists(p) {
 
 function stage() {
   fs.mkdirSync(PUBLIC_DIR, { recursive: true });
+  const base = 'https://awesome-deepseekharness.github.io/deepseek-official-tracker/';
+  fs.copyFileSync(path.join(ROOT, 'llms.txt'), path.join(PUBLIC_DIR, 'llms.txt'));
+  if (fs.existsSync(path.join(ROOT, 'data', 'products.json'))) {
+    fs.copyFileSync(path.join(ROOT, 'data', 'products.json'), path.join(PUBLIC_DIR, 'products.json'));
+  }
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'robots.txt'), `User-agent: *\nAllow: /deepseek-official-tracker/\nSitemap: ${base}sitemap.xml\n`);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${['', 'zh/'].map(locale => `<url><loc>${base}${locale}</loc><xhtml:link rel="alternate" hreflang="en" href="${base}"/><xhtml:link rel="alternate" hreflang="zh-CN" href="${base}zh/"/></url>`).join('')}</urlset>\n`);
   const staged = [];
   for (const f of MARKDOWN) {
     const src = path.join(ROOT, f);

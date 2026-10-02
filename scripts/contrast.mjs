@@ -40,11 +40,12 @@ if (!fs.existsSync(distDir)) {
   console.error('no built CSS found — run: node scripts/build-pages.mjs');
   process.exit(1);
 }
-const cssText = fs.readdirSync(distDir)
+const allCss = fs.readdirSync(distDir)
   .filter(f => f.endsWith('.css'))
   .map(f => fs.readFileSync(path.join(distDir, f), 'utf8'))
   .join('\n');
 
+let cssText = '';
 // oklch or plain hex, so the palette can carry DeepSeek's own literal values
 // (#121c31, #4d6bfe, #73a3d2) alongside the derived steps.
 const token = name => {
@@ -69,13 +70,18 @@ const token = name => {
   return oklchToSrgb(l / 100, c, h);
 };
 
+const dark = allCss.match(/:root\s*\{([^}]+)\}/)?.[1];
+const light = allCss.match(/:root\[data-theme=["']?light["']?\]\s*\{([^}]+)\}/)?.[1];
+if (!dark || !light) throw new Error('Both theme token blocks must be present in built CSS');
+let fail = 0;
+for (const [theme, rules] of [['dark', dark], ['light', light + ';' + dark]]) {
+  cssText = rules;
 const ground = token('sky');
 if (!ground) {
   console.error('could not read --sky from the built CSS');
   process.exit(1);
 }
 
-let fail = 0;
 const check = (label, fg, min, bg = ground) => {
   if (!fg) { fail++; console.log(`FAIL ${label.padEnd(26)} token not found`); return; }
   const r = ratio(fg, bg);
@@ -84,7 +90,7 @@ const check = (label, fg, min, bg = ground) => {
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${label.padEnd(26)} ${r.toFixed(2)}:1  (needs ${min})`);
 };
 
-console.log('contrast on the DeepSeek sky ground, from the built CSS\n');
+console.log(`contrast: ${theme} theme, from the built CSS\n`);
 check('white type', token('white'), 4.5);
 check('body text', token('text'), 4.5);
 check('muted text', token('text-muted'), 4.5);
@@ -104,7 +110,7 @@ check('tier: rumour', token('tier-rumor'), 4.5);
 check('tier: community', token('tier-community'), 4.5);
 check('tier: media', token('tier-media'), 4.5);
 
-const white = token('white');
+const white = token('on-brand');
 const brandDeep = token('brand-deep');
 // Judged against the token the CTA actually paints, not the lighter brand step.
 const onBrand = ratio(white, brandDeep);
@@ -120,6 +126,8 @@ if (brandDarker) {
   const okHover = onHover >= 4.5;
   if (!okHover) fail++;
   console.log(`${okHover ? 'ok  ' : 'FAIL'} ${'white on CTA hover'.padEnd(26)} ${onHover.toFixed(2)}:1  (needs 4.5)`);
+}
+
 }
 
 console.log(`\n${fail ? `${fail} failure(s)` : 'all contrast checks pass'}`);
