@@ -2,7 +2,7 @@
 
 # DeepSeek Official Tracker
 
-**The most complete, automated & verifiable feed for every DeepSeek official update — no rumors, no hallucinations.**
+**Source-linked DeepSeek news: Harness desktop and CLI, model releases, API changes, and clearly labelled media, community and rumour coverage.**
 
 [![Track](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml)
 [![Discover](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml)
@@ -12,7 +12,7 @@
 [![License: CC0](https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg)](LICENSE)
 [![DeepSeek](https://img.shields.io/badge/DeepSeek-V4.1%20%7C%20V4%20%7C%20V3.2-4B82E6?logo=openai)](https://www.deepseek.com)
 
-*Auto-tracked by GitHub Actions every 6 hours. 6 sources · 0 LLM hallucinations · 100% verifiable links. Experimental AI insights via PR.*
+*Official channels and product pages checked every 6 hours. Public signals carry source and confidence labels; AI research passes independent source review via PR. Independent community project, not affiliated with DeepSeek.*
 
 [English](README.md) | [中文](README.zh.md) · [📡 FEED.md](FEED.md) · [📰 Website News](website-news.md) · [🤗 HuggingFace](huggingface.md) · [🔎 Signals](SIGNALS.md) · [🤖 Insights](insights.md) · [🌐 Pages](https://awesome-deepseekharness.github.io/deepseek-official-tracker/)
 
@@ -24,9 +24,9 @@
 
 ## TL;DR
 
-> Tired of checking 6 different DeepSeek channels every morning? This repo does it for you. Single `FEED.md` aggregates **API changelog, API news, deepseek.com blog, GitHub releases/tags, npm, and Hugging Face models** — committed automatically with citation links. Watch this repo → get notified within 6 hours of any official release.
+> See the latest DeepSeek news on the [website](https://awesome-deepseekharness.github.io/deepseek-official-tracker/). `FEED.md` aggregates **API changelog, API news, deepseek.com blog, GitHub releases/tags, npm, and Hugging Face models**. [Product observations](product-news.md) track the Harness desktop page separately; [SIGNALS.md](SIGNALS.md) adds attributed media, community and unverified leads. Collection runs every six hours, subject to upstream availability and GitHub Actions scheduling.
 
-**Perfect for:** API users tracking model `deepseek-v4.1-flash`/`deepseek-v4-pro`/`deepseek-v4-flash` pricing & deprecations · researchers watching DeepSeek-V3/R1/V3.2/V4/V4.1 open-source weights · `dsh`/`DeepSeek-Harness` developers tracking CLI releases.
+**For:** people following DeepSeek news and Harness desktop updates · API users tracking pricing and deprecations · researchers watching model weights · developers following CLI releases and the plugin ecosystem.
 
 ## 🔥 Latest — DeepSeek Harness｜共探智能上限 (first observed / 首次观测) (2026-10-02)
 
@@ -109,7 +109,7 @@ A rumour is recorded **with its date** rather than dropped or quietly promoted. 
 
 **Why 6 and not 1?** Previously only API docs were watched. Now we cover the full official surface — our audit found `deepseek.com` blog publishes ahead of API docs (e.g., V3.2), and Hugging Face weights often land hours before a blog post. Single-source = you miss it.
 
-## 🧭 How it Works / How We're Different
+## 🧭 How it Works
 
 ```
 api-docs.deepseek.com/updates ─┐
@@ -120,18 +120,17 @@ huggingface.co/deepseek-ai    ─┤         │ state.json (seen IDs)   └─�
 registry.npmjs.org/@deepseek… ─┘         └─ retry+timeout fetch, date validation, n/a handling
 ```
 
-| Feature | This repo | Typical RSS/LMM summarizers (`ai-news-bot`, `meridian`, `quantum-rss-radar`) |
-|---------|-----------|----------------------------------------------------------------------------------|
-| Source scope | **6 official DeepSeek endpoints** | 20+ generic AI RSS + LLM rewrite |
-| Hallucination risk | **Zero** (mirrors raw titles with citations) | Medium (LLM summarized) |
-| Verifiability | Every entry has `[Source]` deep-link | Often no link or aggregated |
-| Deduplication | `state.json` persistent IDs, no repeats | Usually daily dump |
-| Latency | ≤6h, push-triggered on fix | 24h daily digest |
-| Dependency | **Pure Node.js, no API key needed** (GH_TOKEN auto) | Requires LLM API key (DeepSeek/Claude) |
+| Stage | Behavior |
+| --- | --- |
+| Official collection | Six release channels plus separate Harness product-page observations; original titles and source links |
+| Public signals | Media, community and rumours retain their attribution and uncertainty labels |
+| Research | Free-model discovery produces a PR; an independent source review and site checks gate merging |
+| Schedule | Collection every six hours, research daily, pending reviews retried hourly; outages can delay updates |
+| Dependencies | Node.js collectors, the workflow GitHub token, keyless search services and current free OpenCode models |
 
 ## 🔔 Subscribe / Use
 
-**1. Watch this repo (recommended):** GitHub → `Watch` → `Custom` → `Releases`/all → email within minutes of `git push`. No RSS needed.
+**1. Watch research discussions:** GitHub → `Watch` → `Custom` → `Pull requests` to follow research drafts and review activity. Notification delivery follows your GitHub settings; watching does not send an email for every feed commit.
 
 **2. Bookmark the feed:** Single file [`FEED.md`](FEED.md) is newest-first, 80 items, with valid `YYYY-MM-DD` dates (`n/a` only for GitHub tags without a timestamp). Ideal for quick scan.
 

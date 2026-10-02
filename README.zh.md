@@ -2,7 +2,7 @@
 
 # DeepSeek 官方动态追踪
 
-**最全、自动、可验证的 DeepSeek 官方更新追踪 — 无谣言、无幻觉，每条可溯源。**
+**有来源可查的 DeepSeek 动态：Harness 桌面端与 CLI、模型发布、API 变化，以及明确标注的媒体、社区与疑似消息。**
 
 [![Track](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/track.yml)
 [![Discover](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml/badge.svg)](https://github.com/awesome-deepseekharness/deepseek-official-tracker/actions/workflows/discover.yml)
@@ -12,7 +12,7 @@
 [![License: CC0](https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg)](LICENSE)
 [![DeepSeek](https://img.shields.io/badge/DeepSeek-V4.1%20%7C%20V4%20%7C%20V3.2-4B82E6)](https://www.deepseek.com)
 
-*GitHub Actions 每 6 小时自动抓取。6 大官方源 · 0 幻觉 · 100% 可验证链接。实验性 AI insights 走 PR。*
+*每 6 小时检查官方渠道与产品页。公共消息标注来源和可信度，AI 研究稿经独立来源审核后通过 PR 发布。本项目由社区维护，与 DeepSeek 官方无隶属关系。*
 
 [中文](README.zh.md) | [English](README.md) · [📡 FEED.md](FEED.md) · [📰 官网新闻](website-news.md) · [🤗 HuggingFace](huggingface.md) · [🤖 Insights](insights.md) · [🌐 Pages](https://awesome-deepseekharness.github.io/deepseek-official-tracker/)
 
@@ -24,9 +24,9 @@
 
 ## TL;DR
 
-> 每天要刷 6 个 DeepSeek 官方渠道太累？这个仓库帮你一站聚合。单个 `FEED.md` 聚合 **API 变更日志、API 新闻、官网博客、GitHub Releases/Tags、npm、HuggingFace 模型**——自动提交、带溯源链接。Watch 本仓库 → 官方发布后 6 小时内邮件通知。
+> 在[网站](https://awesome-deepseekharness.github.io/deepseek-official-tracker/zh/)查看最新 DeepSeek 消息。`FEED.md` 聚合 **API 变更日志、API 新闻、官网博客、GitHub Releases/Tags、npm、HuggingFace 模型**；[产品页观测](product-news.md)单独追踪 Harness 桌面端，[SIGNALS.md](SIGNALS.md)补充媒体、社区与未证实线索。采集每六小时运行，实际更新受上游可用性和 GitHub Actions 调度影响。
 
-**适合：** 关注 `deepseek-v4.1-flash`/`deepseek-v4-pro`/`deepseek-v4-flash` 计费与弃用通知的 API 用户 · 追踪 DeepSeek-V3/R1/V3.2/V4/V4.1 开源权重的开发者 · `dsh`/`DeepSeek-Harness` CLI 用户。
+**适合：** 关注 DeepSeek 最新消息和 Harness 桌面端的读者 · 追踪计费与弃用通知的 API 用户 · 关注模型权重的研究者 · 关注 CLI 发布与插件生态的开发者。
 
 ## 🔥 最新 — DeepSeek Harness｜共探智能上限 (first observed / 首次观测) (2026-10-02)
 
@@ -94,7 +94,7 @@
 
 **为什么从 4 源扩到 6 源？** 之前仅看 API 文档会漏：官网博客常提前于 API 文档（如 V3.2），HuggingFace 权重常在博客前数小时上线。单一源必然漏报。
 
-## 🧭 原理与差异
+## 🧭 工作原理
 
 ```
 api-docs.deepseek.com/updates ─┐
@@ -105,18 +105,17 @@ huggingface.co/deepseek-ai    ─┤         │ state.json（已见ID）    └
 registry.npmjs.org/@deepseek… ─┘         └─ 带重试/超时的 fetch、日期校验、n/a 兜底
 ```
 
-| 特性 | 本仓库 | 典型 RSS/LLM 总结器（`ai-news-bot`、`meridian`、`quantum-rss-radar`） |
-|------|--------|-----------------------------------------------------------------------------------|
-| 来源 | **6 个 DeepSeek 官方端点** | 20+ 泛 AI RSS + LLM 改写 |
-| 幻觉风险 | **零**（原文标题+引用） | 中等（LLM 总结） |
-| 可验证性 | 每条带 `[Source]` 深链 | 常无链接或聚合 |
-| 去重 | `state.json` 持久化 ID，不重复 | 多为每日全量 |
-| 延迟 | ≤6h，修复后即时 push 触发 | 24h 日报 |
-| 依赖 | **纯 Node.js，无需 API Key**（GH_TOKEN 自动） | 需 LLM API Key（DeepSeek/Claude） |
+| 阶段 | 行为 |
+| --- | --- |
+| 官方采集 | 六类发布渠道，加上独立的 Harness 产品页观测；保留原文标题与来源链接 |
+| 公共消息 | 媒体、社区和传闻保留出处及不确定性标注 |
+| 研究审核 | 免费模型生成 PR，独立来源审核与网站检查通过后合并 |
+| 调度 | 每六小时采集、每日研究、每小时重试待审稿；服务故障可能延迟更新 |
+| 依赖 | Node.js 采集脚本、工作流 GitHub token、免密钥搜索服务及当前可用的 OpenCode 免费模型 |
 
 ## 🔔 订阅与使用
 
-**1. Watch 本仓库（推荐）：** GitHub → `Watch` → `Custom` → 勾选全部 → 每次 `git push` 邮件通知，无需 RSS。
+**1. 关注研究讨论：** GitHub → `Watch` → `Custom` → `Pull requests`，跟进研究稿与审核活动。通知方式由你的 GitHub 设置决定；Watch 不会为每次动态文件提交发送邮件。
 
 **2. 收藏 FEED：** 单文件 [`FEED.md`](FEED.md) 最新在前、80 条、带合法 `YYYY-MM-DD` 日期（仅 GitHub tag 无时间戳时为 `n/a`），适合快速扫视。
 
