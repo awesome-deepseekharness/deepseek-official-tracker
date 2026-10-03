@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-03T15:57:26.660Z",
-  "count": 249,
+  "updatedAt": "2026-10-03T20:46:48.884Z",
+  "count": 253,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -122,6 +122,7 @@
     "gnews:deepseek,-moonshot-reportedly-face-china-scrutiny-over-anthropic-claims-ahead-of",
     "gnews:deepseek-and-huawei-partner-on-open-source-ai-chip-software---yahoo-tech",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
+    "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor.com",
     "gnews:deepseek-and-huawei-release-open-source-ascend-ai-programming-tools-to-reduce-re",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---nytimes.com",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---the-new-yor",
@@ -136,6 +137,7 @@
     "gnews:deepseek-open-sources-software-tools-for-huawei-ai-chips---the-information",
     "gnews:deepseek-opens-tools-to-help-huawei-chips-supplant-nvidia-in-ai---south-china-mo",
     "gnews:deepseek-partners-with-huawei-to-develop-chip-programming-tools,-reducing-relian",
+    "gnews:deepseek-reasonix:-how-a-poisoned-config-can-hijack-an-ai-coding-agent---gitlab",
     "gnews:deepseek-releases-v4-pro-with-higher-benchmarks,-open-source-tooling,-and-upcomi",
     "gnews:deepseek-targets-nvidia's-software-moat-with-huawei-partnership---yahoo-finance",
     "gnews:deepseek-teams-up-with-huawei-to-beef-up-ascend-chip-programming-tools---sdxcent",
@@ -169,8 +171,10 @@
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---新浪财经",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---驱动之家",
     "gnewszh:harness:deepseek-harness桌面版实测：更像「个人助理」，还给你送钱---爱范儿",
+    "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用---sohu.com",
     "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用---投资界",
     "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用---搜狐网",
+    "gnewszh:harness:deepseek-harness桌面版来了：不用命令行，打开就能用|插件|模型|会话|工作区|账号_手机新浪网---新浪财经",
     "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---news.qq.com",
     "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---qq-news",
     "gnewszh:harness:deepseek-harness桌面端预览版v0.2正式发布---腾讯新闻",
@@ -252,7 +256,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-03T15:57:26.660Z",
-  "lastFreshCount": 104,
+  "lastSignalsRunAt": "2026-10-03T20:46:48.884Z",
+  "lastFreshCount": 106,
   "cornerErrors": []
 }
