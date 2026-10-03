@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-03T11:19:42.012Z",
-  "count": 247,
+  "updatedAt": "2026-10-03T15:57:26.660Z",
+  "count": 249,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -16,6 +16,7 @@
     "arxiv:http://arxiv.org/abs/2609.24698v1",
     "cnmedia:www.infoq.cn:deepseek-开源昇腾平台基础设施组件，覆盖-tilelang、计算库与分布式通信库",
     "cnmedia:www.qbitai.com:deepseek官方开源昇腾基础组件，与昇腾共建高效易用的ai芯片软件生态",
+    "cnmedia:www.qbitai.com:deepseek扩招！弹性计算团队大量hc，尤其需要资深工程师",
     "cnmedia:www.qbitai.com:deepseek知乎独家发文，首次公开v4.1-agent训练“大本营”dsec",
     "cnmedia:www.solidot.org:cnnic-称中国生成式-ai-用户超-7-亿",
     "cnmedia:www.solidot.org:中国-ai-智能体也会撒谎和欺骗",
@@ -163,6 +164,7 @@
     "gnewszh:harness:deepseek-harness出桌面版了！---wallstreetcn.com",
     "gnewszh:harness:deepseek-harness出桌面版了！---华尔街见闻",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---finance.sina.com.cn",
+    "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---news.mydrivers.com",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---手机新浪网",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---新浪财经",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---驱动之家",
@@ -250,7 +252,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-03T11:19:42.012Z",
-  "lastFreshCount": 115,
+  "lastSignalsRunAt": "2026-10-03T15:57:26.660Z",
+  "lastFreshCount": 104,
   "cornerErrors": []
 }
