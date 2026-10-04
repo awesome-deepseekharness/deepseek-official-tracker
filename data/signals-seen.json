@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-04T12:00:02.826Z",
-  "count": 275,
+  "updatedAt": "2026-10-04T16:49:40.197Z",
+  "count": 283,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -25,6 +25,7 @@
     "exa:community:https://eu.36kr.com/en/p/4005355518726025",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5675",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5856",
+    "exa:community:https://jacar.es/en/deepseek-harness-dsh-local-model/",
     "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
     "exa:community:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
     "exa:community:https://www.v2ex.com/t/1239251",
@@ -121,6 +122,9 @@
     "gnews:china's-deepseek-annualised-revenue-run-rate-hits-$1-billion,-the-information-re",
     "gnews:china's-deepseek-hires-dealmaker-as-cfo-ahead-of-possible-ipo---reuters",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
+    "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
+    "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---bloomberg.com",
+    "gnews:chinese-ai-models-parrot-state-doctrine-or-refuse-to-answer-on-sensitive-topics-",
     "gnews:cutthroat-ai-competition:-deepseek-unveils-new-holiday-update,-harness-launches-",
     "gnews:deepseek's-ai-models-are-about-to-cost-four-times-more---engadget.com",
     "gnews:deepseek's-top-ranked-v4-flash-stumbles-on-real-agent-tasks-as-its-prices-surge-",
@@ -142,6 +146,7 @@
     "gnews:deepseek-cut-its-kv-cache-hbm-need-75%-and-ssd-need-87.5%.-micron-and-sandisk-in",
     "gnews:deepseek-debuts-multimodal-language-model-competitive-with-opus-4.8---siliconang",
     "gnews:deepseek-effect?-how-china’s-quant-funds-thrive-amid-tight-regulatory-scrutiny--",
+    "gnews:deepseek-harness-tests-claude-code-mods-compatibility-layer,-denies-\"copying-hom",
     "gnews:deepseek-harness-v0.2.1-alpha.1-adds-experimental-claude-code-mods-compatibility",
     "gnews:deepseek-just-gave-huawei-a-new-weapon-in-the-race-against-nvidia---yahoo-financ",
     "gnews:deepseek-open-sources-huawei-chip-tools-as-a-simpler-alternative-to-cuda---the-n",
@@ -172,6 +177,7 @@
     "gnewszh:harness:deepseek-harness-v0.2-预览版发布，上线桌面安装包---cryptorank",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---i.ifeng.com",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---凤凰网",
+    "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---新浪财经",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---手机新浪网",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---新浪财经",
@@ -202,6 +208,7 @@
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36-kr",
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36kr",
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36kr.com",
+    "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---搜狐网",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---新浪财经",
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---guancha.cn",
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---观察者网",
@@ -270,6 +277,7 @@
     "openrouter:~deepseek/deepseek-v4-flash-latest",
     "pypi:deepseek:1.0.0",
     "rumour:en:chinese-authorities-investigate-deepseek-and-moonshot-ai-over-suspecte",
+    "rumour:en:deepseek-v5-leak:-still-unconfirmed-as-v4-nets-$7.4b-[2026]---shattere",
     "v2ex:1246264",
     "x:2083084415157022911",
     "x:2087864585504305397",
@@ -278,7 +286,9 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-04T12:00:02.826Z",
-  "lastFreshCount": 118,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-04T16:49:40.197Z",
+  "lastFreshCount": 95,
+  "cornerErrors": [
+    "huggingface: This operation was aborted"
+  ]
 }
