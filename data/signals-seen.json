@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-04T16:49:40.197Z",
-  "count": 283,
+  "updatedAt": "2026-10-04T21:02:46.467Z",
+  "count": 289,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -22,6 +22,7 @@
     "cnmedia:www.solidot.org:中国-ai-智能体也会撒谎和欺骗",
     "exa:community:https://aidaily.fyi/zh/a/how-to-give-local-models-reliable-web-browsing-260927",
     "exa:community:https://bittide.aicompass.dev/article/c1940b4b-4915-4e35-848f-cfde2f23bff1?locale=zh",
+    "exa:community:https://dev.to/worldlinetech/running-deepseek-harness-on-an-8gb-gpu-context-tuning-presets-and-hardware-limits-410i",
     "exa:community:https://eu.36kr.com/en/p/4005355518726025",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5675",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5856",
@@ -45,6 +46,7 @@
     "exa:secondary:http://www.pwwt.cn/news/4521622/",
     "exa:secondary:https://ai-digest-1.com/zh/news/deepseek-harness-v0-2-desktop-npm-plugins-ai-15491",
     "exa:secondary:https://airebao.com/item/39225",
+    "exa:secondary:https://airebao.com/item/39757",
     "exa:secondary:https://eu.36kr.com/zh/p/4005355518726025",
     "exa:secondary:https://fluxbbs.com/deepseek-harness-v0-2-desktop-release/",
     "exa:secondary:https://molihua.org/mh-2493220/",
@@ -53,6 +55,7 @@
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
     "exa:secondary:https://www.163.com/dy/article/L8ADUHN40556OXHR.html?f=post1603_tab_news",
     "exa:secondary:https://www.80aj.com/2026/09/29/deepseek-desktop-dsh-0-2-0-rc1/",
+    "exa:secondary:https://www.aiboss88.com/en/news/deepseek-harness-v02-desktop-app",
     "exa:secondary:https://www.okyn.com/ai/1042.html",
     "exa:secondary:https://www.woshipm.com/ai/6472278.html",
     "exa:secondary:https://xiaoan.cc/article/deepseek-harness-kai-qi-quan-qiu-gong-kai-yu-lan-kai-yuan-zh-tt",
@@ -124,6 +127,7 @@
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---bloomberg.com",
+    "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---the-straits-times",
     "gnews:chinese-ai-models-parrot-state-doctrine-or-refuse-to-answer-on-sensitive-topics-",
     "gnews:cutthroat-ai-competition:-deepseek-unveils-new-holiday-update,-harness-launches-",
     "gnews:deepseek's-ai-models-are-about-to-cost-four-times-more---engadget.com",
@@ -137,6 +141,7 @@
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor.com",
     "gnews:deepseek-and-huawei-release-open-source-ascend-ai-programming-tools-to-reduce-re",
+    "gnews:deepseek-and-huawei-take-aim-at-nvidia’s-formidable-moat---bloomberg.com",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---nytimes.com",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---the-new-yor",
     "gnews:deepseek-bets-big-on-huawei-chips-to-bypass-u.s.-export-controls---the-informati",
@@ -217,6 +222,7 @@
     "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---手机新浪网",
     "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---新浪财经",
     "gnewszh:zh:anthropic发布ai滥用报告后-中国监管部门据报对deepseek和月之暗面展开调查---rfi",
+    "gnewszh:zh:anthropic发布ai滥用报告后-中国监管部门据报对deepseek和月之暗面展开调查---rfi.fr",
     "gnewszh:zh:deepseek-1.4亿元入局宇树战略配售，为具身智能铺路---21jingji.com",
     "gnewszh:zh:deepseek-1.4亿元入局宇树战略配售，为具身智能铺路---21财经",
     "gnewszh:zh:deepseek-再扔“王炸”-美国指责-中国反驳---dw.com",
@@ -286,9 +292,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-04T16:49:40.197Z",
-  "lastFreshCount": 95,
-  "cornerErrors": [
-    "huggingface: This operation was aborted"
-  ]
+  "lastSignalsRunAt": "2026-10-04T21:02:46.467Z",
+  "lastFreshCount": 108,
+  "cornerErrors": []
 }
