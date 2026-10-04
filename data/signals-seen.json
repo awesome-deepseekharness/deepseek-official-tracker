@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-03T20:46:48.884Z",
-  "count": 253,
+  "updatedAt": "2026-10-04T05:02:23.584Z",
+  "count": 259,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -47,6 +47,7 @@
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00?ptag=ima",
     "exa:secondary:https://news.qq.com/rain/a/20260930A0AUKI00?ptag=ima",
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
+    "exa:secondary:https://www.163.com/dy/article/L8ADUHN40556OXHR.html?f=post1603_tab_news",
     "exa:secondary:https://www.80aj.com/2026/09/29/deepseek-desktop-dsh-0-2-0-rc1/",
     "exa:secondary:https://www.okyn.com/ai/1042.html",
     "exa:secondary:https://www.woshipm.com/ai/6472278.html",
@@ -131,9 +132,11 @@
     "gnews:deepseek-builds-for-huawei-ascend---geopolitechs",
     "gnews:deepseek-builds-for-huawei-ascend---geopolitechs.org",
     "gnews:deepseek-cut-its-kv-cache-hbm-need-75%-and-ssd-need-87.5%.-micron-and-sandisk-in",
+    "gnews:deepseek-debuts-multimodal-language-model-competitive-with-opus-4.8---siliconang",
     "gnews:deepseek-effect?-how-china’s-quant-funds-thrive-amid-tight-regulatory-scrutiny--",
     "gnews:deepseek-just-gave-huawei-a-new-weapon-in-the-race-against-nvidia---yahoo-financ",
     "gnews:deepseek-open-sources-huawei-chip-tools-as-a-simpler-alternative-to-cuda---the-n",
+    "gnews:deepseek-open-sources-huawei-chip-tools-as-a-simpler-alternative-to-cuda---thene",
     "gnews:deepseek-open-sources-software-tools-for-huawei-ai-chips---the-information",
     "gnews:deepseek-opens-tools-to-help-huawei-chips-supplant-nvidia-in-ai---south-china-mo",
     "gnews:deepseek-partners-with-huawei-to-develop-chip-programming-tools,-reducing-relian",
@@ -155,6 +158,7 @@
     "gnews:pushing-the-limits-of-serving-deepseek-v4-pro---lmsys.org",
     "gnews:the-open-sourcing-of-deepseek-harness-opens-the-door-to-modular,-unbundled-ai-ag",
     "gnews:we-burned-11.7bn-tokens-to-find-the-best-cyber-ai-model-|-glm5.3-and-deepseek-ar",
+    "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnewszh:harness:deepseek-harness-v0.2-发布桌面版：装插件靠npm-包名，还能让ai-自己写插件--oschina---开源-×-ai-",
     "gnewszh:harness:deepseek-harness-v0.2-预览版发布，上线桌面安装包---cryptorank",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---i.ifeng.com",
@@ -185,6 +189,7 @@
     "gnewszh:harness:刚刚，deepseek-harness桌面端上线，梁文锋开送token了---智东西",
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36kr",
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36kr.com",
+    "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---新浪财经",
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---guancha.cn",
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---观察者网",
     "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---凤凰网",
@@ -249,6 +254,7 @@
     "openrouter:~deepseek/deepseek-v4-flash-latest",
     "pypi:deepseek:1.0.0",
     "rumour:en:chinese-authorities-investigate-deepseek-and-moonshot-ai-over-suspecte",
+    "v2ex:1246264",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -256,7 +262,9 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-03T20:46:48.884Z",
-  "lastFreshCount": 106,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-04T05:02:23.584Z",
+  "lastFreshCount": 108,
+  "cornerErrors": [
+    "exa-community: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
+  ]
 }
