@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-06T22:30:25.329Z",
-  "count": 410,
+  "updatedAt": "2026-10-07T05:05:07.278Z",
+  "count": 415,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -49,6 +49,7 @@
     "exa:rumor:https://news.mydrivers.com/1/1154/1154337.htm",
     "exa:rumor:https://news.qq.com/rain/a/20260908A0BSUW00?adChannelId=news_news_tech",
     "exa:rumor:https://nitter.jaydenha.uk/Priyannkaaaa/status/2103699253273247809",
+    "exa:rumor:https://promptblueprints.tech/leaks/deepseek-v5-leak-what-the-report-actually-says/",
     "exa:rumor:https://promptblueprints.tech/leaks/what-the-deepseek-v5-leak-actually-reports/",
     "exa:rumor:https://www.datalearner.com/ai-models/pretrained-models/deepseek-v5",
     "exa:rumor:https://www.laplaceatlas.com/stories/deepseek-v5-leaks-suggest-imminent-open-weight-model-launch-73c33cd2",
@@ -121,6 +122,7 @@
     "ghcommunity:next:MiaAI-Lab/DeepSeek-v4.1-Flash-EXL3-2x-DGX-Sparks",
     "ghcommunity:next:TOBYCAI/dsh-sessions-manager",
     "ghcommunity:next:Yunado/dsh-qwen38-local-qol",
+    "ghcommunity:next:bertholomus/deepseek-v4.1-tensorfold-tp2-2xgb10",
     "ghcommunity:next:coolbho3k/DeepSeek-v4.1-Flash-2x-DGX-Spark",
     "ghcommunity:next:dg1kjd/sglang-sxm2",
     "ghcommunity:next:hikarioyama/dsv4-flash-0731-sm120",
@@ -224,6 +226,7 @@
     "gnews:deepseek-unveils-huawei-ai-chip-software-to-challenge-nvidia---seeking-alpha",
     "gnews:deepseek-unveils-huawei-ai-chip-tools-that-may-replace-nvidia’s---bloomberg.com",
     "gnews:deepseek-unveils-huawei-ai-chip-tools-that-may-replace-nvidia’s---yahoo-finance",
+    "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek’s-funding-round-could-approach-$15-billion-as-investor-demand-surges---",
     "gnews:exclusive:-china's-deepseek-taps-citic-securities-for-domestic-ipo,-sources-say-",
     "gnews:exclusive:-deepseek-to-brief-un-security-council-on-ai-this-week,-sources-say---",
@@ -334,6 +337,7 @@
     "gnewszh:zh:deepseek据报在内蒙古数据中心部署16万片华为晶片---联合早报",
     "gnewszh:zh:deepseek最新一轮融资规模或超800亿元，宁德时代和腾讯承诺大手笔注资---rfi",
     "gnewszh:zh:deepseek最新论文，作者超130人，梁文锋最后署名---新浪财经",
+    "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---搜狐网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---新浪网",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
@@ -406,6 +410,7 @@
     "rumour:zh:英伟达重金力捧！“美版deepseek”即将发布开源模型---华尔街见闻",
     "rumour:zh:英伟达重金力捧！“美版deepseek”即将发布开源模型---富途牛牛",
     "v2ex:1246264",
+    "v2ex:1246636",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -413,7 +418,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-06T22:30:25.328Z",
-  "lastFreshCount": 127,
+  "lastSignalsRunAt": "2026-10-07T05:05:07.278Z",
+  "lastFreshCount": 107,
   "cornerErrors": []
 }
