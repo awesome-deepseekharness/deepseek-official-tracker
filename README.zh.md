@@ -28,13 +28,13 @@
 
 **适合：** 关注 DeepSeek 最新消息和 Harness 桌面端的读者 · 追踪计费与弃用通知的 API 用户 · 关注模型权重的研究者 · 关注 CLI 发布与插件生态的开发者。
 
-## 🔥 最新 — deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.1 (2026-10-03)
+## 🔥 最新 — deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.2 (2026-10-09)
 
-**预发布 / 候选版** · [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.1)
+**预发布 / 候选版** · [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.2)
 
-v0.2.1-alpha.1
+v0.2.1-alpha.2
 
-- **Harness:** 2026-10-03 · [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.1) · 预发布 / 候选版
+- **Harness:** 2026-10-09 · [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.2) · 预发布 / 候选版
 - **最近模型 / API 公告:** 2026-09-10 · [DeepSeek-V4.1-Flash Release](https://api-docs.deepseek.com/updates#date-2026-09-10)
 - **完整官方记录:** [FEED.md](FEED.md) · [GitHub releases](releases.md) · [npm](npm.md)
 - **媒体、社区与疑似消息（非官方）:** [SIGNALS.md](SIGNALS.md) · [Insights](insights.md)
@@ -42,14 +42,14 @@ v0.2.1-alpha.1
 <details>
 <summary>近期官方更新</summary>
 
+- **2026-10-09** [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.2)
+- **2026-10-09** [v0.2.1-alpha.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-alpha.2)
 - **2026-10-03** [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.1)
 - **2026-10-03** [v0.2.1-alpha.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-alpha.1)
 - **2026-10-02** [DeepSeek Harness｜共探智能上限 (first observed / 首次观测)](https://www.deepseek.com/harness/)
 - **2026-09-29** [deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.2)
 - **2026-09-29** [v0.2.0-rc.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.0-rc.2)
 - **2026-09-28** [deepseek-ai/deepseek-harness release dsh-v0.2.0-rc.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.0-rc.1)
-- **2026-09-28** [v0.2.0-rc.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.0-rc.1)
-- **2026-09-24** [deepseek-ai/deepseek-harness release dsh-v0.1.7-rc.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.7-rc.2)
 </details>
 
 ## Harness 桌面端、版本发布与社区动态

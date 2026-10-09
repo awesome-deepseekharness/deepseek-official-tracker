@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-09T05:19:00.769Z",
-  "count": 474,
+  "updatedAt": "2026-10-09T12:50:53.408Z",
+  "count": 482,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -20,6 +20,7 @@
     "cnmedia:www.qbitai.com:deepseek官方开源昇腾基础组件，与昇腾共建高效易用的ai芯片软件生态",
     "cnmedia:www.qbitai.com:deepseek扩招！弹性计算团队大量hc，尤其需要资深工程师",
     "cnmedia:www.qbitai.com:deepseek知乎独家发文，首次公开v4.1-agent训练“大本营”dsec",
+    "cnmedia:www.qbitai.com:字节找到了deepseek时强时弱的原因",
     "cnmedia:www.solidot.org:ai-聊天机器人会成为意识形态回音室",
     "cnmedia:www.solidot.org:cnnic-称中国生成式-ai-用户超-7-亿",
     "cnmedia:www.solidot.org:中国-ai-智能体也会撒谎和欺骗",
@@ -77,6 +78,7 @@
     "exa:secondary:https://github.com/deepseek-ai",
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/6637",
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/7667",
+    "exa:secondary:https://hideepseek.com/learn/news/deepseek-harness-community-v0223-v0224-2026-10-08/",
     "exa:secondary:https://juejin.cn/post/7690976080673112074",
     "exa:secondary:https://molihua.org/mh-2493220/",
     "exa:secondary:https://news.10jqka.com.cn/20260929/c680375915.shtml",
@@ -84,6 +86,7 @@
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00?ptag=ima",
     "exa:secondary:https://news.qq.com/rain/a/20260930A0AUKI00?ptag=ima",
     "exa:secondary:https://news.qq.com/rain/a/20261004A09GML00",
+    "exa:secondary:https://segmentfault.com/a/1190000048326165",
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
     "exa:secondary:https://www.163.com/dy/article/L8ADUHN40556OXHR.html?f=post1603_tab_news",
@@ -174,6 +177,8 @@
     "gnews:ai-startup-deepseek-poised-to-reach-$74-billion-valuation---wsj",
     "gnews:am-markets-need-to-know:-deepseek-backs-huawei-chips,-anthropic-ipo-risks,-and-m",
     "gnews:america's-answer-to-deepseek-arrives---marketscreener.com",
+    "gnews:bytedance-researchers-identify-cause-of-inconsistent-long-context-retrieval-in-d",
+    "gnews:bytedance-uncovers-the-root-cause-behind-deepseek's-unstable-performance-fluctua",
     "gnews:catl-&-deepseek:-revolutionary-synergy-in-new-energy-&-ai-technology---36kr",
     "gnews:catl-and-tencent-back-deepseek's-ballooning-funding-round-as-the-ai-startup-eyes",
     "gnews:caught-lying-in-88%-of-tests:-ai-agents-on-chinese-models-learned-to-cheat,-us-m",
@@ -295,6 +300,7 @@
     "gnews:watch-out-openai,-anthropic:-deepseek,-moonshot-raise-fresh-capital-as-chinese-o",
     "gnews:we-burned-11.7bn-tokens-to-find-the-best-cyber-ai-model-|-glm5.3-and-deepseek-ar",
     "gnews:what-is-beam?-the-buzzy-american-ai-model-being-called-the-'deepseek-of-the-west",
+    "gnews:which-deepseek-v4-flash-api-is-cheapest?-bitdeer-ai-tops-artificial-analysis-pri",
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnews:windows-gets-open-weight-a.i.-like-china’s-deepseek-and-nvidia’s-nemotron---www.",
     "gnewszh:harness:31小时连发3版！deepseek-harness-0.1.7进入rc---手机网易网",
@@ -392,6 +398,7 @@
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---新浪网",
+    "gnewszh:zh:中国品牌如何实现跨越式发展？|deepseek|韩国|机器人|小米|谢菲尔德---新浪军事",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
     "gnewszh:zh:华为携deepseek攻坚-英伟达护城河不妙？---orientaldaily.com.my",
     "gnewszh:zh:声明：本人从未在互联网上诋毁过深度求索，并没有称梁文锋为梁白开。-本人实际上是深度求索2年老粉，经过...-|-机组---gcores.co",
@@ -463,6 +470,7 @@
     "rumour:en:deepseek-v5-leak:-still-unconfirmed-as-v4-nets-$7.4b-[2026]---shattere",
     "rumour:zh:【英伟达重金力捧！美版deepseek即将发布开源模型】获得英伟达8---凤凰网",
     "rumour:zh:传闻deepseek接近完成逾800亿元融资-腾讯、宁德时代等重量级机构参与押注---yellow.com",
+    "rumour:zh:市场传闻：deepseek在最新一轮融资中即将敲定至少$119.4亿---moomoo",
     "rumour:zh:市场传闻：deepseek拟在宁德时代和腾讯控股领投的新一轮融资中筹集800亿元---富途牛牛",
     "rumour:zh:爆“出猫”争议后再涉数据泄露-deepseek、月之暗面传遭内地调查---香港01",
     "rumour:zh:英伟达重金力捧！“美版deepseek”即将发布开源模型---华尔街见闻",
@@ -477,7 +485,10 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-09T05:19:00.769Z",
-  "lastFreshCount": 104,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-09T12:50:53.408Z",
+  "lastFreshCount": 108,
+  "cornerErrors": [
+    "x-timeline: firecrawl scrape -> HTTP 403",
+    "firecrawl-search: firecrawl search -> HTTP 403"
+  ]
 }
