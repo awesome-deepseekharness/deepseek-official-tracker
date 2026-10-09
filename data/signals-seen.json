@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-09T12:50:53.408Z",
-  "count": 482,
+  "updatedAt": "2026-10-09T22:26:20.049Z",
+  "count": 487,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -68,6 +68,7 @@
     "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-v4-1-pro-release-window-leak",
     "exa:secondary:http://www.pwwt.cn/news/4521622/",
     "exa:secondary:https://ai-digest-1.com/zh/news/deepseek-harness-v0-2-desktop-npm-plugins-ai-15491",
+    "exa:secondary:https://aicoder.com/zh/news/news-20260925-deepseek-harness-desktop-standalone-release",
     "exa:secondary:https://aicoder.com/zh/news/news-20261004-deepseek-harness-v02-claude-mods-compat",
     "exa:secondary:https://airebao.com/item/39225",
     "exa:secondary:https://airebao.com/item/39757",
@@ -82,6 +83,7 @@
     "exa:secondary:https://juejin.cn/post/7690976080673112074",
     "exa:secondary:https://molihua.org/mh-2493220/",
     "exa:secondary:https://news.10jqka.com.cn/20260929/c680375915.shtml",
+    "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A402371422",
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00",
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00?ptag=ima",
     "exa:secondary:https://news.qq.com/rain/a/20260930A0AUKI00?ptag=ima",
@@ -93,6 +95,7 @@
     "exa:secondary:https://www.80aj.com/2026/09/29/deepseek-desktop-dsh-0-2-0-rc1/",
     "exa:secondary:https://www.aiboss88.com/en/news/deepseek-harness-v02-desktop-app",
     "exa:secondary:https://www.ithome.com/1/009/701.htm",
+    "exa:secondary:https://www.jxxy.net/ai/articles/deepseek-harness-v02-desktop/",
     "exa:secondary:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
     "exa:secondary:https://www.okyn.com/ai/1042.html",
     "exa:secondary:https://www.woshipm.com/ai/6472278.html",
@@ -158,6 +161,7 @@
     "ghcommunity:next:tonyd2wild/DeepSeek-v4-Flash-0731-Vision-DSpark-1M-NVFP4-KV-2x-DGX-Spark",
     "ghcommunity:next:yanun0323/Whallm",
     "ghcommunity:weights:0xBakeer/deepseek-v41-flash-spark",
+    "ghcommunity:weights:0xSero/DeepSeek-V4.1-Flash-Two-Sparks",
     "ghcommunity:weights:FeiZhuLulu/DeepSeek-Bot",
     "ghcommunity:weights:MiaAI-Lab/DeepSeek-v4.1-Flash-DGX-Sparks",
     "ghcommunity:weights:MiaAI-Lab/DeepSeek-v4.1-Flash-EXL3-2x-DGX-Sparks",
@@ -223,6 +227,7 @@
     "gnews:deepseek-cuts-china’s-ai-gap-with-us-rivals-to-just-3%---yourstory.com",
     "gnews:deepseek-debuts-multimodal-language-model-competitive-with-opus-4.8---siliconang",
     "gnews:deepseek-effect?-how-china’s-quant-funds-thrive-amid-tight-regulatory-scrutiny--",
+    "gnews:deepseek-ends-weekend-peak-pricing-for-api-users-from-today---bloomberg.com",
     "gnews:deepseek-eyes-doubling-latest-funding-round-to-$15b:-report---tradingview",
     "gnews:deepseek-harness-challenges-agent-lock-in-with-claude-code-mods-bridge-and-open-",
     "gnews:deepseek-harness-tests-claude-code-mods-compatibility-layer,-denies-\"copying-hom",
@@ -485,10 +490,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-09T12:50:53.408Z",
-  "lastFreshCount": 108,
-  "cornerErrors": [
-    "x-timeline: firecrawl scrape -> HTTP 403",
-    "firecrawl-search: firecrawl search -> HTTP 403"
-  ]
+  "lastSignalsRunAt": "2026-10-09T22:26:20.049Z",
+  "lastFreshCount": 105,
+  "cornerErrors": []
 }
