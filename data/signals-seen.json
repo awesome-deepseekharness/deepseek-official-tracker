@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-08T23:06:10.472Z",
-  "count": 470,
+  "updatedAt": "2026-10-09T05:19:00.769Z",
+  "count": 474,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -52,6 +52,7 @@
     "exa:rumor:https://cellcog.ai/blog/deepseek-v5-release-date/",
     "exa:rumor:https://denghy.cn/articles/deepseek-harness-desktop-pro-rumor",
     "exa:rumor:https://maxassistant.app/en/news/releases/deepseek-v5-mythos-class-rumor-september/",
+    "exa:rumor:https://news.cnyes.com/news/id/6612753",
     "exa:rumor:https://news.mydrivers.com/1/1154/1154337.htm",
     "exa:rumor:https://news.qq.com/rain/a/20260908A0BSUW00?adChannelId=news_news_tech",
     "exa:rumor:https://news.yuhuanstudio.com/issues/2026-09-22/e314fec7eafa4b48",
@@ -62,6 +63,7 @@
     "exa:rumor:https://www.laplaceatlas.com/stories/deepseek-v5-leaks-suggest-imminent-open-weight-model-launch-73c33cd2",
     "exa:rumor:https://www.orcarouter.ai/zh-CN/blog/deepseek-v5-preview-leak",
     "exa:rumor:https://www.orcarouter.ai/zh-CN/blog/dsh-0-2-v4-1-pro-leak",
+    "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-3t-model-leak",
     "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-v4-1-pro-release-window-leak",
     "exa:secondary:http://www.pwwt.cn/news/4521622/",
     "exa:secondary:https://ai-digest-1.com/zh/news/deepseek-harness-v0-2-desktop-npm-plugins-ai-15491",
@@ -179,6 +181,7 @@
     "gnews:china's-deepseek,-peers-launch-16-ai-models-in-month-despite-anthropic-warning--",
     "gnews:china's-deepseek-annualised-revenue-run-rate-hits-$1-billion,-the-information-re",
     "gnews:china's-deepseek-hires-dealmaker-as-cfo-ahead-of-possible-ipo---reuters",
+    "gnews:china-narrowing-ai-gap-with-us---chinadailyhk",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---bloomberg.com",
@@ -466,6 +469,7 @@
     "rumour:zh:英伟达重金力捧！“美版deepseek”即将发布开源模型---富途牛牛",
     "v2ex:1246264",
     "v2ex:1246636",
+    "v2ex:1247032",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -473,7 +477,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-08T23:06:10.471Z",
-  "lastFreshCount": 112,
+  "lastSignalsRunAt": "2026-10-09T05:19:00.769Z",
+  "lastFreshCount": 104,
   "cornerErrors": []
 }
