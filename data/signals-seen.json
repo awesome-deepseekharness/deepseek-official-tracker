@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-10T05:03:04.670Z",
-  "count": 499,
+  "updatedAt": "2026-10-10T12:09:04.010Z",
+  "count": 502,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -52,6 +52,7 @@
     "exa:rumor:https://bittide.aicompass.dev/article/7b0cb097-9df9-4b17-a0ff-a64afa6acc3c?locale=zh",
     "exa:rumor:https://cellcog.ai/blog/deepseek-v5-release-date/",
     "exa:rumor:https://denghy.cn/articles/deepseek-harness-desktop-pro-rumor",
+    "exa:rumor:https://guijiagi.com/posts/2026-10-09-17-deepseek-v5-from-scratch-mythos/",
     "exa:rumor:https://maxassistant.app/en/news/releases/deepseek-v5-mythos-class-rumor-september/",
     "exa:rumor:https://news.cnyes.com/news/id/6612753",
     "exa:rumor:https://news.mydrivers.com/1/1154/1154337.htm",
@@ -333,6 +334,7 @@
     "gnewszh:harness:deepseek-harness出桌面版了！---华尔街见闻",
     "gnewszh:harness:deepseek-harness国庆假期上新！90后负责人回应：希望做出让世界ai巨头跟进的创新---thepaper.cn",
     "gnewszh:harness:deepseek-harness国庆假期上新！90后负责人回应：希望做出让世界ai巨头跟进的创新---天天基金",
+    "gnewszh:harness:deepseek-harness国庆假期上新！90后负责人回应：希望做出让世界ai巨头跟进的创新---新浪财经",
     "gnewszh:harness:deepseek-harness国庆假期上新！负责人：希望做出让世界ai巨头跟进的创新---sohu",
     "gnewszh:harness:deepseek-harness国庆假期上新！负责人：希望做出让世界ai巨头跟进的创新---搜狐网",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---finance.sina.com.cn",
@@ -381,6 +383,7 @@
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---36-kr",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---36kr",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---36kr.com",
+    "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---36氪",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---手机搜狐网",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---搜狐网",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---新浪财经",
@@ -502,10 +505,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-10T05:03:04.670Z",
-  "lastFreshCount": 110,
-  "cornerErrors": [
-    "exa-community: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
-    "exa-rumours: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
-  ]
+  "lastSignalsRunAt": "2026-10-10T12:09:04.010Z",
+  "lastFreshCount": 101,
+  "cornerErrors": []
 }
