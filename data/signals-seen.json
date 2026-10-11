@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-11T12:22:37.529Z",
-  "count": 531,
+  "updatedAt": "2026-10-11T21:40:06.556Z",
+  "count": 536,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -220,6 +220,7 @@
     "gnews:deepseek's-top-ranked-v4-flash-stumbles-on-real-agent-tasks-as-its-prices-surge-",
     "gnews:deepseek,-huawei-challenge-the-software-powering-nvidia’s-ai-dominance---the-dai",
     "gnews:deepseek,-huawei-join-forces-to-challenge-nvidia’s-cuda-dominance---businesskore",
+    "gnews:deepseek,-huawei-ship-6-ascend-tools-to-rival-cuda-[2026]---https://tech-insider",
     "gnews:deepseek,-huawei-team-on-ai-chip-software---mobile-world-live",
     "gnews:deepseek,-huawei-team-on-ai-chip-software---mobileworldlive.com",
     "gnews:deepseek,-moonshot-ai-prepare-for-2027-ipos---조선일보",
@@ -288,6 +289,7 @@
     "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek:-what-exactly-is-this-open-position-recruiting-for?-uncover-the-real-hi",
     "gnews:deepseek’s-funding-round-could-approach-$15-billion-as-investor-demand-surges---",
+    "gnews:dolphin:-inference-api-goes-live-with-deepseek-v4.1-flash---11-oct-2026---tradin",
     "gnews:exclusive:-china's-deepseek-taps-citic-securities-for-domestic-ipo,-sources-say-",
     "gnews:exclusive:-deepseek-to-brief-un-security-council-on-ai-this-week,-sources-say---",
     "gnews:file-photo:-illustration-shows-deepseek-logo---the-daily-news-|-texas'-oldest-ne",
@@ -332,6 +334,7 @@
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnews:windows-gets-open-weight-a.i.-like-china’s-deepseek-and-nvidia’s-nemotron---www.",
     "gnewszh:harness:31小时连发3版！deepseek-harness-0.1.7进入rc---手机网易网",
+    "gnewszh:harness:deepseek-bot插件深度解读：多智能体协同与长期记忆机制---积墨-ai",
     "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---凤凰网科技",
     "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---量子位",
     "gnewszh:harness:deepseek-harness-v0.2-发布桌面版：装插件靠npm-包名，还能让ai-自己写插件--oschina---开源-×-ai-",
@@ -434,11 +437,13 @@
     "gnewszh:zh:deepseek新一轮融资逼近1000亿---finance.sina.com.cn",
     "gnewszh:zh:deepseek新一轮融资逼近1000亿|21世纪经济报道|深度求索|腾讯控股|人工智能相关基金|宁德时代---新浪财经",
     "gnewszh:zh:deepseek最新一轮融资规模或超800亿元，宁德时代和腾讯承诺大手笔注资---rfi",
+    "gnewszh:zh:deepseek最新论文，作者超130人，梁文锋最后署名---21财经",
     "gnewszh:zh:deepseek最新论文，作者超130人，梁文锋最后署名---新浪财经",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---搜狐网",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐",
+    "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---新浪网",
     "gnewszh:zh:中国品牌如何实现跨越式发展？|deepseek|韩国|机器人|小米|谢菲尔德---新浪军事",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
@@ -534,7 +539,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-11T12:22:37.529Z",
-  "lastFreshCount": 96,
+  "lastSignalsRunAt": "2026-10-11T21:40:06.555Z",
+  "lastFreshCount": 94,
   "cornerErrors": []
 }
