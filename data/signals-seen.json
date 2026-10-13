@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-13T13:50:49.129Z",
-  "count": 584,
+  "updatedAt": "2026-10-13T22:25:53.741Z",
+  "count": 596,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -47,6 +47,11 @@
     "exa:community:https://nitter.cf/DeepSeekHarness/status/2105330281389662575",
     "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
     "exa:community:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
+    "exa:community:https://www.reddit.com/r/DeepSeek/comments/1wp5r06/i_ran_deepseek_through_7_harnesses_heres_how_each/",
+    "exa:community:https://www.reddit.com/r/DeepSeek/comments/1wt9184/i_built_a_web_search_plugin_for_deepseek_harness/",
+    "exa:community:https://www.reddit.com/r/DeepSeek/comments/1wtfp0g/deepseek_harness_app_is_out_now/",
+    "exa:community:https://www.reddit.com/r/DeepSeek/comments/1wth5fw/anyone_has_experience_with_the_new_deepseek/",
+    "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1wro7hg/how_do_you_guys_give_your_models_web_browsing/",
     "exa:community:https://www.v2ex.com/t/1239251",
     "exa:community:https://www.v2ex.com/t/1240128",
     "exa:community:https://www.v2ex.com/t/1241664",
@@ -209,6 +214,7 @@
     "gnews:am-markets-need-to-know:-deepseek-backs-huawei-chips,-anthropic-ipo-risks,-and-m",
     "gnews:america's-answer-to-deepseek-arrives---marketscreener.com",
     "gnews:breaking:-deepseek-secures-second-round-financing-worth-100-billion-yuan---36-kr",
+    "gnews:breaking:-deepseek-secures-second-round-financing-worth-100-billion-yuan---36kr",
     "gnews:bytedance-researchers-identify-cause-of-inconsistent-long-context-retrieval-in-d",
     "gnews:bytedance-uncovers-the-root-cause-behind-deepseek's-unstable-performance-fluctua",
     "gnews:catl-&-deepseek:-revolutionary-synergy-in-new-energy-&-ai-technology---36kr",
@@ -336,6 +342,7 @@
     "gnews:led-by-deepseek,-chinese-ai-models-take-top-five-positions-in-global-weekly-toke",
     "gnews:lenovo's-tianxicode-agent-and-deepseek-v4.1-flash-top-swe-bench-live-lite-at-71%",
     "gnews:lifetime-access-to-gpt,-deepseek,-gemini,-and-more-is-only-$60-today-($619-value",
+    "gnews:megaeth-powered-mnx-goes-live-with-pre-ipo-futures-for-openai,-anthropic-and-dee",
     "gnews:minimax-valuation-plunges-80%,-deepseek-seeks-100b-yuan-financing:-who-will-back",
     "gnews:moonshot-ai-eyes-hong-kong-ipo-in-early-2027-after-a-$50bn-valuation---euronews.",
     "gnews:nvidia-backed-reflection-ai-targets-low-cost-chinese-models-like-deepseek-and-ki",
@@ -364,6 +371,7 @@
     "gnews:watch-out-openai,-anthropic:-deepseek,-moonshot-raise-fresh-capital-as-chinese-o",
     "gnews:we-burned-11.7bn-tokens-to-find-the-best-cyber-ai-model-|-glm5.3-and-deepseek-ar",
     "gnews:what-is-beam?-the-buzzy-american-ai-model-being-called-the-'deepseek-of-the-west",
+    "gnews:what-is-deepseek?-open-weight-ai-models-explained---built-in",
     "gnews:which-deepseek-v4-flash-api-is-cheapest?-bitdeer-ai-tops-artificial-analysis-pri",
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnews:windows-gets-open-weight-a.i.-like-china’s-deepseek-and-nvidia’s-nemotron---www.",
@@ -372,6 +380,7 @@
     "gnewszh:harness:deepseek-bot插件深度解读：多智能体协同与长期记忆机制---积墨-ai",
     "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---凤凰网科技",
     "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---新浪新闻",
+    "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---新浪新闻_手机新浪网",
     "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---智源社区",
     "gnewszh:harness:deepseek-bot来了！民间版，dsh装个插件就能用---量子位",
     "gnewszh:harness:deepseek-harness-v0.2-发布桌面版：装插件靠npm-包名，还能让ai-自己写插件--oschina---开源-×-ai-",
@@ -509,6 +518,7 @@
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---联合早报",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---zaobao.com.sg",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---联合早报",
+    "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36kr",
     "gnewszh:zh:曝deepseek或下场做机器人，梁文锋密集接触具身智能创业者_公司新闻_财经---证券之星",
     "gnewszh:zh:本周，deepseek将向安理会通报---观察者网",
     "gnewszh:zh:杭州深度求索人工智能基础技术研究有限公司3年增资15倍---东方财富",
@@ -553,6 +563,7 @@
     "hn:49911500",
     "hn:49929489",
     "hn:50000488",
+    "hn:50077619",
     "openrouter:deepseek/deepseek-v3.2",
     "openrouter:deepseek/deepseek-v3.2-exp",
     "openrouter:deepseek/deepseek-v4-flash",
@@ -568,6 +579,7 @@
     "pypi:deepseek:1.0.0",
     "rumour:en:china-probes-deepseek-and-moonshot-over-alleged-data-leaks-to-anthropi",
     "rumour:en:chinese-authorities-investigate-deepseek-and-moonshot-ai-over-suspecte",
+    "rumour:en:deepseek's-successor-leak:-one-screenshot,-no-model-name---orcarouter",
     "rumour:en:deepseek-v5-leak:-still-unconfirmed-as-v4-nets-$7.4b-[2026]---shattere",
     "rumour:zh:【英伟达重金力捧！美版deepseek即将发布开源模型】获得英伟达8---凤凰网",
     "rumour:zh:传闻deepseek接近完成逾800亿元融资-腾讯、宁德时代等重量级机构参与押注---yellow.com",
@@ -587,11 +599,7 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-13T13:50:49.129Z",
-  "lastFreshCount": 103,
-  "cornerErrors": [
-    "exa-news: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
-    "exa-community: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
-    "exa-rumours: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
-  ]
+  "lastSignalsRunAt": "2026-10-13T22:25:53.741Z",
+  "lastFreshCount": 102,
+  "cornerErrors": []
 }
