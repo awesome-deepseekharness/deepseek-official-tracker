@@ -1,10 +1,8 @@
 {
-  "checkedAt": "2026-10-13T12:23:49.229Z",
-  "ok": false,
-  "issueCount": 1,
-  "issues": [
-    "SIGNALS.md: rumour row without 疑似/unverified marker — | 2026-10-09 | Exa · guijiagi.com | [传闻中的 DeepSeek V5：从零重造底座"
-  ],
+  "checkedAt": "2026-10-14T09:52:06.942Z",
+  "ok": true,
+  "issueCount": 0,
+  "issues": [],
   "stats": {
     "NEWS.md": 10,
     "api-changelog.md": 22,
@@ -26,7 +24,7 @@
       "zh": "2026-10-09"
     },
     "linksChecked": 15,
-    "signalsAgeDays": 0.5,
-    "rumourRows": 11
+    "signalsAgeDays": 0.24,
+    "rumourRows": 0
   }
 }
