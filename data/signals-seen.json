@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-14T11:28:13.091Z",
-  "count": 609,
+  "updatedAt": "2026-10-14T16:49:37.058Z",
+  "count": 613,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -79,6 +79,7 @@
     "exa:rumor:https://www.orcarouter.ai/zh-CN/blog/dsh-0-2-v4-1-pro-leak",
     "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-3t-model-leak",
     "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-v4-1-pro-release-window-leak",
+    "exa:rumor:https://yunpan.plus/t/31745-1-1",
     "exa:secondary:http://www.pwwt.cn/news/4521622/",
     "exa:secondary:https://ai-digest-1.com/zh/news/deepseek-harness-v0-2-desktop-npm-plugins-ai-15491",
     "exa:secondary:https://aicoder.com/zh/news/news-20260925-deepseek-harness-desktop-standalone-release",
@@ -228,6 +229,8 @@
     "gnews:china's-deepseek,-peers-launch-16-ai-models-in-month-despite-anthropic-warning--",
     "gnews:china's-deepseek-annualised-revenue-run-rate-hits-$1-billion,-the-information-re",
     "gnews:china's-deepseek-hires-dealmaker-as-cfo-ahead-of-possible-ipo---reuters",
+    "gnews:china's-open-ai-models-now-trail-the-us-frontier-by-just-seven-months---startup-",
+    "gnews:china-is-chipping-away-at-america’s-ai-advantage---washington-examiner",
     "gnews:china-narrowing-ai-gap-with-us---chinadailyhk",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
@@ -530,6 +533,7 @@
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---zaobao.com.sg",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---联合早报",
     "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36kr",
+    "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36氪",
     "gnewszh:zh:曝deepseek或下场做机器人，梁文锋密集接触具身智能创业者_公司新闻_财经---证券之星",
     "gnewszh:zh:本周，deepseek将向安理会通报---观察者网",
     "gnewszh:zh:杭州深度求索人工智能基础技术研究有限公司3年增资15倍---东方财富",
@@ -612,9 +616,11 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-14T11:28:13.090Z",
-  "lastFreshCount": 102,
+  "lastSignalsRunAt": "2026-10-14T16:49:37.058Z",
+  "lastFreshCount": 97,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
+    "x-timeline: firecrawl scrape -> HTTP 403",
+    "firecrawl-search: firecrawl search -> HTTP 403"
   ]
 }
