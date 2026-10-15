@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-15T16:35:12.756Z",
-  "count": 671,
+  "updatedAt": "2026-10-15T21:06:31.139Z",
+  "count": 674,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -340,6 +340,7 @@
     "gnews:deepseek-reportedly-nears-$12-billion-funding-round-backed-by-tencent-and-catl--",
     "gnews:deepseek-reportedly-nears-$12bn-funding-round-backed-by-tencent-and-catl---the-n",
     "gnews:deepseek-reportedly-set-to-raise-up-to-$15-billion-—-with-tencent-among-the-lead",
+    "gnews:deepseek-restores-services-after-nearly-five-hour-outage---caixin-global",
     "gnews:deepseek-servers-suffer-global-outage,-mysterious-harness-accounts-emerge-simult",
     "gnews:deepseek-set-to-net-over-$12-billion-in-new-fundraising,-source-says---reuters",
     "gnews:deepseek-set-to-raise-at-least-$12-bln-in-tencent,-catl-led-round--bloomberg---i",
@@ -483,6 +484,7 @@
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---凤凰网科技",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---搜狐网",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---finance.sina.com.cn",
+    "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---qq-news",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---搜狐",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---搜狐网",
     "gnewszh:harness:deepseek服务器全球宕机，神秘harness账号同时现身---36氪",
@@ -559,6 +561,7 @@
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---搜狐网",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---新浪网",
     "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---搜狐",
+    "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---极目新闻",
     "gnewszh:zh:“deepseek崩了”背后，巨头云集的b轮千亿融资浮出水面---新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐",
@@ -674,8 +677,8 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-15T16:35:12.755Z",
-  "lastFreshCount": 110,
+  "lastSignalsRunAt": "2026-10-15T21:06:31.139Z",
+  "lastFreshCount": 98,
   "cornerErrors": [
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
