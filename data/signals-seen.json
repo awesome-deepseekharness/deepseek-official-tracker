@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-14T21:24:28.363Z",
-  "count": 633,
+  "updatedAt": "2026-10-15T03:52:19.842Z",
+  "count": 642,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -20,6 +20,7 @@
     "cnmedia:www.qbitai.com:deepseek-bot来了！民间版，dsh装个插件就能用",
     "cnmedia:www.qbitai.com:deepseek官方开源昇腾基础组件，与昇腾共建高效易用的ai芯片软件生态",
     "cnmedia:www.qbitai.com:deepseek扩招！弹性计算团队大量hc，尤其需要资深工程师",
+    "cnmedia:www.qbitai.com:deepseek服务器全球宕机！神秘harness账号同时现身",
     "cnmedia:www.qbitai.com:deepseek知乎独家发文，首次公开v4.1-agent训练“大本营”dsec",
     "cnmedia:www.qbitai.com:字节找到了deepseek时强时弱的原因",
     "cnmedia:www.qbitai.com:梁文锋投了swin-transformer作者！deepseek开始布局具身大脑",
@@ -105,6 +106,7 @@
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/7667",
     "exa:secondary:https://hideepseek.com/learn/news/deepseek-harness-community-v0223-v0224-2026-10-08/",
     "exa:secondary:https://juejin.cn/post/7690976080673112074",
+    "exa:secondary:https://lounge.ai/news/deepseek-harness-v0-2-ships-desktop-apps-and-an-alpha-bridge-that-runs-claude-co",
     "exa:secondary:https://molihua.org/mh-2493220/",
     "exa:secondary:https://news.10jqka.com.cn/20260929/c680375915.shtml",
     "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A402371422",
@@ -355,11 +357,13 @@
     "gnews:deepseek’s-cost-saving-ai-may-lead-to-inaccuracy-in-model-performance:-research-",
     "gnews:deepseek’s-funding-round-could-approach-$15-billion-as-investor-demand-surges---",
     "gnews:deepseek’s-fundraise-could-hit-100-billion-yuan-in-days---finimize",
+    "gnews:deepseek’s-revenue-reaches-$70-million-as-of-july,-tenfold-jump-from-2025---the-",
     "gnews:dolphin:-inference-api-goes-live-with-deepseek-v4.1-flash---11-oct-2026---tradin",
     "gnews:exclusive:-china's-deepseek-taps-citic-securities-for-domestic-ipo,-sources-say-",
     "gnews:exclusive:-deepseek-to-brief-un-security-council-on-ai-this-week,-sources-say---",
     "gnews:file-photo:-illustration-shows-deepseek-logo---the-daily-news-|-texas'-oldest-ne",
     "gnews:firm-rents-four-nvidia-h200s-to-test-'80x-cheaper'-deepseek-claim-—-$13,200-mont",
+    "gnews:five-ai-chatbots-were-tested-on-accuracy.-the-results-weren’t-good---the-indepen",
     "gnews:gender-bias-study:-anthropic’s-claude-sonnet-4.6-and-openai’s-gpt-5.5-say-it’s-o",
     "gnews:gpt-6-astra-vs-gemini-4-argon-vs-deepseek:-13x-gap-[2026]---tech-insider.org",
     "gnews:huawei-and-deepseek-release-open-source-ai-tools-in-a-bid-to-lower-nvidia-exposu",
@@ -467,6 +471,8 @@
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---sohu",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---凤凰网科技",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---搜狐网",
+    "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---搜狐",
+    "gnewszh:harness:deepseek服务器全球宕机，神秘harness账号同时现身---投资界",
     "gnewszh:harness:deepseek终于开箱即用-deepseek-harness官方桌面端实测：不用命令行启动，常用功能开箱即用。从自动整理桌面，到自己写个猫",
     "gnewszh:harness:tencentdb-agent-memory-新增deepseek-harness-桌面端接入支持---qq-news",
     "gnewszh:harness:v4-flash跑分惊艳，但deepseek还没亮出底牌---维科号",
@@ -527,6 +533,7 @@
     "gnewszh:zh:deepseek最新论文，作者超130人，梁文锋最后署名---新浪财经",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---搜狐网",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---新浪网",
+    "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---搜狐",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐网",
@@ -617,6 +624,7 @@
     "rumour:en:deepseek's-successor-leak:-one-screenshot,-no-model-name---orcarouter",
     "rumour:en:deepseek-v4.1-pro-leak:-a-window-that-closes-sept-30---orcarouter",
     "rumour:en:deepseek-v5-leak:-still-unconfirmed-as-v4-nets-$7.4b-[2026]---shattere",
+    "rumour:zh:deepseek-v4.1-pro-泄露：一扇将于9月30日关闭的窗口---orcarouter",
     "rumour:zh:deepseek-后继模型泄露：一张截图，没有模型名称---orcarouter",
     "rumour:zh:【英伟达重金力捧！美版deepseek即将发布开源模型】获得英伟达8---凤凰网",
     "rumour:zh:传闻deepseek接近完成逾800亿元融资-腾讯、宁德时代等重量级机构参与押注---yellow.com",
@@ -629,6 +637,7 @@
     "v2ex:1246636",
     "v2ex:1247032",
     "v2ex:1247696",
+    "v2ex:1248818",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -636,9 +645,10 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-14T21:24:28.363Z",
-  "lastFreshCount": 113,
+  "lastSignalsRunAt": "2026-10-15T03:52:19.842Z",
+  "lastFreshCount": 102,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+    "exa-community: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
+    "exa-rumours: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
   ]
 }
