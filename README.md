@@ -28,11 +28,9 @@
 
 **For:** people following DeepSeek news and Harness desktop updates · API users tracking pricing and deprecations · researchers watching model weights · developers following CLI releases and the plugin ecosystem.
 
-## 🔥 Latest — deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.5 (2026-10-16)
+## 🔥 Latest — v0.2.1-rc.1 (2026-10-17)
 
-**Prerelease / preview** · [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.5](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.5)
-
-v0.2.1-alpha.5
+**Prerelease / preview** · [v0.2.1-rc.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-rc.1)
 
 - **Harness:** 2026-10-16 · [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.5](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.5) · Prerelease / preview
 - **Latest model / API announcement:** 2026-09-10 · [DeepSeek-V4.1-Flash Release](https://api-docs.deepseek.com/updates#date-2026-09-10)
@@ -42,6 +40,7 @@ v0.2.1-alpha.5
 <details>
 <summary>Recent official updates</summary>
 
+- **2026-10-17** [v0.2.1-rc.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-rc.1)
 - **2026-10-16** [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.5](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.5)
 - **2026-10-16** [v0.2.1-alpha.5](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-alpha.5)
 - **2026-10-15** [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.4](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.4)
@@ -49,7 +48,6 @@ v0.2.1-alpha.5
 - **2026-10-14** [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.3](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.3)
 - **2026-10-14** [v0.2.1-alpha.3](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-alpha.3)
 - **2026-10-09** [deepseek-ai/deepseek-harness release dsh-v0.2.1-alpha.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-alpha.2)
-- **2026-10-09** [v0.2.1-alpha.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-alpha.2)
 </details>
 
 ## Harness desktop, release tracking and community news

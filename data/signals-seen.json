@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-16T20:42:31.344Z",
-  "count": 716,
+  "updatedAt": "2026-10-17T03:38:46.384Z",
+  "count": 720,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -230,6 +230,7 @@
     "ghcommunity:weights:Zhou-Yujing114514/deepseek-harness-linux",
     "ghcommunity:weights:apimartdecg4/deepseek-v4-pro-api-ja",
     "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-cn",
+    "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-fr",
     "ghcommunity:weights:apimartno/deepseek-v3.2-api-ja",
     "ghcommunity:weights:apimartno/deepseek-v3.2-api-ko",
     "ghcommunity:weights:atbender/deepseek-v41-flash-mac-mini",
@@ -275,6 +276,7 @@
     "gnews:chinese-ai-is-back:-deepseek,-moonshot-ai-and-manu-all-raise-huge-rounds---asia-",
     "gnews:chinese-ai-is-back:-deepseek,-moonshot-ai-and-manus-all-raise-huge-rounds---asia",
     "gnews:chinese-ai-models-parrot-state-doctrine-or-refuse-to-answer-on-sensitive-topics-",
+    "gnews:claude-mythos-5-vs-deepseek-v4-pro:-a-15×-price-gap,-and-only-one-of-them-is-che",
     "gnews:community-built-ds-bot-plugin-turns-deepseek-harness-into-a-team-of-long-lived-b",
     "gnews:cutthroat-ai-competition:-deepseek-unveils-new-holiday-update,-harness-launches-",
     "gnews:deepseek's-ai-models-are-about-to-cost-four-times-more---engadget.com",
@@ -291,6 +293,7 @@
     "gnews:deepseek,-hundred-billion-financing-tracking,-lp-says-the-situation-is-still-und",
     "gnews:deepseek,-moonshot-ai-prepare-for-2027-ipos---조선일보",
     "gnews:deepseek,-moonshot-reportedly-face-china-scrutiny-over-anthropic-claims-ahead-of",
+    "gnews:deepseek-adds-standalone-search-and-fetch-apis-for-agents,-priced-at-5-yuan-per-",
     "gnews:deepseek-and-huawei-partner-on-open-source-ai-chip-software---yahoo-tech",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor.com",
@@ -568,6 +571,7 @@
     "gnewszh:zh:deepseek-再扔“王炸”-美国指责-中国反驳---dw.com",
     "gnewszh:zh:deepseek“崩”了之后，补偿措施来了---搜狐",
     "gnewszh:zh:deepseek修好了，此前崩了近5小时---证券时报网",
+    "gnewszh:zh:deepseek再次出现大规模宕机-服务稳定性会影响冲刺ipo吗？---搜狐",
     "gnewszh:zh:deepseek创始人梁文锋称不追求利润最大化其经营思路很有特点|深度求索|融资|会议|愿景|首富---finance.sina.com.c",
     "gnewszh:zh:deepseek千亿融资创纪录-宁德腾讯联手押注算力---雪球",
     "gnewszh:zh:deepseek千亿融资创纪录，宁德腾讯联手押注算力---thepaper.cn",
@@ -719,11 +723,10 @@
     "x:2097930608790167907",
     "x:2105915715241062644"
   ],
-  "lastSignalsRunAt": "2026-10-16T20:42:31.344Z",
+  "lastSignalsRunAt": "2026-10-17T03:38:46.384Z",
   "lastFreshCount": 99,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
-    "x-timeline: firecrawl scrape -> HTTP 403",
-    "firecrawl-search: firecrawl search -> HTTP 403"
+    "arxiv: This operation was aborted",
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
 }
