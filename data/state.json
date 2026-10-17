@@ -21,7 +21,9 @@
     "2024-06-14|deepseek-coder ",
     "2024-05-17|deepseek-chat ",
     "2026-08-21|DeepSeek-V4-Flash-Vision-Exp Release ",
-    "2026-09-10|DeepSeek-V4.1-Flash Release "
+    "2026-09-10|DeepSeek-V4.1-Flash Release ",
+    "2026-10-17|Opening up the in-house search API ",
+    "2026-10-17|DeepSeek-V4.1-Flash-1017 Update "
   ],
   "news": [
     "news260813",
@@ -33,7 +35,8 @@
     "news0802",
     "news0725",
     "news260821",
-    "news260910"
+    "news260910",
+    "news261017"
   ],
   "websiteNews": [
     "v4-preview",
@@ -89,7 +92,9 @@
     "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.2",
     "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.3",
     "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.4",
-    "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.5"
+    "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.5",
+    "deepseek-ai/deepseek-harness|dsh-v0.2.1-rc.2",
+    "deepseek-ai/deepseek-harness|dsh-v0.2.1-rc.1"
   ],
   "npm": [
     "0.0.1-rc.1",
@@ -126,7 +131,8 @@
     "0.2.1-alpha.3",
     "0.2.1-alpha.4",
     "0.2.1-alpha.5",
-    "0.2.1-rc.1"
+    "0.2.1-rc.1",
+    "0.2.1-rc.2"
   ],
   "huggingface": [
     "deepseek-ai/DeepSeek-V4-Pro-0813",
@@ -150,6 +156,7 @@
     "deepseek-ai/DeepSeek-V4-Flash-Base",
     "deepseek-ai/DeepSeek-V4-Pro-Base",
     "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
-    "deepseek-ai/DeepSeek-V4.1-Flash"
+    "deepseek-ai/DeepSeek-V4.1-Flash",
+    "deepseek-ai/DeepSeek-V4.1-Flash-1017"
   ]
 }

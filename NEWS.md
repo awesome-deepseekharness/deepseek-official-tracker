@@ -1,5 +1,13 @@
 # DeepSeek Official News
 
+## [2026-10-17] DeepSeek-V4.1-Flash-1017: Wish-Driven Programming Made Real
+
+[Source](https://api-docs.deepseek.com/news/news261017)
+
+---
+
+---
+
 ## [2026-09-10] DeepSeek-V4.1-Flash: Smarter, Faster, More Efficient
 
 [Source](https://api-docs.deepseek.com/news/news260910)

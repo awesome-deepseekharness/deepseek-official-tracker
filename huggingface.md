@@ -1,5 +1,15 @@
 # HuggingFace: deepseek-ai Models
 
+## [2026-10-17] deepseek-ai/DeepSeek-V4.1-Flash-1017
+
+❤️ 331 · 📥 0 · image-text-to-text · transformers, safetensors, deepseek_v41, text-generation, image-text-to-text
+
+[Source](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017)
+
+---
+
+---
+
 ## [2026-09-10] deepseek-ai/DeepSeek-V4.1-Flash
 
 ❤️ 744 · 📥 6 · image-text-to-text · transformers, safetensors, deepseek_v41, text-generation, image-text-to-text

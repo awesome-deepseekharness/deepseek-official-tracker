@@ -1,5 +1,23 @@
 # DeepSeek API Change Log (mirror)
 
+## [2026-10-17] Opening up the in-house search API 
+
+DeepSeek's web and API search capabilities are powered by our in-house DeepSeek search engine, which reliably handles hundreds of millions of search requests from around the world every day. DeepSeek Search is an AI-native general-purpose search engine that indexes hundreds of billions of web pages, supports multilingual search, and returns highly relevant, authoritative, and timely results in real time. It filters SEO spam, GEO manipulation, and low-quality AIGC through strict detection mechanisms, ensuring authoritative and trustworthy information for users and LLMs. For usage details, see t
+
+[Source](https://api-docs.deepseek.com/updates#date-2026-10-17)
+
+---
+
+## [2026-10-17] DeepSeek-V4.1-Flash-1017 Update 
+
+DeepSeek V4.1 Flash has been upgraded to DeepSeek-V4.1-Flash-1017. The official web and APP models have also been updated to the new version. The API calling method and pricing remain unchanged — simply use deepseek-flash to access the latest model. Performance–cost Pareto improvement Compared with the previous DeepSeek V4.1, the new model delivers substantial improvements across benchmarks: HLE (w/o tools): 42.6 (44.0*) Terminal-Bench 4.0: 42.3 DeepSWE v1.1: 77.0 ProgramBench: 29.1 NL2Repo-Bench: 68.2 Automation-Bench v1.0.6: 60.5 Agents' Last Exam: 35.4 Apex Bench v1.1: 72.1 Chartography (w/
+
+[Source](https://api-docs.deepseek.com/updates#date-2026-10-17)
+
+---
+
+---
+
 ## [2026-09-10] DeepSeek-V4.1-Flash Release 
 
 Today, we officially release the DeepSeek-V4.1-Flash model. It is the smallest model in our new architecture family, with native multimodal visual understanding. The new architecture is designed for a higher capability ceiling, faster inference, higher throughput, and scaling to larger models. GPQA Diamond: 90.9 HLE: 36.8 (39.1*) Codeforces (Rating): 3471 MathArena Apex: 65.6 Terminal-Bench 2.1: 90.6 Terminal-Bench 3.0: 30.0 Terminal-Bench 4.0: 31.2 DeepSWE v1.1: 74.2 ProgramBench: 20.3 NL2Repo-Bench: 65.4 CyberGym: 88.1 SEC-Bench Pro: 62.8 ExploitGym: 15.3 HLE (w/tools): 63.9 Automation-Bench
