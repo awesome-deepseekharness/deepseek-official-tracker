@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-18T15:36:13.144Z",
-  "count": 812,
+  "updatedAt": "2026-10-18T20:19:21.165Z",
+  "count": 815,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -358,6 +358,7 @@
     "gnews:deepseek-leads-surge-in-low-cost-chinese-open-weight-models-on-us-platform---sou",
     "gnews:deepseek-looks-to-raise-$12-billion-ahead-of-ipo---pymnts.com",
     "gnews:deepseek-makes-v4.1-flash-1017-official-with-mit-licensed-weights-and-stronger-a",
+    "gnews:deepseek-monetizes-the-agent-retrieval-layer-at-$0.75-per-1,000-calls.-every-com",
     "gnews:deepseek-moves-up-the-stack:-v4.1-flash-update-ships-alongside-its-own-search-an",
     "gnews:deepseek-nears-$12-billion-funding-round-backed-by-tencent---ooda-loop",
     "gnews:deepseek-nears-$12b-tencent-backed-funding-round---seeking-alpha",
@@ -417,6 +418,7 @@
     "gnews:deepseek-v4.1-flash-1017-hits-77.0,-opens-search-api-[2026]---https://tech-insid",
     "gnews:deepseek-v4.1-flash-1017-hits-77.0-on-deepswe-[2026]---shattered.io",
     "gnews:deepseek-v4.1-flash-1017-tested:-specs,-benchmarks-&-price---kingy-ai",
+    "gnews:deepseek-v4.1-flash-1017:-hle-score-hits-42.6-[2026]---shattered.io",
     "gnews:deepseek-v4.1-flash-1017:-specs,-benchmarks,-pricing-and-frontier-rivals---kingy",
     "gnews:deepseek-v4.1-flash-api-setup-guide-(2026)---https://tech-insider.org/",
     "gnews:deepseek-v4.1-flash-q4-requires-294-gb-of-ram-vs-152-gb-for-q2---geeky-gadgets",
@@ -564,6 +566,7 @@
     "gnewszh:harness:deepseek-假期上新，负责人回应---川观新闻",
     "gnewszh:harness:deepseek上新，“许愿式编程”成为现实---finance.sina.com.cn",
     "gnewszh:harness:deepseek上新，“许愿式编程”成为现实---搜狐网",
+    "gnewszh:harness:deepseek发布v4.1-flash-1017版本-api网页搜索每1000次收费5元---观点网",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---sohu",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---凤凰网科技",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---搜狐网",
@@ -815,7 +818,7 @@
     "x:2105915715241062644",
     "x:2111375640717033777"
   ],
-  "lastSignalsRunAt": "2026-10-18T15:36:13.144Z",
-  "lastFreshCount": 111,
+  "lastSignalsRunAt": "2026-10-18T20:19:21.165Z",
+  "lastFreshCount": 100,
   "cornerErrors": []
 }
