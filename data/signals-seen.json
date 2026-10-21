@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-21T11:25:12.371Z",
-  "count": 984,
+  "updatedAt": "2026-10-21T16:52:27.183Z",
+  "count": 987,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -70,6 +70,7 @@
     "exa:community:https://www.zgaiagent.cn/items/16817",
     "exa:rumor:https://agihunt.info/en/p/1a0e35e51d2ac3c233a1feec591",
     "exa:rumor:https://agihunt.info/p/1a13e1612c3df755c9e46faf594",
+    "exa:rumor:https://airebao.com/item/47892",
     "exa:rumor:https://bittide.aicompass.dev/article/7b0cb097-9df9-4b17-a0ff-a64afa6acc3c?locale=zh",
     "exa:rumor:https://cellcog.ai/blog/deepseek-v5-release-date/",
     "exa:rumor:https://denghy.cn/articles/deepseek-harness-desktop-pro-rumor",
@@ -173,6 +174,7 @@
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/updates/",
     "fcsearch:cn-media:https://www.ibm.com/cn-zh/think/topics/deepseek",
     "fcsearch:cn-media:https://www.qbitai.com/2025/09/328663.html",
+    "fcsearch:cn-media:https://www.reddit.com/r/LocalLLaMA/comments/1rrkglb/two_new_models_on_openrouter_possibly_deepseek_v4/?tl=zh-hans",
     "fcsearch:cn-media:https://www.yicai.com/news/102785887.html",
     "fcsearch:cn-media:https://www.zhihu.com/question/1993329446883651767",
     "fcsearch:reddit-deepseek:https://www.reddit.com/r/DeepSeek/",
@@ -208,6 +210,7 @@
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1vn8m1x/deepseek_were_launching_deepseekv4pro_today/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1vnb66j/deepseek_harness_is_up/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1vugyfe/deepseek_harness_v011_released/",
+    "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1w53mwu/opencode_vs_deepseek_harness_my_experience_with/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1wtg1hs/deepseek_harness_app_is_out_now/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1x84po4/deepseekaideepseekv41flash1017_hugging_face/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1x8bb6b/deepseek_v41_flash_1017_now_leads_openweight/",
@@ -987,7 +990,11 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-21T11:25:12.370Z",
-  "lastFreshCount": 88,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-21T16:52:27.183Z",
+  "lastFreshCount": 79,
+  "cornerErrors": [
+    "google-news: HTTP 503",
+    "google-news-zh: zh Google News returned nothing",
+    "rumours: no rumour items matched"
+  ]
 }
