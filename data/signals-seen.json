@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-21T16:52:27.183Z",
-  "count": 987,
+  "updatedAt": "2026-10-21T21:25:29.979Z",
+  "count": 995,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -296,6 +296,7 @@
     "gnews:china's-deepseek-hit-by-5-hour-ai-service-outage---nikkei-asia",
     "gnews:china's-open-ai-models-now-trail-the-us-frontier-by-just-seven-months---startup-",
     "gnews:china-condemns-u.s.-ban-on-deepseek-a.i.-in-government-systems---the-new-york-ti",
+    "gnews:china-criticizes-u.s.-ban-on-deepseek-a.i.-in-government-systems---the-new-york-",
     "gnews:china-defends-deepseek-after-u.s.-ban-of-its-ai-from-government-systems---nbc-ne",
     "gnews:china-defends-deepseek-after-us-ban-of-its-ai-from-government-systems---ap-news",
     "gnews:china-defends-deepseek-after-us-ban-of-its-ai-from-government-systems---bozeman-",
@@ -402,6 +403,7 @@
     "gnews:deepseek-open-sources-deepinfer,-the-inference-framework-behind-deepseek-v4.1-fl",
     "gnews:deepseek-open-sources-deepinfer,-the-inference-framework-behind-its-production-s",
     "gnews:deepseek-open-sources-deepinfer-software-for-running-its-ai-models---quartz",
+    "gnews:deepseek-open-sources-framework-behind-its-high-margin-ai-inference---the-inform",
     "gnews:deepseek-open-sources-huawei-chip-tools-as-a-simpler-alternative-to-cuda---the-n",
     "gnews:deepseek-open-sources-huawei-chip-tools-as-a-simpler-alternative-to-cuda---thene",
     "gnews:deepseek-open-sources-inference-tech-to-lower-ai-costs---pymnts.com",
@@ -550,6 +552,7 @@
     "gnews:the-'deepseek-of-the-west'-finally-has-a-model---the-rundown-ai",
     "gnews:the-552b-deepseek-v4.1-flash-model-offers-a-peak-output-of-494-tokens/second-whe",
     "gnews:the-ai-race-with-china-the-us-is-losing---the-hill",
+    "gnews:the-huawei-deepseek-symbiosis---semianalysis",
     "gnews:the-open-sourcing-of-deepseek-harness-opens-the-door-to-modular,-unbundled-ai-ag",
     "gnews:trump-admin-bans-deepseek-from-federal-agencies---gizmodo",
     "gnews:trump-administration-orders-ban-on-deepseek-in-federal-agencies---siliconangle",
@@ -569,6 +572,7 @@
     "gnews:us-bans-deepseek-ai-from-government-use-as-tech-tension-with-china-continues---b",
     "gnews:us-bans-use-of-china’s-deepseek-ai-in-federal-agencies,-cites-security-concerns-",
     "gnews:us-bans-use-of-china’s-deepseek-ai-tools-by-government-agencies---the-guardian",
+    "gnews:us-bans-use-of-china’s-deepseek-ai-tools-by-government-agencies-|-trump-administ",
     "gnews:us-china-ai-gap-hits-3%,-and-deepseek-v4.1-flash-now-leads-on-agentic-coding-ben",
     "gnews:us-lead-in-ai-over-china-narrows-after-deepseek-gains,-bi-says---bloomberg.com",
     "gnews:us-lead-in-ai-over-china-narrows-after-deepseek-gains,-bi-says---finance.yahoo.c",
@@ -613,6 +617,7 @@
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---新浪财经",
     "gnewszh:harness:deepseek-harness-桌面端：现在，开箱即用。---53ai",
     "gnewszh:harness:deepseek-harness-装哪个-bot-插件？90%-的人第一步就选错了---53ai",
+    "gnewszh:harness:deepseek-harness不可错过的12款神器！还有崔添翼推荐的---新浪新闻",
     "gnewszh:harness:deepseek-harness出桌面版了！---wallstreetcn.com",
     "gnewszh:harness:deepseek-harness出桌面版了！---华尔街见闻",
     "gnewszh:harness:deepseek-harness国庆假期上新！90后负责人回应：希望做出让世界ai巨头跟进的创新---thepaper.cn",
@@ -653,6 +658,7 @@
     "gnewszh:harness:deepseek-harness：“一切皆插件”-是刻在立项之初的产品基因---新浪财经",
     "gnewszh:harness:deepseek-harness：“一切皆插件”-是刻在立项之初的产品基因---环球网",
     "gnewszh:harness:deepseek-rolls-out-faster,-cheaper-ai-model,-opens-search-tools-to-dev",
+    "gnewszh:harness:deepseek-v4-flash正式版api公测，适配codex，贴脸开大openai---donews",
     "gnewszh:harness:deepseek-v4.1-flash-1017-新版本发布：支持许愿式编程---donews",
     "gnewszh:harness:deepseek-v4.1-flash-1017新版本发布：许愿式编程一键成真---凤凰网科技",
     "gnewszh:harness:deepseek-v4.1-flash-1017新版本发布：许愿式编程一键成真---搜狐",
@@ -783,6 +789,7 @@
     "gnewszh:zh:deepseek千亿融资落定前夜：钱不是问题，芯片才是---21财经",
     "gnewszh:zh:deepseek发布新版ai模型-性能提升且运行成本降低---早晨报",
     "gnewszh:zh:deepseek发布新版ai模型-性能提升且运行成本降低---联合早报",
+    "gnewszh:zh:deepseek在美国联邦机构遭禁用---澳洲看新闻",
     "gnewszh:zh:deepseek大手笔融资1000亿，冲刺上市，国产ai\"弹药\"备足了记者讯-国产人工智能大模型公司deepseek（深度求索）迎来重磅消息",
     "gnewszh:zh:deepseek大规模服务异常，故障仍未恢复！记者拨打官方电话无法接通---东方财富",
     "gnewszh:zh:deepseek大规模服务异常，故障仍未恢复！记者拨打官方电话无法接通|深度求索|上观新闻|杭州市|大模型|浙江省---finance.si",
@@ -901,6 +908,7 @@
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---zaobao.com.sg",
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---联合早报",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
+    "gnewszh:zh:美政府禁止其民事行政机构采购使用deepseek，我商务部回应---新浪财经",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
     "gnewszh:zh:至少800亿，deepseek融资新进展---新浪财经",
     "gnewszh:zh:说实话，我觉得-claude-4.8-有点拉。---finance.sina.cn",
@@ -990,11 +998,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-21T16:52:27.183Z",
-  "lastFreshCount": 79,
-  "cornerErrors": [
-    "google-news: HTTP 503",
-    "google-news-zh: zh Google News returned nothing",
-    "rumours: no rumour items matched"
-  ]
+  "lastSignalsRunAt": "2026-10-21T21:25:29.979Z",
+  "lastFreshCount": 84,
+  "cornerErrors": []
 }
