@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-22T06:24:48.871Z",
-  "count": 1014,
+  "updatedAt": "2026-10-22T06:58:52.558Z",
+  "count": 1016,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -878,6 +878,7 @@
     "gnewszh:zh:我国生成式人工智能用户规模突破7亿人---thepaper.cn",
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---finance.sina.com.cn",
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---新浪网",
+    "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---新浪财经",
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---zaobao.com.sg",
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---联合早报",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---zaobao.com.sg",
@@ -926,6 +927,7 @@
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---zaobao.com.sg",
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---联合早报",
     "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---finance.sina.com.cn",
+    "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---新浪网",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
     "gnewszh:zh:美政府禁止其民事行政机构采购使用deepseek，我商务部回应---新浪财经",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
@@ -1017,9 +1019,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-22T06:24:48.871Z",
-  "lastFreshCount": 85,
-  "cornerErrors": [
-    "exa-news: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
-  ]
+  "lastSignalsRunAt": "2026-10-22T06:58:52.558Z",
+  "lastFreshCount": 78,
+  "cornerErrors": []
 }
