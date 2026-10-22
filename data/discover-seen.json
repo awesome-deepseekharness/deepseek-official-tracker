@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-22T06:36:40.407Z",
-  "count": 796,
+  "updatedAt": "2026-10-22T07:10:52.829Z",
+  "count": 799,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -114,6 +114,7 @@
     "exa:secondary:https://eu.36kr.com/zh/p/4005355518726025",
     "exa:secondary:https://finance.sina.com.cn/wm/2026-10-05/doc-iniucuei3009023.shtml",
     "exa:secondary:https://fluxbbs.com/deepseek-harness-v0-2-desktop-release/",
+    "exa:secondary:https://freedom.tech/posts/2026-10-09-deepseek-harness-0-2-1-alpha-2/",
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/6637",
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/7667",
     "exa:secondary:https://lifehacker.ru/deepseek-vypustila-desktopnuyu-versiyu-agenta-harness/",
@@ -622,6 +623,7 @@
     "gnewszh:zh:我向新版-deepseek-许了个愿，4-块钱让特斯拉飞起来---爱范儿",
     "gnewszh:zh:我国生成式人工智能用户规模突破7亿人---thepaper.cn",
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---finance.sina.com.cn",
+    "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---新浪财经",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---联合早报",
     "gnewszh:zh:曝deepseek或下场做机器人，梁文锋密集接触具身智能创业者_公司新闻_财经---证券之星",
     "gnewszh:zh:梁希币---手机新浪网",
@@ -648,6 +650,7 @@
     "gnewszh:zh:美媒：deepseek年化营收达10亿美元---联合早报",
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---联合早报",
     "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---全天候科技",
+    "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---新浪网",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
     "gnewszh:zh:至少800亿，deepseek融资新进展---新浪财经",
@@ -799,9 +802,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastRunAt": "2026-10-22T06:36:40.407Z",
-  "lastFreshCount": 28,
-  "cornerErrors": [
-    "v2ex: This operation was aborted"
-  ]
+  "lastRunAt": "2026-10-22T07:10:52.829Z",
+  "lastFreshCount": 3,
+  "cornerErrors": []
 }
