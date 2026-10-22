@@ -14,6 +14,9 @@ The tracker has separate collection, research, review and publishing stages.
   or updates one `discover/insights` PR. Each attempt must produce a changed,
   sourced report. Errors, timeouts and missing artifacts trigger model fallback;
   total failure preserves the prior report and does not consume the baseline.
+  The workflow uses the public free tier configured in `opencode.json`; do not
+  inject a personal or contributor `OPENCODE_API_KEY`, because it changes the
+  visible free roster and hides the trusted public models.
 - `auto-review.yml`: runs after discovery and hourly to retry pending drafts.
   Code and agent instructions always come from main; only bot-authored,
   same-repository, `insights.md`-only PRs are eligible for automatic merging.

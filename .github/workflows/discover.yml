@@ -49,9 +49,9 @@ jobs:
       - name: Run discover (free model traversal)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Use the public free tier from opencode.json. A personal or
+          # contributor OPENCODE_API_KEY changes the visible free roster and
+          # hides the trusted public models (DeepSeek/GLM/MiniMax).
           DISCOVER_FORCE: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           set -e
