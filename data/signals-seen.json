@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-22T07:41:27.641Z",
-  "count": 1019,
+  "updatedAt": "2026-10-22T11:25:23.383Z",
+  "count": 1026,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -425,6 +425,7 @@
     "gnews:deepseek-pushes-out-updated-ai-model-it-says-is-faster,-leaner---bloomberg.com",
     "gnews:deepseek-pushes-out-updated-ai-model-it-says-is-faster,-leaner---yahoo-finance",
     "gnews:deepseek-quietly-ships-v4.1-flash-1017,-beating-rivals-on-agent-tasks---startup-",
+    "gnews:deepseek-raised-about-$15-billion-in-funding-ahead-of-a-possible-ipo---quartz",
     "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs,-bloomberg-news-repo",
     "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs---bloomberg.com",
     "gnews:deepseek-raises-$15-bln-in-tencent,-catl-backed-funding-round---bloomberg---inve",
@@ -599,6 +600,7 @@
     "gnews:we-burned-11.7bn-tokens-to-find-the-best-cyber-ai-model-|-glm5.3-and-deepseek-ar",
     "gnews:what-is-beam?-the-buzzy-american-ai-model-being-called-the-'deepseek-of-the-west",
     "gnews:what-is-deepseek?-open-weight-ai-models-explained---built-in",
+    "gnews:where-the-deepseek-api-stands-on-october-22,-2026---shattered.io",
     "gnews:which-deepseek-v4-flash-api-is-cheapest?-bitdeer-ai-tops-artificial-analysis-pri",
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnews:windows-gets-open-weight-a.i.-like-china’s-deepseek-and-nvidia’s-nemotron---www.",
@@ -630,6 +632,7 @@
     "gnewszh:harness:deepseek-harness-桌面端：现在，开箱即用。---53ai",
     "gnewszh:harness:deepseek-harness-装哪个-bot-插件？90%-的人第一步就选错了---53ai",
     "gnewszh:harness:deepseek-harness不可错过的12款神器！还有崔添翼推荐的---新浪新闻",
+    "gnewszh:harness:deepseek-harness不可错过的12款神器！还有崔添翼推荐的|github|reddit|ai代码生成|插件|上下文_手机新浪网-",
     "gnewszh:harness:deepseek-harness出桌面版了！---wallstreetcn.com",
     "gnewszh:harness:deepseek-harness出桌面版了！---华尔街见闻",
     "gnewszh:harness:deepseek-harness国庆假期上新！90后负责人回应：希望做出让世界ai巨头跟进的创新---thepaper.cn",
@@ -699,6 +702,7 @@
     "gnewszh:harness:deepseek整合成立产品部-崔添翼任负责人---电商派",
     "gnewszh:harness:deepseek新模型发布，超级性价比斩杀一切---创业邦",
     "gnewszh:harness:deepseek新版本-许愿式编程一键成真-性能与成本双重优化---中华网",
+    "gnewszh:harness:deepseek更新模型-官方点名workbuddy---搜狐",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---finance.sina.com.cn",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---qq-news",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---手机新浪网",
@@ -847,6 +851,7 @@
     "gnewszh:zh:中国品牌如何实现跨越式发展？|deepseek|韩国|机器人|小米|谢菲尔德---新浪军事",
     "gnewszh:zh:中国商务部称-deepseek-联邦禁令属破坏公平竞争的歧视性措施，敦促美方撤销---智源社区",
     "gnewszh:zh:中国外交部回应美国政府deepseek禁令---搜狐",
+    "gnewszh:zh:中国民企ai大模型全球“圈粉”-调用量连续24周霸榜！---深圳市委统战部",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
     "gnewszh:zh:中方回应美机构禁用deepseek---新浪军事_手机新浪网",
     "gnewszh:zh:中方批美政府禁用deepseek，称“罔顾元首共识”---日经中文网",
@@ -855,6 +860,7 @@
     "gnewszh:zh:停工近5小时，“deepseek崩了”炸上热搜，性能之外国产大模型还需补上“稳定课”---时代财经",
     "gnewszh:zh:再现“深度求索冲击”……高性价比中国模型份额超过美国三家公司总和|-东亚日报---동아일보",
     "gnewszh:zh:冲上热搜！deepseek大规模服务异常，记者拨打官方电话无法接通---东方财富",
+    "gnewszh:zh:刚宣布制裁，不到24小时，中企宣布开源，美媒惊呼最危险的来了---搜狐",
     "gnewszh:zh:千亿级资金涌入大模型-商业化难题待解---新湖南",
     "gnewszh:zh:半两财经｜deepseek突发服务故障，中断长达五小时---搜狐",
     "gnewszh:zh:华为携deepseek攻坚-英伟达护城河不妙？---orientaldaily.com.my",
@@ -930,6 +936,7 @@
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---zaobao.com.sg",
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---联合早报",
     "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---finance.sina.com.cn",
+    "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---华尔街见闻",
     "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---新浪网",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
     "gnewszh:zh:美政府禁止其民事行政机构采购使用deepseek，我商务部回应---新浪财经",
@@ -1022,7 +1029,9 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-22T07:41:27.641Z",
-  "lastFreshCount": 79,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-22T11:25:23.382Z",
+  "lastFreshCount": 83,
+  "cornerErrors": [
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+  ]
 }
