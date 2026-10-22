@@ -35,3 +35,45 @@ test('automatic model choice excludes paid/non-tool models and discovers new IDs
   const output = models.map(m => `opencode/${m.id}\r\n${JSON.stringify(m, null, 2)}\r\n`).join('');
   assert.deepEqual(parseModelRegistry(output), models);
 });
+
+test('trusted vendors outrank newer unknown releases in policy order', () => {
+  const model = (id, date) => ({ id, release_date: date, cost: { input: 0, output: 0 }, capabilities: { toolcall: true, reasoning: true } });
+  const models = [
+    model('flint-40b-free', '2026-10-21'),
+    model('unknown-new', '2026-10-20'),
+    model('muse-1-free', '2026-09-01'),
+    model('step-3-free', '2026-09-01'),
+    model('qwen3-coder-free', '2026-09-01'),
+    model('kimi-k2-free', '2026-09-01'),
+    model('minimax-m3.1-flash-free', '2026-09-01'),
+    model('glm-5.3-flash-free', '2026-09-01'),
+    model('deepseek-v4.1-flash-free', '2026-09-01'),
+  ];
+  assert.deepEqual(rankFreeModels(models).map(m => m.id), [
+    'deepseek-v4.1-flash-free',
+    'glm-5.3-flash-free',
+    'minimax-m3.1-flash-free',
+    'kimi-k2-free',
+    'qwen3-coder-free',
+    'step-3-free',
+    'muse-1-free',
+    'flint-40b-free',
+    'unknown-new',
+  ]);
+});
+
+test('newest release wins within a trusted vendor, but an older trusted model still beats untrusted releases', () => {
+  const model = (id, date) => ({ id, release_date: date, cost: { input: 0, output: 0 }, capabilities: { toolcall: true, reasoning: true } });
+  const models = [
+    model('deepseek-old', '2025-01-01'),
+    model('deepseek-new', '2026-09-10'),
+    model('glm-5.3-flash-free', '2026-08-26'),
+    model('flint-40b-free', '2026-10-21'),
+  ];
+  assert.deepEqual(rankFreeModels(models).map(m => m.id), [
+    'deepseek-new',
+    'deepseek-old',
+    'glm-5.3-flash-free',
+    'flint-40b-free',
+  ]);
+});

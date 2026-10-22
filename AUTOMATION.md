@@ -10,7 +10,7 @@ The tracker has separate collection, research, review and publishing stages.
   Exa's hosted MCP, Firecrawl Keyless, HN, RSS, Chinese media and other public
   sources feed `SIGNALS.md`. Quota/network failures are recorded as coverage gaps.
   It owns `data/signals-seen.json`, not the discovery baseline.
-- `discover.yml`: refreshes the CLI model registry and researches fresh signals with models whose input/output/cache prices are all zero and which support tools. Reasoning support, release date and context capacity rank candidates; real task output decides whether to keep the result. It opens
+- `discover.yml`: refreshes the CLI model registry and researches fresh signals with models whose input/output/cache prices are all zero and which support tools. The roster is read from the installed CLI, never hard-coded. Candidate priority is a deliberate trust policy: `deepseek` → `glm` → `minimax` → `kimi` → `qwen` → `step` → `muse`, newest release first within a vendor; other vendors follow by release date. Reasoning support and context capacity break remaining ties. Real task output decides whether to keep the result. It opens
   or updates one `discover/insights` PR. Each attempt must produce a changed,
   sourced report. Errors, timeouts and missing artifacts trigger model fallback;
   total failure preserves the prior report and does not consume the baseline.

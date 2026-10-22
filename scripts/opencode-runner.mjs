@@ -20,14 +20,31 @@ export function parseModelRegistry(output) {
   });
 }
 
+// Vendor preference is a deliberate trust policy, not a capability claim.
+// Prefer model families with a reliable history in this automation before a
+// newer release from a vendor with no track record. Within a vendor, the
+// newest release wins; outside the list, release date decides.
+export const TRUSTED_FREE_MODEL_VENDORS = Object.freeze([
+  'deepseek', 'glm', 'minimax', 'kimi', 'qwen', 'step', 'muse',
+]);
+const freeModelVendorPatterns = TRUSTED_FREE_MODEL_VENDORS.map(vendor =>
+  [vendor, new RegExp(`^${vendor}(?:$|[-_.\\d])`, 'i')]);
+
+function freeModelVendorRank(model) {
+  const index = freeModelVendorPatterns.findIndex(([, pattern]) => pattern.test(model.id));
+  return index === -1 ? TRUSTED_FREE_MODEL_VENDORS.length : index;
+}
+
 export function rankFreeModels(models) {
   const freeCost = cost => cost && cost.input === 0 && cost.output === 0 &&
     Object.values(cost.cache || {}).every(value => value === 0) &&
     (!cost.context_over_200k || freeCost(cost.context_over_200k));
-  return models.filter(model => freeCost(model.cost) && model.capabilities?.toolcall === true &&
+  return [...new Map(models.filter(model => freeCost(model.cost) && model.capabilities?.toolcall === true &&
     !['deprecated', 'retired'].includes(model.status) && /^[a-zA-Z0-9._-]+$/.test(model.id))
-    .sort((a, b) => Number(b.capabilities.reasoning === true) - Number(a.capabilities.reasoning === true) ||
+    .map(model => [model.id, model])).values()]
+    .sort((a, b) => freeModelVendorRank(a) - freeModelVendorRank(b) ||
       (b.release_date || '').localeCompare(a.release_date || '') ||
+      Number(b.capabilities.reasoning === true) - Number(a.capabilities.reasoning === true) ||
       (b.limit?.context || 0) - (a.limit?.context || 0) || a.id.localeCompare(b.id));
 }
 
@@ -43,7 +60,7 @@ export async function freeModels() {
     if (registry.status !== 0) continue;
     const ranked = rankFreeModels(parseModelRegistry(registry.stdout));
     if (ranked.length) {
-      console.log('[agent] Free tool-capable candidates:', ranked.map(m => `${m.id} (${m.release_date || 'date unknown'})`).join(', '));
+      console.log('[agent] Free tool-capable candidates (trusted vendors first, then release date):', ranked.map(m => `${m.id} (${m.release_date || 'date unknown'})`).join(', '));
       return ranked.map(model => model.id);
     }
   }
