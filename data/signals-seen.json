@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-22T03:55:37.763Z",
-  "count": 1005,
+  "updatedAt": "2026-10-22T06:24:48.871Z",
+  "count": 1014,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -308,6 +308,7 @@
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
     "gnews:china-says-us'-deepseek-ban-disregards-xi-trump-consensus---reuters",
     "gnews:china’s-ai-chip-shortage-becomes-reality-as-deepseek-outage-exposes-compute-drou",
+    "gnews:china’s-deepseek-raises-$15-billion-to-challenge-top-us-ai-labs---bloomberg.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---bloomberg.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---straitstimes.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---the-straits-times",
@@ -485,6 +486,7 @@
     "gnews:deepseek-vs-haiku-5.5-vs-gemini-flash:-7.5x-gap-[2026]---https://tech-insider.or",
     "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek-went-down-for-5-hours.-the-silence-afterward-is-the-real-story.---vocal",
+    "gnews:deepseek-wrapping-up-$15-billion-fundraising-to-fuel-ai-race---reuters",
     "gnews:deepseek:-what-exactly-is-this-open-position-recruiting-for?-uncover-the-real-hi",
     "gnews:deepseek’s-cost-saving-ai-may-lead-to-inaccuracy-in-model-performance:-research-",
     "gnews:deepseek’s-funding-round-could-approach-$15-billion-as-investor-demand-surges---",
@@ -522,6 +524,7 @@
     "gnews:industrial-capital-floods-into-deepseek,-funding-round-doubles-to-¥2.4-trillion-",
     "gnews:intel-ceo-says-deepseek,-kimi,-glm-are-'good-enough'-–-reportedly-backs-open-sou",
     "gnews:ivo-launches-open-source-deepseek-contract-ai-model---artificial-lawyer",
+    "gnews:just-the-docs:-dhs-discloses-july-order-stripping-deepseek-ai-from-federal-civil",
     "gnews:korean-stocks-fall-as-deepseek-model,-funding-worry-rattle-chips---bloomberg",
     "gnews:korean-stocks-fall-as-deepseek-model,-funding-worry-rattle-chips---bloomberg.com",
     "gnews:leading-chinese-tech-firms-target-nvidia’s-a.i.-dominance---nytimes.com",
@@ -806,6 +809,7 @@
     "gnewszh:zh:deepseek拟融资至少800亿人民币-腾讯等参与投资---联合早报",
     "gnewszh:zh:deepseek据报在内蒙古数据中心部署16万片华为晶片---zaobao.com.sg",
     "gnewszh:zh:deepseek据报在内蒙古数据中心部署16万片华为晶片---联合早报",
+    "gnewszh:zh:deepseek据报完成千亿人民币融资-挑战美国巨头---联合早报",
     "gnewszh:zh:deepseek据称将完成约1000亿融资---搜狐",
     "gnewszh:zh:deepseek据称将完成约1000亿融资---新浪网",
     "gnewszh:zh:deepseek据称将完成约1000亿融资_公司新闻_财经---证券之星",
@@ -843,6 +847,7 @@
     "gnewszh:zh:中国外交部回应美国政府deepseek禁令---搜狐",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
     "gnewszh:zh:中方回应美机构禁用deepseek---新浪军事_手机新浪网",
+    "gnewszh:zh:中方批美政府禁用deepseek，称“罔顾元首共识”---日经中文网",
     "gnewszh:zh:中美ai战争打响！特朗普全面封杀deepseek？只因中国ai模型太强？---搜狐",
     "gnewszh:zh:从宇树科技到winverse-ai，deepseek梁文锋的物理世界新棋局---panews",
     "gnewszh:zh:停工近5小时，“deepseek崩了”炸上热搜，性能之外国产大模型还需补上“稳定课”---时代财经",
@@ -862,6 +867,7 @@
     "gnewszh:zh:声明：本人从未在互联网上诋毁过深度求索，并没有称梁文锋为梁白开。-本人实际上是深度求索2年老粉，经过...-|-机组---gcores.co",
     "gnewszh:zh:声明：本人从未在互联网上诋毁过深度求索，并没有称梁文锋为梁白开。-本人实际上是深度求索2年老粉，经过...-|-机组---机核gcores",
     "gnewszh:zh:外交部回应美政府要求机构停用deepseek---搜狐网",
+    "gnewszh:zh:外媒：deepseek完成约1000亿人民币新一轮融资---电子工程专辑",
     "gnewszh:zh:安理会本周开会讨论ai和国际安全问题，deepseek公司被曝将作通报---guancha.cn",
     "gnewszh:zh:安理会本周开会讨论ai和国际安全问题，deepseek公司被曝将作通报---观察者网",
     "gnewszh:zh:寒武纪10月12日回应deepseek概念话题：已完成deepseek-v4模型day-0适配_公司新闻---证券之星",
@@ -871,6 +877,7 @@
     "gnewszh:zh:我向新版-deepseek-许了个愿，4-块钱让特斯拉飞起来---爱范儿",
     "gnewszh:zh:我国生成式人工智能用户规模突破7亿人---thepaper.cn",
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---finance.sina.com.cn",
+    "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---新浪网",
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---zaobao.com.sg",
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---联合早报",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---zaobao.com.sg",
@@ -896,6 +903,7 @@
     "gnewszh:zh:突发！deepseek又“崩”了！---新浪财经",
     "gnewszh:zh:维修4小时52分钟，deepseek恢复了---thepaper.cn",
     "gnewszh:zh:维修4小时52分钟，deepseek恢复了---国际金融报",
+    "gnewszh:zh:美国ai涨价中国deepseek开源引印度工程师称赞---手机新浪网",
     "gnewszh:zh:美国下令政府系统禁用deepseek：中美ai竞争继续升温---bbc",
     "gnewszh:zh:美国发布针对deepseek的禁令，商务部回应---凤凰网",
     "gnewszh:zh:美国国土安全部发布deepseek禁令---新浪财经",
@@ -917,6 +925,7 @@
     "gnewszh:zh:美媒：deepseek年化营收达10亿美元---联合早报",
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---zaobao.com.sg",
     "gnewszh:zh:美媒：deepseek押注华为晶片训练大模型---联合早报",
+    "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---finance.sina.com.cn",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
     "gnewszh:zh:美政府禁止其民事行政机构采购使用deepseek，我商务部回应---新浪财经",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
@@ -1008,9 +1017,9 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-22T03:55:37.763Z",
-  "lastFreshCount": 86,
+  "lastSignalsRunAt": "2026-10-22T06:24:48.871Z",
+  "lastFreshCount": 85,
   "cornerErrors": [
-    "arxiv: This operation was aborted"
+    "exa-news: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
   ]
 }
