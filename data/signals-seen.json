@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-21T21:25:29.979Z",
-  "count": 995,
+  "updatedAt": "2026-10-22T03:55:37.763Z",
+  "count": 1005,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -241,11 +241,13 @@
     "ghcommunity:next:sfxnz/DeepSeek-V4.1-Flash-EXL3-TensorFold-2x-DGX-Spark",
     "ghcommunity:next:sfxnz/DeepSeek-V4.1-Flash-EXL3-vLLM-2x-DGX-Spark",
     "ghcommunity:next:taochangle/LingCast",
+    "ghcommunity:next:tonyd2wild/DeepSeek-V4.1-Flash-TP2-and-TP4-DGX-Sparks",
     "ghcommunity:next:tonyd2wild/DeepSeek-v4-Flash-0731-Vision-DSpark-1M-NVFP4-KV-2x-DGX-Spark",
     "ghcommunity:next:yanun0323/Whallm",
     "ghcommunity:weights:0xBakeer/deepseek-v41-flash-spark",
     "ghcommunity:weights:0xSero/DeepSeek-V4.1-Flash-Two-Sparks",
     "ghcommunity:weights:BotHarness/DeepSeekBot",
+    "ghcommunity:weights:Elevatormusic/DeepSeek-V4.1-Flash-1017-EXL3-TensorFold-2x-DGX-Spark",
     "ghcommunity:weights:Fei2411/DeepSeek-Bot",
     "ghcommunity:weights:FeiZhuLulu/DeepSeek-Bot",
     "ghcommunity:weights:MiaAI-Lab/DeepSeek-v4.1-Flash-1017-2x-DGX-Sparks",
@@ -334,6 +336,7 @@
     "gnews:deepseek-adds-self-feedback-learning-to-its-v4.1-flash-model---www.tokenpost.com",
     "gnews:deepseek-adds-standalone-search-and-fetch-apis-for-agents,-priced-at-5-yuan-per-",
     "gnews:deepseek-ai-faces-ban-from-federal-networks-over-data-security-concerns-(oct-19,",
+    "gnews:deepseek-ai-predicts-that-chainlink-(link)-is-about-to-do-something-huge---tradi",
     "gnews:deepseek-and-huawei-partner-on-open-source-ai-chip-software---yahoo-tech",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor.com",
@@ -420,6 +423,8 @@
     "gnews:deepseek-pushes-out-updated-ai-model-it-says-is-faster,-leaner---bloomberg.com",
     "gnews:deepseek-pushes-out-updated-ai-model-it-says-is-faster,-leaner---yahoo-finance",
     "gnews:deepseek-quietly-ships-v4.1-flash-1017,-beating-rivals-on-agent-tasks---startup-",
+    "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs,-bloomberg-news-repo",
+    "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs---bloomberg.com",
     "gnews:deepseek-raising-$12-billion-ahead-of-2027-ipo---quartz",
     "gnews:deepseek-raising-$12-billion-ahead-of-2027-ipo---qz.com",
     "gnews:deepseek-reasonix:-how-a-poisoned-config-can-hijack-an-ai-coding-agent---about.g",
@@ -500,6 +505,7 @@
     "gnews:dolphin:-inference-api-goes-live-with-deepseek-v4.1-flash---11-oct-2026---tradin",
     "gnews:exclusive:-china's-deepseek-taps-citic-securities-for-domestic-ipo,-sources-say-",
     "gnews:exclusive:-deepseek-to-brief-un-security-council-on-ai-this-week,-sources-say---",
+    "gnews:fascsa-orders-require-exclusion-and-removal-of-deepseek-ai---crowell-&-moring-ll",
     "gnews:federal-agencies-must-remove-deepseek-software-under-new-dhs-order---gadget-revi",
     "gnews:file-photo:-illustration-shows-deepseek-logo---the-daily-news-|-texas'-oldest-ne",
     "gnews:firm-rents-four-nvidia-h200s-to-test-'80x-cheaper'-deepseek-claim-—-$13,200-mont",
@@ -612,6 +618,7 @@
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---finance.sina.cn",
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---新浪财经",
     "gnewszh:harness:deepseek-harness-开源解读：把-agent-做成零件而不是成品---积墨-ai",
+    "gnewszh:harness:deepseek-harness-桌面应用：安装程序、更新以及它写入的内容---orcarouter",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---手机新浪网",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---新浪财经",
@@ -832,6 +839,7 @@
     "gnewszh:zh:【财闻联播】上新！deepseek，大消息！国际货币基金组织，最新发声---证券时报网",
     "gnewszh:zh:中国ai“双星共振”：从生态接力到全球回响|openai-o1|deepseek|中国ai发展|深度求索|月之暗面---finance.si",
     "gnewszh:zh:中国品牌如何实现跨越式发展？|deepseek|韩国|机器人|小米|谢菲尔德---新浪军事",
+    "gnewszh:zh:中国商务部称-deepseek-联邦禁令属破坏公平竞争的歧视性措施，敦促美方撤销---智源社区",
     "gnewszh:zh:中国外交部回应美国政府deepseek禁令---搜狐",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
     "gnewszh:zh:中方回应美机构禁用deepseek---新浪军事_手机新浪网",
@@ -846,6 +854,8 @@
     "gnewszh:zh:华盛顿徒劳地望着deepseek尾灯开罚单---新浪网",
     "gnewszh:zh:华盛顿徒劳地望着deepseek尾灯开罚单---旅日侨网",
     "gnewszh:zh:南方财经全媒体集团---南方财经",
+    "gnewszh:zh:印度网民激动了：我爱这家中国企业---凤凰网科技",
+    "gnewszh:zh:周鸿祎谈美国封杀deepseek：背后不是数据安全这么简单---驱动之家",
     "gnewszh:zh:四款国产模型周用量破10万亿tokens，deepseek与混元占比近半---观察者网",
     "gnewszh:zh:国产最强-deepseek-v4.1-flash-1017-登顶-agent-arena-开源榜，总榜第-11---新浪财经",
     "gnewszh:zh:報告：僅3.6%中國ai模型披露安全測試結果---大紀元",
@@ -998,7 +1008,9 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-21T21:25:29.979Z",
-  "lastFreshCount": 84,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-22T03:55:37.763Z",
+  "lastFreshCount": 86,
+  "cornerErrors": [
+    "arxiv: This operation was aborted"
+  ]
 }
