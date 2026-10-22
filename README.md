@@ -59,7 +59,7 @@ Track **DeepSeek Harness desktop (Windows/macOS)**, `dsh` CLI releases, DeepSeek
 Media, community discussion and **unverified rumours** live in [SIGNALS.md](SIGNALS.md); reviewed research lives in [insights.md](insights.md). They are never presented as official releases.
 
 - [English website](https://awesome-deepseekharness.github.io/deepseek-official-tracker/) · [中文网站](https://awesome-deepseekharness.github.io/deepseek-official-tracker/zh/) — system/light/dark themes.
-- [How collection and automatic PR review work](AUTOMATION.md) — free-model retries, keyless Exa/Firecrawl and Kitesurf.
+- [How collection and automatic PR review work](AUTOMATION.md) — trusted-vendor free-model priority, retries, keyless Exa/Firecrawl and Kitesurf.
 - [Machine-readable source guide](llms.txt) — citation rules and data endpoints for AI readers.
 
 
