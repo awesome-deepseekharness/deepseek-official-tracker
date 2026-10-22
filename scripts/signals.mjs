@@ -141,8 +141,14 @@ export function renderTable(rows, tier) {
   ];
   for (const r of rows) {
     const detail = r.detail ? ` — ${r.detail}` : '';
+    const signal = `[${r.title}](${r.url})${detail}`;
+    // The section heading is not enough once downstream tools quote a single
+    // row. Health requires every rumour row to carry its own visible hedge.
+    const stamp = tier === 'rumor' && !/疑似|unverified/i.test(signal)
+      ? ` — ${meta.en.stamp}`
+      : '';
     lines.push(
-      `| ${hasNew ? `${r.isNew ? '🆕' : ''} | ` : ''}${r.date} | ${r.source} | [${r.title}](${r.url})${detail} |`
+      `| ${hasNew ? `${r.isNew ? '🆕' : ''} | ` : ''}${r.date} | ${r.source} | ${signal}${stamp} |`
     );
   }
   return `${lines.join('\n')}\n`;

@@ -1,24 +1,22 @@
 {
-  "checkedAt": "2026-10-17T08:57:09.879Z",
-  "ok": false,
-  "issueCount": 1,
-  "issues": [
-    "SIGNALS.md: rumour row without 疑似/unverified marker — | 2026-10-16 | Exa · www.orcarouter.ai | [DeepSeek V4.1 Pro "
-  ],
+  "checkedAt": "2026-10-22T07:36:32.762Z",
+  "ok": true,
+  "issueCount": 0,
+  "issues": [],
   "stats": {
-    "NEWS.md": 10,
-    "api-changelog.md": 22,
+    "NEWS.md": 11,
+    "api-changelog.md": 24,
     "website-news.md": 8,
-    "releases.md": 51,
-    "npm.md": 35,
-    "huggingface.md": 22,
+    "releases.md": 53,
+    "npm.md": 36,
+    "huggingface.md": 23,
     "state": {
-      "changelog": 22,
-      "news": 10,
+      "changelog": 24,
+      "news": 11,
       "websiteNews": 8,
-      "releases": 44,
-      "npm": 35,
-      "huggingface": 22
+      "releases": 46,
+      "npm": 36,
+      "huggingface": 23
     },
     "feedItems": 80,
     "readmeLatest": {
@@ -26,7 +24,7 @@
       "zh": "2026-10-17"
     },
     "linksChecked": 15,
-    "signalsAgeDays": 0.22,
-    "rumourRows": 11
+    "signalsAgeDays": 0.03,
+    "rumourRows": 10
   }
 }

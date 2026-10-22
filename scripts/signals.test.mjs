@@ -1,4 +1,4 @@
-import { buildRows } from './signals.mjs';
+import { buildRows, renderTable } from './signals.mjs';
 
 // SIGNALS.md is the only channel that always updates, so its two failure modes
 // are both silent: rows out of order (reads as a tracker that lost track) and
@@ -68,6 +68,16 @@ const nasty = buildRows([
   { tier: 'community', date: iso(1), title: 'a | b\nsecond row', source: 's', url: 'u1' },
 ]);
 ok(nasty.community[0].title === 'a \\| b second row', 'pipes and newlines cannot break the table');
+
+// --- rumour rows carry their own hedge ------------------------------------
+const rumourRows = renderTable(buildRows([
+  { tier: 'rumor', date: iso(1), title: 'bare leak', source: 's', url: 'u1' },
+]).rumor, 'rumor');
+const renderedRumours = rumourRows.split('\n').filter(l => /^\|\s*\d{4}-\d{2}-\d{2}/.test(l));
+ok(
+  renderedRumours.length === 1 && renderedRumours.every(l => /疑似|unverified/i.test(l)),
+  'every rumour row is visibly hedged'
+);
 
 // --- per-tier caps --------------------------------------------------------
 const many = buildRows(
