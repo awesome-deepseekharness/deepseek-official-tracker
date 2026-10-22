@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-22T06:58:52.558Z",
-  "count": 1016,
+  "updatedAt": "2026-10-22T07:41:27.641Z",
+  "count": 1019,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -266,6 +266,7 @@
     "ghcommunity:weights:jayleaton/deepseek-v41-tensorfold-spark",
     "ghcommunity:weights:justxor/deepseek-local-guide-ru",
     "ghcommunity:weights:knapcio/DeepSeek-V4.1-Flash-4x-DGX-Spark-TP4",
+    "ghcommunity:weights:linxisama/deepseekgirl",
     "ghcommunity:weights:mini-yifan/deepseek-harness-orb",
     "ghcommunity:weights:rlaope/deepseek-bot",
     "ghcommunity:weights:shi3z/deepseekv4.1-A100-custom",
@@ -426,6 +427,7 @@
     "gnews:deepseek-quietly-ships-v4.1-flash-1017,-beating-rivals-on-agent-tasks---startup-",
     "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs,-bloomberg-news-repo",
     "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs---bloomberg.com",
+    "gnews:deepseek-raises-$15-bln-in-tencent,-catl-backed-funding-round---bloomberg---inve",
     "gnews:deepseek-raising-$12-billion-ahead-of-2027-ipo---quartz",
     "gnews:deepseek-raising-$12-billion-ahead-of-2027-ipo---qz.com",
     "gnews:deepseek-reasonix:-how-a-poisoned-config-can-hijack-an-ai-coding-agent---about.g",
@@ -913,6 +915,7 @@
     "gnewszh:zh:美国宣布禁止政府系统使用deepseek：我国回应了---驱动之家",
     "gnewszh:zh:美国宣布禁止联邦政府民事行政机构采购deepseek及关联企业的产品和服务，商务部：对此强烈不满、坚决反对---新浪网",
     "gnewszh:zh:美国封杀-deepseek！中方回应---搜狐",
+    "gnewszh:zh:美国封杀-deepseek！中方回应---新浪财经",
     "gnewszh:zh:美国政府全面封杀deepseek-联邦系统将强制清除---文学城",
     "gnewszh:zh:美国政府要求联邦机构禁用deepseek等中国ai工具，外交部：中方反对泛化国家安全概念、将科技经贸问题政治化，将坚决维护企业合法权益---",
     "gnewszh:zh:美国点名六家中国ai公司，指其“工业化蒸馏”美国模型能力---美国之音",
@@ -1019,7 +1022,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-22T06:58:52.558Z",
-  "lastFreshCount": 78,
+  "lastSignalsRunAt": "2026-10-22T07:41:27.641Z",
+  "lastFreshCount": 79,
   "cornerErrors": []
 }
