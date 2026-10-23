@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-22T21:20:21.784Z",
-  "count": 1044,
+  "updatedAt": "2026-10-23T03:58:43.234Z",
+  "count": 1055,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -15,7 +15,9 @@
     "arxiv:http://arxiv.org/abs/2609.22978v1",
     "arxiv:http://arxiv.org/abs/2609.24698v1",
     "arxiv:http://arxiv.org/abs/2610.05238v1",
+    "arxiv:http://arxiv.org/abs/2610.30886v1",
     "cnmedia:www.infoq.cn:deepseek-开源昇腾平台基础设施组件，覆盖-tilelang、计算库与分布式通信库",
+    "cnmedia:www.infoq.cn:deepseek千亿融资逼近收官：结盟完美世界、中芯聚源等产业资本，募资翻倍押注具身智能",
     "cnmedia:www.infoq.cn:deepseek开源最新推理框架：单集群日吞吐155万亿token，kvcache可保存7天",
     "cnmedia:www.infoq.cn:海外开源模型重新提速：“美版-deepseek”第一次交卷，mistral同时亮牌",
     "cnmedia:www.qbitai.com:deepseek-bot来了！民间版，dsh装个插件就能用",
@@ -336,6 +338,7 @@
     "gnews:deepseek,-huawei-team-on-ai-chip-software---mobile-world-live",
     "gnews:deepseek,-huawei-team-on-ai-chip-software---mobileworldlive.com",
     "gnews:deepseek,-hundred-billion-financing-tracking,-lp-says-the-situation-is-still-und",
+    "gnews:deepseek,-minimax-win-approval-for-global-use,-state-media-says---bloomberg.com",
     "gnews:deepseek,-moonshot-ai-prepare-for-2027-ipos---조선일보",
     "gnews:deepseek,-moonshot-reportedly-face-china-scrutiny-over-anthropic-claims-ahead-of",
     "gnews:deepseek-adds-self-feedback-learning-to-its-v4.1-flash-model---www.tokenpost.com",
@@ -502,6 +505,7 @@
     "gnews:deepseek’s-new-ai-model-talks-less,-so-a-coding-task-costs-20-cents---martin-cid",
     "gnews:deepseek’s-post-training-lead-declares-“entering-the-era-of-democratized-wish-dr",
     "gnews:deepseek’s-revenue-reaches-$70-million-as-of-july,-tenfold-jump-from-2025---the-",
+    "gnews:deepseek’s-v4.1-flash-1017-model-just-built-an-exploit-that-escapes-chrome’s-san",
     "gnews:dhs-banning-deepseek-from-us-federal-civilian-agencies---security-magazine",
     "gnews:dhs-bans-deepseek-across-federal-government-networks---pymnts.com",
     "gnews:dhs-bans-deepseek-from-federal-civilian-agencies---bankinfosecurity",
@@ -714,8 +718,10 @@
     "gnewszh:harness:deepseek整合成立“产品部”，崔添翼担任负责人|澎湃新闻|大模型|故障|退款|补偿---finance.sina.com.cn",
     "gnewszh:harness:deepseek整合成立产品部-崔添翼任负责人---电商派",
     "gnewszh:harness:deepseek新模型发布，超级性价比斩杀一切---创业邦",
+    "gnewszh:harness:deepseek新模型登场，用户要给ai付的钱又少了---36kr",
     "gnewszh:harness:deepseek新版本-许愿式编程一键成真-性能与成本双重优化---中华网",
     "gnewszh:harness:deepseek更新模型-官方点名workbuddy---搜狐",
+    "gnewszh:harness:deepseek更新模型官方点名workbuddy_国内经济---证券之星",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---finance.sina.com.cn",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---qq-news",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---手机新浪网",
@@ -729,8 +735,10 @@
     "gnewszh:harness:deepseek：api支持网页搜索与抓取，单价为每1000次成功请求5元，11月1日起生效---新浪网",
     "gnewszh:harness:tencentdb-agent-memory-新增deepseek-harness-桌面端接入支持---qq-news",
     "gnewszh:harness:v4-flash跑分惊艳，但deepseek还没亮出底牌---维科号",
+    "gnewszh:harness:v4全系列模型上线后，deepseek-harness开发者预览版开放测试---财联社",
     "gnewszh:harness:“许愿式”编程能力升级！deepseek上新：开放自研搜索api，千次调用仅5元---finance.sina.com.cn",
     "gnewszh:harness:“许愿式”编程能力升级！deepseek上新：开放自研搜索api，千次调用仅5元---thepaper.cn",
+    "gnewszh:harness:“许愿式”编程能力升级！deepseek上新：开放自研搜索api，千次调用仅5元---华尔街见闻",
     "gnewszh:harness:“许愿式”编程能力升级！deepseek上新：开放自研搜索api，千次调用仅5元---新浪网",
     "gnewszh:harness:“许愿式”编程能力升级！deepseek上新：开放自研搜索api，千次调用仅5元---新浪财经",
     "gnewszh:harness:【deepseek-harness-推出桌面端预览版】-#deeps---tech.ifeng.com",
@@ -853,6 +861,7 @@
     "gnewszh:zh:deepseek，千亿融资新消息---21财经",
     "gnewszh:zh:deepseek，拟获千亿融资---搜狐",
     "gnewszh:zh:deepseek，拟获千亿融资---新浪新闻",
+    "gnewszh:zh:deepseek，拟获千亿融资---新浪新闻_手机新浪网",
     "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---搜狐",
     "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---极目新闻",
     "gnewszh:zh:“deepseek崩了”背后，巨头云集的b轮千亿融资浮出水面---新浪网",
@@ -928,6 +937,7 @@
     "gnewszh:zh:特朗普政府下令联邦机构系统禁用中国“深度求索”---아시아경제",
     "gnewszh:zh:突发！deepseek又“崩”了！---finance.sina.cn",
     "gnewszh:zh:突发！deepseek又“崩”了！---新浪财经",
+    "gnewszh:zh:纳指大跌2.6%，热门科技股纷纷下挫；deepseek拟融资1000亿元丨港股早报---东方财富",
     "gnewszh:zh:维修4小时52分钟，deepseek恢复了---thepaper.cn",
     "gnewszh:zh:维修4小时52分钟，deepseek恢复了---国际金融报",
     "gnewszh:zh:美国ai涨价中国deepseek开源引印度工程师称赞---手机新浪网",
@@ -1038,6 +1048,7 @@
     "v2ex:1250261",
     "v2ex:1250313",
     "v2ex:1250414",
+    "v2ex:1250949",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1047,9 +1058,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-22T21:20:21.783Z",
-  "lastFreshCount": 84,
-  "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
-  ]
+  "lastSignalsRunAt": "2026-10-23T03:58:43.233Z",
+  "lastFreshCount": 86,
+  "cornerErrors": []
 }
