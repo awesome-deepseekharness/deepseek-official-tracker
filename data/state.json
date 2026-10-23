@@ -94,7 +94,8 @@
     "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.4",
     "deepseek-ai/deepseek-harness|dsh-v0.2.1-alpha.5",
     "deepseek-ai/deepseek-harness|dsh-v0.2.1-rc.2",
-    "deepseek-ai/deepseek-harness|dsh-v0.2.1-rc.1"
+    "deepseek-ai/deepseek-harness|dsh-v0.2.1-rc.1",
+    "deepseek-ai/deepseek-harness|dsh-v0.2.1-rc.3"
   ],
   "npm": [
     "0.0.1-rc.1",
