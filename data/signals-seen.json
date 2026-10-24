@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-24T15:37:18.328Z",
-  "count": 1093,
+  "updatedAt": "2026-10-24T20:27:47.410Z",
+  "count": 1098,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -321,9 +321,11 @@
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
     "gnews:china-says-us'-deepseek-ban-disregards-xi-trump-consensus---reuters",
+    "gnews:china-won’t-stop-its-ai-from-going-global,-but-it-wants-control-over-how-it-trav",
     "gnews:china’s-ai-chip-shortage-becomes-reality-as-deepseek-outage-exposes-compute-drou",
     "gnews:china’s-deepseek-raises-$15-billion-to-challenge-top-us-ai-labs---bloomberg",
     "gnews:china’s-deepseek-raises-$15-billion-to-challenge-top-us-ai-labs---bloomberg.com",
+    "gnews:china’s-deepseek-wants-ubiquity.-beijing-has-mixed-feelings---bloomberg.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---bloomberg.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---straitstimes.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---the-straits-times",
@@ -641,6 +643,7 @@
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnews:windows-gets-open-weight-a.i.-like-china’s-deepseek-and-nvidia’s-nemotron---www.",
     "gnews:‘jensen’s-nightmare’:-huawei,-deepseek-narrow-ai-chip-ecosystem-gap-with-nvidia-",
+    "gnews:‘jensen’s-nightmare’:-huawei,-deepseek-narrow-ai-chip-ecosystem-gap-with-nvidia:",
     "gnews:😺-deepseek's-free-model-edged-opus-5-at-coding---the-neuron",
     "gnewszh:harness:31小时连发3版！deepseek-harness-0.1.7进入rc---手机网易网",
     "gnewszh:harness:deepseek-api已支持网页搜索和抓取-每1000次成功请求5元---cnbeta.com",
@@ -729,6 +732,7 @@
     "gnewszh:harness:deepseek上新，“许愿式编程”成为现实---搜狐网",
     "gnewszh:harness:deepseek上新，“许愿式编程”成为现实---飞象网",
     "gnewszh:harness:deepseek上新：开放自研搜索api，千次调用仅5元---panews",
+    "gnewszh:harness:deepseek产品部，交给了一个量化交易员---潮起网",
     "gnewszh:harness:deepseek发布v4.1-flash-1017版本-api网页搜索每1000次收费5元---观点网",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---sohu",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---凤凰网科技",
@@ -745,6 +749,7 @@
     "gnewszh:harness:deepseek新模型发布，超级性价比斩杀一切---创业邦",
     "gnewszh:harness:deepseek新模型登场，用户要给ai付的钱又少了---36kr",
     "gnewszh:harness:deepseek新版本-许愿式编程一键成真-性能与成本双重优化---中华网",
+    "gnewszh:harness:deepseek更新模型-官方点名workbuddy---thepaper.cn",
     "gnewszh:harness:deepseek更新模型-官方点名workbuddy---搜狐",
     "gnewszh:harness:deepseek更新模型官方点名workbuddy_国内经济---证券之星",
     "gnewszh:harness:deepseek服务器全球宕机！神秘harness账号同时现身---finance.sina.com.cn",
@@ -1096,7 +1101,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-24T15:37:18.328Z",
-  "lastFreshCount": 78,
+  "lastSignalsRunAt": "2026-10-24T20:27:47.410Z",
+  "lastFreshCount": 80,
   "cornerErrors": []
 }
