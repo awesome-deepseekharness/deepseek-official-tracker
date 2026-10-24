@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-24T10:34:09.150Z",
-  "count": 1090,
+  "updatedAt": "2026-10-24T15:37:18.328Z",
+  "count": 1093,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -511,6 +511,7 @@
     "gnews:deepseek-v4.1-flash-update-enables-wish-driven-programming---techzine-global",
     "gnews:deepseek-v4.1-flash-vs-haiku-5.5-vs-gemini-flash---https://tech-insider.org/",
     "gnews:deepseek-v4.1-flash:-specs,-price-&-is-it-free?---orcarouter",
+    "gnews:deepseek-vs-claude:-$0.15-vs-$4-per-1m-tokens-[2026]---https://tech-insider.org/",
     "gnews:deepseek-vs-haiku-5.5-vs-gemini-flash:-7.5x-gap-[2026]---https://tech-insider.or",
     "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek-went-down-for-5-hours.-the-silence-afterward-is-the-real-story.---vocal",
@@ -800,6 +801,7 @@
     "gnewszh:harness:消息称-deepseek-将-harness、web、app、platform-团队整合成立“产品部”---腾讯新闻",
     "gnewszh:harness:消息称deepseek将harness、web、app、platform团队整合成立“产品部”---凤凰网",
     "gnewszh:harness:消息称deepseek将harness、web、app、platform团队整合成立“产品部”---凤凰网科技",
+    "gnewszh:harness:现在，梁文锋需要一个自己的“tibo”---36kr",
     "gnewszh:harness:现在，梁文锋需要一个自己的“tibo”---36氪",
     "gnewszh:harness:现在，梁文锋需要一个自己的“tibo”-36氪---36kr",
     "gnewszh:harness:硬科技早报|梁文锋送token；运营商规模落地昇腾950dt；苹果要大改革---guancha.cn",
@@ -956,6 +958,7 @@
     "gnewszh:zh:梁文锋一出手，deepseek就融了上千亿？---36kr",
     "gnewszh:zh:消息人士：deepseek已启动科创板上市筹备-正大量招人---21jingji.com",
     "gnewszh:zh:消息人士：deepseek已启动科创板上市筹备-正大量招人---21财经",
+    "gnewszh:zh:消息称deepseek拟在最新一轮融资中筹得约1000亿元---东方财富",
     "gnewszh:zh:消息：deepseek拟在内蒙古设巨型ai数据中心---联合早报",
     "gnewszh:zh:深度求索与华为挑战nvidia强大的护城河---the-business-times",
     "gnewszh:zh:深度求索开源原生推理框架deepinfer-同步开放token编解码组件---凤凰网",
@@ -1093,7 +1096,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-24T10:34:09.150Z",
-  "lastFreshCount": 79,
+  "lastSignalsRunAt": "2026-10-24T15:37:18.328Z",
+  "lastFreshCount": 78,
   "cornerErrors": []
 }
