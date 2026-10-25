@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-25T03:52:34.593Z",
-  "count": 1105,
+  "updatedAt": "2026-10-25T10:59:22.305Z",
+  "count": 1110,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -239,6 +239,7 @@
     "ghcommunity:next:TOBYCAI/dsh-sessions-manager",
     "ghcommunity:next:VecSzn/PolyStrata",
     "ghcommunity:next:Yunado/dsh-qwen38-local-qol",
+    "ghcommunity:next:a775828b-dot/lsglang_ds4.1",
     "ghcommunity:next:bertholomus/deepseek-v4.1-tensorfold-tp2-2xgb10",
     "ghcommunity:next:coolbho3k/DeepSeek-v4.1-Flash-2x-DGX-Spark",
     "ghcommunity:next:dg1kjd/sglang-sxm2",
@@ -585,6 +586,7 @@
     "gnews:moonshot-ai-eyes-hong-kong-ipo-in-early-2027-after-a-$50bn-valuation---euronews.",
     "gnews:moonshot-debuts-first-ai-upgrade-since-its-own-deepseek-moment---bloomberg",
     "gnews:moonshot-debuts-first-ai-upgrade-since-its-own-deepseek-moment---bloomberg.com",
+    "gnews:more-than-deepinfer:-what-sglang-delivers---lmsys-org",
     "gnews:muse-spark-open-vs-deepseek-v4.1-flash:-same-score,-triple-the-cost---intelligen",
     "gnews:nemotron-3.5-bolt-vs-deepseek-v4-pro:-24gb-vs-1.6t---orcarouter",
     "gnews:new-deepseek-v4.1-flash-1017-hits-300-tokens-per-second-in-tests---geeky-gadgets",
@@ -750,6 +752,7 @@
     "gnewszh:harness:deepseek整合成立“产品部”-加速agi创新步伐---中华网",
     "gnewszh:harness:deepseek整合成立“产品部”，崔添翼担任负责人---thepaper.cn",
     "gnewszh:harness:deepseek整合成立“产品部”，崔添翼担任负责人---新浪网",
+    "gnewszh:harness:deepseek整合成立“产品部”，崔添翼担任负责人---新浪财经",
     "gnewszh:harness:deepseek整合成立“产品部”，崔添翼担任负责人|澎湃新闻|大模型|故障|退款|补偿---finance.sina.com.cn",
     "gnewszh:harness:deepseek整合成立产品部-崔添翼任负责人---电商派",
     "gnewszh:harness:deepseek新模型发布，超级性价比斩杀一切---创业邦",
@@ -965,6 +968,7 @@
     "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36kr",
     "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36氪",
     "gnewszh:zh:曝deepseek或下场做机器人，梁文锋密集接触具身智能创业者_公司新闻_财经---证券之星",
+    "gnewszh:zh:月之暗面发布k3模型首个重大升级-降低网络攻击能力---联合早报",
     "gnewszh:zh:本周，deepseek将向安理会通报---观察者网",
     "gnewszh:zh:杭州深度求索人工智能基础技术研究有限公司3年增资15倍---东方财富",
     "gnewszh:zh:梁文锋一出手，deepseek就融了上千亿？---36kr",
@@ -1016,6 +1020,7 @@
     "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---新浪网",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
     "gnewszh:zh:美政府禁止其民事行政机构采购使用deepseek，我商务部回应---新浪财经",
+    "gnewszh:zh:美政府要求禁用deepseek-封杀中国人工智能？英国经济学家罗思义：中美ai竞争未来十年见分晓更看好中国---新浪网",
     "gnewszh:zh:美方宣布禁止美联邦政府民事行政机构采购深度求索及其关联企业开发的产品和服务，中方：敦促美方立即纠正错误做法，撤销歧视性限制措施---搜狐",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
     "gnewszh:zh:至少800亿，deepseek融资新进展---新浪财经",
@@ -1108,10 +1113,9 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-25T03:52:34.593Z",
-  "lastFreshCount": 80,
+  "lastSignalsRunAt": "2026-10-25T10:59:22.304Z",
+  "lastFreshCount": 78,
   "cornerErrors": [
-    "arxiv: This operation was aborted",
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
 }
