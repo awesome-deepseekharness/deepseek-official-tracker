@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-24T20:27:47.410Z",
-  "count": 1098,
+  "updatedAt": "2026-10-25T03:52:34.593Z",
+  "count": 1105,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -164,6 +164,7 @@
     "exa:secondary:https://www.okyn.com/ai/1042.html",
     "exa:secondary:https://www.tuoluo.cn/article/detail-10131356.html",
     "exa:secondary:https://www.woshipm.com/ai/6472278.html",
+    "exa:secondary:https://www.zhidx.com/p/598364.html",
     "exa:secondary:https://xiaoan.cc/article/deepseek-harness-kai-qi-quan-qiu-gong-kai-yu-lan-kai-yuan-zh-tt",
     "exa:secondary:https://zhidx.com/p/598364.html",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/api/list-models",
@@ -178,6 +179,7 @@
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news260813/",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news260910",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news260910/",
+    "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news261017",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/updates",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/updates/",
     "fcsearch:cn-media:https://www.ibm.com/cn-zh/think/topics/deepseek",
@@ -225,6 +227,7 @@
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1x8bb6b/deepseek_v41_flash_1017_now_leads_openweight/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1xanm55/deepseek_released_deepinfer_open_source/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1xburkx/tried_running_748b_deepseekv41flash_on_a_2k_pc/",
+    "ghcommunity:next:Blackwellboy/DeepSeek-V4.1-Flash-1017-BLACKFOLD-TP2",
     "ghcommunity:next:CageEcho/xingce-travel-planner",
     "ghcommunity:next:Elevatormusic/DeepSeek-V4.1-Flash-1017-EXL3-TensorFold-2x-DGX-Spark",
     "ghcommunity:next:HeCC928/shanghai-news-insight",
@@ -267,6 +270,7 @@
     "ghcommunity:weights:TreapGoGo/deepseek-whale-girl",
     "ghcommunity:weights:Tsuev/opencode-deepseek",
     "ghcommunity:weights:Zhou-Yujing114514/deepseek-harness-linux",
+    "ghcommunity:weights:aideveloper-web/Free-Deepseek",
     "ghcommunity:weights:apimartdecg4/deepseek-v4-pro-api-ja",
     "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-cn",
     "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-fr",
@@ -321,6 +325,7 @@
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
     "gnews:china-says-us'-deepseek-ban-disregards-xi-trump-consensus---reuters",
+    "gnews:china-slams-us-ban-on-deepseek-ai-over-security-concerns---fox-news",
     "gnews:china-won’t-stop-its-ai-from-going-global,-but-it-wants-control-over-how-it-trav",
     "gnews:china’s-ai-chip-shortage-becomes-reality-as-deepseek-outage-exposes-compute-drou",
     "gnews:china’s-deepseek-raises-$15-billion-to-challenge-top-us-ai-labs---bloomberg",
@@ -452,6 +457,7 @@
     "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs,-bloomberg-news-repo",
     "gnews:deepseek-raises-$15-billion-in-challenge-to-leading-us-labs---bloomberg.com",
     "gnews:deepseek-raises-$15-bln-in-tencent,-catl-backed-funding-round---bloomberg---inve",
+    "gnews:deepseek-raises-$15b-to-rival-openai-and-anthropic---tipranks",
     "gnews:deepseek-raises-nearly-$16-billion-in-second-funding-round---the-information",
     "gnews:deepseek-raising-$12-billion-ahead-of-2027-ipo---quartz",
     "gnews:deepseek-raising-$12-billion-ahead-of-2027-ipo---qz.com",
@@ -845,6 +851,7 @@
     "gnewszh:zh:deepseek-v4.1-flash-1017登顶agent-arena开源榜，总榜第11---凤凰网科技",
     "gnewszh:zh:deepseek-再扔“王炸”-美国指责-中国反驳---dw.com",
     "gnewszh:zh:deepseek“崩”了之后，补偿措施来了---搜狐",
+    "gnewszh:zh:deepseek、minimax完成ai模型出海登记-合规路径落地提振国内ai“出海”信心---财联社",
     "gnewszh:zh:deepseek上新ai模型部分性能超openai，v4.1-flash几乎每周位居使用量榜首---搜狐",
     "gnewszh:zh:deepseek上新ai模型，称部分性能超openai等---日经中文网",
     "gnewszh:zh:deepseek上新，“许愿式编程”成为现实---东方财富",
@@ -1101,7 +1108,10 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-24T20:27:47.410Z",
+  "lastSignalsRunAt": "2026-10-25T03:52:34.593Z",
   "lastFreshCount": 80,
-  "cornerErrors": []
+  "cornerErrors": [
+    "arxiv: This operation was aborted",
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+  ]
 }
