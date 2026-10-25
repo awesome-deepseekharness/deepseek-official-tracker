@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-25T10:59:22.305Z",
-  "count": 1110,
+  "updatedAt": "2026-10-25T15:47:58.871Z",
+  "count": 1116,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -329,6 +329,7 @@
     "gnews:china-slams-us-ban-on-deepseek-ai-over-security-concerns---fox-news",
     "gnews:china-won’t-stop-its-ai-from-going-global,-but-it-wants-control-over-how-it-trav",
     "gnews:china’s-ai-chip-shortage-becomes-reality-as-deepseek-outage-exposes-compute-drou",
+    "gnews:china’s-ai-leader-deepseek-raises-$15b---semafor",
     "gnews:china’s-deepseek-raises-$15-billion-to-challenge-top-us-ai-labs---bloomberg",
     "gnews:china’s-deepseek-raises-$15-billion-to-challenge-top-us-ai-labs---bloomberg.com",
     "gnews:china’s-deepseek-wants-ubiquity.-beijing-has-mixed-feelings---bloomberg.com",
@@ -374,6 +375,7 @@
     "gnews:deepseek-and-huawei-take-aim-at-nvidia’s-formidable-moat---bloomberg.com",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---nytimes.com",
     "gnews:deepseek-and-huawei-target-a-key-source-of-nvidia’s-a.i.-dominance---the-new-yor",
+    "gnews:deepseek-and-minimax-clear-china-ai-export-controls-for-overseas-use---the-next-",
     "gnews:deepseek-and-moonshot-ai:-china’s-a.i.-stars-head-for-the-stock-market---trendin",
     "gnews:deepseek-and-xiaomi-lead-china’s-ai-push-with-16-new-models,-challenging-u.s.-te",
     "gnews:deepseek-api-key-setup:-v4.1-flash-in-13-steps-[2026]---https://tech-insider.org",
@@ -521,6 +523,7 @@
     "gnews:deepseek-v4.1-flash-vs-haiku-5.5-vs-gemini-flash---https://tech-insider.org/",
     "gnews:deepseek-v4.1-flash:-specs,-price-&-is-it-free?---orcarouter",
     "gnews:deepseek-vs-claude:-$0.15-vs-$4-per-1m-tokens-[2026]---https://tech-insider.org/",
+    "gnews:deepseek-vs-claude:-$0.30-vs-$2-input-tokens-[2026]---shattered.io",
     "gnews:deepseek-vs-haiku-5.5-vs-gemini-flash:-7.5x-gap-[2026]---https://tech-insider.or",
     "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek-went-down-for-5-hours.-the-silence-afterward-is-the-real-story.---vocal",
@@ -900,6 +903,7 @@
     "gnewszh:zh:deepseek服务一度中断近5小时---早晨报",
     "gnewszh:zh:deepseek服务一度中断近5小时---联合早报",
     "gnewszh:zh:deepseek目前正在实施修复-服务中断持续2小时---中华网",
+    "gnewszh:zh:deepseek获510亿融资，投资方公布：腾讯、宁德时代、京东、网易等---新浪网",
     "gnewszh:zh:deepseek道歉，公布补偿方案---thepaper.cn",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---搜狐网",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---新浪网",
@@ -1020,6 +1024,7 @@
     "gnewszh:zh:美接连出台措施限制中国人工智能企业，中方：将采取必要措施予以回应---新浪网",
     "gnewszh:zh:美政府机构禁用deepseek，北京指责华盛顿打压中国公司---纽约时报中文网",
     "gnewszh:zh:美政府禁止其民事行政机构采购使用deepseek，我商务部回应---新浪财经",
+    "gnewszh:zh:美政府要求禁用deepseek-封杀中国人工智能？英国经济学家罗思义：中美ai竞争未来十年见分晓更看好中国---手机新浪网",
     "gnewszh:zh:美政府要求禁用deepseek-封杀中国人工智能？英国经济学家罗思义：中美ai竞争未来十年见分晓更看好中国---新浪网",
     "gnewszh:zh:美方宣布禁止美联邦政府民事行政机构采购深度求索及其关联企业开发的产品和服务，中方：敦促美方立即纠正错误做法，撤销歧视性限制措施---搜狐",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
@@ -1081,6 +1086,7 @@
     "rumour:zh:deepseek-v4.1-pro-泄露：一扇将于9月30日关闭的窗口---orcarouter",
     "rumour:zh:deepseek-后继模型泄露：一张截图，没有模型名称---orcarouter",
     "rumour:zh:deepseek联手华为共研下一代ai芯片-deepseek牵手华为昇腾950dt，国产ai算力迎来关键一役---搜狐",
+    "rumour:zh:deepseek联手华为共研下一代ai芯片-deepseek牵手华为昇腾950dt，国产ai算力迎来关键一役---搜狐网",
     "rumour:zh:【英伟达重金力捧！美版deepseek即将发布开源模型】获得英伟达8---凤凰网",
     "rumour:zh:传闻deepseek接近完成逾800亿元融资-腾讯、宁德时代等重量级机构参与押注---yellow.com",
     "rumour:zh:市场传闻：deepseek在最新一轮融资中即将敲定至少$119.4亿---moomoo",
@@ -1113,8 +1119,8 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-25T10:59:22.304Z",
-  "lastFreshCount": 78,
+  "lastSignalsRunAt": "2026-10-25T15:47:58.870Z",
+  "lastFreshCount": 79,
   "cornerErrors": [
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
