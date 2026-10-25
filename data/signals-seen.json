@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-25T15:47:58.871Z",
-  "count": 1116,
+  "updatedAt": "2026-10-25T20:35:17.625Z",
+  "count": 1119,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -681,6 +681,7 @@
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---手机新浪网",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---新浪财经",
     "gnewszh:harness:deepseek-harness-桌面端：现在，开箱即用。---53ai",
+    "gnewszh:harness:deepseek-harness-破甲-网络安全红队工具（dsh-purge）---黑海洋wiki",
     "gnewszh:harness:deepseek-harness-装哪个-bot-插件？90%-的人第一步就选错了---53ai",
     "gnewszh:harness:deepseek-harness不可错过的12款神器！还有崔添翼推荐的---搜狐网",
     "gnewszh:harness:deepseek-harness不可错过的12款神器！还有崔添翼推荐的---新浪新闻",
@@ -760,6 +761,7 @@
     "gnewszh:harness:deepseek整合成立产品部-崔添翼任负责人---电商派",
     "gnewszh:harness:deepseek新模型发布，超级性价比斩杀一切---创业邦",
     "gnewszh:harness:deepseek新模型登场，用户要给ai付的钱又少了---36kr",
+    "gnewszh:harness:deepseek新模型登场，用户要给ai付的钱又少了---36氪",
     "gnewszh:harness:deepseek新版本-许愿式编程一键成真-性能与成本双重优化---中华网",
     "gnewszh:harness:deepseek更新模型-官方点名workbuddy---thepaper.cn",
     "gnewszh:harness:deepseek更新模型-官方点名workbuddy---搜狐",
@@ -812,6 +814,7 @@
     "gnewszh:harness:崩了近5小时！deepseek宣布全额补偿，“harness”新账号引猜测---财联社",
     "gnewszh:harness:想尝鲜的速来-deepseek-harness官方桌面端偷跑：跑ai性能更好---驱动之家",
     "gnewszh:harness:新浪网·---手机新浪网",
+    "gnewszh:harness:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36氪",
     "gnewszh:harness:梁圣又掀桌了！deepseek新模型斩杀gpt-6，许愿式编程时代降临---智东西",
     "gnewszh:harness:梁文锋不服马斯克---finance.sina.com.cn",
     "gnewszh:harness:消息称-deepseek-将-harness、web、app、platform-团队整合成立“产品部”---新浪财经",
@@ -1119,8 +1122,8 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-25T15:47:58.870Z",
-  "lastFreshCount": 79,
+  "lastSignalsRunAt": "2026-10-25T20:35:17.625Z",
+  "lastFreshCount": 76,
   "cornerErrors": [
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
