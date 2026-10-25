@@ -34,6 +34,7 @@ const OFFICIAL_REPOS = [
   'deepseek-ai/DeepEP-Ascend',
   'deepseek-ai/DeepGEMM',
   'deepseek-ai/DeepGEMM-Ascend',
+  'deepseek-ai/DeepInfer',
   'deepseek-ai/DeepJIT',
   'deepseek-ai/DeepSeek-Coder-V2',
   'deepseek-ai/deepseek-harness',
