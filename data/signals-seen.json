@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-26T03:56:32.210Z",
-  "count": 1128,
+  "updatedAt": "2026-10-26T12:31:26.138Z",
+  "count": 1136,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -49,6 +49,7 @@
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/8818",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/8938",
     "exa:community:https://jacar.es/en/deepseek-harness-dsh-local-model/",
+    "exa:community:https://news.micker.com.cn/items/ekjam4ie28w4fdn6qee5m3gmi",
     "exa:community:https://nitter.cf/DeepSeekHarness/status/2105330281389662575",
     "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
     "exa:community:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
@@ -441,6 +442,7 @@
     "gnews:deepseek-nears-$12b-tencent-backed-funding-round---seeking-alpha",
     "gnews:deepseek-nears-a-$12-billion-funding-round---finimize",
     "gnews:deepseek-offers-compensation-after-restoring-from-service-outage---cgtn",
+    "gnews:deepseek-open-source:-671b-params-free-vs-us-caution-[2026]---https://tech-insid",
     "gnews:deepseek-open-sources-deepinfer,-the-inference-framework-behind-deepseek-v4.1-fl",
     "gnews:deepseek-open-sources-deepinfer,-the-inference-framework-behind-its-production-s",
     "gnews:deepseek-open-sources-deepinfer-software-for-running-its-ai-models---quartz",
@@ -530,6 +532,7 @@
     "gnews:deepseek-vs-claude:-$0.15-vs-$4-per-1m-tokens-[2026]---https://tech-insider.org/",
     "gnews:deepseek-vs-claude:-$0.30-vs-$2-input-tokens-[2026]---shattered.io",
     "gnews:deepseek-vs-haiku-5.5-vs-gemini-flash:-7.5x-gap-[2026]---https://tech-insider.or",
+    "gnews:deepseek-vs-qwen-vs-mistral:-1t-params,-$1.36-input-[2026]---shattered.io",
     "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek-went-down-for-5-hours.-the-silence-afterward-is-the-real-story.---vocal",
     "gnews:deepseek-wrapping-up-$15-billion-fundraising-to-fuel-ai-race,-sources-say---reut",
@@ -543,6 +546,7 @@
     "gnews:deepseek’s-post-training-lead-declares-“entering-the-era-of-democratized-wish-dr",
     "gnews:deepseek’s-revenue-reaches-$70-million-as-of-july,-tenfold-jump-from-2025---the-",
     "gnews:deepseek’s-v4.1-flash-1017-model-just-built-an-exploit-that-escapes-chrome’s-san",
+    "gnews:deepseek’s-v4.1-flash-1017-model-tops-global-weekly-usage-rankings-as-token-volu",
     "gnews:dhs-banning-deepseek-from-us-federal-civilian-agencies---security-magazine",
     "gnews:dhs-bans-deepseek-across-federal-government-networks---pymnts.com",
     "gnews:dhs-bans-deepseek-from-federal-civilian-agencies---bankinfosecurity",
@@ -821,6 +825,7 @@
     "gnewszh:harness:想尝鲜的速来-deepseek-harness官方桌面端偷跑：跑ai性能更好---驱动之家",
     "gnewszh:harness:新浪网·---手机新浪网",
     "gnewszh:harness:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36氪",
+    "gnewszh:harness:智能体直接调用数字孪生开发平台！漂视网络新产品dpe赋形正式接入workbuddy与deepseek-harness生态---中华网",
     "gnewszh:harness:梁圣又掀桌了！deepseek新模型斩杀gpt-6，许愿式编程时代降临---智东西",
     "gnewszh:harness:梁文锋不服马斯克---finance.sina.com.cn",
     "gnewszh:harness:消息称-deepseek-将-harness、web、app、platform-团队整合成立“产品部”---新浪财经",
@@ -851,6 +856,7 @@
     "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---凤凰网",
     "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---手机新浪网",
     "gnewszh:zh:ai伦理研究：deepseek对男女近乎一视同仁，美系模型却“区别对待”---新浪财经",
+    "gnewszh:zh:ai出海划红线，deepseek、minimax完成登记---sohu",
     "gnewszh:zh:anthropic发布ai滥用报告后-中国监管部门据报对deepseek和月之暗面展开调查---rfi",
     "gnewszh:zh:anthropic发布ai滥用报告后-中国监管部门据报对deepseek和月之暗面展开调查---rfi.fr",
     "gnewszh:zh:anthropic指控抄袭背后：中国ai模型约束中何以求发展？|deepseek|minimax|claude|深度求索|月之暗面---fi",
@@ -867,6 +873,8 @@
     "gnewszh:zh:deepseek-再扔“王炸”-美国指责-中国反驳---dw.com",
     "gnewszh:zh:deepseek“崩”了之后，补偿措施来了---搜狐",
     "gnewszh:zh:deepseek、minimax完成ai模型出海登记-合规路径落地提振国内ai“出海”信心---财联社",
+    "gnewszh:zh:deepseek、minimax完成ai模型出海登记；spacex为芯片采购敲定400亿美元债务融资；sk海力士或派发16万亿韩元特别分红|",
+    "gnewszh:zh:deepseek、minimax完成ai模型出海登记；智元110台人形机器人创下吉尼斯世界纪录｜数智早参---https://www.mrj",
     "gnewszh:zh:deepseek上新ai模型部分性能超openai，v4.1-flash几乎每周位居使用量榜首---搜狐",
     "gnewszh:zh:deepseek上新ai模型，称部分性能超openai等---日经中文网",
     "gnewszh:zh:deepseek上新，“许愿式编程”成为现实---东方财富",
@@ -1131,9 +1139,11 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-26T03:56:32.210Z",
-  "lastFreshCount": 81,
+  "lastSignalsRunAt": "2026-10-26T12:31:26.137Z",
+  "lastFreshCount": 80,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
+    "exa-news: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
+    "exa-rumours: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
   ]
 }
