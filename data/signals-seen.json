@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-26T22:26:36.823Z",
-  "count": 1147,
+  "updatedAt": "2026-10-27T04:19:01.627Z",
+  "count": 1155,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -63,6 +63,7 @@
     "exa:community:https://www.reddit.com/r/DeepSeek/comments/1wth5fw/anyone_has_experience_with_the_new_deepseek/",
     "exa:community:https://www.reddit.com/r/DeepSeekHarness/comments/1wq10dl/best_plugins_for_local_hosting_a_personal/",
     "exa:community:https://www.reddit.com/r/DeepSeekHarness/comments/1wsanil/hey_guys_tell_me_your_favorite_plugins/",
+    "exa:community:https://www.reddit.com/r/DeepSeekHarness/comments/1wt5d27/tokenslash_cordis_plugin_for_dsh_that_slashes/",
     "exa:community:https://www.reddit.com/r/LocalLLM/comments/1wmn1jw/local_harness_test_omp_vs_qwen_code_vs_deepseek/",
     "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1whz401/deepseek_harness_vs_omp/",
     "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1wobhs6/windows_nvidia_deepseek_harness_smoketest_a_gpu/",
@@ -148,6 +149,7 @@
     "exa:secondary:https://segmentfault.com/a/1190000048326165",
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
+    "exa:secondary:https://timeline.sohu.com/news/Urw6IrrX7f",
     "exa:secondary:https://wallstreetcn.com/articles/3782792",
     "exa:secondary:https://www.163.com/dy/article/L81BCOVV051180F7.html",
     "exa:secondary:https://www.163.com/dy/article/L8ADUHN40556OXHR.html?f=post1603_tab_news",
@@ -392,6 +394,7 @@
     "gnews:deepseek-backs-ex-tencent-ai-scientist’s-$400-million-robot-lab---bloomberg.com",
     "gnews:deepseek-backs-ex-tencent-ai-scientist’s-$400-million-robot-lab---yahoo-finance",
     "gnews:deepseek-backs-ex-tencent-scientist’s-robotics-startup-winverse-ai---bloomberg-b",
+    "gnews:deepseek-ban-creates-new-compliance-and-reporting-obligations-for-contractors---",
     "gnews:deepseek-barred-from-government-agency-it-systems---politico",
     "gnews:deepseek-barred-from-u.s.-civilian-agency-systems-and-contracts---quartz",
     "gnews:deepseek-begins-limited-time-beta-of-v4.1-flash-multimodal-model---technode",
@@ -688,7 +691,9 @@
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---i.ifeng.com",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---凤凰网",
     "gnewszh:harness:deepseek-harness-v0.2预览版发布：上线桌面端安装包，新增插件管理---凤凰网科技",
+    "gnewszh:harness:deepseek-harness-全面解读：功能、架构与上手指南---新浪财经",
     "gnewszh:harness:deepseek-harness-官方桌面端是-webui-套壳吗？---电子工程专辑",
+    "gnewszh:harness:deepseek-harness-实测：一夜-5-万星，agent-界的-android-来了---极客公园",
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---finance.sina.cn",
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---新浪财经",
     "gnewszh:harness:deepseek-harness-开源解读：把-agent-做成零件而不是成品---积墨-ai",
@@ -697,6 +702,7 @@
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---手机新浪网",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---新浪财经",
     "gnewszh:harness:deepseek-harness-桌面端：现在，开箱即用。---53ai",
+    "gnewszh:harness:deepseek-harness-的插件体验短板：安全权限未生效，好插件用户找不到---雷峰网",
     "gnewszh:harness:deepseek-harness-破甲-网络安全红队工具（dsh-purge）---黑海洋wiki",
     "gnewszh:harness:deepseek-harness-装哪个-bot-插件？90%-的人第一步就选错了---53ai",
     "gnewszh:harness:deepseek-harness不可错过的12款神器！还有崔添翼推荐的---搜狐网",
@@ -818,6 +824,7 @@
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36-kr",
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36kr",
     "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36kr.com",
+    "gnewszh:harness:刚刚，deepseek-harness桌面预览版上线！---36氪",
     "gnewszh:harness:千次5元、搜不到不收钱：deepseek给agent装上自研搜索，价格只有tavily的零头---潮起网",
     "gnewszh:harness:多agent协作设计新范式：deepseek-harness插件生态启示录---积墨-ai",
     "gnewszh:harness:太卷了！deepseek假期更新，harness有了新版本---36-kr",
@@ -1023,6 +1030,7 @@
     "gnewszh:zh:突发！deepseek又“崩”了！---finance.sina.cn",
     "gnewszh:zh:突发！deepseek又“崩”了！---新浪财经",
     "gnewszh:zh:纳指大跌2.6%，热门科技股纷纷下挫；deepseek拟融资1000亿元丨港股早报---东方财富",
+    "gnewszh:zh:经济日报：deepseek千亿元融资展现中国ai进取心---thepaper.cn",
     "gnewszh:zh:经济日报：deepseek千亿元融资展现中国ai进取心---手机新浪网",
     "gnewszh:zh:维修4小时52分钟，deepseek恢复了---thepaper.cn",
     "gnewszh:zh:维修4小时52分钟，deepseek恢复了---国际金融报",
@@ -1150,9 +1158,10 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-26T22:26:36.823Z",
-  "lastFreshCount": 83,
+  "lastSignalsRunAt": "2026-10-27T04:19:01.627Z",
+  "lastFreshCount": 81,
   "cornerErrors": [
+    "arxiv: This operation was aborted",
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
 }
