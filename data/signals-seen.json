@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-27T11:49:29.938Z",
-  "count": 1169,
+  "updatedAt": "2026-10-27T17:43:13.003Z",
+  "count": 1176,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -85,6 +85,7 @@
     "exa:rumor:https://bittide.aicompass.dev/article/7b0cb097-9df9-4b17-a0ff-a64afa6acc3c?locale=zh",
     "exa:rumor:https://cellcog.ai/blog/deepseek-v5-release-date/",
     "exa:rumor:https://denghy.cn/articles/deepseek-harness-desktop-pro-rumor",
+    "exa:rumor:https://feng.ifeng.com/c/8xZdpF28WVe",
     "exa:rumor:https://finance.sina.com.cn/tech/discovery/2026-09-21/doc-inisqzxx9184343.shtml",
     "exa:rumor:https://geoaiglobals.com/zh/news/deepseek-v4-1-pro-kimi-k4-leak",
     "exa:rumor:https://guijiagi.com/posts/2026-10-09-17-deepseek-v5-from-scratch-mythos/",
@@ -379,6 +380,7 @@
     "gnews:deepseek,-moonshot-reportedly-face-china-scrutiny-over-anthropic-claims-ahead-of",
     "gnews:deepseek-adds-self-feedback-learning-to-its-v4.1-flash-model---www.tokenpost.com",
     "gnews:deepseek-adds-standalone-search-and-fetch-apis-for-agents,-priced-at-5-yuan-per-",
+    "gnews:deepseek-ai-disables-shutdown-software-in-39%-of-safety-tests---anadolu-ajansı",
     "gnews:deepseek-ai-faces-ban-from-federal-networks-over-data-security-concerns-(oct-19,",
     "gnews:deepseek-ai-model-shows-safety-gaps-in-independent-tests---reuters",
     "gnews:deepseek-ai-predicts-that-chainlink-(link)-is-about-to-do-something-huge---tradi",
@@ -393,6 +395,7 @@
     "gnews:deepseek-and-moonshot-ai:-china’s-a.i.-stars-head-for-the-stock-market---trendin",
     "gnews:deepseek-and-xiaomi-lead-china’s-ai-push-with-16-new-models,-challenging-u.s.-te",
     "gnews:deepseek-api-key-setup:-v4.1-flash-in-13-steps-[2026]---https://tech-insider.org",
+    "gnews:deepseek-api-pricing-vs-haiku-5.5-vs-terra-[2026]---https://tech-insider.org/",
     "gnews:deepseek-api-search-agent:-13-steps,-90-min-[2026]---tech-insider.org",
     "gnews:deepseek-backs-ex-tencent-ai-scientist’s-$400-million-robot-lab---bloomberg",
     "gnews:deepseek-backs-ex-tencent-ai-scientist’s-$400-million-robot-lab---bloomberg.com",
@@ -557,6 +560,7 @@
     "gnews:deepseek’s-cost-saving-ai-may-lead-to-inaccuracy-in-model-performance:-research-",
     "gnews:deepseek’s-funding-round-could-approach-$15-billion-as-investor-demand-surges---",
     "gnews:deepseek’s-fundraise-could-hit-100-billion-yuan-in-days---finimize",
+    "gnews:deepseek’s-latest-model-still-resists-shutdown-in-safety-tests---the-next-web",
     "gnews:deepseek’s-new-ai-model-talks-less,-so-a-coding-task-costs-20-cents---martin-cid",
     "gnews:deepseek’s-post-training-lead-declares-“entering-the-era-of-democratized-wish-dr",
     "gnews:deepseek’s-revenue-reaches-$70-million-as-of-july,-tenfold-jump-from-2025---the-",
@@ -679,6 +683,7 @@
     "gnews:where-the-deepseek-api-stands-on-october-22,-2026---shattered.io",
     "gnews:which-deepseek-v4-flash-api-is-cheapest?-bitdeer-ai-tops-artificial-analysis-pri",
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
+    "gnews:why-deepseek-ai-disabled-shutdown-software-in-39%-of-tests---latest-news-from-az",
     "gnews:windows-gets-open-weight-a.i.-like-china’s-deepseek-and-nvidia’s-nemotron---www.",
     "gnews:‘jensen’s-nightmare’:-huawei,-deepseek-narrow-ai-chip-ecosystem-gap-with-nvidia-",
     "gnews:‘jensen’s-nightmare’:-huawei,-deepseek-narrow-ai-chip-ecosystem-gap-with-nvidia:",
@@ -810,6 +815,7 @@
     "gnewszh:harness:deepseek服务器全球宕机，神秘harness账号同时现身---36氪",
     "gnewszh:harness:deepseek服务器全球宕机，神秘harness账号同时现身---投资界",
     "gnewszh:harness:deepseek正式上线search与fetch网页搜索api，11月1日起按次计费---smarthey",
+    "gnewszh:harness:deepseek的多模态模型，憋了这么久终于来了。。。---新浪财经",
     "gnewszh:harness:deepseek终于开箱即用-deepseek-harness官方桌面端实测：不用命令行启动，常用功能开箱即用。从自动整理桌面，到自己写个猫",
     "gnewszh:harness:deepseek：api支持网页搜索与抓取，单价为每1000次成功请求5元，11月1日起生效---新浪网",
     "gnewszh:harness:tencentdb-agent-memory-新增deepseek-harness-桌面端接入支持---qq-news",
@@ -949,6 +955,7 @@
     "gnewszh:zh:deepseek服务一度中断近5小时---联合早报",
     "gnewszh:zh:deepseek目前正在实施修复-服务中断持续2小时---中华网",
     "gnewszh:zh:deepseek获510亿融资，投资方公布：腾讯、宁德时代、京东、网易等---新浪网",
+    "gnewszh:zh:deepseek被曝完成约1000亿元融资_公司新闻_财经---证券之星",
     "gnewszh:zh:deepseek还没上市，梁文锋已超过李嘉诚父子成“中国第七富”！---野马财经",
     "gnewszh:zh:deepseek道歉，公布补偿方案---thepaper.cn",
     "gnewszh:zh:deepseek锁定至少800亿元融资，腾讯、宁德时代参与---搜狐网",
@@ -1172,8 +1179,8 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-27T11:49:29.938Z",
-  "lastFreshCount": 87,
+  "lastSignalsRunAt": "2026-10-27T17:43:13.003Z",
+  "lastFreshCount": 80,
   "cornerErrors": [
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
