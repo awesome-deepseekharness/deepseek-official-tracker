@@ -135,7 +135,8 @@
     "0.2.1-rc.1",
     "0.2.1-rc.2",
     "0.2.1-rc.3",
-    "0.2.1-rc.4"
+    "0.2.1-rc.4",
+    "0.2.2-alpha.2"
   ],
   "huggingface": [
     "deepseek-ai/DeepSeek-V4-Pro-0813",

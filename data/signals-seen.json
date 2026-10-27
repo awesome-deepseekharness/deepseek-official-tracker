@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-27T17:43:13.003Z",
-  "count": 1176,
+  "updatedAt": "2026-10-27T21:57:22.781Z",
+  "count": 1183,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -135,6 +135,7 @@
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/10772",
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/6637",
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/discussions/7667",
+    "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/releases",
     "exa:secondary:https://hideepseek.com/learn/news/deepseek-harness-community-v0223-v0224-2026-10-08/",
     "exa:secondary:https://jishuzhan.net/article/2108910629256192001",
     "exa:secondary:https://jishuzhan.net/article/2109518601183322114",
@@ -514,6 +515,7 @@
     "gnews:deepseek-targets-nvidia's-software-moat-with-huawei-partnership---yahoo-finance",
     "gnews:deepseek-teams-up-with-huawei-to-beef-up-ascend-chip-programming-tools---sdxcent",
     "gnews:deepseek-teams-up-with-huawei-to-challenge-nvidia---investing.com",
+    "gnews:deepseek-tests-expose-gaps-in-ai-shutdown-and-oversight-controls---cdo-magazine",
     "gnews:deepseek-ties-its-new-v4.1-flash-1017-model-tighter-to-its-own-harness---startup",
     "gnews:deepseek-to-double-fundraising-to-100-billion-yuan---marketscreener.com",
     "gnews:deepseek-to-lead-funding-round-for-robotics-ai-startup-winverse-at-$400-mln---re",
@@ -595,6 +597,7 @@
     "gnews:governments,-regulators-increase-scrutiny-of-china's-deepseek---reuters",
     "gnews:gpt-6-astra-vs-gemini-4-argon-vs-deepseek:-13x-gap-[2026]---tech-insider.org",
     "gnews:grok-4.7-vs-claude-vs-deepseek:-13x-price-gap-[2026]---https://tech-insider.org/",
+    "gnews:haiku-5.5-vs-gpt-6.1-terra-vs-deepseek:-$0.10-vs-$1-[2026]---https://tech-inside",
     "gnews:homeland-security-bans-deepseek-from-federal-systems,-but-experts-warn-enforceme",
     "gnews:homeland-security-bans-deepseek-use-in-federal-civilian-agencies---engadget",
     "gnews:how-deepseek-is-shaping-huawei’s-ai-chips-in-a-growing-challenge-to-nvidia---the",
@@ -634,6 +637,7 @@
     "gnews:pushing-the-limits-of-serving-deepseek-v4-pro---lmsys-org",
     "gnews:pushing-the-limits-of-serving-deepseek-v4-pro---lmsys.org",
     "gnews:reflection’s-founders-on-building-a-deepseek-of-the-west---sources-|-alex-heath",
+    "gnews:research-sheds-new-light-on-deepseek’s-safety-risks---gizmodo",
     "gnews:roundup:-nonprofit-money-trail-/-$5.5b-energy-deal-/-us-vs.-deepseek---baton-rou",
     "gnews:spacex,-deepseek-and-anthropic-top-week's-deal-rumors---law360",
     "gnews:step-5-preview-vs-deepseek-v4.1-flash:-price-vs-licence---orcarouter",
@@ -1008,6 +1012,7 @@
     "gnewszh:zh:声明：本人从未在互联网上诋毁过深度求索，并没有称梁文锋为梁白开。-本人实际上是深度求索2年老粉，经过...-|-机组---机核gcores",
     "gnewszh:zh:外交部回应美政府要求机构停用deepseek---搜狐网",
     "gnewszh:zh:外媒：deepseek完成约1000亿人民币新一轮融资---电子工程专辑",
+    "gnewszh:zh:太卷了！deepseek假期更新，harness有了新版本---36kr",
     "gnewszh:zh:太卷了！deepseek假期更新，harness有了新版本---36氪",
     "gnewszh:zh:安理会本周开会讨论ai和国际安全问题，deepseek公司被曝将作通报---guancha.cn",
     "gnewszh:zh:安理会本周开会讨论ai和国际安全问题，deepseek公司被曝将作通报---观察者网",
@@ -1022,6 +1027,7 @@
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---finance.sina.com.cn",
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---新浪网",
     "gnewszh:zh:投资圈沸腾了！deepseek首次启动外部融资？---新浪财经",
+    "gnewszh:zh:报道：deepseek融资规模超预期冲击800亿人民币，腾讯和宁德时代领投---华尔街见闻",
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---zaobao.com.sg",
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---联合早报",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---zaobao.com.sg",
@@ -1088,6 +1094,7 @@
     "gnewszh:zh:美方宣布禁止美联邦政府民事行政机构采购深度求索及其关联企业开发的产品和服务，中方：敦促美方立即纠正错误做法，撤销歧视性限制措施---搜狐",
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
     "gnewszh:zh:至少800亿，deepseek融资新进展---新浪财经",
+    "gnewszh:zh:英伟达重金力捧！“美版deepseek”即将发布开源模型---华尔街见闻",
     "gnewszh:zh:说实话，我觉得-claude-4.8-有点拉。---finance.sina.cn",
     "gnewszh:zh:说实话，我觉得-claude-4.8-有点拉。---新浪财经",
     "gnewszh:zh:财新周刊｜钢铁降碳深度求索---财新周刊",
@@ -1179,7 +1186,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-27T17:43:13.003Z",
+  "lastSignalsRunAt": "2026-10-27T21:57:22.780Z",
   "lastFreshCount": 80,
   "cornerErrors": [
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
