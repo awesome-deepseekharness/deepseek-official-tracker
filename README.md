@@ -28,11 +28,13 @@
 
 **For:** people following DeepSeek news and Harness desktop updates · API users tracking pricing and deprecations · researchers watching model weights · developers following CLI releases and the plugin ecosystem.
 
-## 🔥 Latest — v0.2.2-alpha.2 (2026-10-27)
+## 🔥 Latest — deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.4 (2026-10-28)
 
-**Prerelease / preview** · [v0.2.2-alpha.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.2-alpha.2)
+**Prerelease / preview** · [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.4](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.4)
 
-- **Harness:** 2026-10-23 · [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.3](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.3) · Prerelease / preview
+v0.2.1-rc.4
+
+- **Harness:** 2026-10-28 · [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.4](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.4) · Prerelease / preview
 - **Latest model / API announcement:** 2026-10-17 · [DeepSeek-V4.1-Flash-1017 Update](https://api-docs.deepseek.com/updates#date-2026-10-17)
 - **All official updates:** [FEED.md](FEED.md) · [GitHub releases](releases.md) · [npm](npm.md)
 - **Media, community & rumours (unverified):** [SIGNALS.md](SIGNALS.md) · [Insights](insights.md)
@@ -40,14 +42,14 @@
 <details>
 <summary>Recent official updates</summary>
 
+- **2026-10-28** [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.4](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.4)
+- **2026-10-28** [deepseek-ai/deepseek-harness release dsh-v0.2.2-alpha.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-alpha.2)
 - **2026-10-27** [v0.2.2-alpha.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.2-alpha.2)
 - **2026-10-26** [v0.2.1-rc.4](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-rc.4)
 - **2026-10-23** [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.3](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.3)
 - **2026-10-23** [v0.2.1-rc.3](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-rc.3)
 - **2026-10-17** [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.1)
 - **2026-10-17** [deepseek-ai/deepseek-harness release dsh-v0.2.1-rc.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.1-rc.2)
-- **2026-10-17** [v0.2.1-rc.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-rc.1)
-- **2026-10-17** [v0.2.1-rc.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.1-rc.2)
 </details>
 
 ## Harness desktop, release tracking and community news
