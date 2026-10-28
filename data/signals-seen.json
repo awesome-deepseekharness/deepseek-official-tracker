@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-28T12:23:51.262Z",
-  "count": 1207,
+  "updatedAt": "2026-10-28T22:21:28.040Z",
+  "count": 1214,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -91,6 +91,7 @@
     "exa:rumor:https://geoaiglobals.com/zh/news/deepseek-v4-1-pro-kimi-k4-leak",
     "exa:rumor:https://guijiagi.com/posts/2026-10-09-17-deepseek-v5-from-scratch-mythos/",
     "exa:rumor:https://m.itbear.com.cn/html/2026-10/1578898.html",
+    "exa:rumor:https://m.itbear.com.cn/html/2026-10/1578948.html",
     "exa:rumor:https://maxassistant.app/en/news/releases/deepseek-v5-mythos-class-rumor-september/",
     "exa:rumor:https://mindpattern.ai/f/26613",
     "exa:rumor:https://news.cnyes.com/news/id/6612753",
@@ -108,6 +109,7 @@
     "exa:rumor:https://tech.ifeng.com/c/8xaMcSLMa0g",
     "exa:rumor:https://www.ailou.cn/ai/5304.html",
     "exa:rumor:https://www.datalearner.com/ai-models/pretrained-models/deepseek-v5",
+    "exa:rumor:https://www.donews.com/article/detail/6885/108997.html",
     "exa:rumor:https://www.laplaceatlas.com/stories/deepseek-v5-leaks-suggest-imminent-open-weight-model-launch-73c33cd2",
     "exa:rumor:https://www.orcarouter.ai/blog/deepseek-v4-1-pro-release-window-leak",
     "exa:rumor:https://www.orcarouter.ai/blog/deepseek-v4-1-pro-stealth-leak",
@@ -393,6 +395,7 @@
     "gnews:deepseek-ai-faces-ban-from-federal-networks-over-data-security-concerns-(oct-19,",
     "gnews:deepseek-ai-model-shows-safety-gaps-in-independent-tests---reuters",
     "gnews:deepseek-ai-predicts-that-chainlink-(link)-is-about-to-do-something-huge---tradi",
+    "gnews:deepseek-ai-with-guideline-knowledge-base-boosts-junior-doctors’-arthroplasty-de",
     "gnews:deepseek-and-huawei-partner-on-open-source-ai-chip-software---yahoo-tech",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor",
     "gnews:deepseek-and-huawei-partner-to-develop-ai-software---semafor.com",
@@ -433,6 +436,7 @@
     "gnews:deepseek-expands-into-embodied-ai-with-early-bet-on-robotics-startup-winverse---",
     "gnews:deepseek-eyes-doubling-latest-funding-round-to-$15b:-report---tradingview",
     "gnews:deepseek-fires-back-at-u.s.federal-agency-ban-as-'overstretching-of-the-concept-",
+    "gnews:deepseek-founder-joins-china's-top-10-richest-for-first-time-with-$42b-fortune--",
     "gnews:deepseek-fundraising-frenzy-spawns-shadow-market---financial-times",
     "gnews:deepseek-harness-challenges-agent-lock-in-with-claude-code-mods-bridge-and-open-",
     "gnews:deepseek-harness-flaw-let-ai-agents-disable-their-own-file-sandbox-without-appro",
@@ -443,6 +447,7 @@
     "gnews:deepseek-harness-v0.2.1-alpha.2-pre-release-adds-reasoning-translation-and-git-w",
     "gnews:deepseek-harness-v0.2.1-rc1-arrives-as-an-unannounced-v4.1-flash-snapshot-briefl",
     "gnews:deepseek-has-been-disrupted-10-times-this-year,-now-preparing-compensation-for-u",
+    "gnews:deepseek-hit-27.1%-on-openrouter.-that’s-bigger-than-google-and-openai.---vocal",
     "gnews:deepseek-implements-fix-after-partial-outage-affects-chat-and-api-services---tec",
     "gnews:deepseek-is-moving-to-lead-a-$400-million-seed-round-for-a-chinese-robotics-ai-s",
     "gnews:deepseek-is-open-sourcing-the-software-it-uses-to-run-its-ai-models-at-scale---q",
@@ -457,6 +462,7 @@
     "gnews:deepseek-made-its-name-with-cheap-ai-models.-now-it’s-undercutting-search-api-ri",
     "gnews:deepseek-made-search-almost-free.-the-number-it-returns-is-the-bigger-story---vo",
     "gnews:deepseek-makes-v4.1-flash-1017-official-with-mit-licensed-weights-and-stronger-a",
+    "gnews:deepseek-model-disabled-its-shutdown-script-in-39%-of-warned-test-runs---technol",
     "gnews:deepseek-model-ranks-no.-12-on-web-development-coding-board---tokenpost",
     "gnews:deepseek-monetizes-the-agent-retrieval-layer-at-$0.75-per-1,000-calls.-every-com",
     "gnews:deepseek-moves-up-the-stack:-v4.1-flash-update-ships-alongside-its-own-search-an",
@@ -1004,6 +1010,7 @@
     "gnewszh:zh:中国品牌如何实现跨越式发展？|deepseek|韩国|机器人|小米|谢菲尔德---新浪军事",
     "gnewszh:zh:中国商务部称-deepseek-联邦禁令属破坏公平竞争的歧视性措施，敦促美方撤销---智源社区",
     "gnewszh:zh:中国外交部回应美国政府deepseek禁令---搜狐",
+    "gnewszh:zh:中国官媒：deepseek和minimax完成ai模型出海登记---早晨报",
     "gnewszh:zh:中国官媒：deepseek和minimax完成ai模型出海登记---联合早报",
     "gnewszh:zh:中国民企ai大模型全球“圈粉”-调用量连续24周霸榜！---深圳市委统战部",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
@@ -1210,8 +1217,8 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-28T12:23:51.262Z",
-  "lastFreshCount": 83,
+  "lastSignalsRunAt": "2026-10-28T22:21:28.040Z",
+  "lastFreshCount": 80,
   "cornerErrors": [
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
