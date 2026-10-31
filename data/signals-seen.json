@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-30T22:04:04.679Z",
-  "count": 1292,
+  "updatedAt": "2026-10-31T04:45:48.535Z",
+  "count": 1304,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -52,6 +52,7 @@
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/8818",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/8938",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/9245",
+    "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/9635",
     "exa:community:https://jacar.es/en/deepseek-harness-dsh-local-model/",
     "exa:community:https://news.micker.com.cn/items/ekjam4ie28w4fdn6qee5m3gmi",
     "exa:community:https://nitter.cf/DeepSeekHarness/status/2105330281389662575",
@@ -83,6 +84,7 @@
     "exa:community:https://www.xda-developers.com/tried-deepseeks-agent-harness-its-not-the-claude-code-clone-expected/",
     "exa:community:https://www.zgaiagent.cn/items/16817",
     "exa:rumor:https://agihunt.info/en/p/1a0e35e51d2ac3c233a1feec591",
+    "exa:rumor:https://agihunt.info/en/p/1a16da5511d4c40b6b9032e378c",
     "exa:rumor:https://agihunt.info/p/1a13e1612c3df755c9e46faf594",
     "exa:rumor:https://agihunt.info/p/1a170e6149642ff3a4a90957690",
     "exa:rumor:https://agihunt.info/p/1a17593783462a22c9b7769ee74",
@@ -114,6 +116,7 @@
     "exa:rumor:https://nitter.jaydenha.uk/Priyannkaaaa/status/2103699253273247809",
     "exa:rumor:https://post.smzdm.com/p/a03xnpx9/",
     "exa:rumor:https://promptblueprints.tech/leaks/deepseek-v5-leak-what-the-report-actually-says/",
+    "exa:rumor:https://promptblueprints.tech/leaks/reports-show-deepseek-v5-placeholders-in-harness-code/",
     "exa:rumor:https://promptblueprints.tech/leaks/what-the-deepseek-v5-leak-actually-reports/",
     "exa:rumor:https://rss.bz/zh/post/deepseek-v5-huawei-ascend-training",
     "exa:rumor:https://shattered.io/deepseek-v5-leak-unconfirmed-2026/",
@@ -197,6 +200,7 @@
     "exa:secondary:https://www.okyn.com/ai/1042.html",
     "exa:secondary:https://www.tuoluo.cn/article/detail-10131356.html",
     "exa:secondary:https://www.woshipm.com/ai/6472278.html",
+    "exa:secondary:https://www.woshipm.com/ai/6475794.html",
     "exa:secondary:https://www.zhidx.com/p/598364.html",
     "exa:secondary:https://www.zhidx.com/p/602940.html",
     "exa:secondary:https://xiaoan.cc/article/deepseek-harness-kai-qi-quan-qiu-gong-kai-yu-lan-kai-yuan-zh-tt",
@@ -269,6 +273,7 @@
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1xcylhj/qwen_38_flash_next_129_gb_is_better_than_26_bpw/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1xdkvmi/how_i_tried_to_like_deepseekv41flash1017_only_to/",
     "ghcommunity:next:Blackwellboy/DeepSeek-V4.1-Flash-1017-BLACKFOLD-TP2",
+    "ghcommunity:next:CJYLZS/vllm-ascend-deepseek-v41-a2",
     "ghcommunity:next:CageEcho/xingce-travel-planner",
     "ghcommunity:next:Elevatormusic/DeepSeek-V4.1-Flash-1017-EXL3-TensorFold-2x-DGX-Spark",
     "ghcommunity:next:HeCC928/shanghai-news-insight",
@@ -399,6 +404,7 @@
     "gnews:chinese-ai-labs-deepseek-and-moonshot-ai-heavily-trained-models-on-gpt-6-astra-o",
     "gnews:chinese-ai-models-parrot-state-doctrine-or-refuse-to-answer-on-sensitive-topics-",
     "gnews:chinese-ai-startup-deepseek-raises-$15-billion-ahead-of-potential-ipo---wsj",
+    "gnews:chinese-hackers-use-deepseek-ai-to-target-more-than-200-organizations---security",
     "gnews:chinese-hackers-used-deepseek-and-other-ai-tools-in-sweeping-global-cyberattacks",
     "gnews:claude-mythos-5-vs-deepseek-v4-pro:-a-15×-price-gap,-and-only-one-of-them-is-che",
     "gnews:community-built-ds-bot-plugin-turns-deepseek-harness-into-a-team-of-long-lived-b",
@@ -475,6 +481,8 @@
     "gnews:deepseek-eyes-doubling-latest-funding-round-to-$15b:-report---tradingview",
     "gnews:deepseek-fires-back-at-u.s.federal-agency-ban-as-'overstretching-of-the-concept-",
     "gnews:deepseek-founder-joins-china's-top-10-richest-for-first-time-with-$42b-fortune--",
+    "gnews:deepseek-funding-round:-$16b,-27%-state-money-[2026]---https://tech-insider.org/",
+    "gnews:deepseek-funding-round:-$16b-at-$74b-pre-money-[2026]---shattered.io",
     "gnews:deepseek-fundraising-frenzy-spawns-shadow-market---financial-times",
     "gnews:deepseek-gpt-6-astra:-2-models-named-in-report-[2026]---shattered.io",
     "gnews:deepseek-harness-challenges-agent-lock-in-with-claude-code-mods-bridge-and-open-",
@@ -613,6 +621,7 @@
     "gnews:deepseek-vs-claude:-$0.30-vs-$2-input-tokens-[2026]---shattered.io",
     "gnews:deepseek-vs-haiku-5.5-vs-gemini-flash:-7.5x-gap-[2026]---https://tech-insider.or",
     "gnews:deepseek-vs-qwen-vs-mistral:-1t-params,-$1.36-input-[2026]---shattered.io",
+    "gnews:deepseek-website-code-points-to-cyber,-a-dedicated-cybersecurity-model-in-limite",
     "gnews:deepseek-weighs-doubling-raise-to-100-billion-yuan-as-big-name-backers-line-up--",
     "gnews:deepseek-went-down-for-5-hours.-the-silence-afterward-is-the-real-story.---vocal",
     "gnews:deepseek-wrapping-up-$15-billion-fundraising-to-fuel-ai-race,-sources-say---reut",
@@ -770,6 +779,8 @@
     "gnews:“seems-important”:-new-deepseek-stat-explodes-ai-bubble-fears---yahoo-finance",
     "gnews:😺-deepseek's-free-model-edged-opus-5-at-coding---the-neuron",
     "gnewszh:harness:31小时连发3版！deepseek-harness-0.1.7进入rc---手机网易网",
+    "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---搜狐网",
+    "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---新浪新闻_手机新浪网",
     "gnewszh:harness:b站评论区出现大量deepseek拟人化ai账号，引发ai内容泛滥与治理讨论---虎嗅",
     "gnewszh:harness:b站评论区出现大量deepseek拟人化ai账号，引发ai内容泛滥与治理讨论---虎嗅网",
     "gnewszh:harness:deepseek-api已支持网页搜索和抓取-每1000次成功请求5元---cnbeta.com",
@@ -825,6 +836,7 @@
     "gnewszh:harness:deepseek-harness开启内测？看来v4正式版也不远了---finance.sina.cn",
     "gnewszh:harness:deepseek-harness开启内测？看来v4正式版也不远了---新浪财经",
     "gnewszh:harness:deepseek-harness或将推多模态大模型---中关村在线",
+    "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---finance.sina.com.c",
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---新浪网",
     "gnewszh:harness:deepseek-harness来了：ai开始制造ai了？---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness来了：ai开始制造ai了？---新浪财经",
@@ -1295,7 +1307,9 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-30T22:04:04.679Z",
-  "lastFreshCount": 104,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-10-31T04:45:48.534Z",
+  "lastFreshCount": 103,
+  "cornerErrors": [
+    "arxiv: HTTP 429"
+  ]
 }
