@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-31T04:45:48.535Z",
-  "count": 1304,
+  "updatedAt": "2026-10-31T11:55:12.115Z",
+  "count": 1311,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -21,6 +21,7 @@
     "cnmedia:www.infoq.cn:deepseek千亿融资逼近收官：结盟完美世界、中芯聚源等产业资本，募资翻倍押注具身智能",
     "cnmedia:www.infoq.cn:deepseek开源最新推理框架：单集群日吞吐155万亿token，kvcache可保存7天",
     "cnmedia:www.infoq.cn:海外开源模型重新提速：“美版-deepseek”第一次交卷，mistral同时亮牌",
+    "cnmedia:www.qbitai.com:ai零帧起手写算子，反超deepseek人类手写巅峰：快了9.8%！",
     "cnmedia:www.qbitai.com:deepseek-bot来了！民间版，dsh装个插件就能用",
     "cnmedia:www.qbitai.com:deepseek官方开源昇腾基础组件，与昇腾共建高效易用的ai芯片软件生态",
     "cnmedia:www.qbitai.com:deepseek扩招！弹性计算团队大量hc，尤其需要资深工程师",
@@ -191,6 +192,7 @@
     "exa:secondary:https://www.dztan.com/p/2026/10/11/deepseek-harness-zhuo-mian-duan-zhi-chi-dao-ru-wen-dang-biao.shtml",
     "exa:secondary:https://www.dztan.com/p/2026/10/12/deepseek-harness-v0-2-yu-lan-ban-zheng-shi-fa-bu-ti-gong-kai.shtml",
     "exa:secondary:https://www.dztan.com/p/2026/10/12/deepseek-harness-xin-zeng-cha-jian-guan-li-ye-mian-shu-ru.shtml",
+    "exa:secondary:https://www.dztan.com/p/2026/10/12/deepseek-harness-zhuo-mian-duan-xin-zeng-cha-jian-guan-li-ye.shtml",
     "exa:secondary:https://www.dztan.com/p/2026/10/12/deepseek-harness-zhuo-mian-duan-yu-lan-ban-v0-2-fa-bu-zhi.shtml",
     "exa:secondary:https://www.gate.com/zh/news/detail/DEEPSEEK/deepseek-releases-harness-v02-with-plugin-manager-for-macos-and-windows-24703834",
     "exa:secondary:https://www.harness-hub.org/news/deepseek-harness-desktop",
@@ -206,6 +208,7 @@
     "exa:secondary:https://xiaoan.cc/article/deepseek-harness-kai-qi-quan-qiu-gong-kai-yu-lan-kai-yuan-zh-tt",
     "exa:secondary:https://zhidx.com/p/598364.html",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/api/list-models",
+    "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/api/list-models/",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news250821",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news250821/",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news250922/",
@@ -223,6 +226,7 @@
     "fcsearch:cn-media:https://www.ibm.com/cn-zh/think/topics/deepseek",
     "fcsearch:cn-media:https://www.ithome.com/0/999/795.htm",
     "fcsearch:cn-media:https://www.ithome.com/1/000/719.htm",
+    "fcsearch:cn-media:https://www.ithome.com/1/014/328.htm",
     "fcsearch:cn-media:https://www.qbitai.com/2025/09/328663.html",
     "fcsearch:cn-media:https://www.reddit.com/r/LocalLLaMA/comments/1rrkglb/two_new_models_on_openrouter_possibly_deepseek_v4/?tl=zh-hans",
     "fcsearch:cn-media:https://www.yicai.com/news/102785887.html",
@@ -312,6 +316,7 @@
     "ghcommunity:weights:Elevatormusic/DeepSeek-V4.1-Flash-1017-EXL3-TensorFold-2x-DGX-Spark",
     "ghcommunity:weights:Fei2411/DeepSeek-Bot",
     "ghcommunity:weights:FeiZhuLulu/DeepSeek-Bot",
+    "ghcommunity:weights:KDDKBD/DeepSeek-splash-animation",
     "ghcommunity:weights:MiaAI-Lab/DeepSeek-v4.1-Flash-1017-2x-DGX-Sparks",
     "ghcommunity:weights:MiaAI-Lab/DeepSeek-v4.1-Flash-DGX-Sparks",
     "ghcommunity:weights:MiaAI-Lab/DeepSeek-v4.1-Flash-EXL3-2x-DGX-Sparks",
@@ -578,6 +583,7 @@
     "gnews:deepseek-targets-nvidia's-software-moat-with-huawei-partnership---yahoo-finance",
     "gnews:deepseek-teams-up-with-huawei-to-beef-up-ascend-chip-programming-tools---sdxcent",
     "gnews:deepseek-teams-up-with-huawei-to-challenge-nvidia---investing.com",
+    "gnews:deepseek-tests-efficient,-safer-method-for-training-ai-agents---bloomberg.com",
     "gnews:deepseek-tests-expose-gaps-in-ai-shutdown-and-oversight-controls---cdo-magazine",
     "gnews:deepseek-ties-its-new-v4.1-flash-1017-model-tighter-to-its-own-harness---startup",
     "gnews:deepseek-to-double-fundraising-to-100-billion-yuan---marketscreener.com",
@@ -781,6 +787,7 @@
     "gnewszh:harness:31小时连发3版！deepseek-harness-0.1.7进入rc---手机网易网",
     "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---搜狐网",
     "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---新浪新闻_手机新浪网",
+    "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---智东西",
     "gnewszh:harness:b站评论区出现大量deepseek拟人化ai账号，引发ai内容泛滥与治理讨论---虎嗅",
     "gnewszh:harness:b站评论区出现大量deepseek拟人化ai账号，引发ai内容泛滥与治理讨论---虎嗅网",
     "gnewszh:harness:deepseek-api已支持网页搜索和抓取-每1000次成功请求5元---cnbeta.com",
@@ -1307,9 +1314,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-31T04:45:48.534Z",
-  "lastFreshCount": 103,
-  "cornerErrors": [
-    "arxiv: HTTP 429"
-  ]
+  "lastSignalsRunAt": "2026-10-31T11:55:12.115Z",
+  "lastFreshCount": 98,
+  "cornerErrors": []
 }
