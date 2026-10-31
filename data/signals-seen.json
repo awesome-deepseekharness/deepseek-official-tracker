@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-31T17:01:45.064Z",
-  "count": 1328,
+  "updatedAt": "2026-10-31T21:13:29.831Z",
+  "count": 1334,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -179,6 +179,7 @@
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00?ptag=ima",
     "exa:secondary:https://news.qq.com/rain/a/20260930A0AUKI00?ptag=ima",
     "exa:secondary:https://news.qq.com/rain/a/20261004A09GML00",
+    "exa:secondary:https://pro.edgex.exchange/zh-CN/news/article/deepseek-harness-v0-2-desktop-installers",
     "exa:secondary:https://segmentfault.com/a/1190000048326165",
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
@@ -325,6 +326,7 @@
     "ghcommunity:weights:TreapGoGo/deepseek-whale-girl",
     "ghcommunity:weights:Tsuev/opencode-deepseek",
     "ghcommunity:weights:Zhou-Yujing114514/deepseek-harness-linux",
+    "ghcommunity:weights:aicodeking/deepseek-stack",
     "ghcommunity:weights:aideveloper-web/Free-Deepseek",
     "ghcommunity:weights:apimartdecg4/deepseek-v4-pro-api-ja",
     "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-cn",
@@ -351,6 +353,7 @@
     "gnews:'better-than-deepseek':-xiaomi's-mimo-v2.6-pro-debuts-as-the-top-open-weights-mo",
     "gnews:16-ai-models-in-one-month:-deepseek,-chinese-ai-firms-step-up-launch-race-despit",
     "gnews:3-ai-infrastructure-stocks-for-data-center-demand-after-deepseek-shock---simply-",
+    "gnews:[deepseek-unveils-super-agent]---shanghai-metals-market",
     "gnews:a-$12b-deepseek-raise-is-reportedly-close,-with-tencent-and-catl-among-backers--",
     "gnews:a-complete-guide-to-deepseek’s-2026-ipo:-what-it-means-for-china-etf-kstr---seek",
     "gnews:a-deepseek-engineer's-viral-post-on-talent,-power,-and-humanity-is-a-rare-snapsh",
@@ -789,6 +792,7 @@
     "gnews:‘jensen’s-nightmare’:-huawei,-deepseek-narrow-ai-chip-ecosystem-gap-with-nvidia:",
     "gnews:“seems-important”:-new-deepseek-stat-explodes-ai-bubble-fears---yahoo-finance",
     "gnews:😺-deepseek's-free-model-edged-opus-5-at-coding---the-neuron",
+    "gnewszh:harness:2026“苏超”，无锡队夺冠！---新浪财经",
     "gnewszh:harness:31小时连发3版！deepseek-harness-0.1.7进入rc---手机网易网",
     "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---搜狐网",
     "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---新浪新闻_手机新浪网",
@@ -898,8 +902,10 @@
     "gnewszh:harness:deepseek产品部，交给了一个量化交易员---搜狐网",
     "gnewszh:harness:deepseek产品部，交给了一个量化交易员---潮起网",
     "gnewszh:harness:deepseek又开源了！公布super-agent架构---搜狐网",
+    "gnewszh:harness:deepseek又开源了！公布super-agent架构---智东西",
     "gnewszh:harness:deepseek发布v4.1-flash-1017版本-api网页搜索每1000次收费5元---观点网",
     "gnewszh:harness:deepseek发布全新agent架构---21财经",
+    "gnewszh:harness:deepseek发布全新agent架构---www.mrjjxw.com",
     "gnewszh:harness:deepseek发布全新agent架构---搜狐网",
     "gnewszh:harness:deepseek发布全新agent架构：super-agent---finance.sina.com.cn",
     "gnewszh:harness:deepseek回应“抄作业”：不是被迫或模仿---sohu",
@@ -1331,9 +1337,7 @@
     "x:2111375640717033777",
     "x:2112476496283775135"
   ],
-  "lastSignalsRunAt": "2026-10-31T17:01:45.064Z",
-  "lastFreshCount": 110,
-  "cornerErrors": [
-    "exa-rumours: Unexpected token 'Y', \"You've hit\"... is not valid JSON"
-  ]
+  "lastSignalsRunAt": "2026-10-31T21:13:29.831Z",
+  "lastFreshCount": 99,
+  "cornerErrors": []
 }
