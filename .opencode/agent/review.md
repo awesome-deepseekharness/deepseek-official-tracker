@@ -7,6 +7,8 @@ permission:
   grep: allow
   glob: allow
   bash: deny
+
+  shell: deny
   edit:
     "*": deny
     ".review-decision.json": allow

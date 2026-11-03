@@ -36,7 +36,7 @@ jobs:
 
       - name: Install pinned OpenCode
         run: |
-          npm install -g opencode-ai@1.18.34
+          npm install -g @opencode/cli @kilocode/cli
           opencode debug config > /dev/null
 
       - name: AI triage

@@ -42,7 +42,7 @@ jobs:
 
       - name: Install pinned OpenCode and validate configuration
         run: |
-          npm install -g opencode-ai@1.18.34
+          npm install -g @opencode/cli @kilocode/cli
           opencode debug config > /dev/null
           opencode mcp list
 

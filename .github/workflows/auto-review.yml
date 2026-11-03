@@ -47,7 +47,7 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - name: Install pinned OpenCode and site dependencies
         run: |
-          npm install -g opencode-ai@1.18.34
+          npm install -g @opencode/cli @kilocode/cli
           npm ci --prefix site
           opencode debug config > /dev/null
       - name: Review sources, validate candidate and act on the exact reviewed head

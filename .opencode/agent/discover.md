@@ -7,6 +7,8 @@ permission:
   grep: allow
   glob: allow
   bash: allow
+
+  shell: allow
   edit: allow
   webfetch: allow
   websearch: allow

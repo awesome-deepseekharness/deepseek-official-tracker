@@ -1,4 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process';
+import { withFreeModel } from './opencode-free.mjs';
 import { setTimeout as sleep } from 'node:timers/promises';
 
 export function outputError(output) {
@@ -24,98 +25,19 @@ export function parseModelRegistry(output) {
 // Prefer model families with a reliable history in this automation before a
 // newer release from a vendor with no track record. Within a vendor, the
 // newest release wins; outside the list, release date decides.
-export const TRUSTED_FREE_MODEL_VENDORS = Object.freeze([
-  'deepseek', 'glm', 'minimax', 'kimi', 'qwen', 'step', 'muse',
-]);
-const freeModelVendorPatterns = TRUSTED_FREE_MODEL_VENDORS.map(vendor =>
-  [vendor, new RegExp(`^${vendor}(?:$|[-_.\\d])`, 'i')]);
-
-function freeModelVendorRank(model) {
-  const index = freeModelVendorPatterns.findIndex(([, pattern]) => pattern.test(model.id));
-  return index === -1 ? TRUSTED_FREE_MODEL_VENDORS.length : index;
-}
-
-export function rankFreeModels(models) {
-  const freeCost = cost => cost && cost.input === 0 && cost.output === 0 &&
-    Object.values(cost.cache || {}).every(value => value === 0) &&
-    (!cost.context_over_200k || freeCost(cost.context_over_200k));
-  return [...new Map(models.filter(model => freeCost(model.cost) && model.capabilities?.toolcall === true &&
-    !['deprecated', 'retired'].includes(model.status) && /^[a-zA-Z0-9._-]+$/.test(model.id))
-    .map(model => [model.id, model])).values()]
-    .sort((a, b) => freeModelVendorRank(a) - freeModelVendorRank(b) ||
-      (b.release_date || '').localeCompare(a.release_date || '') ||
-      Number(b.capabilities.reasoning === true) - Number(a.capabilities.reasoning === true) ||
-      (b.limit?.context || 0) - (a.limit?.context || 0) || a.id.localeCompare(b.id));
-}
-
-export async function freeModels() {
-  // Query metadata from the actual installed CLI and refresh models.dev each
-  // run. No static IDs and no assumption that a '-free' suffix guarantees zero cost.
-  for (const refresh of [true, false]) {
-    const registry = spawnSync(process.env.OPENCODE_BIN || 'opencode',
-      ['models', 'opencode', '--verbose', ...(refresh ? ['--refresh'] : [])], {
-        encoding: 'utf8', shell: process.platform === 'win32', timeout: 30000,
-        maxBuffer: 8 * 1024 * 1024,
-      });
-    if (registry.status !== 0) continue;
-    const ranked = rankFreeModels(parseModelRegistry(registry.stdout));
-    if (ranked.length) {
-      console.log('[agent] Free tool-capable candidates (trusted vendors first, then release date):', ranked.map(m => `${m.id} (${m.release_date || 'date unknown'})`).join(', '));
-      return ranked.map(model => model.id);
-    }
-  }
-  throw new Error('No verifiably free tool-capable models available; retry required');
-}
+export { TRUSTED_FREE_MODEL_VENDORS, rankFreeModels } from './opencode-free.mjs';
 
 export async function runAgent({ agent, prompt, validate, beforeAttempt = () => {},
-  timeoutMs = 240000, totalMs = 780000, maxAttempts = 12 }) {
+  timeoutMs = 240000, totalMs = 780000 }) {
   if (!['discover', 'review', 'triage'].includes(agent)) throw new Error('Unknown agent');
-  const started = Date.now();
-  const failures = [];
-  for (const id of (await freeModels()).slice(0, maxAttempts)) {
-    if (!/^[a-zA-Z0-9._-]+$/.test(id)) continue;
-    const remaining = totalMs - (Date.now() - started);
-    if (remaining < 10000) break;
+  // Dual-rail free-model traversal: the OpenCode Zen public catalog first, then
+  // the Kilo CLI free catalog as a fallback when Zen is exhausted on runner IPs.
+  const { model, result } = await withFreeModel(async (fullID, attemptMs, run) => {
     await beforeAttempt();
-    console.log(`[agent] ${agent}: trying opencode/${id}`);
-    try {
-      const output = await new Promise((resolve, reject) => {
-        // Prompts go through stdin, never through a shell command string.
-        const child = spawn(process.env.OPENCODE_BIN || 'opencode',
-          ['run', '--format', 'json', '--model', `opencode/${id}`, '--agent', agent], {
-            shell: process.platform === 'win32', stdio: ['pipe', 'pipe', 'pipe'],
-            env: { ...process.env, OPENCODE_CONFIG_CONTENT: JSON.stringify({ model: `opencode/${id}`, small_model: `opencode/${id}` }) },
-          });
-        let output = '';
-        let timedOut = false;
-        const timer = setTimeout(() => {
-          timedOut = true;
-          child.kill('SIGTERM');
-          forceKill = setTimeout(() => child.kill('SIGKILL'), 3000);
-        }, Math.min(timeoutMs, remaining));
-        let forceKill;
-        const collect = chunk => { const text = chunk.toString(); output += text; process.stdout.write(text); };
-        child.stdout.on('data', collect);
-        child.stderr.on('data', collect);
-        child.stdin.on('error', () => {});
-        child.on('error', error => { clearTimeout(timer); reject(error); });
-        child.on('close', code => {
-          clearTimeout(timer); clearTimeout(forceKill);
-          const error = outputError(output);
-          if (timedOut || code !== 0 || error) reject(new Error(timedOut ? 'Timed out' : error || `Exit ${code}`));
-          else resolve(output);
-        });
-        child.stdin.end(prompt);
-      });
-      const result = await validate(output);
-      if (!result) throw new Error('Missing or invalid output artifact');
-      return { model: id, result };
-    } catch (error) {
-      failures.push(`${id}: ${error.message}`);
-      console.warn(`[agent] ${failures.at(-1)}`);
-      if (error.code === 'ENOENT') break;
-      await sleep(1000);
-    }
-  }
-  throw new Error(`Agent unavailable or produced no valid result; retry required. ${failures.join(' | ')}`);
+    const output = await run(fullID, prompt, { agent, timeoutMs: attemptMs });
+    const result = await validate(output);
+    if (!result) throw new Error('Missing or invalid output artifact');
+    return result;
+  }, { totalMs, attemptMs: timeoutMs });
+  return { model, result };
 }
