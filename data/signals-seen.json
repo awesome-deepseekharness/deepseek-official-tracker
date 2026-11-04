@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-04T01:05:50.278Z",
-  "count": 1497,
+  "updatedAt": "2026-11-04T05:29:38.268Z",
+  "count": 1506,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -17,6 +17,7 @@
     "arxiv:http://arxiv.org/abs/2610.05238v1",
     "arxiv:http://arxiv.org/abs/2610.30886v1",
     "arxiv:http://arxiv.org/abs/2610.35671v1",
+    "arxiv:http://arxiv.org/abs/2611.03768v1",
     "cnmedia:www.infoq.cn:deepseek-开源昇腾平台基础设施组件，覆盖-tilelang、计算库与分布式通信库",
     "cnmedia:www.infoq.cn:deepseek千亿融资逼近收官：结盟完美世界、中芯聚源等产业资本，募资翻倍押注具身智能",
     "cnmedia:www.infoq.cn:deepseek开源最新推理框架：单集群日吞吐155万亿token，kvcache可保存7天",
@@ -202,6 +203,7 @@
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
     "exa:secondary:https://timeline.sohu.com/news/Urw6IrrX7f",
+    "exa:secondary:https://udn.com/news/story/7333/9796252",
     "exa:secondary:https://wallstreetcn.com/articles/3782792",
     "exa:secondary:https://www.163.com/dy/article/L81BCOVV051180F7.html",
     "exa:secondary:https://www.163.com/dy/article/L8ADUHN40556OXHR.html?f=post1603_tab_news",
@@ -431,6 +433,7 @@
     "gnews:china-going-for-domestic-full-stack-ai-dominance:-deepseek-will-train-its-upcomi",
     "gnews:china-is-chipping-away-at-america’s-ai-advantage---washington-examiner",
     "gnews:china-linked-hackers-ran-deepseek-ai-agents-at-200+-targets---fourweekmba",
+    "gnews:china-linked-hackers-used-deepseek-to-hit-200-plus-organizations-in-14-countries",
     "gnews:china-narrowing-ai-gap-with-us---chinadailyhk",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---the-inf",
     "gnews:china-probes-deepseek,-moonshot-over-potential-data-leaks-to-anthropic---theinfo",
@@ -485,6 +488,7 @@
     "gnews:deepseek,-moonshot-reportedly-face-china-scrutiny-over-anthropic-claims-ahead-of",
     "gnews:deepseek,-moonshot-used-gpt-6-astra:-2-models-[2026]---shattered.io",
     "gnews:deepseek,-moonshot-used-openai's-gpt-6-astra-to-train-latest-models,-the-informa",
+    "gnews:deepseek,-qwen-and-minimax-leads-debate-open-source-model-risks-on-shared-wuzhen",
     "gnews:deepseek-adds-creator-mode,-lets-users-build-agent-plugins-by-chat---dealroom",
     "gnews:deepseek-adds-creator-mode-to-boost-ai-agent-tools---investing.com",
     "gnews:deepseek-adds-self-feedback-learning-to-its-v4.1-flash-model---www.tokenpost.com",
@@ -511,6 +515,7 @@
     "gnews:deepseek-api-pricing-vs-haiku-5.5-vs-terra-[2026]---https://tech-insider.org/",
     "gnews:deepseek-api-search-agent:-13-steps,-90-min-[2026]---tech-insider.org",
     "gnews:deepseek-api:-two-bases,-two-model-names---orcarouter",
+    "gnews:deepseek-backer-monolith-seeks-$561m,-nearly-double-fund-ii---fourweekmba",
     "gnews:deepseek-backer-monolith-seeks-$561m-for-third-usd-venture-fund:-sec-filing---de",
     "gnews:deepseek-backs-ex-tencent-ai-scientist’s-$400-million-robot-lab---bloomberg",
     "gnews:deepseek-backs-ex-tencent-ai-scientist’s-$400-million-robot-lab---bloomberg.com",
@@ -710,6 +715,7 @@
     "gnews:deepseek-v4.1-pro-release-date:-there-is-no-date,-and-three-ways-to-know-when-th",
     "gnews:deepseek-v5-identifiers-surface-in-official-harness-code-repository---technode",
     "gnews:deepseek-v5-placeholder-ids-show-up-in-harness-code;-v4.1-flash-leads-open-weigh",
+    "gnews:deepseek-v5-reportedly-targets-huawei-ascend-950-training-in-2027,-a-crucial-tes",
     "gnews:deepseek-vs-chatgpt:-$0.15-to-$50-per-1m-tokens-[2026]---shattered.io",
     "gnews:deepseek-vs-claude:-$0.15-vs-$4-per-1m-tokens-[2026]---https://tech-insider.org/",
     "gnews:deepseek-vs-claude:-$0.30-vs-$2-input-tokens-[2026]---shattered.io",
@@ -1203,6 +1209,7 @@
     "gnewszh:zh:deepseek学霸的降维打击：没刷榜，在工位打游戏，模型能力却控制不住地涨---新浪财经",
     "gnewszh:zh:deepseek宣布：永久降价---finance.sina.com.cn",
     "gnewszh:zh:deepseek宣布：永久降价---新浪财经",
+    "gnewszh:zh:deepseek工程师谈开源：让agi加速到来---中国青年网",
     "gnewszh:zh:deepseek开源ai推理框架-或能降低算力成本---联合早报",
     "gnewszh:zh:deepseek拟在最新一轮融资中筹得约1000亿元人民币---东方财富",
     "gnewszh:zh:deepseek拟融资至少800亿人民币-腾讯等参与投资---联合早报",
@@ -1258,6 +1265,7 @@
     "gnewszh:zh:中国外交部回应美国政府deepseek禁令---搜狐",
     "gnewszh:zh:中国官媒：deepseek和minimax完成ai模型出海登记---早晨报",
     "gnewszh:zh:中国官媒：deepseek和minimax完成ai模型出海登记---联合早报",
+    "gnewszh:zh:中国开源ai大模型持续“圈粉”---手机新浪网",
     "gnewszh:zh:中国民企ai大模型全球“圈粉”-调用量连续24周霸榜！---深圳市委统战部",
     "gnewszh:zh:中国生成式ai用户达7亿-官媒称有利产业链国产化---诗华日报",
     "gnewszh:zh:中方回应美机构禁用deepseek---新浪军事",
@@ -1310,6 +1318,7 @@
     "gnewszh:zh:据报deepseek本周将向联合国安理会介绍ai风险---联合早报",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---zaobao.com.sg",
     "gnewszh:zh:据报中国调查deepseek和月之暗面数据安全问题---联合早报",
+    "gnewszh:zh:数智新侠影-|-全球开源领军者的“中国之约”-ai时代如何修炼“内功心法”---浙江新闻",
     "gnewszh:zh:新浪网·---新浪网",
     "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36kr",
     "gnewszh:zh:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36氪",
@@ -1500,10 +1509,12 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-04T01:05:50.278Z",
-  "lastFreshCount": 99,
+  "lastSignalsRunAt": "2026-11-04T05:29:38.267Z",
+  "lastFreshCount": 103,
   "cornerErrors": [
-    "arxiv: This operation was aborted",
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
+    "x-timeline: firecrawl scrape -> HTTP 403",
+    "firecrawl-search: firecrawl search -> HTTP 403",
+    "exa-community: You've hit Exa's free MCP rate limit. Create a free Exa account to get your own usage allowance and rate limits. No payment method required.\n\nFix: Create API key at https://dashboard.exa.ai/api-keys , and then update Exa MCP URL to this https://mcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
   ]
 }
