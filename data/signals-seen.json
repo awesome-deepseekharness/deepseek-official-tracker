@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T14:20:09.705Z",
-  "count": 1554,
+  "updatedAt": "2026-11-05T23:26:40.891Z",
+  "count": 1566,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -198,6 +198,7 @@
     "exa:secondary:https://lounge.ai/news/deepseek-harness-v0-2-ships-desktop-apps-and-an-alpha-bridge-that-runs-claude-co",
     "exa:secondary:https://molihua.org/mh-2493220/",
     "exa:secondary:https://news.10jqka.com.cn/20260929/c680375915.shtml",
+    "exa:secondary:https://news.10jqka.com.cn/20261105/c681523749.shtml",
     "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A402371422",
     "exa:secondary:https://news.qq.com/rain/a/20260925A03YVU00",
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00",
@@ -229,6 +230,7 @@
     "exa:secondary:https://www.gate.com/zh/news/detail/DEEPSEEK/deepseek-releases-harness-v02-with-plugin-manager-for-macos-and-windows-24703834",
     "exa:secondary:https://www.harness-hub.org/news/deepseek-harness-desktop",
     "exa:secondary:https://www.ithome.com/1/009/701.htm",
+    "exa:secondary:https://www.ithome.com/1/023/011.htm",
     "exa:secondary:https://www.jxxy.net/ai/articles/deepseek-harness-v02-desktop/",
     "exa:secondary:https://www.jxxy.net/ai/articles/uby1003-deepseek-harness-desktop-astraflow/",
     "exa:secondary:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
@@ -261,6 +263,7 @@
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news260910",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news260910/",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news261017",
+    "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/news/news261017/",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/updates",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/updates/",
     "fcsearch:cn-media:https://www.ibm.com/cn-zh/think/topics/deepseek",
@@ -754,6 +757,7 @@
     "gnews:deepseek-wrapping-up-$15-billion-fundraising-to-fuel-ai-race---reuters",
     "gnews:deepseek-|-rise,-technologies,-impact,-&-global-response---britannica",
     "gnews:deepseek:-what-exactly-is-this-open-position-recruiting-for?-uncover-the-real-hi",
+    "gnews:deepseek’s-annualized-revenue-hits-$1-billion-as-startup-finalizes-$7.5-billion-",
     "gnews:deepseek’s-cost-saving-ai-may-lead-to-inaccuracy-in-model-performance:-research-",
     "gnews:deepseek’s-funding-round-could-approach-$15-billion-as-investor-demand-surges---",
     "gnews:deepseek’s-fundraise-could-hit-100-billion-yuan-in-days---finimize",
@@ -945,6 +949,7 @@
     "gnewszh:harness:deepseek-harness-为创作者模式新增插件创建入口---unite.ai",
     "gnewszh:harness:deepseek-harness-全面解读：功能、架构与上手指南---新浪财经",
     "gnewszh:harness:deepseek-harness-发布了，居然没-cli-？---电子工程专辑",
+    "gnewszh:harness:deepseek-harness-官宣日活达154万，日消耗92-万亿token---第一财经",
     "gnewszh:harness:deepseek-harness-官方桌面端是-webui-套壳吗？---电子工程专辑",
     "gnewszh:harness:deepseek-harness-实测：一夜-5-万星，agent-界的-android-来了---极客公园",
     "gnewszh:harness:deepseek-harness-宣布推出-creator-mode：把想法变成能用的插件，七个演示提示词同步公开---智源社区",
@@ -976,6 +981,7 @@
     "gnewszh:harness:deepseek-harness国庆假期上新！90后负责人回应：希望做出让世界ai巨头跟进的创新---新浪财经",
     "gnewszh:harness:deepseek-harness国庆假期上新！负责人：希望做出让世界ai巨头跟进的创新---sohu",
     "gnewszh:harness:deepseek-harness国庆假期上新！负责人：希望做出让世界ai巨头跟进的创新---搜狐网",
+    "gnewszh:harness:deepseek-harness官宣日活达154万-插件生态蓬勃发展---中华网",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---news.mydrivers.com",
     "gnewszh:harness:deepseek-harness官方桌面版正式发布：国庆节使劲蹬-每人白送6元赠金---手机新浪网",
@@ -988,6 +994,10 @@
     "gnewszh:harness:deepseek-harness推出创造模式---凤凰网科技",
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---finance.sina.com.c",
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---新浪网",
+    "gnewszh:harness:deepseek-harness日活跃用户达154万-日耗token约92万亿---观点网",
+    "gnewszh:harness:deepseek-harness日活跃用户达154万，日消耗token约92万亿---凤凰网科技",
+    "gnewszh:harness:deepseek-harness日活跃用户达154万，日消耗token约92万亿---搜狐网",
+    "gnewszh:harness:deepseek-harness日活达154万，第三方插件增至3.5万个---凤凰网",
     "gnewszh:harness:deepseek-harness来了：ai开始制造ai了？---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness来了：ai开始制造ai了？---新浪财经",
     "gnewszh:harness:deepseek-harness核心理念揭晓，一切皆插件---三易生活",
@@ -1158,6 +1168,7 @@
     "gnewszh:harness:崩了近5小时！deepseek宣布全额补偿，“harness”新账号引猜测---财联社电报",
     "gnewszh:harness:想尝鲜的速来-deepseek-harness官方桌面端偷跑：跑ai性能更好---驱动之家",
     "gnewszh:harness:新浪网·---手机新浪网",
+    "gnewszh:harness:日活用户154万！deepseek-harness最新披露→---大河财立方",
     "gnewszh:harness:昨夜，deepseek-harness首发新版本：14项更新，多模态能力拉满---36氪",
     "gnewszh:harness:智能体直接调用数字孪生开发平台！漂视网络新产品dpe赋形正式接入workbuddy与deepseek-harness生态---中华网",
     "gnewszh:harness:梁圣又掀桌了！deepseek新模型斩杀gpt-6，许愿式编程时代降临---智东西",
@@ -1313,6 +1324,7 @@
     "gnewszh:zh:乌镇奏响开源开放协奏曲---中国新闻网",
     "gnewszh:zh:乌镇奏响开源开放协奏曲---搜狐网",
     "gnewszh:zh:乌镇对“数字铁幕”说不---手机新浪网",
+    "gnewszh:zh:乌镇峰会主论坛上，院士与深度求索、千问、minimax共同探讨——三问ai开放共生---新浪新闻_手机新浪网",
     "gnewszh:zh:乌镇峰会主论坛上，院士与深度求索、千问、minimax共同探讨——三问ai开放共生---温州新闻",
     "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---中国网新闻中心",
     "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---凤凰网",
@@ -1557,10 +1569,9 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-05T14:20:09.704Z",
-  "lastFreshCount": 104,
+  "lastSignalsRunAt": "2026-11-05T23:26:40.891Z",
+  "lastFreshCount": 106,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
-    "x-timeline: firecrawl x scrape produced no posts"
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
 }
