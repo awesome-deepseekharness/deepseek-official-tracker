@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T05:50:02.018Z",
-  "count": 1544,
+  "updatedAt": "2026-11-05T14:20:09.705Z",
+  "count": 1554,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -111,6 +111,7 @@
     "exa:rumor:https://bittide.aicompass.dev/article/7b0cb097-9df9-4b17-a0ff-a64afa6acc3c?locale=zh",
     "exa:rumor:https://cellcog.ai/blog/deepseek-v5-release-date/",
     "exa:rumor:https://denghy.cn/articles/deepseek-harness-desktop-pro-rumor",
+    "exa:rumor:https://felloai.com/deepseek-v5/",
     "exa:rumor:https://feng.ifeng.com/c/8xZdpF28WVe",
     "exa:rumor:https://finance.sina.com.cn/tech/discovery/2026-09-21/doc-inisqzxx9184343.shtml",
     "exa:rumor:https://finance.sina.com.cn/tech/roll/2026-10-27/doc-iniwsses3790713.shtml",
@@ -130,6 +131,7 @@
     "exa:rumor:https://news.yuhuanstudio.com/issues/2026-09-19/24b416f11ca88e15",
     "exa:rumor:https://news.yuhuanstudio.com/issues/2026-09-22/e314fec7eafa4b48",
     "exa:rumor:https://nitter.jaydenha.uk/Priyannkaaaa/status/2103699253273247809",
+    "exa:rumor:https://pasqualepillitteri.it/zh/news/28975/deepseek-v5-harness-ceshi-wu-guanfang-fabu",
     "exa:rumor:https://post.smzdm.com/p/a03xnpx9/",
     "exa:rumor:https://promptblueprints.tech/leaks/deepseek-v5-leak-what-the-report-actually-says/",
     "exa:rumor:https://promptblueprints.tech/leaks/reports-show-deepseek-v5-placeholders-in-harness-code/",
@@ -175,6 +177,7 @@
     "exa:secondary:https://coderliang.com/posts/0c712506-2bf4-43fb-9521-56e4e0424927",
     "exa:secondary:https://deepseekagent.io/zh/guides/deepseek-harness-v0-2-0-rc-1",
     "exa:secondary:https://deepseekv4pro.com/news/deepseek-harness-desktop-ready-to-use-right-now",
+    "exa:secondary:https://dshpluginhub.ai/en/news/dsh-releases",
     "exa:secondary:https://eu.36kr.com/zh/p/4005355518726025",
     "exa:secondary:https://finance.sina.cn/stock/jdts/2026-09-29/detail-initphzx6049497.d.html?vt=4",
     "exa:secondary:https://finance.sina.com.cn/roll/2026-10-05/doc-iniucuei3018521.shtml",
@@ -357,6 +360,7 @@
     "ghcommunity:next:yanun0323/Whallm",
     "ghcommunity:weights:0xBakeer/deepseek-v41-flash-spark",
     "ghcommunity:weights:0xSero/DeepSeek-V4.1-Flash-Two-Sparks",
+    "ghcommunity:weights:7API/deepseek-v4.1-flash-1017-abliterated",
     "ghcommunity:weights:8533502-dev/deepseek-opus-motion-skill",
     "ghcommunity:weights:Blackwellboy/DeepSeek-V4.1-Flash-1017-BLACKFOLD-TP2",
     "ghcommunity:weights:BotHarness/DeepSeekBot",
@@ -415,6 +419,7 @@
     "gnews:ai-startup-deepseek-poised-to-reach-$74-billion-valuation---wsj",
     "gnews:am-markets-need-to-know:-deepseek-backs-huawei-chips,-anthropic-ipo-risks,-and-m",
     "gnews:america's-answer-to-deepseek-arrives---marketscreener.com",
+    "gnews:artex-hackers-used-claude-code,-deepseek,-and-grok-in-attacks-targeting-south-ko",
     "gnews:behind-deepseek’s-$16-billion-funding:-chinese-tech-titans-and-state-players---t",
     "gnews:bipartisan-u.s.-lawmakers-push-to-ban-deepseek-from-government-devices:-5-outlet",
     "gnews:breaking:-deepseek-secures-second-round-financing-worth-100-billion-yuan---36-kr",
@@ -732,6 +737,7 @@
     "gnews:deepseek-v4.1-pro-release-date:-there-is-no-date,-and-three-ways-to-know-when-th",
     "gnews:deepseek-v5-identifiers-surface-in-official-harness-code-repository---technode",
     "gnews:deepseek-v5-placeholder-ids-show-up-in-harness-code;-v4.1-flash-leads-open-weigh",
+    "gnews:deepseek-v5-release-date:-what-we-know-so-far---fello-ai",
     "gnews:deepseek-v5-reportedly-targets-huawei-ascend-950-training-in-2027,-a-crucial-tes",
     "gnews:deepseek-v5-said-to-shift-pretraining-to-huawei-ascend-chips---fourweekmba",
     "gnews:deepseek-vs-chatgpt:-$0.15-to-$50-per-1m-tokens-[2026]---shattered.io",
@@ -774,6 +780,7 @@
     "gnews:does-deepseek-ai-rollout-change-the-bull-case-for-tencent-music-stock?---simply-",
     "gnews:dolphin:-inference-api-goes-live-with-deepseek-v4.1-flash---11-oct-2026---tradin",
     "gnews:doubao-work-opens-kimi,-glm-and-deepseek-models-to-team-and-enterprise-customers",
+    "gnews:ernie-5.5-flash-vs-deepseek-v4.1-flash:-base-vs-finished---orcarouter",
     "gnews:exclusive:-china's-deepseek-taps-citic-securities-for-domestic-ipo,-sources-say-",
     "gnews:exclusive:-deepseek-to-brief-un-security-council-on-ai-this-week,-sources-say---",
     "gnews:fascsa-orders-require-exclusion-and-removal-of-deepseek-ai---crowell-&-moring-ll",
@@ -791,6 +798,7 @@
     "gnews:gpt-6-astra-vs-gemini-4-argon-vs-deepseek:-13x-gap-[2026]---tech-insider.org",
     "gnews:grok-4.7-vs-claude-vs-deepseek:-13x-price-gap-[2026]---https://tech-insider.org/",
     "gnews:haiku-5.5-vs-gpt-6.1-terra-vs-deepseek:-$0.10-vs-$1-[2026]---https://tech-inside",
+    "gnews:hangzhou-deepseek-artificial-intelligence-co.,-ltd.-announced-that-it-has-receiv",
     "gnews:homeland-security-bans-deepseek-from-federal-systems,-but-experts-warn-enforceme",
     "gnews:homeland-security-bans-deepseek-use-in-federal-civilian-agencies---engadget",
     "gnews:how-deepseek-is-shaping-huawei’s-ai-chips-in-a-growing-challenge-to-nvidia---the",
@@ -1304,6 +1312,7 @@
     "gnewszh:zh:中美ai战争打响！特朗普全面封杀deepseek？只因中国ai模型太强？---搜狐",
     "gnewszh:zh:乌镇奏响开源开放协奏曲---中国新闻网",
     "gnewszh:zh:乌镇奏响开源开放协奏曲---搜狐网",
+    "gnewszh:zh:乌镇对“数字铁幕”说不---手机新浪网",
     "gnewszh:zh:乌镇峰会主论坛上，院士与深度求索、千问、minimax共同探讨——三问ai开放共生---温州新闻",
     "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---中国网新闻中心",
     "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---凤凰网",
@@ -1431,6 +1440,7 @@
     "gnewszh:zh:美禁止政府使用deepseek，商务部回应；美总统特使今日与普京会面；智驾“小蓝灯”国标要来了；spacex三度报出炉丨每经早参---每日经",
     "gnewszh:zh:至少800亿，deepseek融资新进展---新浪财经",
     "gnewszh:zh:英伟达重金力捧！“美版deepseek”即将发布开源模型---华尔街见闻",
+    "gnewszh:zh:视频丨大模型开源，如何让ai技术惠及更多人---京报网",
     "gnewszh:zh:说实话，我觉得-claude-4.8-有点拉。---finance.sina.cn",
     "gnewszh:zh:说实话，我觉得-claude-4.8-有点拉。---新浪财经",
     "gnewszh:zh:财新周刊｜钢铁降碳深度求索---财新周刊",
@@ -1547,9 +1557,10 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-05T05:50:02.018Z",
-  "lastFreshCount": 106,
+  "lastSignalsRunAt": "2026-11-05T14:20:09.704Z",
+  "lastFreshCount": 104,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
+    "x-timeline: firecrawl x scrape produced no posts"
   ]
 }
