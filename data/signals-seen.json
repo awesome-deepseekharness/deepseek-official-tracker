@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-06T13:57:05.289Z",
-  "count": 1591,
+  "updatedAt": "2026-11-06T22:53:00.054Z",
+  "count": 1598,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -581,6 +581,7 @@
     "gnews:deepseek-gpt-6-astra:-2-models-named-in-report-[2026]---shattered.io",
     "gnews:deepseek-harness'-new-creator-mode-creates-plugins-from-prompts---mashable",
     "gnews:deepseek-harness'-new-creator-mode-creates-plugins-from-prompts---mashable-sea",
+    "gnews:deepseek-harness'-new-creator-mode-creates-plugins-from-prompts---yahoo-tech",
     "gnews:deepseek-harness-adds-creator-mode-for-text-to-plugin-generation---dataconomy",
     "gnews:deepseek-harness-adds-plugin-creation-entry-for-creator-mode---unite.ai",
     "gnews:deepseek-harness-challenges-agent-lock-in-with-claude-code-mods-bridge-and-open-",
@@ -858,6 +859,7 @@
     "gnews:nvidia’s-software-advantage-under-threat-by-deepseek-huawei-alliance---benzinga",
     "gnews:one-ai-rule-book:-chip-expert-urges-shared-standards-across-china,-us-models---s",
     "gnews:open-source-fix-slashes-deepseek-v4.1-startup-time-on-gaming-gpus---startup-fort",
+    "gnews:open-weight-deepseek-nearly-matches-closed-ai-in-cybersecurity-tests---mezha.net",
     "gnews:openai-rivals-deepseek,-kimi-distilled-gpt-6-astra:-report---fourweekmba",
     "gnews:openai’s-astra-model-becomes-top-distillation-target-for-china’s-ai-labs---the-i",
     "gnews:opencode-makes-deepseek-v4.1-flash-free-to-use,-with-a-200k-context-window---pan",
@@ -1013,6 +1015,7 @@
     "gnewszh:harness:deepseek-harness日活跃用户达154万，日消耗token约92万亿---凤凰网科技",
     "gnewszh:harness:deepseek-harness日活跃用户达154万，日消耗token约92万亿---搜狐网",
     "gnewszh:harness:deepseek-harness日活达154万，将建设官方插件市场---动点科技",
+    "gnewszh:harness:deepseek-harness日活达154万，将建设插件市场---三易生活",
     "gnewszh:harness:deepseek-harness日活达154万，第三方插件增至3.5万个---凤凰网",
     "gnewszh:harness:deepseek-harness来了：ai开始制造ai了？---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness来了：ai开始制造ai了？---新浪财经",
@@ -1038,6 +1041,7 @@
     "gnewszh:harness:deepseek-harness首次披露日活用户超150万---搜狐网",
     "gnewszh:harness:deepseek-harness首次披露：日活用户超150万---钢铁网",
     "gnewszh:harness:deepseek-harness首次披露：日活用户超150万-一个月时间增超百万---财联社电报",
+    "gnewszh:harness:deepseek-harness首次披露：日活用户超150万一个月时间增超百万---财联社",
     "gnewszh:harness:deepseek-harness首次披露：日活用户超150万，一个月时间增超百万---thepaper.cn",
     "gnewszh:harness:deepseek-harness，首次披露---电子工程专辑ee-times-china",
     "gnewszh:harness:deepseek-harness：“一切皆插件”-是刻在立项之初的产品基因---finance.sina.cn",
@@ -1158,6 +1162,7 @@
     "gnewszh:harness:【deepseek上新模式强化智能体能力：一句话定制ai插件，公开提示词搞定3d可视化到视频编辑】以“一切皆插件”为核心理念的开源智能体框架",
     "gnewszh:harness:一个月日活飙至154万！deepseek-harness官宣建设插件市场---驱动之家",
     "gnewszh:harness:下一波果然是大的-deepseek-v5大模型已现身官方代码库---驱动之家",
+    "gnewszh:harness:不用等程序员！154万人玩出花，deepseek-harness长出3.5万插件---网易新闻客户端",
     "gnewszh:harness:中信证券看好deepseek-harness，国产大模型生态闭环加速---第一电动网",
     "gnewszh:harness:中信证券：harness有望强化deepseek的长期竞争力-看好国产大模型持续崛起-提供者-智通财经---英为财情-investing.c",
     "gnewszh:harness:中信证券：看好国产大模型崛起-harness望成deepseek生态关键一环---观点网",
@@ -1353,6 +1358,7 @@
     "gnewszh:zh:乌镇峰会主论坛上，院士与深度求索、千问、minimax共同探讨——三问ai开放共生---温州新闻",
     "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---中国网新闻中心",
     "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---凤凰网",
+    "gnewszh:zh:乌镇峰会观察：中国开源ai大模型持续“圈粉”---北欧时报",
     "gnewszh:zh:人工智能乌镇对话：开源的价值之问、治理之道和普惠之愿---光明网",
     "gnewszh:zh:人工智能乌镇对话：开源的价值之问、治理之道和普惠之愿---紫牛新闻",
     "gnewszh:zh:从宇树科技到winverse-ai，deepseek梁文锋的物理世界新棋局---panews",
@@ -1518,6 +1524,7 @@
     "openrouter:deepseek/deepseek-v3.2-exp",
     "openrouter:deepseek/deepseek-v4-flash",
     "openrouter:deepseek/deepseek-v4-flash-0731",
+    "openrouter:deepseek/deepseek-v4-flash-0731:batch",
     "openrouter:deepseek/deepseek-v4-flash-vision-exp",
     "openrouter:deepseek/deepseek-v4-pro",
     "openrouter:deepseek/deepseek-v4-pro-0813",
@@ -1594,7 +1601,9 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-06T13:57:05.289Z",
-  "lastFreshCount": 105,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-11-06T22:53:00.053Z",
+  "lastFreshCount": 101,
+  "cornerErrors": [
+    "x-timeline: firecrawl x scrape produced no posts"
+  ]
 }
