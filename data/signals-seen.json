@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T05:16:41.184Z",
-  "count": 1605,
+  "updatedAt": "2026-11-07T12:41:18.770Z",
+  "count": 1613,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -32,6 +32,7 @@
     "cnmedia:www.qbitai.com:deepseek知乎独家发文，首次公开v4.1-agent训练“大本营”dsec",
     "cnmedia:www.qbitai.com:刚刚，deepseek重磅开源：agent底座架构！",
     "cnmedia:www.qbitai.com:字节找到了deepseek时强时弱的原因",
+    "cnmedia:www.qbitai.com:抢跑deepseek！硅谷华人把下一代agent-harness造出来了！？",
     "cnmedia:www.qbitai.com:梁文锋投了swin-transformer作者！deepseek开始布局具身大脑",
     "cnmedia:www.qbitai.com:突发！deepseek新模型发布，超级性价比斩杀一切",
     "cnmedia:www.solidot.org:ai-聊天机器人会成为意识形态回音室",
@@ -91,6 +92,7 @@
     "exa:community:https://www.v2ex.com/t/1241664",
     "exa:community:https://www.v2ex.com/t/1246591",
     "exa:community:https://www.v2ex.com/t/1250293",
+    "exa:community:https://www.v2ex.com/t/1252123",
     "exa:community:https://www.v2ex.com/t/1252445",
     "exa:community:https://www.v2ex.com/t/1252795",
     "exa:community:https://www.v2ex.com/t/1252896",
@@ -832,6 +834,7 @@
     "gnews:is-trump’s-deepseek-ban-about-national-security-or-politics?---puck",
     "gnews:ivo-launches-open-source-deepseek-contract-ai-model---artificial-lawyer",
     "gnews:just-the-docs:-dhs-discloses-july-order-stripping-deepseek-ai-from-federal-civil",
+    "gnews:kimi-ai-pricing:-$1-api-top-up-vs-$159-plan-[2026]---https://tech-insider.org/",
     "gnews:kimi-ai-vs-deepseek-vs-chatgpt:-3-picks-for-canada-[2026]---tech-insider.org",
     "gnews:kimi-vs-deepseek:-which-chinese-ai-should-you-use?---fello-ai",
     "gnews:korean-stocks-fall-as-deepseek-model,-funding-worry-rattle-chips---bloomberg",
@@ -978,6 +981,7 @@
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---finance.sina.cn",
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---新浪财经",
     "gnewszh:harness:deepseek-harness-开源解读：把-agent-做成零件而不是成品---积墨-ai",
+    "gnewszh:harness:deepseek-harness-日活154万，官方开始给插件作者发token：agent-生态要靠开发者了--产业链---光通信pro",
     "gnewszh:harness:deepseek-harness-桌面应用：安装程序、更新以及它写入的内容---orcarouter",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---finance.sina.com.cn",
     "gnewszh:harness:deepseek-harness-桌面端预览版-v0.2-发布，支持插件安装与自动化任务---手机新浪网",
@@ -1017,6 +1021,7 @@
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---finance.sina.com.c",
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---新浪网",
     "gnewszh:harness:deepseek-harness插件系统被吐槽-负责人承诺升级：一切都会好起来---凤凰网",
+    "gnewszh:harness:deepseek-harness插件系统被吐槽-负责人承诺升级：一切都会好起来---驱动之家",
     "gnewszh:harness:deepseek-harness日活破154万，插件生态达3.5万个，启动作者激励计划---smarthey",
     "gnewszh:harness:deepseek-harness日活跃用户达154万-日耗token约92万亿---观点网",
     "gnewszh:harness:deepseek-harness日活跃用户达154万，日消耗token约92万亿---凤凰网科技",
@@ -1151,6 +1156,7 @@
     "gnewszh:harness:deepseek正式上线search与fetch网页搜索api，11月1日起按次计费---smarthey",
     "gnewszh:harness:deepseek正式开源harness：它终于有了自己的vibe-coding入口---麻省理工科技评论",
     "gnewszh:harness:deepseek的多模态模型，憋了这么久终于来了。。。---新浪财经",
+    "gnewszh:harness:deepseek砸出「真os」！140万日活狂烧92万亿token---智源社区",
     "gnewszh:harness:deepseek终于开箱即用-deepseek-harness官方桌面端实测：不用命令行启动，常用功能开箱即用。从自动整理桌面，到自己写个猫",
     "gnewszh:harness:deepseek，重大发布---凤凰网财经",
     "gnewszh:harness:deepseek，重大发布！---证券之星",
@@ -1597,6 +1603,8 @@
     "v2ex:1252726",
     "v2ex:1253999",
     "v2ex:1254448",
+    "v2ex:1255088",
+    "v2ex:1255153",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1608,8 +1616,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-07T05:16:41.184Z",
-  "lastFreshCount": 100,
+  "lastSignalsRunAt": "2026-11-07T12:41:18.769Z",
+  "lastFreshCount": 101,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
