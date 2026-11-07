@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-06T22:53:00.054Z",
-  "count": 1598,
+  "updatedAt": "2026-11-07T05:16:41.184Z",
+  "count": 1605,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -47,6 +47,7 @@
     "exa:community:https://feedbbs.com/v2ex/181388",
     "exa:community:https://feedbbs.com/v2ex/187896",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/10080",
+    "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/11128",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5675",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/5856",
     "exa:community:https://github.com/deepseek-ai/deepseek-harness/discussions/6106",
@@ -295,6 +296,7 @@
     "fcsearch:reddit-deepseek:https://www.reddit.com/r/SillyTavernAI/comments/1vbigft/deepseekv4flash_has_been_updated_the_official/",
     "fcsearch:reddit-deepseek:https://www.reddit.com/r/singularity/comments/1su3lj9/deepseek_v4_has_released/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1clkld3/deepseekv2_a_strong_economical_and_efficient/",
+    "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1hjq6gq/deepseek_is_underrated/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1hofvtw/deepseek_v3_is_absolutely_astonishing/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1hvp5z1/about_deepseek_v3_privacy_concern/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1hzkw3f/deepseek_v3_is_the_gift_that_keeps_on_giving/",
@@ -318,6 +320,7 @@
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1vugyfe/deepseek_harness_v011_released/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1w53mwu/opencode_vs_deepseek_harness_my_experience_with/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1wcagoi/deepseekaideepseekv41flash_hugging_face/",
+    "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1wgii3h/deepseek_engineer_relections_on_rsi_burying_my/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1wtg1hs/deepseek_harness_app_is_out_now/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1x84po4/deepseekaideepseekv41flash1017_hugging_face/",
     "fcsearch:reddit:https://www.reddit.com/r/LocalLLaMA/comments/1x8bb6b/deepseek_v41_flash_1017_now_leads_openweight/",
@@ -588,6 +591,7 @@
     "gnews:deepseek-harness-daily-active-users-surge-468%-to-1.54-million---finance.biggo.c",
     "gnews:deepseek-harness-flaw-let-ai-agents-disable-their-own-file-sandbox-without-appro",
     "gnews:deepseek-harness-gets-multi-bot-management-plugin-as-community-builds-persistent",
+    "gnews:deepseek-harness-reaches-1.54-million-daily-active-users-among-official-api-user",
     "gnews:deepseek-harness-reaches-1.54-million-daily-users-and-plans-an-official-plugin-m",
     "gnews:deepseek-harness-team-open-sources-a-super-agent-prototype-that-finds-and-fixes-",
     "gnews:deepseek-harness-tests-claude-code-mods-compatibility-layer,-denies-\"copying-hom",
@@ -740,6 +744,7 @@
     "gnews:deepseek-v4.1-flash-debuts-with-$0.003/1m-off-peak-cached-input-rate-and-benchma",
     "gnews:deepseek-v4.1-flash-q4-requires-294-gb-of-ram-vs-152-gb-for-q2---geeky-gadgets",
     "gnews:deepseek-v4.1-flash-update-enables-wish-driven-programming---techzine-global",
+    "gnews:deepseek-v4.1-flash-vs-gemini-4-argon-vs-haiku-5.5-[2026]---tech-insider.org",
     "gnews:deepseek-v4.1-flash-vs-haiku-5.5-vs-gemini-flash---https://tech-insider.org/",
     "gnews:deepseek-v4.1-flash-vs-kimi-k3.1-vs-minimax:-13x-gap-[2026]---https://tech-insid",
     "gnews:deepseek-v4.1-flash-vs.-glm-5.3-flash:-benchmarks,-pricing,-and-speed---intellig",
@@ -944,6 +949,7 @@
     "gnewszh:harness:3小时破千！deepseek-harness移动端应用来了---智东西",
     "gnewszh:harness:b站评论区出现大量deepseek拟人化ai账号，引发ai内容泛滥与治理讨论---虎嗅",
     "gnewszh:harness:b站评论区出现大量deepseek拟人化ai账号，引发ai内容泛滥与治理讨论---虎嗅网",
+    "gnewszh:harness:deepseek-154万-不用等程序员3.5万插件---文学城",
     "gnewszh:harness:deepseek-api已支持网页搜索和抓取-每1000次成功请求5元---cnbeta.com",
     "gnewszh:harness:deepseek-api已支持网页搜索和抓取：每1000次成功请求5元-11月1日起生效---手机新浪网",
     "gnewszh:harness:deepseek-api网页搜索与抓取将收费，每千次请求5元，生效时间已定---凤凰网",
@@ -1010,6 +1016,7 @@
     "gnewszh:harness:deepseek-harness推出创造模式---凤凰网科技",
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---finance.sina.com.c",
     "gnewszh:harness:deepseek-harness插件一夜燃爆github：长期记忆、电子宠物、4399小游戏全来了---新浪网",
+    "gnewszh:harness:deepseek-harness插件系统被吐槽-负责人承诺升级：一切都会好起来---凤凰网",
     "gnewszh:harness:deepseek-harness日活破154万，插件生态达3.5万个，启动作者激励计划---smarthey",
     "gnewszh:harness:deepseek-harness日活跃用户达154万-日耗token约92万亿---观点网",
     "gnewszh:harness:deepseek-harness日活跃用户达154万，日消耗token约92万亿---凤凰网科技",
@@ -1601,8 +1608,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-06T22:53:00.053Z",
-  "lastFreshCount": 101,
+  "lastSignalsRunAt": "2026-11-07T05:16:41.184Z",
+  "lastFreshCount": 100,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
