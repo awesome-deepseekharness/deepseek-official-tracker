@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T12:41:18.770Z",
-  "count": 1613,
+  "updatedAt": "2026-11-07T21:37:00.253Z",
+  "count": 1619,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -68,6 +68,7 @@
     "exa:community:https://llmkube.com/blog/deepseek-harness-built-its-own-plugin",
     "exa:community:https://news.micker.com.cn/items/ekjam4ie28w4fdn6qee5m3gmi",
     "exa:community:https://nitter.cf/DeepSeekHarness/status/2105330281389662575",
+    "exa:community:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
     "exa:community:https://v2.craw.skin/t/1251079",
     "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
     "exa:community:https://www.hackerneue.com/item?id=50080685",
@@ -213,6 +214,7 @@
     "exa:secondary:https://news.qq.com/rain/a/20261004A09ZZ600",
     "exa:secondary:https://notes.yachiyo.im/posts/deepseek-harness-desktop/",
     "exa:secondary:https://original.ifeng.com/c/8xk4PQk0VoF",
+    "exa:secondary:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
     "exa:secondary:https://pro.edgex.exchange/zh-CN/news/article/deepseek-harness-v0-2-desktop-installers",
     "exa:secondary:https://segmentfault.com/a/1190000048326165",
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
@@ -835,6 +837,7 @@
     "gnews:ivo-launches-open-source-deepseek-contract-ai-model---artificial-lawyer",
     "gnews:just-the-docs:-dhs-discloses-july-order-stripping-deepseek-ai-from-federal-civil",
     "gnews:kimi-ai-pricing:-$1-api-top-up-vs-$159-plan-[2026]---https://tech-insider.org/",
+    "gnews:kimi-ai-pricing:-$1-top-up-vs-$159-ultra-plan-[2026]---https://tech-insider.org/",
     "gnews:kimi-ai-vs-deepseek-vs-chatgpt:-3-picks-for-canada-[2026]---tech-insider.org",
     "gnews:kimi-vs-deepseek:-which-chinese-ai-should-you-use?---fello-ai",
     "gnews:korean-stocks-fall-as-deepseek-model,-funding-worry-rattle-chips---bloomberg",
@@ -892,6 +895,7 @@
     "gnews:the-'deepseek-of-the-west'-finally-has-a-model---the-rundown-ai",
     "gnews:the-552b-deepseek-v4.1-flash-model-offers-a-peak-output-of-494-tokens/second-whe",
     "gnews:the-ai-race-with-china-the-us-is-losing---the-hill",
+    "gnews:the-gap-between-open-and-closed-ai-models-in-cyber-capabilities-keeps-shrinking-",
     "gnews:the-huawei-deepseek-symbiosis---semianalysis",
     "gnews:the-open-sourcing-of-deepseek-harness-opens-the-door-to-modular,-unbundled-ai-ag",
     "gnews:the-real-reason-opencode-go’s-deepseek-feels-slow---vocal",
@@ -936,6 +940,7 @@
     "gnews:when-deepseek-evolves-into-a-mainstream-tech-subculture:-origins,-community-trai",
     "gnews:where-the-deepseek-api-stands-on-october-22,-2026---shattered.io",
     "gnews:which-deepseek-v4-flash-api-is-cheapest?-bitdeer-ai-tops-artificial-analysis-pri",
+    "gnews:who-owns-deepseek,-the-chinese-ai-company?---bgr",
     "gnews:why-china’s-affordable-ai-is-a-worry-for-silicon-valley---bloomberg.com",
     "gnews:why-deepseek-ai-disabled-shutdown-software-in-39%-of-tests---latest-news-from-az",
     "gnews:will-deepseek-v4.1-pro-ship-open-weights?---orcarouter",
@@ -1533,6 +1538,7 @@
     "hn:50176351",
     "hn:50254836",
     "hn:50339913",
+    "hn:50406222",
     "openrouter:deepseek/deepseek-v3.2",
     "openrouter:deepseek/deepseek-v3.2-exp",
     "openrouter:deepseek/deepseek-v4-flash",
@@ -1616,9 +1622,7 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-07T12:41:18.769Z",
-  "lastFreshCount": 101,
-  "cornerErrors": [
-    "x-timeline: firecrawl x scrape produced no posts"
-  ]
+  "lastSignalsRunAt": "2026-11-07T21:37:00.253Z",
+  "lastFreshCount": 99,
+  "cornerErrors": []
 }
