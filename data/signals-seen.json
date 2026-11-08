@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T12:58:39.362Z",
-  "count": 1634,
+  "updatedAt": "2026-11-08T21:51:08.614Z",
+  "count": 1636,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -103,6 +103,7 @@
     "exa:community:https://www.zgaiagent.cn/items/16817",
     "exa:rumor:https://agihunt.info/en/p/1a0e35e51d2ac3c233a1feec591",
     "exa:rumor:https://agihunt.info/en/p/1a16da5511d4c40b6b9032e378c",
+    "exa:rumor:https://agihunt.info/en/p/1a1b8b032e73ba05bcefb8550e4",
     "exa:rumor:https://agihunt.info/p/1a13e1612c3df755c9e46faf594",
     "exa:rumor:https://agihunt.info/p/1a170e6149642ff3a4a90957690",
     "exa:rumor:https://agihunt.info/p/1a17593783462a22c9b7769ee74",
@@ -216,6 +217,7 @@
     "exa:secondary:https://notes.yachiyo.im/posts/deepseek-harness-desktop/",
     "exa:secondary:https://original.ifeng.com/c/8xk4PQk0VoF",
     "exa:secondary:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
+    "exa:secondary:https://pasqualepillitteri.it/zh/news/30983/deepseek-harness-022-fabu-renwu-codex-claude",
     "exa:secondary:https://pro.edgex.exchange/zh-CN/news/article/deepseek-harness-v0-2-desktop-installers",
     "exa:secondary:https://segmentfault.com/a/1190000048326165",
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
@@ -1637,7 +1639,11 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-08T12:58:39.362Z",
-  "lastFreshCount": 102,
-  "cornerErrors": []
+  "lastSignalsRunAt": "2026-11-08T21:51:08.614Z",
+  "lastFreshCount": 96,
+  "cornerErrors": [
+    "google-news: HTTP 503",
+    "google-news-zh: zh Google News returned nothing",
+    "rumours: no rumour items matched"
+  ]
 }
