@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-11T05:23:35.262Z",
-  "count": 1704,
+  "updatedAt": "2026-11-11T13:49:01.383Z",
+  "count": 1710,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -105,6 +105,7 @@
     "exa:community:https://www.v2ex.com/t/1254400",
     "exa:community:https://www.xda-developers.com/tried-deepseeks-agent-harness-its-not-the-claude-code-clone-expected/",
     "exa:community:https://www.zgaiagent.cn/items/16817",
+    "exa:rumor:http://beta.zhitongcaijing.com/content/detail/1517639.html",
     "exa:rumor:https://agihunt.info/en/p/1a0e35e51d2ac3c233a1feec591",
     "exa:rumor:https://agihunt.info/en/p/1a16da5511d4c40b6b9032e378c",
     "exa:rumor:https://agihunt.info/en/p/1a1b8b032e73ba05bcefb8550e4",
@@ -114,6 +115,7 @@
     "exa:rumor:https://agihunt.info/p/1a18c41c21692365d59de594077",
     "exa:rumor:https://agihunt.info/p/1a19d32c94461e69b31641fd319",
     "exa:rumor:https://agihunt.info/p/1a19dcf0d5dbe4e3fac383e7e4f",
+    "exa:rumor:https://agihunt.info/p/1a1c884ed9c422d12e0961967e1",
     "exa:rumor:https://aigeekr.com/deepseek-v5/",
     "exa:rumor:https://airebao.com/item/47892",
     "exa:rumor:https://airebao.com/item/48240",
@@ -187,6 +189,7 @@
     "exa:secondary:https://aicoder.com/zh/news/news-20260925-deepseek-harness-desktop-standalone-release",
     "exa:secondary:https://aicoder.com/zh/news/news-20261004-deepseek-harness-v02-claude-mods-compat",
     "exa:secondary:https://ailookout.news/blog/deepseek-harness-v0-2-desktop/",
+    "exa:secondary:https://ainrk.com/article/article-31087",
     "exa:secondary:https://airebao.com/item/39225",
     "exa:secondary:https://airebao.com/item/39757",
     "exa:secondary:https://cn.technode.com/post/2026-11-03/deepseek-harness-creator-mode-custom-plugins/",
@@ -532,6 +535,7 @@
     "gnews:deepseek's-second-funding-round-set-to-swell-to-~100-billion-yuan;-pre-money-val",
     "gnews:deepseek's-super-agent-moves-the-attention-bottleneck-from-your-feed-to-your-age",
     "gnews:deepseek's-top-ranked-v4-flash-stumbles-on-real-agent-tasks-as-its-prices-surge-",
+    "gnews:deepseek,-5-china-ai-rivals-run-at-$11b;-anthropic-at-$81b---fourweekmba",
     "gnews:deepseek,-huawei-challenge-the-software-powering-nvidia’s-ai-dominance---the-dai",
     "gnews:deepseek,-huawei-join-forces-to-challenge-nvidia’s-cuda-dominance---businesskore",
     "gnews:deepseek,-huawei-ship-6-ascend-tools-to-rival-cuda-[2026]---https://tech-insider",
@@ -914,6 +918,7 @@
     "gnews:nvidia-heavily-backs-“u.s.-deepseek”-as-it-prepares-to-release-open-source-model",
     "gnews:nvidia-is-bolstering-support-for-chinese-open-ai-models-as-it-warns-of-white-hou",
     "gnews:nvidia-just-had-its-worst-day-since-deepseek,-losing-about-$450-billion---24/7-w",
+    "gnews:nvidia-just-had-its-worst-day-since-deepseek,-losing-about-$450-billion---yahoo-",
     "gnews:nvidia-pursues-acquisition-of-open-source-ai-startup-reflection-to-counter-deeps",
     "gnews:nvidia-stock-eyes-worst-day-vs-s&p-500-since-deepseek---nvidia-(nasdaq:nvda)---b",
     "gnews:nvidia’s-software-advantage-under-threat-by-deepseek-huawei-alliance---benzinga",
@@ -1511,6 +1516,7 @@
     "gnewszh:zh:本周，deepseek将向安理会通报---观察者网",
     "gnewszh:zh:杭州深度求索人工智能基础技术研究有限公司3年增资15倍---东方财富",
     "gnewszh:zh:梁文锋一出手，deepseek就融了上千亿？---36kr",
+    "gnewszh:zh:梁文锋往事---投资界",
     "gnewszh:zh:梁文锋，砍下3400亿估值---新浪财经_金融信息服务商",
     "gnewszh:zh:法国宣布\"ai-超过中国\"!-其实没超过，但这话暴露了ai世界的新格局！---中华网",
     "gnewszh:zh:海报｜这场“乌镇对话”，deepseek、千问、minimax都来了---世界互联网大会",
@@ -1707,7 +1713,9 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-11T05:23:35.261Z",
+  "lastSignalsRunAt": "2026-11-11T13:49:01.382Z",
   "lastFreshCount": 101,
-  "cornerErrors": []
+  "cornerErrors": [
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+  ]
 }
