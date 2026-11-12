@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-11T13:49:01.383Z",
-  "count": 1710,
+  "updatedAt": "2026-11-12T00:17:14.821Z",
+  "count": 1717,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -142,6 +142,7 @@
     "exa:rumor:https://news.qq.com/rain/a/20260908A0BSUW00?adChannelId=news_news_tech",
     "exa:rumor:https://news.qq.com/rain/a/20261022A06YVQ00",
     "exa:rumor:https://news.qq.com/rain/a/20261028A0B7FE00",
+    "exa:rumor:https://news.qq.com/rain/a/20261103A0588400",
     "exa:rumor:https://news.yuhuanstudio.com/issues/2026-09-19/24b416f11ca88e15",
     "exa:rumor:https://news.yuhuanstudio.com/issues/2026-09-22/e314fec7eafa4b48",
     "exa:rumor:https://nitter.jaydenha.uk/Priyannkaaaa/status/2103699253273247809",
@@ -211,6 +212,7 @@
     "exa:secondary:https://github.com/deepseek-ai/deepseek-harness/releases",
     "exa:secondary:https://hideepseek.com/learn/news/deepseek-harness-community-v0223-v0224-2026-10-08/",
     "exa:secondary:https://hub.baai.ac.cn/view/59490",
+    "exa:secondary:https://inews.hket.com/article/4221944/-finance-tech-deepseek-harness-dau-token-growth-plugin-ecosystem",
     "exa:secondary:https://jishuzhan.net/article/2108910629256192001",
     "exa:secondary:https://jishuzhan.net/article/2109518601183322114",
     "exa:secondary:https://juejin.cn/post/7690976080673112074",
@@ -913,10 +915,12 @@
     "gnews:nasdaq-100-jumps-3%-as-chips-rebound;-nvidia-lags-most-since-deepseek:-stock-mar",
     "gnews:nemotron-3.5-bolt-vs-deepseek-v4-pro:-24gb-vs-1.6t---orcarouter",
     "gnews:new-deepseek-v4.1-flash-1017-hits-300-tokens-per-second-in-tests---geeky-gadgets",
+    "gnews:non-consensual-deepfake-content-surges-1,600%-in-two-years---조선일보",
     "gnews:nvidia's-deepseek-v4.1-flash-nvfp4-model:-everything-you-need-to-know---hackerno",
     "gnews:nvidia-backed-reflection-ai-targets-low-cost-chinese-models-like-deepseek-and-ki",
     "gnews:nvidia-heavily-backs-“u.s.-deepseek”-as-it-prepares-to-release-open-source-model",
     "gnews:nvidia-is-bolstering-support-for-chinese-open-ai-models-as-it-warns-of-white-hou",
+    "gnews:nvidia-just-had-its-worst-5-days-since-2022,-worse-than-the-deepseek-crash---24/",
     "gnews:nvidia-just-had-its-worst-day-since-deepseek,-losing-about-$450-billion---24/7-w",
     "gnews:nvidia-just-had-its-worst-day-since-deepseek,-losing-about-$450-billion---yahoo-",
     "gnews:nvidia-pursues-acquisition-of-open-source-ai-startup-reflection-to-counter-deeps",
@@ -938,6 +942,7 @@
     "gnews:redditor-uses-deepseek-ai-to-unlock-amd-fluid-motion-frames-3-on-rdna-3-and-rdna",
     "gnews:reflection’s-founders-on-building-a-deepseek-of-the-west---sources-|-alex-heath",
     "gnews:research-sheds-new-light-on-deepseek’s-safety-risks---gizmodo",
+    "gnews:retail’s-all-in-on-a-deepseek-repeat---sherwood-news",
     "gnews:rival.io-launches-graphx,-running-deepseek-v4-flash-on-just-8-nvidia-l4-gpus---h",
     "gnews:roundup:-nonprofit-money-trail-/-$5.5b-energy-deal-/-us-vs.-deepseek---baton-rou",
     "gnews:self-hosted-llm-vs-api:-$0.70-to-$2.00-input-[2026]---shattered.io",
@@ -1047,6 +1052,7 @@
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---finance.sina.cn",
     "gnewszh:harness:deepseek-harness-崔添翼：产品核心理念是“一切皆插件”，可扩展性是初心---新浪财经",
     "gnewszh:harness:deepseek-harness-开源解读：把-agent-做成零件而不是成品---积墨-ai",
+    "gnewszh:harness:deepseek-harness-日活-154-万，官方开始给插件作者发-token：agent-生态要靠开发者了---infoq-中文",
     "gnewszh:harness:deepseek-harness-日活-154-万，官方开始给插件作者发-token：agent-生态要靠开发者了---infoq.cn",
     "gnewszh:harness:deepseek-harness-日活154万，官方开始给插件作者发token：agent-生态要靠开发者了---36kr",
     "gnewszh:harness:deepseek-harness-日活154万，官方开始给插件作者发token：agent-生态要靠开发者了---36氪",
@@ -1424,6 +1430,7 @@
     "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---极目新闻",
     "gnewszh:zh:“deepseek崩了”背后，巨头云集的b轮千亿融资浮出水面---新浪网",
     "gnewszh:zh:“三星、sk海力士怎么办？”中国传来消息，韩国综指会否受冲击？股东不安--阿视亚经济---아시아경제",
+    "gnewszh:zh:“双十一”迎来成年礼：李佳琦、罗永浩开卖token月卡，把ai装进购物车---sohu",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐网",
@@ -1713,9 +1720,10 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-11T13:49:01.382Z",
-  "lastFreshCount": 101,
+  "lastSignalsRunAt": "2026-11-12T00:17:14.821Z",
+  "lastFreshCount": 102,
   "cornerErrors": [
+    "arxiv: This operation was aborted",
     "cn-tech-media: no DeepSeek items in Chinese tech RSS"
   ]
 }
