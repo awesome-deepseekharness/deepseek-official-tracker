@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-12T00:17:14.821Z",
-  "count": 1717,
+  "updatedAt": "2026-11-12T14:51:41.720Z",
+  "count": 1726,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -157,6 +157,7 @@
     "exa:rumor:https://tech.ifeng.com/c/8xaMcSLMZzo",
     "exa:rumor:https://tech.ifeng.com/c/8xaMcSLMa0g",
     "exa:rumor:https://tech.ifeng.com/c/8xj7jf0n9fW",
+    "exa:rumor:https://tech.ifeng.com/c/8xsknyJSKsB",
     "exa:rumor:https://www.ai-club.cn/news-article/49886",
     "exa:rumor:https://www.ailou.cn/ai/5304.html",
     "exa:rumor:https://www.bytenote.net/article/deepseek-v5-ascend-training-fact-rumor",
@@ -177,6 +178,7 @@
     "exa:rumor:https://www.orcarouter.ai/zh-CN/blog/dsh-0-2-v4-1-pro-leak",
     "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-3t-model-leak",
     "exa:rumor:https://www.orcarouter.ai/zh-TW/blog/deepseek-v4-1-pro-release-window-leak",
+    "exa:rumor:https://www.techub.news/flash/1c2f82c4-f2d4-4ef6-9322-64c344aef4ef",
     "exa:rumor:https://www.thepaper.cn/newsDetail_forward_34397117",
     "exa:rumor:https://www.tmtpost.com/8184852.html",
     "exa:rumor:https://www.woshipm.com/ai/6485841.html",
@@ -223,6 +225,7 @@
     "exa:secondary:https://news.10jqka.com.cn/20260929/c680375915.shtml",
     "exa:secondary:https://news.10jqka.com.cn/20261105/c681523749.shtml",
     "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A402371422",
+    "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A441607356",
     "exa:secondary:https://news.qq.com/rain/a/20260925A03YVU00",
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00",
     "exa:secondary:https://news.qq.com/rain/a/20260930A09ZRG00?ptag=ima",
@@ -234,6 +237,7 @@
     "exa:secondary:https://original.ifeng.com/c/8xk4PQk0VoF",
     "exa:secondary:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
     "exa:secondary:https://pasqualepillitteri.it/zh/news/30983/deepseek-harness-022-fabu-renwu-codex-claude",
+    "exa:secondary:https://post.smzdm.com/p/am9vx2xv/",
     "exa:secondary:https://pro.edgex.exchange/zh-CN/news/article/deepseek-harness-v0-2-desktop-installers",
     "exa:secondary:https://segmentfault.com/a/1190000048326165",
     "exa:secondary:https://spring4all.com/archives/deepseek-harness-v0-2-desktop-plugin-preview",
@@ -422,6 +426,7 @@
     "ghcommunity:weights:apimartoagvujnix/deepseek-v4-pro-api-pricing-guide",
     "ghcommunity:weights:apimartxk/deepseek-v4-pro-api-gateway",
     "ghcommunity:weights:atbender/deepseek-v41-flash-mac-mini",
+    "ghcommunity:weights:bazongotalato-cyber/deepseek-api-overseas-proxy",
     "ghcommunity:weights:benderandrew069/deepseek-api-pricing-2026",
     "ghcommunity:weights:bertholomus/deepseek-v4.1-tensorfold-tp2-2xgb10",
     "ghcommunity:weights:brokep/grok-bots-for-deepseek-harness",
@@ -438,6 +443,7 @@
     "ghcommunity:weights:mini-yifan/deepseek-harness-orb",
     "ghcommunity:weights:rlaope/deepseek-bot",
     "ghcommunity:weights:rosalindcrowley8/deepseek-v4-api-docs",
+    "ghcommunity:weights:routerhubSI/deepseek-uncensored",
     "ghcommunity:weights:rupertmarlowe5/deepseek-auto-fallback",
     "ghcommunity:weights:shi3z/deepseekv4.1-A100-custom",
     "ghcommunity:weights:shirachino/astrbot-deepseek-meme-pack",
@@ -886,6 +892,7 @@
     "gnews:intel-ceo-says-deepseek,-kimi,-glm-are-'good-enough'-–-reportedly-backs-open-sou",
     "gnews:is-trump’s-deepseek-ban-about-national-security-or-politics?---puck",
     "gnews:ivo-launches-open-source-deepseek-contract-ai-model---artificial-lawyer",
+    "gnews:jailbroken-deepseek-agent-evades-antivirus-in-telecom-attack---esecurity-planet",
     "gnews:jailbroken-deepseek-ai-agent-breaches-european-telecom-and-accesses-millions-of-",
     "gnews:just-the-docs:-dhs-discloses-july-order-stripping-deepseek-ai-from-federal-civil",
     "gnews:kimi-ai-pricing:-$1-api-top-up-vs-$159-plan-[2026]---https://tech-insider.org/",
@@ -1326,6 +1333,7 @@
     "gnewszh:harness:计算机行业点评报告：deepseek更新v4.1-flash，模型性价比再提升_行业研究_研报---证券之星",
     "gnewszh:harness:零基础速通deepseek-harness，带你玩转赛博乐高---爱范儿",
     "gnewszh:zh:#deepseekv4.1flash更新#好耶，大肥鱼更新flash模型了！-​​​​-更低成本，更高性能，更快速-#ai进展#---手机新",
+    "gnewszh:zh:2025人工智能破壁时刻-|-deepseek火爆一年间---新华网",
     "gnewszh:zh:2026胡润百富榜出来了，前十名中新上榜的是梁文峰（2800亿元）。-今年ai领域上榜的富豪最多，比例为10.4%。-​---新浪网",
     "gnewszh:zh:30个ai实验室在hugging-face上分享的训练计算资源价值近-10-亿美元---donews",
     "gnewszh:zh:5000亿deepseek再融1000亿，ai首富梁文锋身家已达2400亿---野马财经",
@@ -1468,6 +1476,7 @@
     "gnewszh:zh:人工智能乌镇对话：开源的价值之问、治理之道和普惠之愿---封面新闻",
     "gnewszh:zh:人工智能乌镇对话：开源的价值之问、治理之道和普惠之愿---昆明信息港",
     "gnewszh:zh:人工智能乌镇对话：开源的价值之问、治理之道和普惠之愿---紫牛新闻",
+    "gnewszh:zh:从《天工开物》到“深度求索”的启示---人民日报",
     "gnewszh:zh:从宇树科技到winverse-ai，deepseek梁文锋的物理世界新棋局---panews",
     "gnewszh:zh:从这场乌镇对话，读懂构建ai开源生态关键词---中证网",
     "gnewszh:zh:仿佛刻意安排一般，中国深度求索（deepseek）于周六更新了其ai模型源自deepseek引发的市场震动---moomoo",
@@ -1720,10 +1729,10 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-12T00:17:14.821Z",
-  "lastFreshCount": 102,
+  "lastSignalsRunAt": "2026-11-12T14:51:41.720Z",
+  "lastFreshCount": 104,
   "cornerErrors": [
-    "arxiv: This operation was aborted",
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS"
+    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
+    "x-timeline: firecrawl x scrape produced no posts"
   ]
 }
