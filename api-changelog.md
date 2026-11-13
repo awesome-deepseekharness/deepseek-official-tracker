@@ -1,5 +1,15 @@
 # DeepSeek API Change Log (mirror)
 
+## [2026-11-13] Releasing the full suite of application APIs 
+
+In the DeepSeek App (including the web version), web search, file input, URL reading, voice interaction and safety work together with model inference to form the conversation experience users know. Today we open these capabilities to developers: enable the corresponding parameters in the existing APIs to get conversation features such as web search, file input and URL reading, with the tool calls and context assembly handled by the service. The deepseek-flash model supports the following in the Messages, Responses and Chat Completions APIs: Web search : with thinking disabled and the deepseek_
+
+[Source](https://api-docs.deepseek.com/updates#date-2026-11-13)
+
+---
+
+---
+
 ## [2026-10-17] Opening up the in-house search API 
 
 DeepSeek's web and API search capabilities are powered by our in-house DeepSeek search engine, which reliably handles hundreds of millions of search requests from around the world every day. DeepSeek Search is an AI-native general-purpose search engine that indexes hundreds of billions of web pages, supports multilingual search, and returns highly relevant, authoritative, and timely results in real time. It filters SEO spam, GEO manipulation, and low-quality AIGC through strict detection mechanisms, ensuring authoritative and trustworthy information for users and LLMs. For usage details, see t

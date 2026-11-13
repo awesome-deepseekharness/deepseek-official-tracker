@@ -1,5 +1,13 @@
 # DeepSeek Official News
 
+## [2026-11-13] The full DeepSeek App experience, now via API
+
+[Source](https://api-docs.deepseek.com/news/news261113)
+
+---
+
+---
+
 ## [2026-10-17] DeepSeek-V4.1-Flash-1017: Wish-Driven Programming Made Real
 
 [Source](https://api-docs.deepseek.com/news/news261017)
