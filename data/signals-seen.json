@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T13:13:30.352Z",
-  "count": 1797,
+  "updatedAt": "2026-11-14T22:07:50.576Z",
+  "count": 1805,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -433,6 +433,7 @@
     "ghcommunity:weights:PierreTucker147/deepseek-uncensored",
     "ghcommunity:weights:TreapGoGo/deepseek-whale-girl",
     "ghcommunity:weights:Tsuev/opencode-deepseek",
+    "ghcommunity:weights:Vaibhaav-Tiwari/deepseek-v3-jax",
     "ghcommunity:weights:Zhou-Yujing114514/deepseek-harness-linux",
     "ghcommunity:weights:aicodeking/deepseek-stack",
     "ghcommunity:weights:aideveloper-web/Free-Deepseek",
@@ -496,6 +497,7 @@
     "gnews:am-markets-need-to-know:-deepseek-backs-huawei-chips,-anthropic-ipo-risks,-and-m",
     "gnews:america's-answer-to-deepseek-arrives---marketscreener.com",
     "gnews:artex-hackers-used-claude-code,-deepseek,-and-grok-in-attacks-targeting-south-ko",
+    "gnews:banned-blackwell-chips-tied-to-kimi-k3,-deepseek-v4:-4-gaps---shattered.io",
     "gnews:behind-deepseek’s-$16-billion-funding:-chinese-tech-titans-and-state-players---t",
     "gnews:bipartisan-u.s.-lawmakers-push-to-ban-deepseek-from-government-devices:-5-outlet",
     "gnews:breaking:-deepseek-secures-second-round-financing-worth-100-billion-yuan---36-kr",
@@ -873,6 +875,7 @@
     "gnews:deepseek:-what-exactly-is-this-open-position-recruiting-for?-uncover-the-real-hi",
     "gnews:deepseek’s-ai-agent-hits-1.54m-daily-users-and-5.5m-a-month---fourweekmba",
     "gnews:deepseek’s-ai-agent-platform-hits-1.54-million-daily-users---bloomberg.com",
+    "gnews:deepseek’s-ai-agent-platform-hits-1.54-million-daily-users---free-malaysia-today",
     "gnews:deepseek’s-ai-agent-push-gains-speed-as-harness-tops-1.5-million-daily-users---s",
     "gnews:deepseek’s-annualized-revenue-hits-$1-billion-as-startup-finalizes-$7.5-billion-",
     "gnews:deepseek’s-coding-agent-is-too-tidy-for-its-own-good-—-and-benchmarks-are-punish",
@@ -1002,6 +1005,7 @@
     "gnews:redditor-uses-deepseek-ai-to-unlock-amd-fluid-motion-frames-3-on-rdna-3-and-rdna",
     "gnews:reflection’s-founders-on-building-a-deepseek-of-the-west---sources-|-alex-heath",
     "gnews:research-sheds-new-light-on-deepseek’s-safety-risks---gizmodo",
+    "gnews:researchers-allege-deepseek,-kimi,-and-other-chinese-ai-models-were-trained-usin",
     "gnews:retail’s-all-in-on-a-deepseek-repeat---sherwood-news",
     "gnews:rival.io-launches-graphx,-running-deepseek-v4-flash-on-just-8-nvidia-l4-gpus---h",
     "gnews:roundup:-nonprofit-money-trail-/-$5.5b-energy-deal-/-us-vs.-deepseek---baton-rou",
@@ -1043,6 +1047,7 @@
     "gnews:us-bans-use-of-china’s-deepseek-ai-tools-by-government-agencies---the-guardian",
     "gnews:us-bans-use-of-china’s-deepseek-ai-tools-by-government-agencies-|-trump-administ",
     "gnews:us-china-ai-gap-hits-3%,-and-deepseek-v4.1-flash-now-leads-on-agentic-coding-ben",
+    "gnews:us-lab:-china's-deepseek-and-kimi-trained-on-nvidia's-most-advanced-chips---news",
     "gnews:us-lead-in-ai-over-china-narrows-after-deepseek-gains,-bi-says---bloomberg.com",
     "gnews:us-lead-in-ai-over-china-narrows-after-deepseek-gains,-bi-says---finance.yahoo.c",
     "gnews:us-lead-in-ai-over-china-narrows-after-deepseek-gains,-bi-says---yahoo-finance",
@@ -1355,6 +1360,7 @@
     "gnewszh:harness:崩了近5小时！deepseek宣布全额补偿，“harness”新账号引猜测---财联社",
     "gnewszh:harness:崩了近5小时！deepseek宣布全额补偿，“harness”新账号引猜测---财联社电报",
     "gnewszh:harness:想尝鲜的速来-deepseek-harness官方桌面端偷跑：跑ai性能更好---驱动之家",
+    "gnewszh:harness:我改个demo-接入任意模型|deepseek|api|全家桶应用_新浪新闻---新浪网",
     "gnewszh:harness:抢跑deepseek！硅谷华人把下一代agent-harness造出来了！？---智源社区",
     "gnewszh:harness:抢跑deepseek，硅谷华人把下一代agent-harness造出来了？---csdn博客",
     "gnewszh:harness:新浪网·---手机新浪网",
@@ -1499,6 +1505,7 @@
     "gnewszh:zh:“deepseek崩了”冲上热搜！对话服务完全中断，出现问题已超两小时，官方：已定位原因，正在实施修复---极目新闻",
     "gnewszh:zh:“deepseek崩了”背后，巨头云集的b轮千亿融资浮出水面---新浪网",
     "gnewszh:zh:“三星、sk海力士怎么办？”中国传来消息，韩国综指会否受冲击？股东不安--阿视亚经济---아시아경제",
+    "gnewszh:zh:“双十一”词元热卖，ai离随取随用还有多远？---中国科技网",
     "gnewszh:zh:“双十一”迎来成年礼：李佳琦、罗永浩开卖token月卡，把ai装进购物车---sohu",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---手机新浪网",
     "gnewszh:zh:“美国对华ai领先优势降至3%，历史最低”---搜狐",
@@ -1711,6 +1718,7 @@
     "hn:50411961",
     "hn:50486914",
     "hn:50492302",
+    "hn:50497589",
     "openrouter:deepseek/deepseek-v3.2",
     "openrouter:deepseek/deepseek-v3.2-exp",
     "openrouter:deepseek/deepseek-v4-flash",
@@ -1800,8 +1808,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-14T13:13:30.352Z",
-  "lastFreshCount": 101,
+  "lastSignalsRunAt": "2026-11-14T22:07:50.576Z",
+  "lastFreshCount": 103,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
