@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-14T05:37:34.699Z",
-  "count": 1791,
+  "updatedAt": "2026-11-14T13:13:30.352Z",
+  "count": 1797,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -37,6 +37,7 @@
     "cnmedia:www.qbitai.com:字节找到了deepseek时强时弱的原因",
     "cnmedia:www.qbitai.com:抢跑deepseek！硅谷华人把下一代agent-harness造出来了！？",
     "cnmedia:www.qbitai.com:梁文锋投了swin-transformer作者！deepseek开始布局具身大脑",
+    "cnmedia:www.qbitai.com:突发！deepseek开放全家桶api",
     "cnmedia:www.qbitai.com:突发！deepseek新模型发布，超级性价比斩杀一切",
     "cnmedia:www.solidot.org:ai-聊天机器人会成为意识形态回音室",
     "cnmedia:www.solidot.org:cnnic-称中国生成式-ai-用户超-7-亿",
@@ -736,6 +737,7 @@
     "gnews:deepseek-open-sources-v4-flash-vision-exp,-its-first-native-vision-model---panda",
     "gnews:deepseek-opens-full-suite-of-app-apis,-letting-developers-replicate-its-entire-a",
     "gnews:deepseek-opens-its-app's-search,-file,-ocr-and-voice-tools-as-apis-so-developers",
+    "gnews:deepseek-opens-its-app-features-through-the-api---casrai",
     "gnews:deepseek-opens-its-full-app-toolkit-to-developers-through-its-api---crypto-brief",
     "gnews:deepseek-opens-its-in-house-search-engine-to-developers---search-engine-journal",
     "gnews:deepseek-opens-its-search-and-fetch-apis-at-$0.75-per-1,000-calls---startup-fort",
@@ -949,6 +951,7 @@
     "gnews:kimi-vs-deepseek:-which-chinese-ai-should-you-use?---fello-ai",
     "gnews:korean-stocks-fall-as-deepseek-model,-funding-worry-rattle-chips---bloomberg",
     "gnews:korean-stocks-fall-as-deepseek-model,-funding-worry-rattle-chips---bloomberg.com",
+    "gnews:lawyer-upgrades-eight-v100-private-ai-server-to-run-80%-of-deepseek-v4.1-flash-a",
     "gnews:leading-chinese-tech-firms-target-nvidia’s-a.i.-dominance---nytimes.com",
     "gnews:leading-chinese-tech-firms-target-nvidia’s-a.i.-dominance---the-new-york-times",
     "gnews:led-by-deepseek,-chinese-ai-models-take-top-five-positions-in-global-weekly-toke",
@@ -1299,6 +1302,7 @@
     "gnewszh:harness:deepseek的多模态模型，憋了这么久终于来了。。。---新浪财经",
     "gnewszh:harness:deepseek砸出「真os」！140万日活狂烧92万亿token---智源社区",
     "gnewszh:harness:deepseek终于开箱即用-deepseek-harness官方桌面端实测：不用命令行启动，常用功能开箱即用。从自动整理桌面，到自己写个猫",
+    "gnewszh:harness:deepseek鲸鱼娘ip带动deepseek-harness日活达154万，开发者社区diy热潮成增长助力---虎嗅",
     "gnewszh:harness:deepseek，重大发布---凤凰网财经",
     "gnewszh:harness:deepseek，重大发布！---证券之星",
     "gnewszh:harness:deepseek：api支持网页搜索与抓取，单价为每1000次成功请求5元，11月1日起生效---新浪网",
@@ -1671,6 +1675,7 @@
     "gnewszh:zh:钢铁降碳深度求索---财新周刊",
     "gnewszh:zh:高熙：人工智能的竞赛中，真正的对手是时间---光明网",
     "gnewszh:zh:黃樂據報投資deepseek-承諾供應英偉達芯片---大紀元",
+    "gnewszh:zh:黃樂關聯企業投資deepseek-涉供應受限ai芯片---新唐人電視台",
     "gnewszh:zh:黄乐爆参与投资deepseek-承诺提供“辉达blackwell晶片”---国际---即时国际---sin-chew",
     "gnewszh:zh:黄乐爆参与投资deepseek-承诺提供“辉达blackwell晶片”---国际---即时国际---sin-chew-daily",
     "gnewszh:zh:黑鲸入水：deepseek开源“ai手脚”，ai时代商业模式逐渐清晰---新浪财经",
@@ -1783,6 +1788,7 @@
     "v2ex:1255088",
     "v2ex:1255153",
     "v2ex:1256081",
+    "v2ex:1257001",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1794,10 +1800,9 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-14T05:37:34.699Z",
-  "lastFreshCount": 105,
+  "lastSignalsRunAt": "2026-11-14T13:13:30.352Z",
+  "lastFreshCount": 101,
   "cornerErrors": [
-    "cn-tech-media: no DeepSeek items in Chinese tech RSS",
     "x-timeline: firecrawl x scrape produced no posts"
   ]
 }
