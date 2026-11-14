@@ -1,32 +1,30 @@
 {
-  "checkedAt": "2026-11-13T12:46:20.621Z",
-  "ok": false,
-  "issueCount": 1,
-  "issues": [
-    "link timeout: https://api-docs.deepseek.com/updates#date-2026-10-17 (api-changelog.md: DeepSeek-V4.1-Flash-1017 Update)"
-  ],
+  "checkedAt": "2026-11-14T11:53:52.111Z",
+  "ok": true,
+  "issueCount": 0,
+  "issues": [],
   "stats": {
-    "NEWS.md": 11,
-    "api-changelog.md": 24,
+    "NEWS.md": 12,
+    "api-changelog.md": 25,
     "website-news.md": 8,
-    "releases.md": 60,
-    "npm.md": 43,
+    "releases.md": 61,
+    "npm.md": 44,
     "huggingface.md": 23,
     "state": {
-      "changelog": 24,
-      "news": 11,
+      "changelog": 25,
+      "news": 12,
       "websiteNews": 8,
-      "releases": 53,
-      "npm": 43,
+      "releases": 54,
+      "npm": 44,
       "huggingface": 23
     },
     "feedItems": 80,
     "readmeLatest": {
-      "en": "2026-11-12",
-      "zh": "2026-11-12"
+      "en": "2026-11-13",
+      "zh": "2026-11-13"
     },
     "linksChecked": 15,
-    "signalsAgeDays": 0.29,
-    "rumourRows": 10
+    "signalsAgeDays": 0.26,
+    "rumourRows": 0
   }
 }
