@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-15T05:35:12.502Z",
-  "count": 1808,
+  "updatedAt": "2026-11-15T13:41:20.295Z",
+  "count": 1810,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -109,6 +109,7 @@
     "exa:community:https://www.v2ex.com/t/1254010",
     "exa:community:https://www.v2ex.com/t/1254400",
     "exa:community:https://www.v2ex.com/t/1256762",
+    "exa:community:https://www.v2ex.com/t/1257214",
     "exa:community:https://www.xda-developers.com/tried-deepseeks-agent-harness-its-not-the-claude-code-clone-expected/",
     "exa:community:https://www.zgaiagent.cn/items/16817",
     "exa:rumor:http://beta.zhitongcaijing.com/content/detail/1517639.html",
@@ -1800,6 +1801,7 @@
     "v2ex:1256081",
     "v2ex:1257001",
     "v2ex:1257054",
+    "v2ex:1257214",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1811,8 +1813,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-15T05:35:12.501Z",
-  "lastFreshCount": 97,
+  "lastSignalsRunAt": "2026-11-15T13:41:20.295Z",
+  "lastFreshCount": 96,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
