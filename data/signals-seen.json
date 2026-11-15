@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-15T13:41:20.295Z",
-  "count": 1810,
+  "updatedAt": "2026-11-15T22:37:48.149Z",
+  "count": 1815,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -76,6 +76,7 @@
     "exa:community:https://news.micker.com.cn/items/ekjam4ie28w4fdn6qee5m3gmi",
     "exa:community:https://nitter.cf/DeepSeekHarness/status/2105330281389662575",
     "exa:community:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
+    "exa:community:https://tiwen.com/news/en/tech/deepseek-harness-carbon.html",
     "exa:community:https://v2.craw.skin/t/1251079",
     "exa:community:https://v2.craw.skin/t/1252795",
     "exa:community:https://v2ex.ih06.com/t/1252795",
@@ -194,6 +195,7 @@
     "exa:rumor:https://www.thepaper.cn/newsDetail_forward_34397117",
     "exa:rumor:https://www.tmtpost.com/8184852.html",
     "exa:rumor:https://www.woshipm.com/ai/6485841.html",
+    "exa:rumor:https://xiongmaowan.cn/article/231.html",
     "exa:rumor:https://yunpan.plus/t/31745-1-1",
     "exa:secondary:http://www.pwwt.cn/news/4521622/",
     "exa:secondary:http://www.pwwt.cn/news/5182476/",
@@ -269,6 +271,7 @@
     "exa:secondary:https://www.admin5.com/article/20261002/16704098.shtml",
     "exa:secondary:https://www.aiappe.com/news/2464.html",
     "exa:secondary:https://www.aiboss88.com/en/news/deepseek-harness-v02-desktop-app",
+    "exa:secondary:https://www.digitaltoday.co.kr/cn/view/123230/deepseek-ai-agent-harness-daily-active-users-1-54-million",
     "exa:secondary:https://www.dztan.com/p/2026/10/11/deepseek-harness-zhuo-mian-duan-zhi-chi-dao-ru-wen-dang-biao.shtml",
     "exa:secondary:https://www.dztan.com/p/2026/10/12/deepseek-harness-v0-2-yu-lan-ban-zheng-shi-fa-bu-ti-gong-kai.shtml",
     "exa:secondary:https://www.dztan.com/p/2026/10/12/deepseek-harness-xin-zeng-cha-jian-guan-li-ye-mian-shu-ru.shtml",
@@ -1315,6 +1318,7 @@
     "gnewszh:harness:deepseek，重大发布！---证券之星",
     "gnewszh:harness:deepseek：api支持网页搜索与抓取，单价为每1000次成功请求5元，11月1日起生效---新浪网",
     "gnewszh:harness:ds-bot-登陆-deepseek-harness,-三周内获得-4300-多颗-github-星标---pasquale-pillitt",
+    "gnewszh:harness:everything-is-a-plugin，deepseek-harness-的真正野心，是-agent-的自进化---智源社区",
     "gnewszh:harness:tencentdb-agent-memory-新增deepseek-harness-桌面端接入支持---qq-news",
     "gnewszh:harness:v4-flash跑分惊艳，但deepseek还没亮出底牌---维科号",
     "gnewszh:harness:v4全系列模型上线后，deepseek-harness开发者预览版开放测试---财联社",
@@ -1336,6 +1340,7 @@
     "gnewszh:harness:人人都能整个“自己的-deepseek-harness”，那我们为啥还在给-claude-code-们充会员？---infoq-cn",
     "gnewszh:harness:人人都能整个“自己的-deepseek-harness”，那我们为啥还在给-claude-code-们充会员？---infoq.cn",
     "gnewszh:harness:今晚正式发布！deepseek终于不只是会“聊天”了---finance.sina.com.cn",
+    "gnewszh:harness:修了一堆大肥鱼-#cos##deepseek#-​---新浪网",
     "gnewszh:harness:公众号排版不用一段段调了：装上这个-ai-技能，直接拿成品---手机新浪网",
     "gnewszh:harness:刚刚，deepseek-harness桌面端上线，梁文锋开送token了---zhidx.com",
     "gnewszh:harness:刚刚，deepseek-harness桌面端上线，梁文锋开送token了---新浪财经",
@@ -1813,8 +1818,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-15T13:41:20.295Z",
-  "lastFreshCount": 96,
+  "lastSignalsRunAt": "2026-11-15T22:37:48.148Z",
+  "lastFreshCount": 99,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
