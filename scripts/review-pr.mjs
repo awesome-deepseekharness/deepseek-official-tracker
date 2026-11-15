@@ -85,6 +85,19 @@ async function main() {
     });
     decision = result.result;
   } catch (error) {
+    // A systematic agent defect must stay a red, emailed failure. But free-rail
+    // exhaustion is ordinary capacity churn on shared runner IPs: the hour's
+    // budget is simply gone. A red scheduled run then emails the maintainer
+    // dozens of times a day while nothing actionable exists, so record a skip
+    // instead and let the next hourly run retry with fresh quota.
+    const exhausted = /No free model completed the task within budget/.test(error.message) &&
+      !/Missing or invalid output artifact/.test(error.message);
+    if (exhausted) {
+      comment(pr.number, `Automatic review is paused for this hour: every free model rail is out of quota right now. The next hourly run retries automatically, no action needed. This is an automation capacity note, not a request for manual review.`);
+      fs.writeFileSync(decisionFile, JSON.stringify({ decision: 'SKIPPED', head_sha: pr.head.sha, reason: error.message }, null, 2));
+      console.warn(`Review skipped for this hour, staying green: ${error.message}`);
+      return;
+    }
     comment(pr.number, 'Automatic review is temporarily unavailable. The next hourly run will retry with multiple free models. This is an automation failure, not a request for manual review. See the failed Action run for diagnostics.');
     throw error;
   }

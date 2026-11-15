@@ -388,6 +388,14 @@ export async function withFreeModel(task, {
         if (/free tier can only be used from within OpenCode/i.test(error.message)) {
           throw new Error(`OpenCode rejected the agent/tool profile; check permissions and CLI compatibility. ${error.message}`);
         }
+        // A rail-wide quota error is true for every remaining candidate on this
+        // rail; probing each of them only burns more of the shared free quota
+        // and minutes of runner time. Fall through to the next rail instead.
+        if (/free usage limit reached/i.test(error.message)) {
+          lastError = error;
+          console.warn(`[models] ${rail.name} free quota exhausted; skipping its remaining candidates`);
+          break;
+        }
         rail.failures.add(fullID);
         lastError = error;
         console.warn(`[models] ${fullID} failed: ${error.message}; trying next free candidate`);
