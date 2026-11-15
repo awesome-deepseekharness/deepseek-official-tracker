@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T22:07:50.576Z",
+  "updatedAt": "2026-11-15T01:49:06.053Z",
   "count": 1805,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
@@ -1808,8 +1808,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-14T22:07:50.576Z",
-  "lastFreshCount": 103,
+  "lastSignalsRunAt": "2026-11-15T01:49:06.053Z",
+  "lastFreshCount": 94,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
