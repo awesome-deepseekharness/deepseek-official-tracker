@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-15T01:49:06.053Z",
-  "count": 1805,
+  "updatedAt": "2026-11-15T05:35:12.502Z",
+  "count": 1808,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -77,6 +77,7 @@
     "exa:community:https://nitter.cf/DeepSeekHarness/status/2105330281389662575",
     "exa:community:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
     "exa:community:https://v2.craw.skin/t/1251079",
+    "exa:community:https://v2.craw.skin/t/1252795",
     "exa:community:https://v2ex.ih06.com/t/1252795",
     "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
     "exa:community:https://www.hackerneue.com/item?id=50080685",
@@ -578,6 +579,7 @@
     "gnews:deepseek's-second-funding-round-set-to-swell-to-~100-billion-yuan;-pre-money-val",
     "gnews:deepseek's-super-agent-moves-the-attention-bottleneck-from-your-feed-to-your-age",
     "gnews:deepseek's-top-ranked-v4-flash-stumbles-on-real-agent-tasks-as-its-prices-surge-",
+    "gnews:deepseek's-web-code-shows-quota-management-pointing-to-a-'coding-plan',-but-no-p",
     "gnews:deepseek,-5-china-ai-rivals-run-at-$11b;-anthropic-at-$81b---fourweekmba",
     "gnews:deepseek,-huawei-challenge-the-software-powering-nvidia’s-ai-dominance---the-dai",
     "gnews:deepseek,-huawei-join-forces-to-challenge-nvidia’s-cuda-dominance---businesskore",
@@ -1797,6 +1799,7 @@
     "v2ex:1255153",
     "v2ex:1256081",
     "v2ex:1257001",
+    "v2ex:1257054",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1808,8 +1811,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-15T01:49:06.053Z",
-  "lastFreshCount": 94,
+  "lastSignalsRunAt": "2026-11-15T05:35:12.501Z",
+  "lastFreshCount": 97,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
