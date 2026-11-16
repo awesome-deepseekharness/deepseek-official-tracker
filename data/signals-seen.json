@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-15T22:37:48.149Z",
-  "count": 1815,
+  "updatedAt": "2026-11-16T02:06:30.137Z",
+  "count": 1819,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -241,6 +241,7 @@
     "exa:secondary:https://molihua.org/mh-2493220/",
     "exa:secondary:https://news.10jqka.com.cn/20260929/c680375915.shtml",
     "exa:secondary:https://news.10jqka.com.cn/20261105/c681523749.shtml",
+    "exa:secondary:https://news.cocoloop.cn/2026/11/deepseek-harness-154m-dau/",
     "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A402371422",
     "exa:secondary:https://news.daheiai.com/changelog_detail.php?id=DeepSeek+Harness%3A441607356",
     "exa:secondary:https://news.qq.com/rain/a/20260925A03YVU00",
@@ -251,6 +252,7 @@
     "exa:secondary:https://news.qq.com/rain/a/20261004A09ZZ600",
     "exa:secondary:https://news.qq.com/rain/a/20261107A06W0600",
     "exa:secondary:https://notes.yachiyo.im/posts/deepseek-harness-desktop/",
+    "exa:secondary:https://offloop.org/learn/deepseek-harness-plugin-community",
     "exa:secondary:https://offloop.org/zh-CN/learn/deepseek-harness-plugin-community",
     "exa:secondary:https://original.ifeng.com/c/8xk4PQk0VoF",
     "exa:secondary:https://pasqualepillitteri.it/en/news/30977/deepseek-harness-022-delegates-codex-claude",
@@ -1010,6 +1012,7 @@
     "gnews:quick-spark:-nvidia-stock-eyes-worst-day-against-s&p-500-since-deepseek's-shock-",
     "gnews:redditor-uses-deepseek-ai-to-unlock-amd-fluid-motion-frames-3-on-rdna-3-and-rdna",
     "gnews:reflection’s-founders-on-building-a-deepseek-of-the-west---sources-|-alex-heath",
+    "gnews:report:-huang-linked-firms-join-deepseek-round,-supply-banned-nvidia-chips---dig",
     "gnews:research-sheds-new-light-on-deepseek’s-safety-risks---gizmodo",
     "gnews:researchers-allege-deepseek,-kimi,-and-other-chinese-ai-models-were-trained-usin",
     "gnews:retail’s-all-in-on-a-deepseek-repeat---sherwood-news",
@@ -1807,6 +1810,7 @@
     "v2ex:1257001",
     "v2ex:1257054",
     "v2ex:1257214",
+    "v2ex:1257235",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1818,9 +1822,10 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-15T22:37:48.148Z",
-  "lastFreshCount": 99,
+  "lastSignalsRunAt": "2026-11-16T02:06:30.137Z",
+  "lastFreshCount": 97,
   "cornerErrors": [
+    "arxiv: HTTP 429",
     "x-timeline: firecrawl x scrape produced no posts"
   ]
 }
