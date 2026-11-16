@@ -29,6 +29,7 @@ const OFFICIAL_REPOS = [
   'deepseek-ai/3FS',
   'deepseek-ai/awesome-deepseek-agent',
   'deepseek-ai/awesome-deepseek-integration',
+  'deepseek-ai/chat-demo',
   'deepseek-ai/clangd-ascend',
   'deepseek-ai/DeepEP',
   'deepseek-ai/DeepEP-Ascend',
