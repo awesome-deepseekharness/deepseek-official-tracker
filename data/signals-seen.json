@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-16T02:06:30.137Z",
-  "count": 1819,
+  "updatedAt": "2026-11-16T05:34:16.189Z",
+  "count": 1826,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -288,6 +288,7 @@
     "exa:secondary:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
     "exa:secondary:https://www.nullbot.ai/zh-CN/actu/deepseek-harness-preview-app/",
     "exa:secondary:https://www.okyn.com/ai/1042.html",
+    "exa:secondary:https://www.orcarouter.ai/zh-CN/blog/deepseek-harness-desktop-app",
     "exa:secondary:https://www.sheratonhq.com/news/156712",
     "exa:secondary:https://www.siliconreport.com/deepseek-harness-adds-creator-mode-to-create-plugins-from-text-prompts",
     "exa:secondary:https://www.tao.media/deepseek-adds-chat-based-plugin-creation-to-harness-with-creator-mode/",
@@ -300,6 +301,7 @@
     "exa:secondary:https://www.zhidx.com/p/602940.html",
     "exa:secondary:https://www.zhidx.com/p/607211.html",
     "exa:secondary:https://xiaoan.cc/article/deepseek-harness-kai-qi-quan-qiu-gong-kai-yu-lan-kai-yuan-zh-tt",
+    "exa:secondary:https://yage.ai/share/dsh-plugin-ecosystem-20261115.html",
     "exa:secondary:https://yangtzeer.com/news/heavy-hitters/deepseek-harness-desktop-plugin/",
     "exa:secondary:https://zhidx.com/p/598364.html",
     "fcsearch:cn-media:https://api-docs.deepseek.com/zh-cn/api/list-models",
@@ -494,6 +496,7 @@
     "gnews:ai-race-heats-up:-deepseek-drops-an-autonomous-'super-agent'-to-take-on-claude--",
     "gnews:ai-startup-deepseek-plans-2027-ipo-as-tencent-and-catl-put-$12-billion-into-the-",
     "gnews:ai-startup-deepseek-poised-to-reach-$74-billion-valuation---wsj",
+    "gnews:ai:-daily-quotas-come-to-deepseek,-a-visible-sign-of-china’s-ai-chip-crunch---in",
     "gnews:alice-huang's-companies-invested-in-deepseek,-promising-nvidia-chips---the-infor",
     "gnews:alice-huang-linked-firms-invest-in-deepseek,-promise-nvidia-chip-supply---bloomi",
     "gnews:alice-huang-linked-firms-joined-deepseek's-$15.8-billion-funding-round-in-bid-to",
@@ -1010,6 +1013,7 @@
     "gnews:pushing-the-limits-of-serving-deepseek-v4-pro---lmsys-org",
     "gnews:pushing-the-limits-of-serving-deepseek-v4-pro---lmsys.org",
     "gnews:quick-spark:-nvidia-stock-eyes-worst-day-against-s&p-500-since-deepseek's-shock-",
+    "gnews:qwen4-max-vs-kimi-k3.1-pro-vs-deepseek-v4.1-flash:-which-should-you-use?---kingy",
     "gnews:redditor-uses-deepseek-ai-to-unlock-amd-fluid-motion-frames-3-on-rdna-3-and-rdna",
     "gnews:reflection’s-founders-on-building-a-deepseek-of-the-west---sources-|-alex-heath",
     "gnews:report:-huang-linked-firms-join-deepseek-round,-supply-banned-nvidia-chips---dig",
@@ -1460,6 +1464,7 @@
     "gnewszh:zh:deepseek发布新架构让ai调度ai---联合早报",
     "gnewszh:zh:deepseek发布新版ai模型-性能提升且运行成本降低---早晨报",
     "gnewszh:zh:deepseek发布新版ai模型-性能提升且运行成本降低---联合早报",
+    "gnewszh:zh:deepseek因算力不足限额-额度管理逻辑曝光---中华网",
     "gnewszh:zh:deepseek在美国联邦机构遭禁用---澳洲看新闻",
     "gnewszh:zh:deepseek大手笔融资1000亿，冲刺上市，国产ai\"弹药\"备足了记者讯-国产人工智能大模型公司deepseek（深度求索）迎来重磅消息",
     "gnewszh:zh:deepseek大规模招聘---finance.sina.com.cn",
@@ -1499,6 +1504,7 @@
     "gnewszh:zh:deepseek正式向美国ai霸权宣战！---风闻",
     "gnewszh:zh:deepseek目前正在实施修复-服务中断持续2小时---中华网",
     "gnewszh:zh:deepseek第二轮融资约1000亿元-宁德时代和腾讯再次出资---茉莉花新闻网",
+    "gnewszh:zh:deepseek算力不足提示限额使用-引免费模式可持续性疑虑---联合早报",
     "gnewszh:zh:deepseek获510亿融资，投资方公布：腾讯、宁德时代、京东、网易等---新浪网",
     "gnewszh:zh:deepseek获b轮投资---搜狐网",
     "gnewszh:zh:deepseek被曝完成约1000亿元融资_公司新闻_财经---证券之星",
@@ -1811,6 +1817,7 @@
     "v2ex:1257054",
     "v2ex:1257214",
     "v2ex:1257235",
+    "v2ex:1257339",
     "x:2083084415157022911",
     "x:2087864585504305397",
     "x:2087887408440164663",
@@ -1822,10 +1829,9 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-16T02:06:30.137Z",
-  "lastFreshCount": 97,
+  "lastSignalsRunAt": "2026-11-16T05:34:16.188Z",
+  "lastFreshCount": 100,
   "cornerErrors": [
-    "arxiv: HTTP 429",
     "x-timeline: firecrawl x scrape produced no posts"
   ]
 }
