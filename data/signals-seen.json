@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-16T15:13:58.132Z",
-  "count": 1847,
+  "updatedAt": "2026-11-17T01:45:12.669Z",
+  "count": 1852,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -111,8 +111,10 @@
     "exa:community:https://www.v2ex.com/t/1252896",
     "exa:community:https://www.v2ex.com/t/1254010",
     "exa:community:https://www.v2ex.com/t/1254400",
+    "exa:community:https://www.v2ex.com/t/1254954",
     "exa:community:https://www.v2ex.com/t/1256762",
     "exa:community:https://www.v2ex.com/t/1257214",
+    "exa:community:https://www.v2ex.com/t/1257527",
     "exa:community:https://www.xda-developers.com/tried-deepseeks-agent-harness-its-not-the-claude-code-clone-expected/",
     "exa:community:https://www.zgaiagent.cn/items/16817",
     "exa:rumor:http://beta.zhitongcaijing.com/content/detail/1517639.html",
@@ -139,6 +141,7 @@
     "exa:rumor:https://denghy.cn/articles/deepseek-harness-desktop-pro-rumor",
     "exa:rumor:https://felloai.com/deepseek-v5/",
     "exa:rumor:https://feng.ifeng.com/c/8xZdpF28WVe",
+    "exa:rumor:https://feng.ifeng.com/c/8y6nEaDkxNa",
     "exa:rumor:https://finance.sina.cn/7x24/2026-11-03/detail-inixmnqe2351968.d.html",
     "exa:rumor:https://finance.sina.com.cn/tech/discovery/2026-09-21/doc-inisqzxx9184343.shtml",
     "exa:rumor:https://finance.sina.com.cn/tech/roll/2026-10-27/doc-iniwsses3790713.shtml",
@@ -451,6 +454,7 @@
     "ghcommunity:weights:Zhou-Yujing114514/deepseek-harness-linux",
     "ghcommunity:weights:aicodeking/deepseek-stack",
     "ghcommunity:weights:aideveloper-web/Free-Deepseek",
+    "ghcommunity:weights:annadeters-gif/-deepseek-v4-flash-api-firewall",
     "ghcommunity:weights:apimartdecg4/deepseek-v4-pro-api-ja",
     "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-cn",
     "ghcommunity:weights:apimartmut0k/deepseek-v3.2-api-fr",
@@ -1780,6 +1784,7 @@
     "rumour:en:deepseek-cyber-leak:-model-ids,-cyber-key,-no-scores---orcarouter",
     "rumour:en:deepseek-cyber-leak:-modell-ids,-cyber-key,-keine-scores---orcarouter",
     "rumour:en:deepseek-r2:-release-date,-rumors-&-what-to-expect---fello-ai",
+    "rumour:en:deepseek-users-report-daily-caps-and-shorter-inputs-on-app-and-web,-un",
     "rumour:en:deepseek-v4.1-pro-leak:-a-180-tok/s-unlabelled-endpoint---orcarouter",
     "rumour:en:deepseek-v4.1-pro-leak:-a-window-that-closes-sept-30---orcarouter",
     "rumour:en:deepseek-v5-leak:-still-unconfirmed-as-deepseek-raises-$15b-[2026]---s",
@@ -1850,9 +1855,10 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-16T15:13:58.132Z",
-  "lastFreshCount": 114,
+  "lastSignalsRunAt": "2026-11-17T01:45:12.669Z",
+  "lastFreshCount": 98,
   "cornerErrors": [
+    "google-news: HTTP 429",
     "x-timeline: firecrawl x scrape produced no posts"
   ]
 }
