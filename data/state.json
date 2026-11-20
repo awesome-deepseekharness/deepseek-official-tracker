@@ -109,7 +109,8 @@
     "deepseek-ai/chat-demo|v0.1.0",
     "deepseek-ai/deepseek-harness|dsh-v0.2.2-rc.4",
     "deepseek-ai/deepseek-harness|dsh-v0.2.2-rc.5",
-    "deepseek-ai/chat-demo|v0.1.2"
+    "deepseek-ai/chat-demo|v0.1.2",
+    "deepseek-ai/chat-demo|v0.1.3"
   ],
   "npm": [
     "0.0.1-rc.1",

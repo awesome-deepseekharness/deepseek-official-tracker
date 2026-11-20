@@ -28,11 +28,11 @@
 
 **For:** people following DeepSeek news and Harness desktop updates · API users tracking pricing and deprecations · researchers watching model weights · developers following CLI releases and the plugin ecosystem.
 
-## 🔥 Latest — deepseek-ai/chat-demo release v0.1.2 (2026-11-19)
+## 🔥 Latest — deepseek-ai/chat-demo release v0.1.3 (2026-11-20)
 
-**Version published; see upstream status** · [deepseek-ai/chat-demo release v0.1.2](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.2)
+**Version published; see upstream status** · [deepseek-ai/chat-demo release v0.1.3](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.3)
 
-v0.1.2
+v0.1.3
 
 - **Harness:** 2026-11-18 · [deepseek-ai/deepseek-harness release dsh-v0.2.2-rc.5](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-rc.5) · Prerelease / preview
 - **Latest model / API announcement:** 2026-11-13 · [Releasing the full suite of application APIs](https://api-docs.deepseek.com/updates#date-2026-11-13)
@@ -42,6 +42,7 @@ v0.1.2
 <details>
 <summary>Recent official updates</summary>
 
+- **2026-11-20** [deepseek-ai/chat-demo release v0.1.3](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.3)
 - **2026-11-19** [deepseek-ai/chat-demo release v0.1.2](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.2)
 - **2026-11-18** [deepseek-ai/deepseek-harness release dsh-v0.2.2-rc.5](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-rc.5)
 - **2026-11-18** [v0.2.2-rc.5](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.2-rc.5)
@@ -49,7 +50,6 @@ v0.1.2
 - **2026-11-17** [v0.2.2-rc.4](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.2-rc.4)
 - **2026-11-13** [deepseek-ai/chat-demo release v0.1.0](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.0)
 - **2026-11-13** [deepseek-ai/chat-demo release v0.1.1](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.1)
-- **2026-11-13** [deepseek-ai/deepseek-harness release dsh-v0.2.2-rc.3](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-rc.3)
 </details>
 
 ## Harness desktop, release tracking and community news

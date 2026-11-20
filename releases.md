@@ -1,5 +1,15 @@
 # DeepSeek Official GitHub Releases & Tags
 
+## [2026-11-20] deepseek-ai/chat-demo release v0.1.3
+
+v0.1.3
+
+[Source](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.3)
+
+---
+
+---
+
 ## [2026-11-19] deepseek-ai/chat-demo release v0.1.2
 
 v0.1.2
