@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-21T18:52:51.377Z",
-  "count": 2004,
+  "updatedAt": "2026-11-22T05:49:33.181Z",
+  "count": 2010,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -84,6 +84,7 @@
     "exa:community:https://v2.craw.skin/t/1252795",
     "exa:community:https://v2.craw.skin/t/1254400",
     "exa:community:https://v2ex.ih06.com/t/1252795",
+    "exa:community:https://v2ex.ih06.com/t/1254010",
     "exa:community:https://vocal.media/01/i-installed-deepseek-harness-v02-so-you-dont-have-to",
     "exa:community:https://www.hackerneue.com/item?id=50080685",
     "exa:community:https://www.marktechpost.com/2026/10/03/deepseek-harness-v0-2-brings-official-desktop-apps-to-its-open-source-agent-harness/",
@@ -314,6 +315,7 @@
     "exa:secondary:https://www.sheratonhq.com/news/156712",
     "exa:secondary:https://www.silicon.co.uk/cloud/ai/deepseek-harness-632254",
     "exa:secondary:https://www.siliconreport.com/deepseek-harness-adds-creator-mode-to-create-plugins-from-text-prompts",
+    "exa:secondary:https://www.sina.cn/weibo/detail/5367916142789033.html",
     "exa:secondary:https://www.tao.media/deepseek-adds-chat-based-plugin-creation-to-harness-with-creator-mode/",
     "exa:secondary:https://www.tuoluo.cn/article/detail-10131356.html",
     "exa:secondary:https://www.unite.ai/zh-cn/deepseek-harness-adds-plugin-creation-entry-for-creator-mode/",
@@ -355,6 +357,7 @@
     "fcsearch:cn-media:https://www.reddit.com/r/LocalLLaMA/comments/1rrkglb/two_new_models_on_openrouter_possibly_deepseek_v4/?tl=zh-hans",
     "fcsearch:cn-media:https://www.yicai.com/news/102785887.html",
     "fcsearch:cn-media:https://www.zhihu.com/question/1993329446883651767",
+    "fcsearch:cn-media:https://zhuanlan.zhihu.com/p/2098881974953890322",
     "fcsearch:reddit-deepseek:https://www.reddit.com/r/DeepSeek/",
     "fcsearch:reddit-deepseek:https://www.reddit.com/r/DeepSeek/comments/1remb5k/the_deepseek_v4_release_date_what_the_evidence/",
     "fcsearch:reddit-deepseek:https://www.reddit.com/r/DeepSeek/comments/1ridmnm/deepseek_v4_all_leaks_and_infos_for_the_release/",
@@ -596,6 +599,7 @@
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---straitstimes.com",
     "gnews:china’s-hackers-use-deepseek-for-attacks,-researchers-say---the-straits-times",
     "gnews:china’s-open-ai-models-are-winning-global-users.-who-is-capturing-the-value?---s",
+    "gnews:china’s-open-weight-ai-models-are-coming-for-america’s-market---asia-times",
     "gnews:chinese-'ai-genius-girl'-reportedly-offered-$1.5m-salary-rises-to-xiaomi's-top-r",
     "gnews:chinese-'spy'-alice-huang's-companies-invested-in-deepseek,-promised-nvidia's-bl",
     "gnews:chinese-ai-dominance-is-not-asia’s-destiny---east-asia-forum",
@@ -1007,6 +1011,7 @@
     "gnews:gpt-6-astra-vs-gemini-4-argon-vs-deepseek:-13x-gap-[2026]---tech-insider.org",
     "gnews:grimes-shares-two-new-singles-from-psyopera-“killing-god-with-computers”-&-“deep",
     "gnews:grok-4.7-vs-claude-vs-deepseek:-13x-price-gap-[2026]---https://tech-insider.org/",
+    "gnews:hackers-swapped-a-hosted-deepseek-model-for-53-hours-and-stripped-away-its-safet",
     "gnews:hackers-use-1,438-fake-fofa-accounts-to-steal-openai-and-deepseek-api-keys-acros",
     "gnews:hackers-used-deepseek-ai-in-massive-global-cyberattack---bangkok-post",
     "gnews:haiku-5.5-vs-gpt-6.1-terra-vs-deepseek:-$0.10-vs-$1-[2026]---https://tech-inside",
@@ -1635,6 +1640,7 @@
     "gnewszh:zh:deepseek故障近5小时-补偿方案公布---凤凰网",
     "gnewszh:zh:deepseek故障近5小时-补偿方案公布---封面新闻",
     "gnewszh:zh:deepseek故障近5小时-补偿方案公布---新京报",
+    "gnewszh:zh:deepseek新一轮千亿级融资落地-，腾讯与宁德时代入股---sohu",
     "gnewszh:zh:deepseek新一轮千亿级融资落地，梁文锋保留绝对控制权---凤凰网科技",
     "gnewszh:zh:deepseek新一轮融资或达千亿-“豪赌”国产算力预训练---新浪网",
     "gnewszh:zh:deepseek新一轮融资或达千亿元；快手可灵ai计划最早明年赴港上市｜未来商业早参---https://www.mrjjxw.com/",
@@ -2007,8 +2013,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-21T18:52:51.376Z",
-  "lastFreshCount": 107,
+  "lastSignalsRunAt": "2026-11-22T05:49:33.181Z",
+  "lastFreshCount": 103,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
