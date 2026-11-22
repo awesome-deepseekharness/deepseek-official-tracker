@@ -43,13 +43,13 @@ v0.2.3-alpha.1
 <summary>Recent official updates</summary>
 
 - **2026-11-22** [deepseek-ai/deepseek-harness release dsh-v0.2.3-alpha.1](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.3-alpha.1)
+- **2026-11-22** [deepseek-ai/deepseek-harness release dsh-v0.2.3-alpha.2](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.3-alpha.2)
 - **2026-11-22** [v0.2.3-alpha.1](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.3-alpha.1)
+- **2026-11-22** [v0.2.3-alpha.2](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.3-alpha.2)
 - **2026-11-20** [deepseek-ai/chat-demo release v0.1.3](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.3)
 - **2026-11-19** [deepseek-ai/chat-demo release v0.1.2](https://github.com/deepseek-ai/chat-demo/releases/tag/v0.1.2)
 - **2026-11-18** [deepseek-ai/deepseek-harness release dsh-v0.2.2-rc.5](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-rc.5)
 - **2026-11-18** [v0.2.2-rc.5](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.2-rc.5)
-- **2026-11-17** [deepseek-ai/deepseek-harness release dsh-v0.2.2-rc.4](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-rc.4)
-- **2026-11-17** [v0.2.2-rc.4](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.2.2-rc.4)
 </details>
 
 ## Harness desktop, release tracking and community news

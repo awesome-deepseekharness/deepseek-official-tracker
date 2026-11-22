@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-22T05:49:33.181Z",
-  "count": 2010,
+  "updatedAt": "2026-11-22T14:18:40.590Z",
+  "count": 2013,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -620,6 +620,7 @@
     "gnews:community-built-ds-bot-plugin-turns-deepseek-harness-into-a-team-of-long-lived-b",
     "gnews:companies-linked-to-alice-huang-invested-in-deepseek---the-information",
     "gnews:companies-tied-to-alice-huang-invested-in-deepseek-to-supply-nvidia-chips---repo",
+    "gnews:compare-chatgpt,-gemini,-deepseek,-and-other-ai-models-—-stop-juggling-ai-tabs-f",
     "gnews:coreweave-reports-2.7x-speedup-with-vera-rubin-over-gb200-on-mlperf-deepseek-v3-",
     "gnews:cutthroat-ai-competition:-deepseek-unveils-new-holiday-update,-harness-launches-",
     "gnews:cxmt-chairman's-reported-deepseek-investment-spotlights-china's-semiconductor-ca",
@@ -1093,6 +1094,7 @@
     "gnews:open-model-hits-72.8%-on-vals-hacking-test-[2026]---shattered.io",
     "gnews:open-source-fix-slashes-deepseek-v4.1-startup-time-on-gaming-gpus---startup-fort",
     "gnews:open-weight-deepseek-nearly-matches-closed-ai-in-cybersecurity-tests---mezha.net",
+    "gnews:open-weight-vs-open-source-ai:-4-models,-4-licenses---shattered.io",
     "gnews:openai-rivals-deepseek,-kimi-distilled-gpt-6-astra:-report---fourweekmba",
     "gnews:openai’s-astra-model-becomes-top-distillation-target-for-china’s-ai-labs---the-i",
     "gnews:opencode-makes-deepseek-v4.1-flash-free-to-use,-with-a-200k-context-window---pan",
@@ -1191,6 +1193,7 @@
     "gnews:‘jensen’s-nightmare’:-huawei,-deepseek-narrow-ai-chip-ecosystem-gap-with-nvidia:",
     "gnews:“seems-important”:-new-deepseek-stat-explodes-ai-bubble-fears---yahoo-finance",
     "gnews:😺-deepseek's-free-model-edged-opus-5-at-coding---the-neuron",
+    "gnewszh:harness:10万+star开源团队又出手！一个插件让deepseek-harness学会做视频---sohu",
     "gnewszh:harness:10万+star开源团队又出手！一个插件让deepseek-harness学会做视频---凤凰网科技",
     "gnewszh:harness:10万+star开源团队又出手！一个插件让deepseek-harness学会做视频---智东西",
     "gnewszh:harness:10天狂揽近2万星，00后大学生拿下大结果，deepseek-harness移动端爆火---36kr",
@@ -2013,8 +2016,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-22T05:49:33.181Z",
-  "lastFreshCount": 103,
+  "lastSignalsRunAt": "2026-11-22T14:18:40.590Z",
+  "lastFreshCount": 100,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
