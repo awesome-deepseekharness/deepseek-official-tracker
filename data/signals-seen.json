@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-22T14:18:40.590Z",
-  "count": 2013,
+  "updatedAt": "2026-11-22T23:25:02.265Z",
+  "count": 2019,
   "ids": [
     "arxiv:http://arxiv.org/abs/2606.07410v1",
     "arxiv:http://arxiv.org/abs/2606.09079v3",
@@ -105,6 +105,7 @@
     "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1wobhs6/windows_nvidia_deepseek_harness_smoketest_a_gpu/",
     "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1wro7hg/how_do_you_guys_give_your_models_web_browsing/",
     "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1wtg1hs/deepseek_harness_app_is_out_now/",
+    "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1xf7loz/is_it_time_to_jump_ship_from_opencode/",
     "exa:community:https://www.reddit.com/r/LocalLLaMA/comments/1xhq8bb/deepseek_harness/",
     "exa:community:https://www.v2ex.com/t/1239251",
     "exa:community:https://www.v2ex.com/t/1240128",
@@ -134,6 +135,7 @@
     "exa:rumor:https://agihunt.info/p/1a19d32c94461e69b31641fd319",
     "exa:rumor:https://agihunt.info/p/1a19dcf0d5dbe4e3fac383e7e4f",
     "exa:rumor:https://agihunt.info/p/1a1c884ed9c422d12e0961967e1",
+    "exa:rumor:https://agihunt.info/p/1a1d20713a085bec3b92522eb74",
     "exa:rumor:https://agihunt.info/p/1a1e40929f564a255738cd25bfd",
     "exa:rumor:https://ai-oriens.com/en/news/deepseek-year-end-big-model-rumor/",
     "exa:rumor:https://aigeekr.com/deepseek-v5/",
@@ -228,6 +230,7 @@
     "exa:secondary:https://airebao.com/item/39225",
     "exa:secondary:https://airebao.com/item/39757",
     "exa:secondary:https://airebao.com/item/55357",
+    "exa:secondary:https://blog.51cto.com/u_17647532/15095461",
     "exa:secondary:https://cn.technode.com/post/2026-11-03/deepseek-harness-creator-mode-custom-plugins/",
     "exa:secondary:https://cn.technode.com/post/2026-11-06/deepseek-harness-daily-users-official-plugin-marketplace/",
     "exa:secondary:https://coderliang.com/posts/0c712506-2bf4-43fb-9521-56e4e0424927",
@@ -284,6 +287,7 @@
     "exa:secondary:https://tech.ifeng.com/c/8woyv1hCvkQ",
     "exa:secondary:https://techorange.com/2026/11/09/deepseek-harness-plugin-marketplace/",
     "exa:secondary:https://timeline.sohu.com/news/Urw6IrrX7f",
+    "exa:secondary:https://topaimap.com/article/deepseek-harness-0-2-3-alpha-nov22.html",
     "exa:secondary:https://udn.com/news/story/7333/9796252",
     "exa:secondary:https://wallstreetcn.com/articles/3782792",
     "exa:secondary:https://www.163.com/dy/article/L81BCOVV051180F7.html",
@@ -1058,6 +1062,7 @@
     "gnews:lenovo's-tianxicode-agent-and-deepseek-v4.1-flash-top-swe-bench-live-lite-at-71%",
     "gnews:liang-wenfeng-makes-new-investment-in-former-tencent-robotics-division-veteran--",
     "gnews:lifetime-access-to-gpt,-deepseek,-gemini,-and-more-is-only-$60-today-($619-value",
+    "gnews:lingsante-3.1-flash-vs-deepseek-v4.1-flash:-who-wins?---orcarouter",
     "gnews:megaeth-powered-mnx-goes-live-with-pre-ipo-futures-for-openai,-anthropic-and-dee",
     "gnews:microsoft-foundry-adds-baseten,-deepseek-ai-inference-(msft:nasdaq)---seeking-al",
     "gnews:microsoft-mai-base-2:-2.8t-params,-12x-deepseek-gain-[2026]---https://tech-insid",
@@ -1630,6 +1635,7 @@
     "gnewszh:zh:deepseek工商主体完成投资人变更-注册资本增至1991.87万元---观点网",
     "gnewszh:zh:deepseek工程师谈开源：让agi加速到来---中国青年网",
     "gnewszh:zh:deepseek工程师谈开源：让agi加速到来---新浪财经",
+    "gnewszh:zh:deepseek已完成新一轮融资，规模或超千亿---三易生活",
     "gnewszh:zh:deepseek开源ai推理框架-或能降低算力成本---联合早报",
     "gnewszh:zh:deepseek拟在最新一轮融资中筹得约1000亿元人民币---东方财富",
     "gnewszh:zh:deepseek拟融资至少800亿人民币-腾讯等参与投资---联合早报",
@@ -2016,8 +2022,8 @@
     "x:2116858406627922305",
     "x:2117261337877455247"
   ],
-  "lastSignalsRunAt": "2026-11-22T14:18:40.590Z",
-  "lastFreshCount": 100,
+  "lastSignalsRunAt": "2026-11-22T23:25:02.265Z",
+  "lastFreshCount": 103,
   "cornerErrors": [
     "x-timeline: firecrawl x scrape produced no posts"
   ]
